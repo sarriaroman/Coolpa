@@ -9,7 +9,8 @@ var express = require('express')
 , routes = require('./routes')
 , http = require('http')
 , path = require('path')
-, gzippo = require('gzippo');
+, gzippo = require('gzippo')
+, MongoStore = require('express-session-mongo');
 
 var app = express();
 
@@ -26,7 +27,11 @@ app.configure(function(){
     }));
     app.use(express.methodOverride());
     app.use(express.cookieParser('741b09105b235f2f8fa0511a1229f48e'));
-    app.use(express.session());
+    app.use(express.session({
+    	store: new MongoStore({
+    		db: 'coolpa-sessions'
+    	})
+    }));
     app.use(app.router);
     //app.use(express.static(path.join(__dirname, 'public')));
     app.use(gzippo.staticGzip(path.join(__dirname, 'public')));
