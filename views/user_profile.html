@@ -1,0 +1,136 @@
+<% include header.html %>
+<div class="container-fluid" style="padding-top: 60px;">
+    <div class="row-fluid">
+
+        <div class="span6 offset2">
+            <% if( notification ) { %>
+            <div class="alert alert-block <%=notification.type%>">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <%=notification.message%>
+            </div>
+            <% } %>
+
+            <div class="tabbable">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#user_data">Information</a>
+                    </li>
+                    <li><a href="#user_avatar" id="user_avatar_ref">Avatar</a></li>
+                    <li><a href="#invites" id="invites_ref">Invites</a></li>
+                    <li><a href="#notifications" id="notifications_ref">Notifications</a></li>
+                </ul>
+                <div class="tab-content">
+                    <form class="form-horizontal tab-pane active" method="POST" action="/user_data" id="user_data">
+                        <!-- Comming feature -->
+                        <!--<div class="control-group">
+                            <label class="control-label" for="inputUserName">Username</label>
+                            <div class="controls">
+                                <input type="text" name="username" id="inputUserName" placeholder="Username" value="<%=data._id%>">
+                            </div>
+                        </div>-->
+                        
+                        <div class="control-group">
+                            <label class="control-label" for="inputName">Name</label>
+                            <div class="controls">
+                                <input type="text" name="name" id="inputName" placeholder="Your name" value="<%=data.name%>">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="inputDescription">Description</label>
+                            <div class="controls">
+                                <input type="text" name="description" id="inputDescription" placeholder="A bit about you..." value="<%=data.description%>">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="inputEmail">Email</label>
+                            <div class="controls">
+                                <input type="email" name="email" id="inputEmail" placeholder="Email" value="<%=data.email%>">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <small>Complete if you want to change your password</small>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="inputPassword">Password</label>
+                            <div class="controls">
+                                <input type="password" id="inputPassword" name="password" placeholder="Password">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="inputRepeatPassword">Repeat Password</label>
+                            <div class="controls">
+                                <input type="password" id="inputRepeatPassword" name="repeatpassword" placeholder="Repeat Password">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <button type="submit" class="btn">Save changes</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <form method="POST" action="/upload_image" enctype="multipart/form-data" id="user_avatar" class="form-horizontal tab-pane">
+                        <div class="control-group">
+                            <label class="control-label" for="avatar">Image</label>
+                            <div class="controls">
+                                <input type="file" name="avatar" id="avatar" />
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <button type="submit" class="btn">Upload Image</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="tab-pane" id="invites">
+                        <form method="POST" action="/invite" enctype="multipart/form-data" class="form-horizontal">
+                            <div class="control-group">
+                                <label class="control-label" for="inputEmail">Email</label>
+                                <div class="controls">
+                                    <input type="text" name="invitations" id="inputEmail" placeholder="Emails to send invites ( comma separated )" value="">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <div class="controls">
+                                    <button type="submit" class="btn">Send</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="span10">
+                            <span>You have <%=data.invites%> to send.</span>
+                        </div>
+                    </div>
+
+                    <form method="POST" action="/notifications" id="notifications" class="form-horizontal tab-pane">
+                        <div class="control-group">
+                            <label class="control-label" for="mentions">Mentions</label>
+                            <div class="controls">
+                                <input type="checkbox" name="mentions" id="avatar" />
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <button type="submit" class="btn">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="span2 well" style="max-width: 340px; padding: 8px 0; text-align: center;">
+            <img src="/avatars/<%= data._id %>/avatar.square.jpg" class="img-rounded" width="150" height="150">
+        </div>
+    </div>
+</div>
+<% include footer.html %>

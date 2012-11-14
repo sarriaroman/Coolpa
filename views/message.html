@@ -1,0 +1,22 @@
+<% include header.html %>
+<div class="container-fluid" style="padding-top: 60px;">
+    <div class="row-fluid">
+
+        <div class="span6 well offset3">
+            <div class="span10">
+                <div class="pull-left">
+                    <img src="/avatars/<%= data.sender %>/avatar.square.jpg" class="img-rounded" width="50" height="50">
+                </div>
+                <div class="pull-left" style="margin-left: 20px;">
+                    <h4><%= data.sender %></h4>
+                </div>
+            </div>
+            <div class="span10" style="margin-top: 10px;">
+                <span><%= data.message %></span><br/><br/>
+                <time class="timeago" datetime="<%=data.creationDate.toISOString()%>">about 8 hours ago</time><br/>
+            </div>
+        </div>
+
+    </div>
+</div>
+<% include footer.html %>

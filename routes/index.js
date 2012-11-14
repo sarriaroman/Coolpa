@@ -1,0 +1,797 @@
+
+/*
+ * GET home page.
+ */
+
+exports.index = function(req, res){
+    if( req.session.uid == undefined ) {
+        
+        res.render('start', {
+            user: req.session.uid
+        });
+        
+    } else {
+        res.redirect('/start');
+    }
+};
+
+exports.auth = function(req, res) {
+    var Users = require('../models/users');
+    
+    var User = new Users();
+    
+    User.auth( req.body.username.toLowerCase(), req.body.password, function(data) {
+        if( data ) {
+            req.session.uid = data._id;
+        
+            if(req.session.back != undefined) {
+                var backUrl = req.session.back;
+                
+                delete req.session.back;
+                
+                res.redirect( backUrl );
+            } else {
+                res.redirect('/start');
+            }
+        } else {
+            res.redirect('/');
+        }
+    } );
+};
+
+exports.message = function(req, res) {
+    security(req, res);
+    
+    var Messages = require('../models/messages');
+    var users = new (require('../models/users'))();
+    var fs = require('fs');
+    var ses = new (require('../classes/ses'))();
+    var ejs = require('ejs');
+    
+    var Message = new Messages();
+    
+    var msg = req.body.message;
+    
+    if( msg.trim() == '' ) {
+        res.redirect('/');
+        return;
+    }
+    
+    var ids = new Array();
+    msg.replace(/[:]+[A-Za-z0-9-_]+/g, function(u) {
+        var uname = u.replace(':', '').toLowerCase();
+        
+        if( uname.length > 2 ) {
+            ids.push( uname );
+        }
+    });
+    
+    Message.add({
+        message: msg,
+        ids: ids,
+        sender: req.body.uid,
+        public: false,
+        hidden: false
+    }, function(err) {
+        for( var i = 0 ; i < ids.length ; i++ ) {
+            var uid = ids[i];
+            console.log(uid);
+            
+            users.user(uid, function(err, data){
+                if( data != undefined ) {
+                    fs.readFile('views/email_template.html', 'UTF-8', function(err, html) {
+                        ses.get().send({
+                            from: 'Coolpa.net <info@coolpa.net>',
+                            to: [data.email],
+                            subject: 'You have new mentions on Coolpa',
+                            body: {
+                                html: ejs.render(html, {
+                                    username: data._id, 
+                                    uid: req.session.uid
+                                })
+                            }
+                        });
+                        console.log('Email sent to ' + data._id);
+                    });
+                }
+            });
+        }
+        
+        res.redirect('/');
+    });
+};
+
+exports.signout = function(req, res) {
+    security(req, res);
+    
+    req.session.uid = undefined;
+    res.redirect('/');
+};
+
+exports.connect = function(req, res) {
+    security( req, res );
+    var users = new (require('../models/users'))();
+    
+    users.connect(req.session.uid, req.params.username, function(err, data) {
+        var fs = require('fs');
+        var ses = new (require('../classes/ses'))();
+        var ejs = require('ejs');
+        
+        users.user(req.params.username, function(err, data){
+            if( data != undefined ) {
+                fs.readFile('views/reading_template.html', 'UTF-8', function(err, html) {
+                    ses.get().send({
+                        from: 'Coolpa.net <info@coolpa.net>',
+                        to: [data.email],
+                        subject: 'You have new readers on Coolpa',
+                        body: {
+                            html: ejs.render(html, {
+                                username: data._id, 
+                                uid: req.session.uid
+                            })
+                        }
+                    });
+                    console.log('Email sent to ' + data._id);
+                });
+            }
+        });
+        
+        res.redirect('/users/' + req.params.username); 
+    });
+};
+
+exports.disconnect = function(req, res) {
+    security( req, res );
+    var users = new (require('../models/users'))();
+    
+    users.disconnect(req.session.uid, req.params.username, function(err, data) {
+        res.redirect('/users/' + req.params.username); 
+    });
+};
+
+exports.user = function(req, res) {
+    var messages = new (require('../models/messages'))();
+    var users = new (require('../models/users'))();
+        
+    var username = req.params.username;
+    
+    users.user( username, function(err, data) { // Get the search user!
+        if( data == null ) {
+            res.redirect('/');
+        } else {
+            messages.find( username, [], function(err, docs) {
+                messages.count(username, [], function(err, cnt) {
+                    users.user( req.session.uid, function(err, actual) { // Get the actual user!!!
+                
+                        users.connections( username, function(err, conns) {
+                            res.render('user_view', {
+                                user: req.session.uid,
+                                username: username,
+                                data: data,
+                                messages: docs.reverse(), // Reversing array
+                                count: cnt,
+                                connections: data.connections.length,
+                                connecteds: conns.length,
+                                mustConnect: (username != req.session.uid),
+                                isConnected: (actual.connections.indexOf(username) > -1)
+                            }); 
+                        });
+                    });
+                } );
+            });
+        }
+    } );
+};
+
+var date_sort_desc = function (date1, date2) {
+  // This is a comparison function that will result in dates being sorted in
+  // DESCENDING order.
+  if (date1 > date2) return -1;
+  if (date1 < date2) return 1;
+  return 0;
+};
+
+exports.start = function(req, res) {
+    if( req.session.uid == undefined ) {
+        res.redirect('/');
+    } else {
+        var messages = new (require('../models/messages'))();
+        var users = new (require('../models/users'))();
+        
+        users.user( req.session.uid, function(err, data) {
+            messages.find( req.session.uid, data.connections.slice(0), function(err, docs) {
+                messages.count(req.session.uid, [], function(err, cnt) {
+                    users.connections( req.session.uid, function(err, conns) {
+                    	
+                    	var autocomplete = "[";
+                    	for( var i = 0 ; i < data.connections.length ; i++ ) {
+                    		var obj = "{'id':'" + data.connections[i] + "', 'name':':" + data.connections[i] + "', 'avatar': '/avatars/" + data.connections[i] + "/avatar.square.jpg" + "', 'icon':'" + "', 'type':'contact'}";
+							
+							if( i < (data.connections.length - 1) ) {
+								obj += ",";
+							}
+							
+							autocomplete += obj;
+                    	}
+                    	autocomplete += "]";
+                    	
+                        res.render('index', {
+                            user: req.session.uid,
+                            username: '',
+                            messages: docs.reverse(), // Reversing array
+                            count: cnt,
+                            connections: data.connections.length,
+                            connecteds: conns.length,
+                            autocomplete: autocomplete
+                        }); 
+                    }); 
+                } );
+            });
+        } );
+    }
+};
+
+exports.mentions = function(req, res) {
+    if( req.session.uid == undefined ) {
+        res.redirect('/');
+    } else {
+        var messages = new (require('../models/messages'))();
+        var users = new (require('../models/users'))();
+        
+        users.user( req.session.uid, function(err, data) {
+            messages.mentions( req.session.uid, function(err, docs) {
+                messages.count(req.session.uid, [], function(err, cnt) {
+                    users.connections( req.session.uid, function(err, conns) {
+                    
+                    	var autocomplete = "[";
+                    	for( var i = 0 ; i < data.connections.length ; i++ ) {
+                    		var obj = "{'id':'" + data.connections[i] + "', 'name':':" + data.connections[i] + "', 'avatar': '/avatars/" + data.connections[i] + "/avatar.square.jpg" + "', 'icon':'" + "', 'type':'contact'}";
+							
+							if( i < (data.connections.length - 1) ) {
+								obj += ",";
+							}
+							
+							autocomplete += obj;
+                    	}
+                    	autocomplete += "]";
+                    
+                        res.render('index', {
+                            user: req.session.uid,
+                            username: '',
+                            messages: docs.reverse(), // Reversing array
+                            count: cnt,
+                            connections: data.connections.length,
+                            connecteds: conns.length,
+                            autocomplete: autocomplete
+                        }); 
+                    }); 
+                } );
+            });
+        } );
+    }
+};
+
+exports.reading = function(req, res) {
+    if( req.session.uid == undefined ) {
+        res.redirect('/');
+    } else {
+        var messages = new (require('../models/messages'))();
+        var users = new (require('../models/users'))();
+        
+        console.log(req.params);
+        var username = ( req.params.username == 'me' ) ? req.session.uid : req.params.username;
+        
+        users.user( username, function(err, data) {
+            messages.count(username, [], function(err, cnt) {
+                users.connections( username, function(err, conns) {
+                    users.users( data.connections, function(err, users) {
+                        res.render('users', {
+                            title: 'Reading',
+                            user: req.session.uid,
+                            username: username,
+                            users: users,
+                            count: cnt,
+                            connections: data.connections.length,
+                            connecteds: conns.length
+                        }); 
+                    });
+                }); 
+            } );
+        } );
+    }
+};
+
+exports.readers = function(req, res) {
+    if( req.session.uid == undefined ) {
+        res.redirect('/');
+    } else {
+        var messages = new (require('../models/messages'))();
+        var users = new (require('../models/users'))();
+        
+        var username = ( req.params.username == 'me' ) ? req.session.uid : req.params.username;
+        
+        users.user( username, function(err, data) {
+            messages.count(username, [], function(err, cnt) {
+                users.connections( username, function(err, conns) {
+                    res.render('users', {
+                        title: 'Readers',
+                        user: req.session.uid,
+                        username: username,
+                        users: conns,
+                        count: cnt,
+                        connections: data.connections.length,
+                        connecteds: conns.length
+                    }); 
+                });
+            } );
+        } );
+    }
+};
+
+exports.profile = function(req, res) {
+    if( req.session.uid == undefined ) {
+        res.redirect('/');
+    } else {
+        var users = new (require('../models/users'))();
+        
+        var notification = ( req.session.notification == undefined ) ? false : req.session.notification;
+        delete req.session.notification;
+        
+        users.user( req.session.uid, function(err, data) {
+            res.render('user_profile', {
+                user: req.session.uid,
+                data: data,
+                notification: notification
+            }); 
+        });
+    }
+};
+
+exports.user_data = function(req, res) {
+    if( req.session.uid == undefined ) {
+        res.redirect('/');
+    } else {
+        // Si el Username es modificado se deben modificar todas las referencias en la base de datos
+        // Mensajes
+        // - Texto
+        // - ids
+        // Lectores
+        
+        var users = new (require('../models/users'))();
+        
+        if( req.body.password != "" && req.body.password == req.body.repeatpassword ) {
+            users.update( req.session.uid, {
+                name: req.body.name,
+                description: req.body.description,
+                password: users.hassPass( req.body.password )
+            }, function() {
+                
+                req.session.notification = {
+                    type: 'alert-success',
+                    message: 'Your information was updated. You changed your password... please remember it the next time!'
+                };
+                                                
+                res.redirect('/profile');
+            } );
+        } else {
+            users.update( req.session.uid, {
+                name: req.body.name,
+                description: req.body.description
+            }, function() {
+                req.session.notification = {
+                    type: 'alert-success',
+                    message: 'Your information was updated'
+                };
+                
+                res.redirect('/profile');
+            } );
+        }
+    }
+};
+
+exports.upload_image = function(req, res) {
+    if( req.session.uid == undefined ) {
+        res.redirect('/');
+    } else {
+        if( req.files.avatar ) {
+            if( req.files.avatar.length > 0 ) {
+                var easyimg = require('easyimage');
+                var fs = require('fs');
+                
+                var avatar = req.files.avatar;
+                
+                var dirname = __dirname.replace('routes', '');
+                
+                var orig = dirname + 'public/avatars/' + req.session.uid + '/avatar.original.jpg';
+                var square = dirname + '/public/avatars/' + req.session.uid + '/avatar.square.jpg';
+                
+                fs.exists(orig, function(oexists) {
+                    if( oexists ) {
+                        fs.unlink( orig, function() {
+                            fs.exists(square, function(sexists) {
+                                if( sexists ) {
+                                    fs.unlink( square, function() {
+                                        easyimg.convert({
+                                            src:avatar.path, 
+                                            dst:orig, 
+                                            quality:80
+                                        }, function(err, image) {
+                                            if (err) throw err;
+                                            console.log('Converted');
+                    
+                                            easyimg.thumbnail({
+                                                src:orig, 
+                                                dst:square, 
+                                                width:150, 
+                                                height:150
+                                            },
+                                            function(err, image) {
+                                                if (err) throw err;
+                                                console.log('Thumbnail created');
+                                                
+                                                req.session.notification = {
+                                                    type: 'alert-success',
+                                                    message: 'Your avatar was changed succesfully'
+                                                };
+                        
+                                                res.redirect('/profile#user_avatar');
+                                            });
+                                        });
+                                    } );
+                                } else {
+                                    res.redirect('/profile#user_avatar');
+                                }
+                            });
+                        } );
+                    } else {
+                        res.redirect('/profile#user_avatar');
+                    }
+                });
+                    
+                
+            } else {
+                res.redirect('/profile#user_avatar');
+            }
+        } else {
+            res.redirect('/profile#user_avatar');
+        }
+    }
+};
+
+exports.invite = function(req, res) {
+    if( req.session.uid == undefined ) {
+        res.redirect('/');
+    } else {
+        // Separa por comas y envia invitación
+        // Te muestra todo el array de invitaciones que enviaste.
+        // Cuando un usuario se registra te muestra al lado que username tiene
+        // chequeando por el email.
+        var users = new (require('../models/users'))();
+        var invites = new (require('../models/invitations'))();
+        
+        var fs = require('fs');
+        var ses = new (require('../classes/ses'))();
+        var ejs = require('ejs');
+    
+        var invitations = req.body.invitations;
+        var emails = new Array();
+        
+        if( invitations.indexOf(',') == -1 ) {
+            emails.push(invitations);
+        } else {
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            
+            var ems = invitations.split(',');
+            
+            for( var email in ems ) {
+                if( re.test(email) ) {
+                    emails.push(email);
+                }
+            }
+        }
+        
+        fs.readFile('views/invite_template.html', 'UTF-8', function(err, html) {
+            for( var i = 0 ; i < emails.length ; i++ ) {
+                var invitation = emails[i];
+                var time = (new Date()).getTime();
+            
+                var code = users.hashPass( invitation + time );
+            
+                invites.check({
+                    code: code,
+                    email: invitation,
+                    sender: req.session.uid
+                }, function( rows, data ) {
+                    if(rows.length == 0) {
+                        invites.add(data, function(err, dt) {
+                            ses.get().send({
+                                from: 'Coolpa.net <info@coolpa.net>',
+                                to: [data.email],
+                                subject: 'You have been invited to Coolpa.net',
+                                body: {
+                                    html: ejs.render(html, {
+                                        uid: req.session.uid,
+                                        code: data.code
+                                    })
+                                }
+                            });
+                        } );
+                    }
+                });
+            }
+            
+            req.session.notification = {
+                type: 'alert-success',
+                message: 'Your invitations were sent.'
+            };
+            res.redirect('/profile#invites');
+        });
+    }
+};
+
+exports.invitation = function(req, res) {
+    var invites = new (require('../models/invitations'))();
+    
+    invites.get(req.params.code, function(err, data) {
+        res.render('invitation', {
+            user: '',
+            data: data,
+            username: '',
+            name: '',
+            notification: false
+        });
+    });
+};
+ 
+/*{ 
+ *  "_id" : "sarriaroman", 
+ *  "connections" : [ "koliffato" ], 
+ *  "createdDate" : ISODate("2012-09-25T03:43:40.223Z"), 
+ *  "description" : "Coolpa lover", 
+ *  "email" : "agustin478@gmail.com", 
+ *  "invites" : 50, 
+ *  "lastname" : "Sarria", 
+ *  "name" : "Roman", 
+ *  "password" : "eb0a191797624dd3a48fa681d3061212", 
+ *  "updatedDate" : ISODate("2012-10-27T19:44:53.250Z") 
+ *} */
+exports.invitation_data = function(req, res) {
+    var users = new (require('../models/users'))();
+    var invites = new (require('../models/invitations'))();
+        
+    var fs = require('fs');
+    var ses = new (require('../classes/ses'))();
+    var ejs = require('ejs');
+    
+    var reg = /[A-Za-z0-9-_]+/g;
+    
+    var bdata = req.body;
+    var selecteduname = req.body.username.toLowerCase();
+    
+    if( selecteduname.length < 3 || !reg.test(selecteduname) ) {
+        res.render('invitation', {
+            user: '',
+            data: {
+                code: bdata.code,
+                email: bdata.email
+            },
+            username: bdata.username.toLowerCase(),
+            name: bdata.name,
+            notification: {
+                type: 'alert-error',
+                message: 'The username you select is wrong. A right username must have at least 3 characters.'
+            }
+        });
+    } else if( bdata.password != bdata.repeatpassword ) {
+        res.render('invitation', {
+            user: '',
+            data: {
+                code: bdata.code,
+                email: bdata.email
+            },
+            username: bdata.username.toLowerCase(),
+            name: bdata.name,
+            notification: {
+                type: 'alert-error',
+                message: 'The passwords are different'
+            }
+        });
+    } else {
+        invites.get(bdata.code, function(err, cdata) {
+            if( cdata ) {
+                users.find(bdata.username.toLowerCase(), function(err, usersarray) {
+                    if( usersarray.length == 0 )
+                    {
+                        users.user(cdata.sender, function(error, inviter) {
+                            users.create({
+                                _id: bdata.username.toLowerCase(),
+                                connections: [],
+                                description: '',
+                                name: bdata.name,
+                                email: bdata.email,
+                                invites: 2,
+                                password: users.hashPass( bdata.password )
+                            }, bdata, function( dt, rdt ) {
+                                // Create folders for avatars
+                                var dirname = __dirname.replace('routes', '');
+                            
+                                var folder = dirname + 'public/avatars/' + rdt.username.toLowerCase() + '/';
+                
+                                var orig = folder + 'avatar.original.jpg';
+                                var square = folder + 'avatar.square.jpg';
+                            
+                                fs.mkdir(folder, function(err) {
+                                    var inStr = fs.createReadStream(dirname + 'public/avatars/avatar.jpg');
+                                    var origOutStr = fs.createWriteStream(orig);
+                                    var squareOutStr = fs.createWriteStream(square);
+
+                                    inStr.pipe(origOutStr);
+                                    inStr.pipe(squareOutStr);
+                                
+                                    fs.readFile('views/welcome_template.html', 'UTF-8', function(err, html) {
+                                        ses.get().send({
+                                            from: 'Coolpa.net <info@coolpa.net>',
+                                            to: [rdt.email],
+                                            subject: 'You are succesfully registered on Coolpa.net',
+                                            body: {
+                                                html: ejs.render(html, {
+                                                    username: rdt.username.toLowerCase(),
+                                                    password: rdt.password
+                                                })
+                                            }
+                                        });
+                                        
+                                        fs.readFile('views/joined_template.html', 'UTF-8', function(err, jhtml) {
+                                            ses.get().send({
+                                                from: 'Coolpa.net <info@coolpa.net>',
+                                                to: [inviter.email],
+                                                subject: rdt.username.toLowerCase() + ' has joined Coolpa.net',
+                                                body: {
+                                                    html: ejs.render(jhtml, {
+                                                        username: inviter._id,
+                                                        user: rdt.username.toLowerCase()
+                                                    })
+                                                }
+                                            });
+                                        });
+                                
+                                        req.session.uid = rdt.username.toLowerCase();
+                                
+                                        res.redirect('/');
+                                    
+                                        invites.remove(bdata.code, function(err, cd) {});
+                                    });
+                                });
+                            });
+                        });
+                    } else {
+                        var not = {
+                            type: 'alert-error',
+                            message: 'The username you choose is already taken.'
+                        };
+                        
+                        res.render('invitation', {
+                            user: '',
+                            data: cdata,
+                            username: bdata.username.toLowerCase(),
+                            name: bdata.name,
+                            notification: not
+                        });
+                    }
+                });
+            }
+        });
+    }
+};
+
+exports.showmessage = function(req, res) {
+    if( req.session.uid == undefined ) {
+        req.session.back = '/message/' + req.params.id;
+        
+        res.redirect('/');
+    } else {
+        var messages = new (require('../models/messages'))();
+        
+        messages.get(req.params.id, function(err, data) {
+            res.render('message', {
+                user: req.session.uid,
+                data: data
+            }); 
+        });
+    }
+};
+
+exports.remove_message = function(req, res) {
+    if( req.session.uid == undefined ) {
+        res.redirect('/');
+    } else {
+        var messages = new (require('../models/messages'))();
+        
+        messages.get(req.params.id, function(err, data) {
+            if( data.sender == req.session.uid ) {
+            	messages.remove(req.params.id, function(err) {
+            		res.redirect('/');
+            	});
+            } else {
+            	res.redirect('/');
+            }
+        });
+    }
+};
+
+exports.hide_message = function(req, res) {
+    if( req.session.uid == undefined ) {
+        res.redirect('/');
+    } else {
+        var messages = new (require('../models/messages'))();
+        
+        messages.get(req.params.id, function(err, data) {
+            if( data.sender == req.session.uid ) {
+            	messages.hide(req.params.id, function(err) {
+            		res.redirect('/');
+            	});
+            } else {
+            	res.redirect('/');
+            }
+        });
+    }
+};
+
+exports.unhide_message = function(req, res) {
+    if( req.session.uid == undefined ) {
+        res.redirect('/');
+    } else {
+        var messages = new (require('../models/messages'))();
+        
+        messages.get(req.params.id, function(err, data) {
+            if( data.sender == req.session.uid ) {
+            	messages.unhide(req.params.id, function(err) {
+            		res.redirect('/');
+            	});
+            } else {
+            	res.redirect('/');
+            }
+        });
+    }
+};
+
+exports.search = function(req, res) {
+    if( req.session.uid == undefined ) {
+        req.session.back = '/message/' + req.params.id;
+        
+        res.redirect('/');
+    } else {
+        var messages = new (require('../models/messages'))();
+        var users = new (require('../models/users'))();
+        
+        var username = req.session.uid;
+        
+        var search = req.body.search;
+    
+        users.user( username, function(err, data) {
+            messages.search( search, function(err, docs) {
+                users.search( search, function( err, userssearch ) {
+                    messages.count(username, [], function(err, cnt) {
+                        users.connections( username, function(err, conns) {
+                            res.render('search', {
+                                user: req.session.uid,
+                                username: '',
+                                users: userssearch,
+                                messages: docs.reverse(), // Reversing array
+                                count: cnt,
+                                connections: data.connections.length,
+                                connecteds: conns.length
+                            }); 
+                        }); 
+                    } ); 
+                });
+            });
+        } );
+    }
+};
+
+var security = function(req, res) {
+    if( req.session.uid == undefined ) {
+        res.redirect('/');
+    }
+};

@@ -1,0 +1,34 @@
+
+<script>
+    $(document).ready(function() {
+        
+        $("#message").charCount({
+            css: 'pull-right'
+        });
+        
+        if( window.location.pathname == '/profile' ) {
+            $('.tabbable li a').click(function (e) {
+                    e.preventDefault();
+                    $(this).tab('show');
+                });
+            
+            if(window.location.hash) {
+                $(window.location.hash + "_ref").click();
+            }
+        }
+        
+        
+        $("#help").popover({
+            title: 'Help'
+        });
+                
+        $('.timeago').timeago();
+    });
+</script>
+
+<style>
+    form .warning{color:#600;}	
+    form .exceeded{color:#e00;}
+</style>
+</body>
+</html>

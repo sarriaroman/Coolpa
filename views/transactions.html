@@ -1,0 +1,21 @@
+<% include header.html %>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io.connect('http://localhost');
+    socket.on('transaction', function (data) {
+        $("#transactions").html( data.data );
+    });
+</script>
+<div class="container-fluid" style="padding-top: 60px;">
+    <div class="row-fluid">
+        <% include menu.html %>
+        <div class="span6">
+            <h3>Transacciones</h3>
+            <hr/>
+
+            <!--<div id="transactions"></div>-->
+            <%- transactions %>
+        </div>
+    </div>
+</div>
+<% include footer.html %>

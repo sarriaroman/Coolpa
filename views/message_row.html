@@ -1,0 +1,31 @@
+<% if( data.sender != user && data.hidden == true ) { return ""; } %>
+
+<div class="well" style="overflow: hidden; display: block;" id="id:<%= data._id %>">
+    <div class="pull-left">
+        <img src="/avatars/<%= data.sender %>/avatar.square.jpg" class="img-rounded" width="80" height="80">
+    </div>
+
+    <div class="pull-left span9" style="margin-left: 15px;">
+        <a href="/users/<%=data.sender%>"><h4><%= data.sender %></h4></a>
+        <span><%- data.message.parseURL().parseUsername() %></span><br/><br/>
+        <time class="timeago" datetime="<%=data.creationDate.toISOString()%>">about 8 hours ago</time>
+    </div>
+    
+    <div class="pull-right" id="options">
+        <div class="btn-group btn-group-vertical">
+            <% if( data.sender != user ) { %>
+            <button class="btn" onclick="$('#message').append(':<%=data.sender%> ');$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();"><i class="icon-share-alt"></i></button>
+            <% } %>
+            <% if( data.sender == user ) { %>
+            <button class="btn" onclick="location.href='/remove/<%=data._id%>';"><i class="icon-remove"></i></button>
+            
+            <% if( data.hidden == false ) { %>
+            <button class="btn" onclick="location.href='/hide/<%=data._id%>';"><i class="icon-eye-close"></i></button>
+            <% } else { %>
+            <button class="btn" onclick="location.href='/unhide/<%=data._id%>';"><i class="icon-eye-open"></i></button>
+            <% } %>
+            <% } %>
+            <button class="btn"><a href="/message/<%= data._id %>" target="_BLANK"><i class="icon-globe"></i></a></button>
+        </div>
+    </div>
+</div>

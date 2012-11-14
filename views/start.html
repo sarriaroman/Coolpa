@@ -1,0 +1,18 @@
+<% include header.html %>
+        <div class="container-fluid" style="padding-top: 60px;">
+            <div class="row-fluid">
+                <div class="span5 offset2" style="text-align: center; padding-top: 10px;">
+                    <img src="/images/start_logo.png" />
+                </div>
+                <div class="span2">
+                    <form method="POST" action="/auth">
+                        <input type="text" id="username" name="username" placeholder="Username" value="" style="width: 100%" /><br/>
+                        <input type="password" id="password" name="password" placeholder="Password" value="" style="width: 100%" /><br/>
+                        <div style="width: 100%; text-align: center;">
+                            <input type="submit" value="Log In" class="btn btn-large" style="width: 107%" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+<% include footer.html %>
