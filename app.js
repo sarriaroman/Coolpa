@@ -29,7 +29,8 @@ app.configure(function(){
     app.use(express.cookieParser('741b09105b235f2f8fa0511a1229f48e'));
     app.use(express.session({
     	store: new MongoStore({
-    		db: 'coolpa-sessions'
+    		db: 'coolpa-sessions',
+    		native_parser: true
     	})
     }));
     app.use(app.router);
