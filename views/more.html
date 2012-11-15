@@ -1,4 +1,4 @@
-                    <% if(messages != undefined) { %>
+                    <% if(messages != undefined && messages != null) { %>
                     <% messages.forEach(function(data){ %>
                         <% if( data.sender != user && data.hidden == true ) { return ""; } %>
 
@@ -32,7 +32,8 @@
     </div>
 </div>
                     <% }) %>
-
+                    <% } %>
+                    <% if(messages != undefined && messages != null) { %>
                     <button type="button" id="load_more" class="btn btn-primary span12" data-loading-text="Loading..." data-date="<%= messages[messages.length - 1].creationDate %>" onclick="load_more();" style="display: block;">more</button>
 
                     <% } %>

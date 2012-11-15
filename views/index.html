@@ -60,7 +60,9 @@
 </div>
                     <% }) %>
 
+                    <% if(messages != undefined && messages != null) { %>
                     <button type="button" id="load_more" class="btn btn-primary span11 center" data-loading-text="Loading..." data-date="<%= messages[messages.length - 1].creationDate %>" onclick="load_more();" style="display: block;">more</button>
+                    <% } %>
                 </div>
                 <script>
                     function load_more() {
