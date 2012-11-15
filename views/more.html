@@ -1,4 +1,4 @@
-                    <% if(messages) { %>
+                    <% if(messages != undefined) { %>
                     <% messages.forEach(function(data){ %>
                         <% if( data.sender != user && data.hidden == true ) { return ""; } %>
 
