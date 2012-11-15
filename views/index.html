@@ -60,17 +60,18 @@
 </div>
                     <% }) %>
 
-                    <button type="button" id="load_more" class="btn btn-primary span12" data-loading-text="Loading..." data-date="<%= messages[messages.length - 1].creationDate %>">more/button>
+                    <button type="button" id="load_more" class="btn btn-primary span11 center" data-loading-text="Loading..." data-date="<%= messages[messages.length - 1].creationDate %>">more</button>
                 </div>
                 <script>
                     $('#load_more').on('click', function(e) {
                         var button = $(this);
 
                         $.post('/more', {
-                            date: $(this).attr('data-date')
+                            date: $(this).attr('data-date'),
+                            section: '<%=section%>'
                         }, function(html){
                             button.remove();
-                            
+
                             $('#messages').append(html);
                         }, 'html');
                     });

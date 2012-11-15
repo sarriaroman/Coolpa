@@ -222,7 +222,8 @@ exports.start = function(req, res) {
                             count: cnt,
                             connections: data.connections.length,
                             connecteds: conns.length,
-                            autocomplete: autocomplete
+                            autocomplete: autocomplete,
+                            section: 'start'
                         }); 
                     }); 
                 } );
@@ -238,13 +239,23 @@ exports.more = function(req, res) {
     var uid = req.session.uid;
     var date = req.body.date;
 
-    users.user( uid, function(err, data) {
-        messages.find( uid, data.connections.slice(0), new Date( date ), function(err, docs) {
-            res.render('more', {
-                messages: docs
-            }); 
-        });
-    } );
+    if( req.body.section == 'mentions' ) {
+        users.user( uid, function(err, data) {
+            messages.mentions( uid, new Date( date ), function(err, docs) {
+                res.render('more', {
+                    messages: docs
+                }); 
+            });
+        } );    
+    } else {
+        users.user( uid, function(err, data) {
+            messages.find( uid, data.connections.slice(0), new Date( date ), function(err, docs) {
+                res.render('more', {
+                    messages: docs
+                }); 
+            });
+        } );
+    }
 };
 
 exports.mentions = function(req, res) {
@@ -278,7 +289,8 @@ exports.mentions = function(req, res) {
                             count: cnt,
                             connections: data.connections.length,
                             connecteds: conns.length,
-                            autocomplete: autocomplete
+                            autocomplete: autocomplete,
+                            section: 'mentions'
                         }); 
                     }); 
                 } );
