@@ -67,7 +67,7 @@
                         var button = $("#load_more");
 
                         $.post('/more', {
-                            date: $(this).attr('data-date'),
+                            date: button.attr('data-date'),
                             section: '<%=section%>'
                         }, function(html){
                             button.remove();
