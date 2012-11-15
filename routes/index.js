@@ -168,7 +168,7 @@ exports.user = function(req, res) {
                                 user: req.session.uid,
                                 username: username,
                                 data: data,
-                                messages: docs.reverse(), // Reversing array
+                                messages: docs, // Reversing array
                                 count: cnt,
                                 connections: data.connections.length,
                                 connecteds: conns.length,
@@ -218,7 +218,7 @@ exports.start = function(req, res) {
                         res.render('index', {
                             user: req.session.uid,
                             username: '',
-                            messages: docs.reverse(), // Reversing array
+                            messages: docs, // Reversing array
                             count: cnt,
                             connections: data.connections.length,
                             connecteds: conns.length,
@@ -258,7 +258,7 @@ exports.mentions = function(req, res) {
                         res.render('index', {
                             user: req.session.uid,
                             username: '',
-                            messages: docs.reverse(), // Reversing array
+                            messages: docs, // Reversing array
                             count: cnt,
                             connections: data.connections.length,
                             connecteds: conns.length,
