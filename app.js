@@ -79,6 +79,7 @@ app.get('/unhide/:id', routes.unhide_message);
 // POST
 app.post('/auth', routes.auth);
 app.post('/message', routes.message);
+app.post('/more', routes.more);
 app.post('/upload_image', routes.upload_image);
 app.post('/user_data', routes.user_data);
 app.post('/invite', routes.invite);
