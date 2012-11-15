@@ -243,6 +243,7 @@ exports.more = function(req, res) {
         users.user( uid, function(err, data) {
             messages.mentions( uid, new Date( date ), function(err, docs) {
                 res.render('more', {
+                    user: req.session.uid,
                     messages: docs
                 }); 
             });
@@ -251,6 +252,7 @@ exports.more = function(req, res) {
         users.user( uid, function(err, data) {
             messages.find( uid, data.connections.slice(0), new Date( date ), function(err, docs) {
                 res.render('more', {
+                    user: req.session.uid,
                     messages: docs
                 }); 
             });
