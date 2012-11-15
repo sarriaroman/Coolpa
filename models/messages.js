@@ -23,14 +23,14 @@ var messages = (function( ) {
         return this.database.connection().collection('Messages').updateById(this.database.getObjectID(id),{$set: { hidden: false }}, callback);
     };
 
-    messages.prototype.find = function( uid, connections, callback ) {
+    messages.prototype.find = function( uid, connections, date, callback ) {
         connections.push( uid );
         
-        return this.database.connection().collection('Messages').findItems({sender: { $in: connections }},{sort: { creationDate: 1 }}, callback);
+        return this.database.connection().collection('Messages').findItems({sender: { $in: connections }, creationDate: { $lt : date } },{sort: { creationDate: 1 }, limit: 20 }, callback);
     };
     
-    messages.prototype.mentions = function( uid, callback ) {
-        return this.database.connection().collection('Messages').findItems({ids: uid}, callback);
+    messages.prototype.mentions = function( uid, date, callback ) {
+        return this.database.connection().collection('Messages').findItems({ids: uid, creationDate: { $lt : date }}, { sort: { creationDate : 1 }, limit : 20 }, callback);
     };
     
     messages.prototype.get = function( _id, callback ) {

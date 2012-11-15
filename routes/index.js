@@ -159,7 +159,7 @@ exports.user = function(req, res) {
         if( data == null ) {
             res.redirect('/');
         } else {
-            messages.find( username, [], function(err, docs) {
+            messages.find( username, [], new Date(), function(err, docs) {
                 messages.count(username, [], function(err, cnt) {
                     users.user( req.session.uid, function(err, actual) { // Get the actual user!!!
                 
@@ -199,7 +199,7 @@ exports.start = function(req, res) {
         var users = new (require('../models/users'))();
         
         users.user( req.session.uid, function(err, data) {
-            messages.find( req.session.uid, data.connections.slice(0), function(err, docs) {
+            messages.find( req.session.uid, data.connections.slice(0), new Date(), function(err, docs) {
                 messages.count(req.session.uid, [], function(err, cnt) {
                     users.connections( req.session.uid, function(err, conns) {
                     	
@@ -239,7 +239,7 @@ exports.mentions = function(req, res) {
         var users = new (require('../models/users'))();
         
         users.user( req.session.uid, function(err, data) {
-            messages.mentions( req.session.uid, function(err, docs) {
+            messages.mentions( req.session.uid, new Date(), function(err, docs) {
                 messages.count(req.session.uid, [], function(err, cnt) {
                     users.connections( req.session.uid, function(err, conns) {
                     
