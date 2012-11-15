@@ -60,7 +60,7 @@
 </div>
                     <% }) %>
 
-                    <button type="button" id="load_more" class="btn btn-primary span11 center" data-loading-text="Loading..." data-date="<%= messages[messages.length - 1].creationDate %>">more</button>
+                    <button type="button" id="load_more" class="btn btn-primary span11 center" data-loading-text="Loading..." data-date="<%= messages[messages.length - 1].creationDate %>" onclick="load_more();">more</button>
                 </div>
                 <script>
                     $('#load_more').on('click', function(e) {
