@@ -33,8 +33,8 @@ app.configure(function(){
     	})
     }));
     app.use(app.router);
-    //app.use(express.static(path.join(__dirname, 'public')));
-    app.use(gzippo.staticGzip(path.join(__dirname, 'public')));
+    app.use(express.static(path.join(__dirname, 'public')));
+    //app.use(gzippo.staticGzip(path.join(__dirname, 'public')));
 	app.use(gzippo.compress());
 });
 
