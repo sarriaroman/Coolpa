@@ -231,6 +231,22 @@ exports.start = function(req, res) {
     }
 };
 
+exports.more = function(req, res) {
+    var messages = new (require('../models/messages'))();
+    var users = new (require('../models/users'))();
+
+    var uid = req.session.uid;
+    var date = req.body.date;
+
+    users.user( uid, function(err, data) {
+        messages.find( uid, data.connections.slice(0), new Date( date ), function(err, docs) {
+            res.render('more', {
+                messages: docs
+            }); 
+        });
+    } );
+};
+
 exports.mentions = function(req, res) {
     if( req.session.uid == undefined ) {
         res.redirect('/');
