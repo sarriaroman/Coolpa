@@ -1,47 +1,107 @@
 <% include header.html %>
-        <div class="container-fluid" style="padding-top: 60px;">
-            <div class="row-fluid">
-                <% include menu.html %>
-                <div class="span6">
-                    <form method="POST" action="/message">
-                        <input type="hidden" name="uid" value="<%=user%>"/>
-                        <textarea rows="3" id="message" name="message" class="span12" placeholder="What you want to tell?"></textarea><br/>
-                        <input type="submit" value="Send" class="btn btn-primary" />
-                        <a href="#" class="btn" id="help" rel="popover" data-content="Just write what you want to tell to the world. <br/>If you want to mention someone put the username preppending a colon ( : ). Ex. :username hi how are you?."><i class="icon-question-sign"></i></a>
+        <section id="slider-wrapper">
+        
+            <div class="flexslider">
+                <ul class="slides"> 
+                        <li>
+                            <img src="http://images4.fanpop.com/image/photos/17500000/cool-background-random-17506457-2299-1437.jpg" alt="" />
+                        </li>
+                </ul>
+            </div>
+            
+        </section>
+
+            <section id="content-wrapper">
+            <div id="content">
+                <div id="timeline">
+                    <div id="time-line">
+                        <div class="timeline-icon-bottom">
+                            <a href="#" class="icon-totop"></a>
+                            <span class="tophov">Back to top</span>
+                        </div>   
+                    </div>
+                    
+                    <div id="picture-profile">
+                        <a href="/">
+                            <img src="/avatars/<%= user %>/avatar.square.jpg" alt="" />
+                        </a>
+                    </div>
+                    
+                    <form method="POST" action="/message" id="message_sender">
+                    <div id="profile-description">
+                        <div class="timeline-preview">
+                            <div class="timeline-icon-pp"><a href="/" class="icon-profile"></a></div>
+                            <div class="timeline-pointer-pp"><span class="tl-pointer"></span></div>
+                            <div class="timeline-content">
+                                <p class="description">
+                                    <input type="hidden" name="uid" value="<%=user%>"/>
+                                    <textarea rows="3" id="message" name="message" placeholder="What you want to tell?" style="width: 92%;max-width:92%;min-width: 92%;"></textarea><br/>
+                                </p>
+                            </div>
+                            <div class="timeline-bar">
+                                <div>
+                                    <a class="btn" href="javascript:$('#message_sender').submit();">Send</a>
+                                    <a class="btn" href="#"  id="help" rel="popover" class="button-ask" data-content="Just write what you want to tell to the world. <br/>If you want to mention someone put the username preppending a colon ( : ). Ex. :username hi how are you?."><i class="icon-question-sign"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     </form>
                     
-                    <script>
-                    /*$('textarea#message').mentionsInput({
-                  	  onDataRequest:function (mode, query, callback) {
-                  	    var data = <%=autocomplete%>;
+                    
+                    <!--<div class="post">
+                        <div class="timeline-preview">
+                            <div class="timeline-icon"><span class="icon-taggedpost"></span></div>
+                            <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                            <div class="timeline-content-page">
+                                <div class="textpost">
+                                    <h2 class="post-page-title">Posts tagged with <strong><a href="{TagURL}">{Tag}</a></strong></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="post">
+                        <div class="timeline-preview">
+                            <div class="timeline-icon"><span class="icon-datepost"></span></div>
+                            <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                            <div class="timeline-content-page">
+                                <div class="textpost">
+                                    <h2 class="post-page-title">Posts for <strong>{DayOfWeek}, {DayOfMonth} {Month} {Year}</strong></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
 
-                  	    data = _.filter(data, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
-
-                  	    callback.call(this, data);
-                  	  },
-                  	  minChars: 2,
-                  	  triggerChar: ':',
-                  	  showAvatars: true
-                  	});*/
-                  </script>
-                </div>
-                <div class="span6" id="messages">
+                    <div id="messages">
                     <% messages.forEach(function(data){ %>
                         <% if( data.sender != user && data.hidden == true ) { return ""; } %>
-
-<div class="well" style="overflow: hidden; display: block;" id="id:<%= data._id %>">
-    <div class="pull-left">
-        <img src="/avatars/<%= data.sender %>/avatar.square.jpg" class="img-rounded" width="80" height="80">
-    </div>
-
-    <div class="pull-left span9" style="margin-left: 15px;">
-        <a href="/users/<%=data.sender%>"><h4><%= data.sender %></h4></a>
-        <span><%- data.message.parseURL().parseUsername() %></span><br/><br/>
-        <time class="timeago" datetime="<%=data.creationDate.toISOString()%>"></time>
-    </div>
-    
-    <div class="pull-right" id="options">
-        <div class="btn-group btn-group-vertical">
+                    <div class="post">
+                        <div class="timeline-preview">
+                            <div class="timeline-icon">
+                                <!--<span class="icon-datepost"></span>-->
+                                <div class="minipic">
+                                    <a href="/users/<%=data.sender%>">
+                                        <img src="/avatars/<%= data.sender %>/avatar.square.jpg">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                            <div class="timeline-content-page">
+                                <div class="textpost">
+                                    <h2 class="post-title">
+                                        <a href="/users/<%=data.sender%>"><%= data.sender %></a>
+                                    </h2>
+                                    <span class="post-divider"></span>
+                                    
+                                    <div class="bodytext">
+                                        <p>
+                                            <%- data.message.parseURL().parseUsername() %>
+                                        </p>
+                                        <span class="post-divider"></span>
+                                        <!--<a href="{Permalink}" class="read_more">Read More ...</a>-->
+                                        <time class="timeago read_more" datetime="<%=data.creationDate.toISOString()%>"></time>
+                                        <div style="float:right;">
             <% if( data.sender != user ) { %>
             <button class="btn" onclick="$('#message').append(':<%=data.sender%> ');$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();"><i class="icon-share-alt"></i></button>
             <% } %>
@@ -56,14 +116,122 @@
             <% } %>
             <button class="btn"><a href="/message/<%= data._id %>" target="_BLANK"><i class="icon-globe"></i></a></button>
         </div>
-    </div>
-</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <% }) %>
 
+                    <% if(messages != undefined ) { %>
                     <% if(messages.length > 0) { %>
-                    <button type="button" id="load_more" class="btn btn-primary span11 center" data-loading-text="Loading..." data-date="<%= messages[messages.length - 1].creationDate %>" onclick="load_more();" style="display: block;">more</button>
+                    <div class="post"  id="load_more">
+                        <div class="timeline-preview">
+                            <div class="timeline-icon"><span class="icon-chat"></span></div>
+                            <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                            <div class="timeline-content-page">
+                                <div class="textpost">
+                                    <h2 class="post-page-title">
+                                        <a href="javascript:load_more();" data-date="<%= messages[messages.length - 1].creationDate %>">Load More...</a>
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
                     <% } %>
                 </div>
+                    <!-- 
+                    =======================================
+                    BEGIN POSTS
+                    =======================================
+                    -->
+                    <!--<div id="blogpost">
+                    <div class="post">
+                        <div class="timeline-preview">
+                            <div class="timeline-icon">
+                    <a href="{Permalink}" class="icon-photo"></a>
+                    <a href="{Permalink}" class="icon-text"></a>
+
+                            </div>
+                            <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                            
+                            <div class="timeline-content">
+                                
+                                <div class="photopost">
+                                    
+                                    <img src="{PhotoURL-500}" alt="{PhotoAlt}" />
+                                    
+                                    <div class="caption-post">
+                                        
+                                        <span class="post-divider"></span>
+                                            
+                                    </div>
+                                </div>
+
+                                <div class="textpost">
+                                    
+                                    <h2 class="post-title">{Title}</h2>
+                                    <span class="post-divider"></span>
+                                    
+                                    <div class="bodytext">
+                                        
+                                        
+                                        
+                                        <a href="{Permalink}" class="read_more">Read More ...</a>
+                                        
+                                    </div>
+                                </div>
+                                
+                                
+                            </div>---> <!-- End .timeline-content -->
+                            
+                            <!--<div class="timeline-bar">
+                                
+                                <div class="datelike-bar">
+                                    
+                                    <a href="/day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}/" class="post-time">
+                                        ,
+                                    </a>
+                                    
+                                    <a href="{Permalink}#notes" class="liked-count"></a>
+                                    
+                                </div>
+                                
+                                <div class="button-viewpost">
+                                    <a href="{Permalink}" class="view-post">View Post</a>
+                                </div>
+                                
+                                <div class="button-viewdetails">
+                                    <a href="{Permalink}" class="view-details">View Post</a>
+                                </div>
+                                
+                                <div class="button-share">
+                                    <div class="share-icon">
+                                        <span class="share-btn"></span>
+                                        <a href="http://twitter.com/home?status={ShortURL}" class="share-twitter" target="_blank"></a>
+                                        <a href="http://www.facebook.com/sharer.php?u={ShortURL}" class="share-facebook" target="_blank"></a>
+                                    </div>
+                                </div>      
+                                                
+                            </div>--> <!-- End .timeline-bar -->
+                        </div> <!-- End .timeline-preview -->
+                    </div> <!-- End .post -->               
+                    
+                    </div><!-- End #blogpost -->
+                    
+                    <!-- 
+                    =======================================
+                    END POSTS
+                    =======================================
+                    -->
+                    
+                    
+                </div><!-- End #timeline -->
+                    
+            </div><!-- End #content -->
+        </section>
+
                 <script>
                     function load_more() {
                         var button = $("#load_more");
