@@ -41,7 +41,7 @@
                                 <div class="bodytext">
                                     <span><%= data.description %></span><br/><br/>
                                     <% if( username == user || username == '' ) { %>
-                                    <a href="/users/<%=user%>">Messages: <%=count%></a>
+                                    
                                     <br/>
                                     <% } %>
                                 </div>
@@ -57,6 +57,9 @@
                             <a href="/connect/<%=username%>" class="btn btn-inverse">Connect</a><br/>
                             <% } %>
                             <% } %>
+                        </div>
+                        <div style="float:right;">
+                            You wrote <strong><%=count%></strong> messages
                         </div>
                     </div>
                 </div>
