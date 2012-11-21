@@ -25,7 +25,8 @@
 			counterElement: 'span',
 			cssWarning: 'warning',
 			cssExceeded: 'exceeded',
-			counterText: ''
+			counterText: '',
+			exceededFunction: function(exceeded) {},
 		}; 
 			
 		var options = $.extend(defaults, options); 
@@ -40,8 +41,10 @@
 			}
 			if(available < 0){
 				$(obj).next().addClass(options.cssExceeded);
+				options.exceededFunction(true);
 			} else {
 				$(obj).next().removeClass(options.cssExceeded);
+				options.exceededFunction(false);
 			}
 			$(obj).next().html(options.counterText + available);
 		};

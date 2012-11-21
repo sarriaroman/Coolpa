@@ -3,7 +3,14 @@
     $(document).ready(function() {
         
         $("#message").charCount({
-            css: 'pull-right'
+            css: 'pull-right',
+            exceededFunction: function( exceeded ) {
+                if( exceeded ) {
+                    $("#sendBtn").attr('disabled', "disabled");
+                } else {
+                    $("#sendBtn").removeAttr('disabled');
+                }
+            }
         });
         
         if( window.location.pathname == '/profile' ) {
