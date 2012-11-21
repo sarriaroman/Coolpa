@@ -39,9 +39,7 @@
                                 <h2 class="post-title"><%= data.name %></h2>
                                 <span class="post-divider"></span>
                                 <div class="bodytext">
-                                    <p>
-                                        <span><%= data.description %></span>
-                                    </p><br/>
+                                    <span><%= data.description %></span><br/><br/>
                                     <% if( username == user || username == '' ) { %>
                                     <a href="/users/<%=user%>">Messages: <%=count%></a>
                                     <br/>
