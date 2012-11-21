@@ -791,7 +791,7 @@
 		float: left;
 	}
 
-	.timeline-icon a.icon-profile {
+	.timeline-icon .icon-profile {
 		width: 46px;
 	    height: 46px;
 		margin: 0;
