@@ -34,8 +34,10 @@
                     <div class="timeline-pointer-pp"><span class="tl-pointer"></span></div>
                     <div class="timeline-content">
                         <p class="description">
+                            <div class="textpost">
                             <!-- DESCRIPTION -->
                             <h4 class="post-title"><%= data.name %></h4>
+                            <span class="post-divider"></span>
                             <span><%= data.description %></span><br/>
                             <% if( username == user || username == '' ) { %>
                             <a href="/users/<%=user%>">Messages: <%=count%></a>
@@ -43,6 +45,7 @@
                             <% } %>
                             <a href="/reading/<%= (username != '') ? username : 'me' %>">Reading from: <%=connections%></a><br/>
                             <a href="/readers/<%= (username != '') ? username : 'me' %>">Reading me: <%=connecteds%></a>
+                            </div>
                         </p>
                     </div>
                     <div class="timeline-bar">
