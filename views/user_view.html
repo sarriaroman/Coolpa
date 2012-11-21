@@ -35,16 +35,18 @@
                     <div class="timeline-content">
                         <p class="description">
                             <div class="textpost">
-                            <!-- DESCRIPTION -->
-                            <h4 class="post-title"><%= data.name %></h4>
-                            <span class="post-divider"></span>
-                            <span><%= data.description %></span><br/>
-                            <% if( username == user || username == '' ) { %>
-                            <a href="/users/<%=user%>">Messages: <%=count%></a>
-                            <br/>
-                            <% } %>
-                            <a href="/reading/<%= (username != '') ? username : 'me' %>">Reading from: <%=connections%></a><br/>
-                            <a href="/readers/<%= (username != '') ? username : 'me' %>">Reading me: <%=connecteds%></a>
+                                <!-- DESCRIPTION -->
+                                <h2 class="post-title"><%= data.name %></h2>
+                                <span class="post-divider"></span>
+                                <div class="bodytext">
+                                    <span><%= data.description %></span><br/>
+                                    <% if( username == user || username == '' ) { %>
+                                    <a href="/users/<%=user%>">Messages: <%=count%></a>
+                                    <br/>
+                                    <% } %>
+                                    <a href="/reading/<%= (username != '') ? username : 'me' %>">Reading from: <%=connections%></a><br/>
+                                    <a href="/readers/<%= (username != '') ? username : 'me' %>">Reading me: <%=connecteds%></a>
+                                </div>
                             </div>
                         </p>
                     </div>
