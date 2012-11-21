@@ -787,14 +787,14 @@
 		width: 46px;
 	    height: 46px;
 		margin: 0;
-		background: url('http://static.tumblr.com/bygdzhm/CUKlynu56/icon-profile.png') no-repeat center center;
+		background: url('/images/icon-profile.png') no-repeat center center;
 		float: left;
 	}
 	.timeline-icon a.icon-photo {
 		width: 46px;
 		height: 46px;
 		margin: 0;
-		background: url('http://static.tumblr.com/bygdzhm/Nqjlylgq9/icon-photo.png') no-repeat center center;
+		background: url('/images/icon-photo.png') no-repeat center center;
 		float: left;
 	}
 	.timeline-icon a.icon-photoset {
