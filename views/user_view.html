@@ -44,8 +44,6 @@
                                     <a href="/users/<%=user%>">Messages: <%=count%></a>
                                     <br/>
                                     <% } %>
-                                    <a href="/reading/<%= (username != '') ? username : 'me' %>">Reading from: <%=connections%></a><br/>
-                                    <a href="/readers/<%= (username != '') ? username : 'me' %>">Reading me: <%=connecteds%></a>
                                 </div>
                             </div>
                         </p>
@@ -59,6 +57,18 @@
                             <a href="/connect/<%=username%>" class="btn btn-inverse">Connect</a><br/>
                             <% } %>
                             <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="timeline-preview">
+                    <div class="timeline-icon"><span class="icon-profile"></span></div>
+                    <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                    <div class="timeline-content-page">
+                        <div class="textpost">
+                            <h2 class="post-page-title"><%=username%> has <strong><a href="/readers/<%= (username != '') ? username : 'me' %>"><%=connecteds%></a></strong> readers and is reading from <strong><a href="/reading/<%= (username != '') ? username : 'me' %>"><%=connections%></a></strong>.</h2>
                         </div>
                     </div>
                 </div>
