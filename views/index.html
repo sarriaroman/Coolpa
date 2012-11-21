@@ -48,16 +48,14 @@
                 </div>
             </form>
 
-            <div id="profile-description">
+            <div class="post">
                 <div class="timeline-preview">
-                    <div class="timeline-icon-pp"><a href="/" class="icon-profile"></a></div>
-                    <div class="timeline-pointer-pp"><span class="tl-pointer"></span></div>
-                    <div class="timeline-content">
-                        <p class="description">
-                            <div class="textpost">
-                                <h2 class="post-page-title">You have <strong><a href="/readers/<%= (username != '') ? username : 'me' %>"><%=connecteds%></a></strong> readers and you are reading from <strong><a href="/reading/<%= (username != '') ? username : 'me' %>"><%=connections%></a></strong>.</h2>
-                            </div>
-                        </p>
+                    <div class="timeline-icon"><span class="icon-profile"></span></div>
+                    <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                    <div class="timeline-content-page">
+                        <div class="textpost">
+                            <h2 class="post-page-title">You have <strong><a href="/readers/<%= (username != '') ? username : 'me' %>"><%=connecteds%></a></strong> readers and you are reading from <strong><a href="/reading/<%= (username != '') ? username : 'me' %>"><%=connections%></a></strong>.</h2>
+                        </div>
                     </div>
                 </div>
             </div>
