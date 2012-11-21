@@ -28,126 +28,93 @@
                 </a>
             </div>
 
-            <form method="POST" action="/message" id="message_sender">
-                <div id="profile-description">
-                    <div class="timeline-preview">
-                        <div class="timeline-icon-pp"><a href="/" class="icon-profile"></a></div>
-                        <div class="timeline-pointer-pp"><span class="tl-pointer"></span></div>
-                        <div class="timeline-content">
-                            <p class="description">
-                                <input type="hidden" name="uid" value="<%=user%>"/>
-                                <textarea rows="3" id="message" name="message" placeholder="What you want to tell?" style="width: 92%;max-width:92%;min-width: 92%;"></textarea><br/>
-                            </p>
+            <div id="profile-description">
+                <div class="timeline-preview">
+                    <div class="timeline-icon-pp"><a href="/" class="icon-profile"></a></div>
+                    <div class="timeline-pointer-pp"><span class="tl-pointer"></span></div>
+                    <div class="timeline-content">
+                        <p class="description">
+                            <!-- DESCRIPTION -->
+                            <h4 class="post-title"><%= data.name %></h4>
+                            <span><%= data.description %></span><br/>
+                            <% if( username == user || username == '' ) { %>
+                            <a href="/users/<%=user%>">Messages: <%=count%></a>
+                            <br/>
+                            <% } %>
+                            <a href="/reading/<%= (username != '') ? username : 'me' %>">Reading from: <%=connections%></a><br/>
+                            <a href="/readers/<%= (username != '') ? username : 'me' %>">Reading me: <%=connecteds%></a>
+                        </p>
+                    </div>
+                    <div class="timeline-bar">
+                        <div>
+                            <% if( mustConnect ) { %>
+                            <% if( isConnected ) { %>
+                            <a href="/disconnect/<%=username%>" class="btn btn-danger">Disconnect</a><br/>
+                            <% } else { %>
+                            <a href="/connect/<%=username%>" class="btn btn-inverse">Connect</a><br/>
+                            <% } %>
+                            <% } %>
                         </div>
-                        <div class="timeline-bar">
-                            <div>
-                                <a class="btn" href="javascript:$('#message_sender').submit();">Send</a>
-                                <a class="btn" href="#"  id="help" rel="popover" class="button-ask" data-content="Just write what you want to tell to the world. <br/>If you want to mention someone put the username preppending a colon ( : ). Ex. :username hi how are you?."><i class="icon-question-sign"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="messages">
+                <% messages.forEach(function(data){ %>
+                <% if( data.sender != user && data.hidden == true ) { return ""; } %>
+                <div class="post">
+                    <div class="timeline-preview">
+                        <div class="timeline-icon">
+                            <!--<span class="icon-datepost"></span>-->
+                            <div class="minipic">
+                                <a href="/users/<%=data.sender%>">
+                                    <img src="/avatars/<%= data.sender %>/avatar.square.jpg">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                        <div class="timeline-content-page">
+                            <div class="textpost">
+                                <h2 class="post-title">
+                                    <a href="/users/<%=data.sender%>"><%= data.sender %></a>
+                                </h2>
+                                <span class="post-divider"></span>
+
+                                <div class="bodytext">
+                                    <p>
+                                        <%- data.message.parseURL().parseUsername() %>
+                                    </p>
+                                    <span class="post-divider"></span>
+                                    <!--<a href="{Permalink}" class="read_more">Read More ...</a>-->
+                                    <time class="timeago read_more" datetime="<%=data.creationDate.toISOString()%>"></time>
+                                    <div style="float:right;">
+                                        <% if( data.sender != user ) { %>
+                                        <button class="btn" onclick="$('#message').append(':<%=data.sender%> ');$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();"><i class="icon-share-alt"></i></button>
+                                        <% } %>
+                                        <% if( data.sender == user ) { %>
+                                        <button class="btn" onclick="location.href='/remove/<%=data._id%>';"><i class="icon-remove"></i></button>
+
+                                        <% if( data.hidden == false ) { %>
+                                        <button class="btn" onclick="location.href='/hide/<%=data._id%>';"><i class="icon-eye-close"></i></button>
+                                        <% } else { %>
+                                        <button class="btn" onclick="location.href='/unhide/<%=data._id%>';"><i class="icon-eye-open"></i></button>
+                                        <% } %>
+                                        <% } %>
+                                        <button class="btn"><a href="/message/<%= data._id %>" target="_BLANK"><i class="icon-globe"></i></a></button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
+                <% }) %>
+            </div>
+        </div> <!-- End .timeline-preview -->
+    </div> <!-- End .post -->               
 
+</div><!-- End #blogpost -->
 
-                    <!--<div class="post">
-                        <div class="timeline-preview">
-                            <div class="timeline-icon"><span class="icon-taggedpost"></span></div>
-                            <div class="timeline-pointer"><span class="tl-pointer"></span></div>
-                            <div class="timeline-content-page">
-                                <div class="textpost">
-                                    <h2 class="post-page-title">Posts tagged with <strong><a href="{TagURL}">{Tag}</a></strong></h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="post">
-                        <div class="timeline-preview">
-                            <div class="timeline-icon"><span class="icon-datepost"></span></div>
-                            <div class="timeline-pointer"><span class="tl-pointer"></span></div>
-                            <div class="timeline-content-page">
-                                <div class="textpost">
-                                    <h2 class="post-page-title">Posts for <strong>{DayOfWeek}, {DayOfMonth} {Month} {Year}</strong></h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>-->
-
-                    <div id="messages">
-                        <% messages.forEach(function(data){ %>
-                        <% if( data.sender != user && data.hidden == true ) { return ""; } %>
-                        <div class="post">
-                            <div class="timeline-preview">
-                                <div class="timeline-icon">
-                                    <!--<span class="icon-datepost"></span>-->
-                                    <div class="minipic">
-                                        <a href="/users/<%=data.sender%>">
-                                            <img src="/avatars/<%= data.sender %>/avatar.square.jpg">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="timeline-pointer"><span class="tl-pointer"></span></div>
-                                <div class="timeline-content-page">
-                                    <div class="textpost">
-                                        <h2 class="post-title">
-                                            <a href="/users/<%=data.sender%>"><%= data.sender %></a>
-                                        </h2>
-                                        <span class="post-divider"></span>
-
-                                        <div class="bodytext">
-                                            <p>
-                                                <%- data.message.parseURL().parseUsername() %>
-                                            </p>
-                                            <span class="post-divider"></span>
-                                            <!--<a href="{Permalink}" class="read_more">Read More ...</a>-->
-                                            <time class="timeago read_more" datetime="<%=data.creationDate.toISOString()%>"></time>
-                                            <div style="float:right;">
-                                                <% if( data.sender != user ) { %>
-                                                <button class="btn" onclick="$('#message').append(':<%=data.sender%> ');$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();"><i class="icon-share-alt"></i></button>
-                                                <% } %>
-                                                <% if( data.sender == user ) { %>
-                                                <button class="btn" onclick="location.href='/remove/<%=data._id%>';"><i class="icon-remove"></i></button>
-
-                                                <% if( data.hidden == false ) { %>
-                                                <button class="btn" onclick="location.href='/hide/<%=data._id%>';"><i class="icon-eye-close"></i></button>
-                                                <% } else { %>
-                                                <button class="btn" onclick="location.href='/unhide/<%=data._id%>';"><i class="icon-eye-open"></i></button>
-                                                <% } %>
-                                                <% } %>
-                                                <button class="btn"><a href="/message/<%= data._id %>" target="_BLANK"><i class="icon-globe"></i></a></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <% }) %>
-
-                        <% if(messages != undefined ) { %>
-                        <% if(messages.length > 0) { %>
-                        <div class="post"  id="load_more" data-date="<%= messages[messages.length - 1].creationDate %>">
-                            <div class="timeline-preview">
-                                <div class="timeline-icon"><span class="icon-chat"></span></div>
-                                <div class="timeline-pointer"><span class="tl-pointer"></span></div>
-                                <div class="timeline-content-page">
-                                    <div class="textpost">
-                                        <h2 class="post-page-title">
-                                            <a href="javascript:load_more();">Load More...</a>
-                                        </h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <% } %>
-                        <% } %>
-                    </div>
-                </div> <!-- End .timeline-preview -->
-            </div> <!-- End .post -->               
-            
-        </div><!-- End #blogpost -->
-
-    </div><!-- End #timeline -->
+</div><!-- End #timeline -->
 
 </div><!-- End #content -->
 </section>
@@ -182,35 +149,35 @@
             <% messages.forEach(function(data){ %>
             <% if( data.sender != user && data.hidden == true ) { return ""; } %>
 
-<div class="well" style="overflow: hidden; display: block;" id="id:<%= data._id %>">
-    <div class="pull-left">
-        <img src="/avatars/<%= data.sender %>/avatar.square.jpg" class="img-rounded" width="80" height="80">
-    </div>
+            <div class="well" style="overflow: hidden; display: block;" id="id:<%= data._id %>">
+                <div class="pull-left">
+                    <img src="/avatars/<%= data.sender %>/avatar.square.jpg" class="img-rounded" width="80" height="80">
+                </div>
 
-    <div class="pull-left span9" style="margin-left: 15px;">
-        <a href="/users/<%=data.sender%>"><h4><%= data.sender %></h4></a>
-        <span><%- data.message.parseURL().parseUsername() %></span><br/><br/>
-        <time class="timeago" datetime="<%=data.creationDate.toISOString()%>">about 8 hours ago</time>
-    </div>
-    
-    <div class="pull-right" id="options">
-        <div class="btn-group btn-group-vertical">
-            <% if( data.sender != user ) { %>
-            <button class="btn" onclick="$('#message').append(':<%=data.sender%> ');$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();"><i class="icon-share-alt"></i></button>
-            <% } %>
-            <% if( data.sender == user ) { %>
-            <button class="btn" onclick="location.href='/remove/<%=data._id%>';"><i class="icon-remove"></i></button>
-            
-            <% if( data.hidden == false ) { %>
-            <button class="btn" onclick="location.href='/hide/<%=data._id%>';"><i class="icon-eye-close"></i></button>
-            <% } else { %>
-            <button class="btn" onclick="location.href='/unhide/<%=data._id%>';"><i class="icon-eye-open"></i></button>
-            <% } %>
-            <% } %>
-            <button class="btn"><a href="/message/<%= data._id %>" target="_BLANK"><i class="icon-globe"></i></a></button>
-        </div>
-    </div>
-</div>
+                <div class="pull-left span9" style="margin-left: 15px;">
+                    <a href="/users/<%=data.sender%>"><h4><%= data.sender %></h4></a>
+                    <span><%- data.message.parseURL().parseUsername() %></span><br/><br/>
+                    <time class="timeago" datetime="<%=data.creationDate.toISOString()%>">about 8 hours ago</time>
+                </div>
+
+                <div class="pull-right" id="options">
+                    <div class="btn-group btn-group-vertical">
+                        <% if( data.sender != user ) { %>
+                        <button class="btn" onclick="$('#message').append(':<%=data.sender%> ');$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();"><i class="icon-share-alt"></i></button>
+                        <% } %>
+                        <% if( data.sender == user ) { %>
+                        <button class="btn" onclick="location.href='/remove/<%=data._id%>';"><i class="icon-remove"></i></button>
+
+                        <% if( data.hidden == false ) { %>
+                        <button class="btn" onclick="location.href='/hide/<%=data._id%>';"><i class="icon-eye-close"></i></button>
+                        <% } else { %>
+                        <button class="btn" onclick="location.href='/unhide/<%=data._id%>';"><i class="icon-eye-open"></i></button>
+                        <% } %>
+                        <% } %>
+                        <button class="btn"><a href="/message/<%= data._id %>" target="_BLANK"><i class="icon-globe"></i></a></button>
+                    </div>
+                </div>
+            </div>
             <% }) %>
         </div>
     </div>
