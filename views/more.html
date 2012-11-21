@@ -1,67 +1,65 @@
 
-                    <% messages.forEach(function(data){ %>
-                        <% if( data.sender != user && data.hidden == true ) { return ""; } %>
-                    <div class="post">
-                        <div class="timeline-preview">
-                            <div class="timeline-icon">
-                                <!--<span class="icon-datepost"></span>-->
-                                <div class="minipic">
-                                    <a href="/users/<%=data.sender%>">
-                                        <img src="/avatars/<%= data.sender %>/avatar.square.jpg">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="timeline-pointer"><span class="tl-pointer"></span></div>
-                            <div class="timeline-content-page">
-                                <div class="textpost">
-                                    <h2 class="post-title">
-                                        <a href="/users/<%=data.sender%>"><%= data.sender %></a>
-                                    </h2>
-                                    <span class="post-divider"></span>
-                                    
-                                    <div class="bodytext">
-                                        <p>
-                                            <%- data.message.parseURL().parseUsername() %>
-                                        </p>
-                                        <span class="post-divider"></span>
-                                        <!--<a href="{Permalink}" class="read_more">Read More ...</a>-->
-                                        <time class="timeago read_more" datetime="<%=data.creationDate.toISOString()%>"></time>
-                                        <div style="float:right;">
-            <% if( data.sender != user ) { %>
-            <button class="btn" onclick="$('#message').append(':<%=data.sender%> ');$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();"><i class="icon-share-alt"></i></button>
-            <% } %>
-            <% if( data.sender == user ) { %>
-            <button class="btn" onclick="location.href='/remove/<%=data._id%>';"><i class="icon-remove"></i></button>
-            
-            <% if( data.hidden == false ) { %>
-            <button class="btn" onclick="location.href='/hide/<%=data._id%>';"><i class="icon-eye-close"></i></button>
-            <% } else { %>
-            <button class="btn" onclick="location.href='/unhide/<%=data._id%>';"><i class="icon-eye-open"></i></button>
-            <% } %>
-            <% } %>
-            <button class="btn"><a href="/message/<%= data._id %>" target="_BLANK"><i class="icon-globe"></i></a></button>
+<% messages.forEach(function(data){ %>
+<% if( data.sender != user && data.hidden == true ) { return ""; } %>
+<div class="post">
+    <div class="timeline-preview">
+        <div class="timeline-icon">
+            <div class="minipic">
+                <a href="/users/<%=data.sender%>">
+                    <img src="/avatars/<%= data.sender %>/avatar.square.jpg">
+                </a>
+            </div>
         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <% }) %>
+        <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+        <div class="timeline-content-page">
+            <div class="textpost">
+                <h2 class="post-title">
+                    <a href="/users/<%=data.sender%>"><%= data.sender %></a>
+                </h2>
+                <span class="post-divider"></span>
 
-                    <% if(messages != undefined ) { %>
-                    <% if(messages.length > 0) { %>
-                    <div class="post"  id="load_more" data-date="<%= messages[messages.length - 1].creationDate %>">
-                        <div class="timeline-preview">
-                            <div class="timeline-icon"><span class="icon-chat"></span></div>
-                            <div class="timeline-pointer"><span class="tl-pointer"></span></div>
-                            <div class="timeline-content-page">
-                                <div class="textpost">
-                                    <h2 class="post-page-title">
-                                        <a href="javascript:load_more();">Load More...</a>
-                                    </h2>
-                                </div>
-                            </div>
-                        </div>
+                <div class="bodytext">
+                    <p>
+                        <%- data.message.parseURL().parseUsername() %>
+                    </p>
+                    <span class="post-divider"></span>
+                    <time class="timeago read_more" datetime="<%=data.creationDate.toISOString()%>"></time>
+                    <div style="float:right;">
+                        <% if( data.sender != user ) { %>
+                        <button class="btn" onclick="$('#message').append(':<%=data.sender%> ');$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();"><i class="icon-share-alt"></i></button>
+                        <% } %>
+                        <% if( data.sender == user ) { %>
+                        <button class="btn" onclick="location.href='/remove/<%=data._id%>';"><i class="icon-remove"></i></button>
+
+                        <% if( data.hidden == false ) { %>
+                        <button class="btn" onclick="location.href='/hide/<%=data._id%>';"><i class="icon-eye-close"></i></button>
+                        <% } else { %>
+                        <button class="btn" onclick="location.href='/unhide/<%=data._id%>';"><i class="icon-eye-open"></i></button>
+                        <% } %>
+                        <% } %>
+                        <button class="btn"><a href="/message/<%= data._id %>" target="_BLANK"><i class="icon-globe"></i></a></button>
                     </div>
-                    <% } %>
-                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% }) %>
+
+<% if(messages != undefined ) { %>
+<% if(messages.length > 0) { %>
+<div class="post"  id="load_more" data-date="<%= messages[messages.length - 1].creationDate %>">
+    <div class="timeline-preview">
+        <div class="timeline-icon"><span class="icon-chat"></span></div>
+        <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+        <div class="timeline-content-page">
+            <div class="textpost">
+                <h2 class="post-page-title">
+                    <a href="javascript:load_more();">Load More...</a>
+                </h2>
+            </div>
+        </div>
+    </div>
+</div>
+<% } %>
+<% } %>

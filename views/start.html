@@ -1,18 +1,55 @@
 <% include header.html %>
-        <div class="container-fluid" style="padding-top: 60px;">
-            <div class="row-fluid">
-                <div class="span5 offset2" style="text-align: center; padding-top: 10px;">
-                    <img src="/images/start_logo.png" />
-                </div>
-                <div class="span2">
-                    <form method="POST" action="/auth">
-                        <input type="text" id="username" name="username" placeholder="Username" value="" style="width: 100%" /><br/>
-                        <input type="password" id="password" name="password" placeholder="Password" value="" style="width: 100%" /><br/>
-                        <div style="width: 100%; text-align: center;">
-                            <input type="submit" value="Log In" class="btn btn-large" style="width: 107%" />
-                        </div>
-                    </form>
-                </div>
+
+<section id="slider-wrapper">
+    <div class="flexslider">
+        <ul class="slides"> 
+            <li>
+                <img src="/images/top-header.jpg" alt="" />
+            </li>
+        </ul>
+    </div>
+</section>
+
+<section id="content-wrapper">
+    <div id="content">
+        <div id="timeline">
+            <div id="time-line">
             </div>
+
+            <div id="picture-profile">
+                <a href="/">
+                    <img src="/avatars/avatar.jpg" />
+                </a>
+            </div>
+
+            <form method="POST" action="/auth">
+                <div id="profile-description">
+                    <div class="timeline-preview">
+                        <div class="timeline-icon-pp"><a href="/" class="icon-profile"></a></div>
+                        <div class="timeline-pointer-pp"><span class="tl-pointer"></span></div>
+                        <div class="timeline-content">
+                            <p class="description">
+                                <input type="text" id="username" name="username" placeholder="Username" value="" style="width: 95%" /><br/>
+                                <input type="password" id="password" name="password" placeholder="Password" value="" style="width: 95%" /><br/>
+                            </p>
+                        </div>
+                        <div class="timeline-bar">
+                            <div>
+                                <input type="submit" value="Log In" class="btn btn-large" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
+    </div> <!-- End .timeline-preview -->
+</div> <!-- End .post -->               
+
+</div><!-- End #blogpost -->
+
+</div><!-- End #timeline -->
+
+</div><!-- End #content -->
+</section>
+
 <% include footer.html %>
