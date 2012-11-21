@@ -1,15 +1,95 @@
 <% include header.html %>
-        <div class="container-fluid" style="padding-top: 60px;">
-            <div class="row-fluid">
-                <% include menu.html %>
-                <div class="span6">
-                    <h3><%=title%></h3>
-                    <hr/>
-                    
-                    <% users.forEach(function(data){ %>
-                        <% include user_row.html %>
-                    <% }) %>
+
+<section id="slider-wrapper">
+
+    <div class="flexslider">
+        <ul class="slides"> 
+            <li>
+                <img src="/images/top-header.jpg" alt="" />
+            </li>
+        </ul>
+    </div>
+
+</section>
+
+<section id="content-wrapper">
+    <div id="content">
+        <div id="timeline">
+            <div id="time-line">
+                <div class="timeline-icon-bottom">
+                    <a href="#" class="icon-totop"></a>
+                    <span class="tophov">Back to top</span>
+                </div>   
+            </div>
+
+            <div id="picture-profile">
+                <a href="/">
+                    <img src="/avatars/<%= user %>/avatar.square.jpg" alt="" />
+                </a>
+            </div>
+
+            <div class="post">
+                <div class="timeline-preview">
+                    <div class="timeline-icon"><span class="icon-profile"></span></div>
+                    <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                    <div class="timeline-content-page">
+                        <div class="textpost">
+                            <%=title%>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <% users.forEach(function(data){ %>
+            <div class="post">
+                <div class="timeline-preview">
+                    <div class="timeline-icon">
+                        <div class="minipic">
+                            <a href="/users/<%=data._id%>">
+                                <img src="/avatars/<%= data._id %>/avatar.square.jpg">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                    <div class="timeline-content-page">
+                        <div class="textpost">
+                            <h2 class="post-title">
+                                <a href="/users/<%=data._id%>"><%= data._id %></a>
+                            </h2>
+                            <span class="post-divider"></span>
+
+                            <div class="bodytext">
+                                <p>
+                                    <%= data.description %>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+
+        </div> <!-- End .timeline-preview -->
+    </div> <!-- End .post -->               
+
+</div><!-- End #blogpost -->
+
+</div><!-- End #timeline -->
+
+</div><!-- End #content -->
+</section>
+
+<div class="container-fluid" style="padding-top: 60px;">
+    <div class="row-fluid">
+        <% include menu.html %>
+        <div class="span6">
+            <h3><%=title%></h3>
+            <hr/>
+
+            <% users.forEach(function(data){ %>
+            <% include user_row.html %>
+            <% }) %>
         </div>
+    </div>
+</div>
 <% include footer.html %>
