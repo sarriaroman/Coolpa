@@ -50,14 +50,14 @@
 
                     <% if(messages != undefined ) { %>
                     <% if(messages.length > 0) { %>
-                    <div class="post"  id="load_more">
+                    <div class="post"  id="load_more" data-date="<%= messages[messages.length - 1].creationDate %>">
                         <div class="timeline-preview">
                             <div class="timeline-icon"><span class="icon-chat"></span></div>
                             <div class="timeline-pointer"><span class="tl-pointer"></span></div>
                             <div class="timeline-content-page">
                                 <div class="textpost">
                                     <h2 class="post-page-title">
-                                        <a href="javascript:load_more();" data-date="<%= messages[messages.length - 1].creationDate %>">Load More...</a>
+                                        <a href="javascript:load_more();">Load More...</a>
                                     </h2>
                                 </div>
                             </div>
