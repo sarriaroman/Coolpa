@@ -35,14 +35,13 @@
                         <div class="timeline-content">
                             <p class="description">
                                 <input type="hidden" name="uid" value="<%=user%>"/>
-                                <input type="hidden" name="public" value="55"/>
-                                <textarea rows="3" id="message" name="message" placeholder="What you want to tell?" style="width: 92%;max-width:92%;min-width: 92%;"></textarea><br/>
+                                <input type="hidden" name="public" value="78"/>
+                                <textarea rows="3" id="message" name="message" placeholder="Private message with..." style="width: 92%;max-width:92%;min-width: 92%;"></textarea><br/>
                             </p>
                         </div>
                         <div class="timeline-bar">
                             <div>
                                 <input type="submit" class="btn" id="sendBtn" value="Send" />
-                                <a class="btn" href="#"  id="help" rel="popover" class="button-ask" data-content="Just write what you want to tell to the world. <br/>If you want to mention someone put the username preppending a colon ( : ). Ex. :username hi how are you?."><i class="icon-question-sign"></i></a>
                             </div>
                         </div>
                     </div>
@@ -61,35 +60,9 @@
                 </div>
             </div>
 
-
-                    <!--<div class="post">
-                        <div class="timeline-preview">
-                            <div class="timeline-icon"><span class="icon-taggedpost"></span></div>
-                            <div class="timeline-pointer"><span class="tl-pointer"></span></div>
-                            <div class="timeline-content-page">
-                                <div class="textpost">
-                                    <h2 class="post-page-title">Posts tagged with <strong><a href="{TagURL}">{Tag}</a></strong></h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="post">
-                        <div class="timeline-preview">
-                            <div class="timeline-icon"><span class="icon-datepost"></span></div>
-                            <div class="timeline-pointer"><span class="tl-pointer"></span></div>
-                            <div class="timeline-content-page">
-                                <div class="textpost">
-                                    <h2 class="post-page-title">Posts for <strong>{DayOfWeek}, {DayOfMonth} {Month} {Year}</strong></h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>-->
-
                     <div id="messages">
                         <% messages.forEach(function(data){ %>
-                        <% if( data.public === false ) { return ""; } %>
-                        <% if( data.sender != user && data.hidden == true ) { return ""; } %>
+                        <% if( data.public === true ) { return ""; } %>
                         <div class="post">
                             <div class="timeline-preview">
                                 <div class="timeline-icon">
@@ -121,14 +94,7 @@
                                                 <% } %>
                                                 <% if( data.sender == user ) { %>
                                                 <button class="btn" onclick="location.href='/remove/<%=data._id%>';"><i class="icon-remove"></i></button>
-
-                                                <% if( data.hidden == false ) { %>
-                                                <button class="btn" onclick="location.href='/hide/<%=data._id%>';"><i class="icon-eye-close"></i></button>
-                                                <% } else { %>
-                                                <button class="btn" onclick="location.href='/unhide/<%=data._id%>';"><i class="icon-eye-open"></i></button>
                                                 <% } %>
-                                                <% } %>
-                                                <button class="btn"><a href="/message/<%= data._id %>" target="_BLANK"><i class="icon-globe"></i></a></button>
                                             </div>
                                         </div>
                                     </div>
