@@ -888,6 +888,7 @@ exports.search = function(req, res) {
                         users.connections( username, function(err, conns) {
                             res.render('search', {
                                 user: req.session.uid,
+                                search: search,
                                 username: '',
                                 users: userssearch,
                                 messages: docs.reverse(), // Reversing array
