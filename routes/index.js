@@ -639,13 +639,17 @@ exports.invitation = function(req, res) {
     var invites = new (require('../models/invitations'))();
     
     invites.get(req.params.code, function(err, data) {
-        res.render('invitation', {
-            user: '',
-            data: data,
-            username: '',
-            name: '',
-            notification: false
-        });
+        if( data === null ) {
+            res.redirect('/');
+        } else {
+            res.render('invitation', {
+                user: '',
+                data: data,
+                username: '',
+                name: '',
+                notification: false
+            });
+        }
     });
 };
 
