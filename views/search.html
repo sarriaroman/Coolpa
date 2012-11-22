@@ -24,7 +24,7 @@
 
             <div id="picture-profile">
                 <a href="/">
-                    <img src="/avatars/<%= username %>/avatar.square.jpg" alt="" />
+                    <img src="/avatars/avatar.jpg" />
                 </a>
             </div>
 
@@ -53,7 +53,7 @@
                     <div class="timeline-pointer"><span class="tl-pointer"></span></div>
                     <div class="timeline-content-page">
                         <div class="textpost">
-                            <h2 class="post-page-title">Users for <%=search%></h2>
+                            <h2 class="post-page-title">Users for <%=search%>: <%=users.length%> results</h2>
                         </div>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                     <div class="timeline-pointer"><span class="tl-pointer"></span></div>
                     <div class="timeline-content-page">
                         <div class="textpost">
-                            <h2 class="post-page-title">Messages for <%=search%></h2>
+                            <h2 class="post-page-title">Messages for <%=search%>: <%=messages.length%> results</h2>
                         </div>
                     </div>
                 </div>
