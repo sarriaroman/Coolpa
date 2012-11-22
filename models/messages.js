@@ -34,7 +34,7 @@ var messages = (function( ) {
     messages.prototype.privates = function( uid, connections, date, callback ) {
         connections.push( uid );
         
-        return this.database.connection().collection('Messages').findItems({sender: { $in: connections }, creationDate: { $lt : date }, public: false },{sort: { creationDate: -1 }, limit: 20 }, callback);
+        return this.database.connection().collection('Messages').findItems({ids: { $in: connections }, $or: { sender: uid }, creationDate: { $lt : date }, public: false },{sort: { creationDate: -1 }, limit: 20 }, callback);
     };
     
     messages.prototype.mentions = function( uid, date, callback ) {
