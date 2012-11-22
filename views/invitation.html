@@ -1,64 +1,95 @@
 <% include header.html %>
-<div class="container-fluid" style="padding-top: 60px;">
-    <div class="row-fluid">
 
-        <div class="span6 offset2">
-            <% if( notification ) { %>
-            <div class="alert alert-block <%=notification.type%>">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <%=notification.message%>
+<section id="slider-wrapper">
+    <div class="flexslider">
+        <ul class="slides"> 
+            <li>
+                <img src="/images/top-header.jpg" alt="" />
+            </li>
+        </ul>
+    </div>
+</section>
+
+<section id="content-wrapper">
+    <div id="content">
+        <div id="timeline">
+            <div id="time-line">
             </div>
-            <% } %>
+
+            <div id="picture-profile">
+                <a href="/">
+                    <img src="/avatars/avatar.jpg" />
+                </a>
+            </div>
 
             <form class="form-horizontal" method="POST" action="/invitation" id="user_invitation">
-                <input type="hidden" name="code" id="inputCode" value="<%=data.code%>">
-                
-                <div class="control-group">
-                    <label class="control-label" for="inputUserName">Username</label>
-                    <div class="controls">
-                        <input type="text" name="username" id="inputUserName" placeholder="Choose you username" value="<%=username%>">
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label" for="inputName">Name</label>
-                    <div class="controls">
-                        <input type="text" name="name" id="inputName" placeholder="Your name" value="<%=name%>">
-                    </div>
-                </div>
+                <div id="profile-description">
+                    <div class="timeline-preview">
+                        <div class="timeline-icon-pp"><a href="/" class="icon-profile"></a></div>
+                        <div class="timeline-pointer-pp"><span class="tl-pointer"></span></div>
+                        <div class="timeline-content">
+                            <p class="description">
+                                <% if( notification ) { %>
+                                <div class="alert alert-block <%=notification.type%>">
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                    <%=notification.message%>
+                                </div>
+                                <% } %>
 
-                <div class="control-group">
-                    <label class="control-label" for="inputEmail">Email</label>
-                    <div class="controls">
-                        <input type="email" name="email" id="inputEmail" placeholder="Email" value="<%=data.email%>">
-                    </div>
-                </div>
+                                <input type="hidden" name="code" id="inputCode" value="<%=data.code%>">
 
-                <div class="control-group">
-                    <label class="control-label" for="inputPassword">Password</label>
-                    <div class="controls">
-                        <input type="password" id="inputPassword" name="password" placeholder="Password">
-                    </div>
-                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="inputUserName">Username</label>
+                                    <div class="controls">
+                                        <input type="text" name="username" id="inputUserName" placeholder="Choose you username" value="<%=username%>">
+                                    </div>
+                                </div>
 
-                <div class="control-group">
-                    <label class="control-label" for="inputRepeatPassword">Repeat Password</label>
-                    <div class="controls">
-                        <input type="password" id="inputRepeatPassword" name="repeatpassword" placeholder="Repeat Password">
-                    </div>
-                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="inputName">Name</label>
+                                    <div class="controls">
+                                        <input type="text" name="name" id="inputName" placeholder="Your name" value="<%=name%>">
+                                    </div>
+                                </div>
 
-                <div class="control-group">
-                    <div class="controls">
-                        <button type="submit" id="finishbtn" class="btn">Finish</button>
+                                <div class="control-group">
+                                    <label class="control-label" for="inputEmail">Email</label>
+                                    <div class="controls">
+                                        <input type="email" name="email" id="inputEmail" placeholder="Email" value="<%=data.email%>">
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="inputPassword">Password</label>
+                                    <div class="controls">
+                                        <input type="password" id="inputPassword" name="password" placeholder="Password">
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="inputRepeatPassword">Repeat Password</label>
+                                    <div class="controls">
+                                        <input type="password" id="inputRepeatPassword" name="repeatpassword" placeholder="Repeat Password">
+                                    </div>
+                                </div>
+                            </p>
+                        </div>
+                        <div class="timeline-bar">
+                            <div>
+                                <button type="submit" id="finishbtn" class="btn">Finish</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>
         </div>
+    </div> <!-- End .timeline-preview -->
+</div> <!-- End .post -->               
 
-        <div class="span2 well" style="max-width: 340px; padding: 8px 0; text-align: center;">
-            <img src="/avatars/avatar.jpg" class="img-rounded" width="150" height="150">
-        </div>
-    </div>
-</div>
+</div><!-- End #blogpost -->
+
+</div><!-- End #timeline -->
+
+</div><!-- End #content -->
+</section>
 <% include footer.html %>
