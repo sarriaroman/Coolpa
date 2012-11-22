@@ -15,7 +15,8 @@ $(document).ready(function() {
         $("#message").charCount({
             css: 'pull-right',
             textFunction: function(text) {
-                if(text.match(/[:]+[A-Za-z0-9-_]+/g).length > 0 ){
+                console.log("Texto obtenido: " + text);
+                if( text.match(/[:]+[A-Za-z0-9-_]+/g) ){
                     $("#sendBtn").removeAttr('disabled');
                 } else {
                     $("#sendBtn").attr('disabled', "disabled");
