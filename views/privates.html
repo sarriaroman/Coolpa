@@ -48,18 +48,6 @@
                 </div>
             </form>
 
-            <div class="post">
-                <div class="timeline-preview">
-                    <div class="timeline-icon"><span class="icon-profile"></span></div>
-                    <div class="timeline-pointer"><span class="tl-pointer"></span></div>
-                    <div class="timeline-content-page">
-                        <div class="textpost">
-                            <h2 class="post-page-title">You have <strong><a href="/readers/<%= (username != '') ? username : 'me' %>"><%=connecteds%></a></strong> readers and you are reading from <strong><a href="/reading/<%= (username != '') ? username : 'me' %>"><%=connections%></a></strong>.</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
                     <div id="messages">
                         <% messages.forEach(function(data){ %>
                         <% if( data.public === true ) { return ""; } %>
@@ -112,7 +100,7 @@
                                 <div class="timeline-content-page">
                                     <div class="textpost">
                                         <h2 class="post-page-title">
-                                            <a href="javascript:load_more();">Load More...</a>
+                                            <a href="javascript:load_more();">Load older messages...</a>
                                         </h2>
                                     </div>
                                 </div>
