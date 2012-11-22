@@ -1,22 +1,68 @@
 <% include header.html %>
-<div class="container-fluid" style="padding-top: 60px;">
-    <div class="row-fluid">
 
-        <div class="span6 well offset3">
-            <div class="span10">
-                <div class="pull-left">
-                    <img src="/avatars/<%= data.sender %>/avatar.square.jpg" class="img-rounded" width="50" height="50">
-                </div>
-                <div class="pull-left" style="margin-left: 20px;">
-                    <h4><%= data.sender %></h4>
-                </div>
-            </div>
-            <div class="span10" style="margin-top: 10px;">
-                <span><%= data.message %></span><br/><br/>
-                <time class="timeago" datetime="<%=data.creationDate.toISOString()%>">about 8 hours ago</time><br/>
-            </div>
-        </div>
+<section id="slider-wrapper">
 
+    <div class="flexslider">
+        <ul class="slides"> 
+            <li>
+                <img src="/images/top-header.jpg" alt="" />
+            </li>
+        </ul>
     </div>
-</div>
+
+</section>
+
+<section id="content-wrapper">
+    <div id="content">
+        <div id="timeline">
+            <div id="time-line">
+                <div class="timeline-icon-bottom">
+                    <a href="#" class="icon-totop"></a>
+                    <span class="tophov">Back to top</span>
+                </div>   
+            </div>
+
+            <div id="picture-profile">
+                <a href="#">
+                    <img src="/avatars/<%= data.sender %>/avatar.square.jpg" alt="" />
+                </a>
+            </div>
+
+            <div id="profile-description">
+                <div class="timeline-preview">
+                    <div class="timeline-icon-pp"><a href="/" class="icon-profile"></a></div>
+                    <div class="timeline-pointer-pp"><span class="tl-pointer"></span></div>
+                    <div class="timeline-content">
+                        <p class="description">
+                            <div class="textpost">
+                                <!-- DESCRIPTION -->
+                                <h2 class="post-title"><%= data.sender %></h2>
+                                <span class="post-divider"></span>
+                                <div class="bodytext">
+                                    <span><%= data.message %></span><br/><br/>
+                                </div>
+                            </div>
+                        </p>
+                    </div>
+                    <div class="timeline-bar">
+                        <div style="float: left">
+                            <time class="timeago" datetime="<%=data.creationDate.toISOString()%>">about 8 hours ago</time>
+                        </div>
+                        <div style="float: right;">
+                            <a href="/users/<%=data.sender%>" class="btn btn-invers">Go to profile</a><br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- End .timeline-preview -->
+    </div> <!-- End .post -->               
+
+</div><!-- End #blogpost -->
+
+</div><!-- End #timeline -->
+
+</div><!-- End #content -->
+</section>
+
 <% include footer.html %>
