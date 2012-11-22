@@ -89,14 +89,14 @@
                 </div>
             </form>
 
-            <form method="POST" action="/upload_image" enctype="multipart/form-data" id="user_avatar" class="form-horizontal tab-pane">
+            <form method="POST" action="/upload_image" enctype="multipart/form-data" id="user_avatar" class="form-horizontal">
                 <div class="post">
                     <div class="timeline-preview">
                         <div class="timeline-icon"><span class="icon-photo"></span></div>
                         <div class="timeline-pointer"><span class="tl-pointer"></span></div>
                         <div class="timeline-content-page">
                             <div class="textpost">
-                                <h2 class="post-title">Your photo</h2>
+                                <h2 class="post-title">Change your avatar</h2>
                                 <span class="post-divider"></span>
 
                                 <div class="control-group">
@@ -116,6 +116,32 @@
                 </div>
             </form>
 
+            <!--<form method="POST" action="/upload_top" enctype="multipart/form-data" id="user_top" class="form-horizontal">
+                <div class="post">
+                    <div class="timeline-preview">
+                        <div class="timeline-icon"><span class="icon-photo"></span></div>
+                        <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                        <div class="timeline-content-page">
+                            <div class="textpost">
+                                <h2 class="post-title">Change your Top</h2>
+                                <span class="post-divider"></span>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="avatar">Top Image</label>
+                                    <div class="controls">
+                                        <input type="file" name="top" id="top" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-bar">
+                            <div>
+                                <button type="submit" class="btn">Upload Top Image</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>-->
 
             <form method="POST" action="/invite" enctype="multipart/form-data" class="form-horizontal">
                 <div class="post">
@@ -130,14 +156,14 @@
                                 <div class="control-group">
                                     <label class="control-label" for="inputEmail">Email</label>
                                     <div class="controls">
-                                        <input type="text" name="invitations" id="inputEmail" placeholder="Emails to send invites ( comma separated )" value="">
+                                        <input type="text" name="invitations" id="inputEmail" placeholder="Emails comma separated" value="">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="timeline-bar">
                             <div>
-                                <button type="submit" class="btn">Send</button>
+                                <button type="submit" class="btn" id="invites">Send</button>
                             </div>
                         </div>
                     </div>

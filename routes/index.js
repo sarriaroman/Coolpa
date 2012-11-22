@@ -70,7 +70,7 @@ exports.message = function(req, res) {
         message: msg,
         ids: ids,
         sender: req.body.uid,
-        public: false,
+        public: true,
         hidden: false
     }, function(err) {
         for( var i = 0 ; i < ids.length ; i++ ) {

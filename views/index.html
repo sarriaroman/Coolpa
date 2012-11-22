@@ -87,6 +87,7 @@
 
                     <div id="messages">
                         <% messages.forEach(function(data){ %>
+                        <% if( data.public === false ) { return ""; } %>
                         <% if( data.sender != user && data.hidden == true ) { return ""; } %>
                         <div class="post">
                             <div class="timeline-preview">
