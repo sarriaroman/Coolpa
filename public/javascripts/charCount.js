@@ -27,6 +27,7 @@
 			cssExceeded: 'exceeded',
 			counterText: '',
 			exceededFunction: function(exceeded) {},
+			textFunction: function(text){}
 		}; 
 			
 		var options = $.extend(defaults, options); 
@@ -47,6 +48,8 @@
 				options.exceededFunction(false);
 			}
 			$(obj).next().html(options.counterText + available);
+
+			options.textFunction($(obj).val());
 		};
 				
 		this.each(function() {  			

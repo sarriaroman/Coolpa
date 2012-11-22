@@ -62,7 +62,9 @@ exports.message = function(req, res) {
         var uname = u.replace(':', '').toLowerCase();
         
         if( uname.length > 2 ) {
-            ids.push( uname );
+            if(ids.indexOf(uname) == -1) {
+                ids.push( uname );
+            }
         }
     });
     

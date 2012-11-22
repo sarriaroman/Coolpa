@@ -1,7 +1,35 @@
 
 <script>
-    $(document).ready(function() {
-        
+$(document).ready(function() {
+
+    if( window.location.pathname == '/profile' ) {
+        $('.tabbable li a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+
+        if(window.location.hash) {
+            $(window.location.hash + "_ref").click();
+        }
+    } else if( window.location.pathname == '/privates' ) {
+        $("#message").charCount({
+            css: 'pull-right',
+            textFunction: function(text) {
+                if(text.match(/[:]+[A-Za-z0-9-_]+/g).length > 0 ){
+                    $("#sendBtn").removeAttr('disabled');
+                } else {
+                    $("#sendBtn").attr('disabled', "disabled");
+                }
+            },
+            exceededFunction: function( exceeded ) {
+                if( exceeded ) {
+                    $("#sendBtn").attr('disabled', "disabled");
+                } else {
+                    $("#sendBtn").removeAttr('disabled');
+                }
+            }
+        });
+    } else {
         $("#message").charCount({
             css: 'pull-right',
             exceededFunction: function( exceeded ) {
@@ -12,30 +40,20 @@
                 }
             }
         });
-        
-        if( window.location.pathname == '/profile' ) {
-            $('.tabbable li a').click(function (e) {
-                    e.preventDefault();
-                    $(this).tab('show');
-                });
-            
-            if(window.location.hash) {
-                $(window.location.hash + "_ref").click();
-            }
-        }
-        
-        
-        $("#help").popover({
-            title: 'Help'
-        });
-                
-        $('.timeago').timeago();
+    }
+
+
+    $("#help").popover({
+        title: 'Help'
     });
+
+    $('.timeago').timeago();
+});
 </script>
 
 <style>
-    form .warning{color:#600;}	
-    form .exceeded{color:#e00;}
+form .warning{color:#600;}	
+form .exceeded{color:#e00;}
 </style>
 </div>
 </body>
