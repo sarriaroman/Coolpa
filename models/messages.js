@@ -31,9 +31,7 @@ var messages = (function( ) {
         return this.database.connection().collection('Messages').findItems({sender: { $in: connections }, creationDate: { $lt : date }, public: true },{sort: { creationDate: -1 }, limit: 20 }, callback);
     };
 
-    messages.prototype.privates = function( uid, connections, date, callback ) {
-        connections.push( uid );
-        
+    messages.prototype.privates = function( uid, date, callback ) {
         return this.database.connection().collection('Messages').findItems({ $or: [{ ids: uid }, { sender: uid }], creationDate: { $lt : date }, public: false },{sort: { creationDate: -1 }, limit: 20 }, callback);
     };
     

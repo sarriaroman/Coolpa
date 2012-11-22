@@ -279,7 +279,7 @@ exports.messages = function(req, res) {
         var users = new (require('../models/users'))();
         
         users.user( req.session.uid, function(err, data) {
-            messages.privates( req.session.uid, data.connections.slice(0), new Date(), function(err, docs) {
+            messages.privates( req.session.uid, new Date(), function(err, docs) {
                 messages.count(req.session.uid, [], function(err, cnt) {
                     users.connections( req.session.uid, function(err, conns) {
 
@@ -317,7 +317,7 @@ exports.more = function(req, res) {
         } );    
     } else if( req.body.section == 'privates' ) {
         users.user( uid, function(err, data) {
-            messages.privates( uid, data.connections.slice(0), new Date( date ), function(err, docs) {
+            messages.privates( uid, new Date( date ), function(err, docs) {
                 res.render('more_privates', {
                     user: req.session.uid,
                     messages: docs
