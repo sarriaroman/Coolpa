@@ -39,7 +39,9 @@
                                 <h2 class="post-title"><%= data.sender %></h2>
                                 <span class="post-divider"></span>
                                 <div class="bodytext">
-                                    <span><%= data.message %></span><br/><br/>
+                                    <p>
+                                        <%- data.message.parseURL().parseUsername().parseSearches() %>
+                                    </p>
                                 </div>
                             </div>
                         </p>
