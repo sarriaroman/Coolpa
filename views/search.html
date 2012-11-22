@@ -129,9 +129,6 @@
                                 <!--<a href="{Permalink}" class="read_more">Read More ...</a>-->
                                 <time class="timeago read_more" datetime="<%=data.creationDate.toISOString()%>"></time>
                                 <div style="float:right;">
-                                    <% if( data.sender != user ) { %>
-                                    <button class="btn" onclick="$('#message').append(':<%=data.sender%> ');$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();"><i class="icon-share-alt"></i></button>
-                                    <% } %>
                                     <% if( data.sender == user ) { %>
                                     <button class="btn" onclick="location.href='/remove/<%=data._id%>';"><i class="icon-remove"></i></button>
 
