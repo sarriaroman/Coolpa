@@ -29,50 +29,52 @@
                         <div class="timeline-pointer-pp"><span class="tl-pointer"></span></div>
                         <div class="timeline-content">
                             <p class="description">
-                                <h2 class="post-title">Welcome! You have been invited to Coolpa</h2>
-                                <span class="post-divider"></span>
+                                <div class="textpost">
+                                    <h2 class="post-title">Welcome! You have been invited to Coolpa. Fill the form and go!</h2>
+                                    <span class="post-divider"></span>
 
-                                <% if( notification ) { %>
-                                <div class="alert alert-block <%=notification.type%>">
-                                    <button type="button" class="close" data-dismiss="alert">×</button>
-                                    <%=notification.message%>
-                                </div>
-                                <% } %>
-
-                                <input type="hidden" name="code" id="inputCode" value="<%=data.code%>">
-
-                                <div class="control-group">
-                                    <label class="control-label" for="inputUserName">Username</label>
-                                    <div class="controls">
-                                        <input type="text" name="username" id="inputUserName" placeholder="Choose you username" value="<%=username%>">
+                                    <% if( notification ) { %>
+                                    <div class="alert alert-block <%=notification.type%>">
+                                        <button type="button" class="close" data-dismiss="alert">×</button>
+                                        <%=notification.message%>
                                     </div>
-                                </div>
+                                    <% } %>
 
-                                <div class="control-group">
-                                    <label class="control-label" for="inputName">Name</label>
-                                    <div class="controls">
-                                        <input type="text" name="name" id="inputName" placeholder="Your name" value="<%=name%>">
+                                    <input type="hidden" name="code" id="inputCode" value="<%=data.code%>">
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputUserName">Username</label>
+                                        <div class="controls">
+                                            <input type="text" name="username" id="inputUserName" placeholder="Choose you username" value="<%=username%>">
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="control-group">
-                                    <label class="control-label" for="inputEmail">Email</label>
-                                    <div class="controls">
-                                        <input type="email" name="email" id="inputEmail" placeholder="Email" value="<%=data.email%>">
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputName">Name</label>
+                                        <div class="controls">
+                                            <input type="text" name="name" id="inputName" placeholder="Your name" value="<%=name%>">
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="control-group">
-                                    <label class="control-label" for="inputPassword">Password</label>
-                                    <div class="controls">
-                                        <input type="password" id="inputPassword" name="password" placeholder="Password">
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputEmail">Email</label>
+                                        <div class="controls">
+                                            <input type="email" name="email" id="inputEmail" placeholder="Email" value="<%=data.email%>">
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="control-group">
-                                    <label class="control-label" for="inputRepeatPassword">Repeat Password</label>
-                                    <div class="controls">
-                                        <input type="password" id="inputRepeatPassword" name="repeatpassword" placeholder="Repeat Password">
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputPassword">Password</label>
+                                        <div class="controls">
+                                            <input type="password" id="inputPassword" name="password" placeholder="Password">
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputRepeatPassword">Repeat Password</label>
+                                        <div class="controls">
+                                            <input type="password" id="inputRepeatPassword" name="repeatpassword" placeholder="Repeat Password">
+                                        </div>
                                     </div>
                                 </div>
                             </p>
