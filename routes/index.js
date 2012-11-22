@@ -5,7 +5,7 @@
 
  exports.index = function(req, res){
     if( req.session.uid == undefined ) {
-        
+
         res.render('start', {
             user: req.session.uid
         });
@@ -23,7 +23,7 @@ exports.auth = function(req, res) {
     User.auth( req.body.username.toLowerCase(), req.body.password, function(data) {
         if( data ) {
             req.session.uid = data._id;
-            
+
             if(req.session.back != undefined) {
                 var backUrl = req.session.back;
                 
@@ -81,10 +81,10 @@ exports.message = function(req, res) {
                 for( var i = 0 ; i < ids.length ; i++ ) {
                     var uid = ids[i];
                     console.log(uid);
-                    
+
                     users.user(uid, function(err, data){
                         if( data != undefined ) {
-                            
+
                             ses.get().send({
                                 from: 'Coolpa.net <info@coolpa.net>',
                                 to: [data.email],
@@ -97,7 +97,7 @@ exports.message = function(req, res) {
                                 }
                             });
                             console.log('Email sent to ' + data._id);
-                            
+
                         }
                     });
                 }
@@ -112,7 +112,7 @@ exports.message = function(req, res) {
             
             users.user(uid, function(err, data){
                 if( data != undefined ) {
-                    
+
                     ses.get().send({
                         from: 'Coolpa.net <info@coolpa.net>',
                         to: [data.email],
@@ -187,7 +187,7 @@ exports.disconnect = function(req, res) {
 exports.user = function(req, res) {
     var messages = new (require('../models/messages'))();
     var users = new (require('../models/users'))();
-    
+
     var username = req.params.username;
     
     users.user( username, function(err, data) { // Get the search user!
@@ -197,7 +197,7 @@ exports.user = function(req, res) {
             messages.find( username, [], new Date(), function(err, docs) {
                 messages.count(username, [], function(err, cnt) {
                     users.user( req.session.uid, function(err, actual) { // Get the actual user!!!
-                        
+
                         users.connections( username, function(err, conns) {
                             res.render('user_view', {
                                 user: req.session.uid,
@@ -241,15 +241,15 @@ exports.start = function(req, res) {
                     	var autocomplete = "[";
                     	for( var i = 0 ; i < data.connections.length ; i++ ) {
                     		var obj = "{'id':'" + data.connections[i] + "', 'name':':" + data.connections[i] + "', 'avatar': '/avatars/" + data.connections[i] + "/avatar.square.jpg" + "', 'icon':'" + "', 'type':'contact'}";
-                         
+
                          if( i < (data.connections.length - 1) ) {
                             obj += ",";
                         }
-                        
+
                         autocomplete += obj;
                     }
                     autocomplete += "]";
-                    
+
                     res.render('index', {
                         user: req.session.uid,
                         username: '',
@@ -278,15 +278,14 @@ exports.messages = function(req, res) {
             messages.privates( req.session.uid, data.connections.slice(0), new Date(), function(err, docs) {
                 messages.count(req.session.uid, [], function(err, cnt) {
                     users.connections( req.session.uid, function(err, conns) {
-                        
-                        res.render('index', {
+
+                        res.render('privates', {
                             user: req.session.uid,
                             username: '',
                             messages: docs, // Reversing array
                             count: cnt,
                             connections: data.connections.length,
                             connecteds: conns.length,
-                            autocomplete: autocomplete,
                             section: 'privates'
                         }); 
                     }); 
@@ -344,15 +343,15 @@ exports.mentions = function(req, res) {
             messages.mentions( req.session.uid, new Date(), function(err, docs) {
                 messages.count(req.session.uid, [], function(err, cnt) {
                     users.connections( req.session.uid, function(err, conns) {
-                        
+
                     	var autocomplete = "[";
                     	for( var i = 0 ; i < data.connections.length ; i++ ) {
                     		var obj = "{'id':'" + data.connections[i] + "', 'name':':" + data.connections[i] + "', 'avatar': '/avatars/" + data.connections[i] + "/avatar.square.jpg" + "', 'icon':'" + "', 'type':'contact'}";
-                         
+
                          if( i < (data.connections.length - 1) ) {
                             obj += ",";
                         }
-                        
+
                         autocomplete += obj;
                     }
                     autocomplete += "]";
@@ -468,12 +467,12 @@ exports.user_data = function(req, res) {
                 description: req.body.description,
                 password: users.hassPass( req.body.password )
             }, function() {
-                
+
                 req.session.notification = {
                     type: 'alert-success',
                     message: 'Your information was updated. You changed your password... please remember it the next time!'
                 };
-                
+
                 res.redirect('/profile');
             } );
         } else {
@@ -521,7 +520,7 @@ exports.upload_image = function(req, res) {
                                         }, function(err, image) {
                                             if (err) throw err;
                                             console.log('Converted');
-                                            
+
                                             easyimg.thumbnail({
                                                 src:orig, 
                                                 dst:square, 
@@ -536,7 +535,7 @@ exports.upload_image = function(req, res) {
                                                     type: 'alert-success',
                                                     message: 'Your avatar was changed succesfully'
                                                 };
-                                                
+
                                                 res.redirect('/profile#user_avatar');
                                             });
 });
@@ -575,7 +574,7 @@ exports.invite = function(req, res) {
         var fs = require('fs');
         var ses = new (require('../classes/ses'))();
         var ejs = require('ejs');
-        
+
         var invitations = req.body.invitations;
         var emails = new Array();
         
@@ -597,9 +596,9 @@ exports.invite = function(req, res) {
             for( var i = 0 ; i < emails.length ; i++ ) {
                 var invitation = emails[i];
                 var time = (new Date()).getTime();
-                
+
                 var code = users.hashPass( invitation + time );
-                
+
                 invites.check({
                     code: code,
                     email: invitation,
@@ -661,7 +660,7 @@ exports.invitation = function(req, res) {
  exports.invitation_data = function(req, res) {
     var users = new (require('../models/users'))();
     var invites = new (require('../models/invitations'))();
-    
+
     var fs = require('fs');
     var ses = new (require('../classes/ses'))();
     var ejs = require('ejs');
@@ -717,12 +716,12 @@ exports.invitation = function(req, res) {
                             }, bdata, function( dt, rdt ) {
                                 // Create folders for avatars
                                 var dirname = __dirname.replace('routes', '');
-                                
+
                                 var folder = dirname + 'public/avatars/' + rdt.username.toLowerCase() + '/';
-                                
+
                                 var orig = folder + 'avatar.original.jpg';
                                 var square = folder + 'avatar.square.jpg';
-                                
+
                                 fs.mkdir(folder, function(err) {
                                     var inStr = fs.createReadStream(dirname + 'public/avatars/avatar.jpg');
                                     var origOutStr = fs.createWriteStream(orig);
@@ -730,7 +729,7 @@ exports.invitation = function(req, res) {
 
                                     inStr.pipe(origOutStr);
                                     inStr.pipe(squareOutStr);
-                                    
+
                                     fs.readFile('views/welcome_template.html', 'UTF-8', function(err, html) {
                                         ses.get().send({
                                             from: 'Coolpa.net <info@coolpa.net>',
@@ -757,11 +756,11 @@ exports.invitation = function(req, res) {
                                                 }
                                             });
                                         });
-                                        
+
                                         req.session.uid = rdt.username.toLowerCase();
-                                        
+
                                         res.redirect('/');
-                                        
+
                                         invites.remove(bdata.code, function(err, cd) {});
                                     });
 });
@@ -772,7 +771,7 @@ exports.invitation = function(req, res) {
         type: 'alert-error',
         message: 'The username you choose is already taken.'
     };
-    
+
     res.render('invitation', {
         user: '',
         data: cdata,
@@ -870,7 +869,7 @@ exports.search = function(req, res) {
         var username = req.session.uid;
         
         var search = req.body.search;
-        
+
         users.user( username, function(err, data) {
             messages.search( search, function(err, docs) {
                 users.search( search, function( err, userssearch ) {
