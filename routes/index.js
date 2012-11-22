@@ -132,7 +132,11 @@ exports.message = function(req, res) {
     });
 }
 
-res.redirect('/');
+if( msg.public === true ) {
+    res.redirect('/');
+} else {
+    res.redirect('/privates');
+}
 });
 };
 
