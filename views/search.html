@@ -23,7 +23,7 @@
 
     <div class="pull-left span9" style="margin-left: 15px;">
         <a href="/users/<%=data.sender%>"><h4><%= data.sender %></h4></a>
-        <span><%- data.message.parseURL().parseUsername() %></span><br/><br/>
+        <span><%- data.message.parseURL().parseUsername().parseSearches() %></span><br/><br/>
         <time class="timeago" datetime="<%=data.creationDate.toISOString()%>">about 8 hours ago</time>
     </div>
     

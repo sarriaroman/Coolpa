@@ -59,6 +59,14 @@ String.prototype.parseUsername = function() {
     });
 };
 
+String.prototype.parseSearches = function() {
+    return this.replace(/[#]+[A-Za-z0-9-_]+/g, function(u) {
+        var username = u.replace("#","").toLowerCase();
+        
+        return u.link("http://coolpa.net/search/"+username);
+    });
+};
+
 // GET
 app.get('/', routes.index);
 app.get('/start', routes.start);
@@ -76,6 +84,7 @@ app.get('/invitation/:code', routes.invitation);
 app.get('/remove/:id', routes.remove_message);
 app.get('/hide/:id', routes.hide_message);
 app.get('/unhide/:id', routes.unhide_message);
+app.get('/search/:token', routes.search);
 
 // POST
 app.post('/auth', routes.auth);
