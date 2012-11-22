@@ -28,7 +28,7 @@ var messages = (function( ) {
     messages.prototype.find = function( uid, connections, date, callback ) {
         connections.push( uid );
         
-        return this.database.connection().collection('Messages').findItems({sender: { $in: connections }, creationDate: { $lt : date } },{sort: { creationDate: -1 }, limit: 20 }, callback);
+        return this.database.connection().collection('Messages').findItems({sender: { $in: connections }, creationDate: { $lt : date }, public: true },{sort: { creationDate: -1 }, limit: 20 }, callback);
     };
 
     messages.prototype.privates = function( uid, connections, date, callback ) {
@@ -38,7 +38,7 @@ var messages = (function( ) {
     };
     
     messages.prototype.mentions = function( uid, date, callback ) {
-        return this.database.connection().collection('Messages').findItems({ids: uid, creationDate: { $lt : date }}, { sort: { creationDate : -1 }, limit : 20 }, callback);
+        return this.database.connection().collection('Messages').findItems({ids: uid, creationDate: { $lt : date }}, public: true, { sort: { creationDate : -1 }, limit : 20 }, callback);
     };
     
     messages.prototype.get = function( _id, callback ) {
@@ -52,7 +52,7 @@ var messages = (function( ) {
     };
     
     messages.prototype.search = function( search, callback ) {
-        return this.database.connection().collection('Messages').findItems({message: { $regex: search, $options: 'i' }}, callback);
+        return this.database.connection().collection('Messages').findItems({message: { $regex: search, $options: 'i' }, public: true}, callback);
     };
     
     return messages;
