@@ -1,136 +1,157 @@
 <% include header.html %>
-<div class="container-fluid" style="padding-top: 60px;">
-    <div class="row-fluid">
 
-        <div class="span6 offset2">
-            <% if( notification ) { %>
-            <div class="alert alert-block <%=notification.type%>">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <%=notification.message%>
+<section id="slider-wrapper">
+
+    <div class="flexslider">
+        <ul class="slides"> 
+            <li>
+                <img src="/images/top-header.jpg" alt="" />
+            </li>
+        </ul>
+    </div>
+
+</section>
+
+<section id="content-wrapper">
+    <div id="content">
+        <div id="timeline">
+            <div id="time-line">
+                <div class="timeline-icon-bottom">
+                    <a href="#" class="icon-totop"></a>
+                    <span class="tophov">Back to top</span>
+                </div>   
             </div>
-            <% } %>
 
-            <div class="tabbable">
-                <ul class="nav nav-tabs">
-                    <li class="active">
-                        <a href="#user_data">Information</a>
-                    </li>
-                    <li><a href="#user_avatar" id="user_avatar_ref">Avatar</a></li>
-                    <li><a href="#invites" id="invites_ref">Invites</a></li>
-                    <li><a href="#notifications" id="notifications_ref">Notifications</a></li>
-                </ul>
-                <div class="tab-content">
-                    <form class="form-horizontal tab-pane active" method="POST" action="/user_data" id="user_data">
-                        <!-- Comming feature -->
-                        <!--<div class="control-group">
-                            <label class="control-label" for="inputUserName">Username</label>
-                            <div class="controls">
-                                <input type="text" name="username" id="inputUserName" placeholder="Username" value="<%=data._id%>">
-                            </div>
-                        </div>-->
-                        
-                        <div class="control-group">
-                            <label class="control-label" for="inputName">Name</label>
-                            <div class="controls">
-                                <input type="text" name="name" id="inputName" placeholder="Your name" value="<%=data.name%>">
-                            </div>
+            <div id="picture-profile">
+                <a href="#">
+                    <img src="/avatars/<%= data._id %>/avatar.square.jpg" alt="" />
+                </a>
+            </div>
+
+            <form class="form-horizontal tab-pane active" method="POST" action="/user_data" id="user_data">
+                <div id="profile-description">
+                    <div class="timeline-preview">
+                        <div class="timeline-icon-pp"><a href="/" class="icon-profile"></a></div>
+                        <div class="timeline-pointer-pp"><span class="tl-pointer"></span></div>
+                        <div class="timeline-content">
+                            <p class="description">
+                                <div class="textpost">
+                                    <h2 class="post-title">Your data</h2>
+                                    <span class="post-divider"></span>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputName">Name</label>
+                                        <div class="controls">
+                                            <input type="text" name="name" id="inputName" placeholder="Your name" value="<%=data.name%>">
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputDescription">Description</label>
+                                        <div class="controls">
+                                            <input type="text" name="description" id="inputDescription" placeholder="A bit about you..." value="<%=data.description%>">
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputEmail">Email</label>
+                                        <div class="controls">
+                                            <input type="email" name="email" id="inputEmail" placeholder="Email" value="<%=data.email%>">
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <small>Complete if you want to change your password</small>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputPassword">Password</label>
+                                        <div class="controls">
+                                            <input type="password" id="inputPassword" name="password" placeholder="Password">
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputRepeatPassword">Repeat Password</label>
+                                        <div class="controls">
+                                            <input type="password" id="inputRepeatPassword" name="repeatpassword" placeholder="Repeat Password">
+                                        </div>
+                                    </div>
+                                </div>
+                            </p>
                         </div>
-
-                        <div class="control-group">
-                            <label class="control-label" for="inputDescription">Description</label>
-                            <div class="controls">
-                                <input type="text" name="description" id="inputDescription" placeholder="A bit about you..." value="<%=data.description%>">
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label" for="inputEmail">Email</label>
-                            <div class="controls">
-                                <input type="email" name="email" id="inputEmail" placeholder="Email" value="<%=data.email%>">
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <small>Complete if you want to change your password</small>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label" for="inputPassword">Password</label>
-                            <div class="controls">
-                                <input type="password" id="inputPassword" name="password" placeholder="Password">
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label" for="inputRepeatPassword">Repeat Password</label>
-                            <div class="controls">
-                                <input type="password" id="inputRepeatPassword" name="repeatpassword" placeholder="Repeat Password">
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <div class="controls">
+                        <div class="timeline-bar">
+                            <div>
                                 <button type="submit" class="btn">Save changes</button>
                             </div>
                         </div>
-                    </form>
+                    </div>
+                </div>
+            </form>
 
-                    <form method="POST" action="/upload_image" enctype="multipart/form-data" id="user_avatar" class="form-horizontal tab-pane">
-                        <div class="control-group">
-                            <label class="control-label" for="avatar">Image</label>
-                            <div class="controls">
-                                <input type="file" name="avatar" id="avatar" />
+            <form method="POST" action="/upload_image" enctype="multipart/form-data" id="user_avatar" class="form-horizontal tab-pane">
+                <div class="post">
+                    <div class="timeline-preview">
+                        <div class="timeline-icon"><span class="icon-photo"></span></div>
+                        <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                        <div class="timeline-content-page">
+                            <div class="textpost">
+                                <h2 class="post-title">Your photo</h2>
+                                <span class="post-divider"></span>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="avatar">Image</label>
+                                    <div class="controls">
+                                        <input type="file" name="avatar" id="avatar" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="control-group">
-                            <div class="controls">
+                        <div class="timeline-bar">
+                            <div>
                                 <button type="submit" class="btn">Upload Image</button>
                             </div>
                         </div>
-                    </form>
+                    </div>
+                </div>
+            </form>
 
-                    <div class="tab-pane" id="invites">
-                        <form method="POST" action="/invite" enctype="multipart/form-data" class="form-horizontal">
-                            <div class="control-group">
-                                <label class="control-label" for="inputEmail">Email</label>
-                                <div class="controls">
-                                    <input type="text" name="invitations" id="inputEmail" placeholder="Emails to send invites ( comma separated )" value="">
+
+            <form method="POST" action="/invite" enctype="multipart/form-data" class="form-horizontal">
+                <div class="post">
+                    <div class="timeline-preview">
+                        <div class="timeline-icon"><span class="icon-chat"></span></div>
+                        <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                        <div class="timeline-content-page">
+                            <div class="textpost">
+                                <h2 class="post-title">Invite people to Coolpa.net</h2>
+                                <span class="post-divider"></span>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="inputEmail">Email</label>
+                                    <div class="controls">
+                                        <input type="text" name="invitations" id="inputEmail" placeholder="Emails to send invites ( comma separated )" value="">
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="control-group">
-                                <div class="controls">
-                                    <button type="submit" class="btn">Send</button>
-                                </div>
+                        </div>
+                        <div class="timeline-bar">
+                            <div>
+                                <button type="submit" class="btn">Send</button>
                             </div>
-                        </form>
-                        <div class="span10">
-                            <span>You have <%=data.invites%> to send.</span>
                         </div>
                     </div>
-
-                    <form method="POST" action="/notifications" id="notifications" class="form-horizontal tab-pane">
-                        <div class="control-group">
-                            <label class="control-label" for="mentions">Mentions</label>
-                            <div class="controls">
-                                <input type="checkbox" name="mentions" id="avatar" />
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <div class="controls">
-                                <button type="submit" class="btn">Save</button>
-                            </div>
-                        </div>
-                    </form>
                 </div>
-            </div>
-        </div>
+            </form>
 
-        <div class="span2 well" style="max-width: 340px; padding: 8px 0; text-align: center;">
-            <img src="/avatars/<%= data._id %>/avatar.square.jpg" class="img-rounded" width="150" height="150">
-        </div>
-    </div>
-</div>
+        </div> <!-- End .timeline-preview -->
+    </div> <!-- End .post -->               
+
+</div><!-- End #blogpost -->
+
+</div><!-- End #timeline -->
+
+</div><!-- End #content -->
+</section>
+
 <% include footer.html %>

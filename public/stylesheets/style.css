@@ -806,6 +806,15 @@
 		background: url('/images/icon-photo.png') no-repeat center center;
 		float: left;
 	}
+
+	.timeline-icon .icon-photo {
+		width: 46px;
+		height: 46px;
+		margin: 0;
+		background: url('/images/icon-photo.png') no-repeat center center;
+		float: left;
+	}
+
 	.timeline-icon a.icon-photoset {
 		width: 46px;
 		height: 46px;
@@ -838,9 +847,18 @@
 		width: 46px;
 		height: 46px;
 		margin: 0;
-		background: url('http://static.tumblr.com/bygdzhm/Z5Glylgtx/icon-chat.png') no-repeat center center;
+		background: url('/images/icon-chat.png') no-repeat center center;
 		float: left;
 	}
+
+	.timeline-icon .icon-chat {
+		width: 46px;
+		height: 46px;
+		margin: 0;
+		background: url('/images/icon-chat.png') no-repeat center center;
+		float: left;
+	}
+
 	.timeline-icon a.icon-quote {
 		width: 46px;
 		height: 46px;
@@ -859,9 +877,18 @@
 		width: 46px;
 		height: 46px;
 		margin: 0;
-		background: url('http://static.tumblr.com/bygdzhm/IUmlylgw0/icon-answer.png') no-repeat center center;
+		background: url('/images/icon-answer.png') no-repeat center center;
 		float: left;
 	}
+
+	.timeline-icon .icon-answer {
+		width: 46px;
+		height: 46px;
+		margin: 0;
+		background: url('/images/icon-answer.png') no-repeat center center;
+		float: left;
+	}
+
 	.timeline-icon span.icon-searchpost {
 		width: 46px;
 		height: 46px;
