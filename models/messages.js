@@ -48,7 +48,7 @@ var messages = (function( ) {
     messages.prototype.count = function( uid, connections, callback ) {
         connections.push( uid );
         
-        return this.database.connection().collection('Messages').count({sender: { $in: connections }}, callback);
+        return this.database.connection().collection('Messages').count({sender: { $in: connections }, public: true}, callback);
     };
     
     messages.prototype.search = function( search, callback ) {
