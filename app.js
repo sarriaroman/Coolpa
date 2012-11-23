@@ -9,7 +9,6 @@ var express = require('express')
 , routes = require('./routes')
 , http = require('http')
 , path = require('path')
-, gzippo = require('gzippo')
 , MongoStore = require('express-session-mongo');
 
 var app = express();
