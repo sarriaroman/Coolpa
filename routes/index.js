@@ -893,7 +893,7 @@ exports.search = function(req, res) {
                                 search: search,
                                 username: '',
                                 users: userssearch,
-                                messages: docs.reverse(), // Reversing array
+                                messages: docs,
                                 count: cnt,
                                 connections: data.connections.length,
                                 connecteds: conns.length
