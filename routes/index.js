@@ -879,8 +879,8 @@ exports.search = function(req, res) {
         var username = req.session.uid;
         
         var search = req.body.search;
-        if( search === undefined || search === null ) {
-            search = req.body.token;
+        if( search == undefined ) {
+            search = req.params.token;
         }
 
         users.user( username, function(err, data) {
