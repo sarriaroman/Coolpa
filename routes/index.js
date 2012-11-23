@@ -471,7 +471,7 @@ exports.user_data = function(req, res) {
             users.update( req.session.uid, {
                 name: req.body.name,
                 description: req.body.description,
-                password: users.hassPass( req.body.password )
+                password: users.hashPass( req.body.password )
             }, function() {
 
                 req.session.notification = {
