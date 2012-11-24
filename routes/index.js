@@ -252,7 +252,7 @@ exports.user = function(req, res) {
 var mobile_security = function(req, res, callback) {
     var users = new (require('../models/users'))();
 
-    users.user( req.session.uid, function(err, data) {
+    users.user( req.body.username, function(err, data) {
         if( data.mobile.sessions.indexOf( req.body.token ) != -1 ) {
             callback(req, res);
         } else {
