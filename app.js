@@ -96,6 +96,7 @@ app.post('/search', routes.search);
 
 // API's
 app.post('/api/login', routes.mobile_auth);
+app.post('/api/start', routes.mobile_start);
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));

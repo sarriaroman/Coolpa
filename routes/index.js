@@ -310,7 +310,7 @@ var home_factory = function(session_uid, callback) {
     } );
 };
 
-exports.start_mobile = function(req, res) {
+exports.mobile_start = function(req, res) {
     mobile_security(req, res, function(request, response){
         home_factory(req.body.username, function(data){
             response.json(data);
