@@ -261,10 +261,7 @@ exports.start = function(req, res) {
     if( req.session.uid == undefined ) {
         res.redirect('/');
     } else {
-        home_factory(req.session.uid, function(data){
-            res.render('index', data);
-        });
-        /*var messages = new (require('../models/messages'))();
+        var messages = new (require('../models/messages'))();
         var users = new (require('../models/users'))();
         
         users.user( req.session.uid, function(err, data) {
@@ -297,7 +294,7 @@ exports.start = function(req, res) {
                     }); 
                 } );
             });
-        } );*/
+        } );
     }
 };
 
