@@ -252,6 +252,7 @@ exports.user = function(req, res) {
 var mobile_security = function(req, res, callback) {
     var users = new (require('../models/users'))();
 
+    console.log(req);
     users.user( req.body.username, function(err, data) {
         console.log(data);
         /*if( data.mobile.sessions.indexOf( req.body.token ) != -1 ) {
@@ -312,7 +313,7 @@ var home_factory = function(session_uid, callback) {
 
 exports.mobile_start = function(req, res) {
     mobile_security(req, res, function(request, response){
-        home_factory(req.body.username, function(data){
+        home_factory(request.body.username, function(data){
             response.json(data);
         });
     });
