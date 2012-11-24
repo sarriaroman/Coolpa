@@ -261,9 +261,10 @@ exports.start = function(req, res) {
     if( req.session.uid == undefined ) {
         res.redirect('/');
     } else {
-        console.log(req.session);
-
-        var messages = new (require('../models/messages'))();
+        home_factory(req.session.uid, function(data){
+            res.render('index', data);
+        });
+        /*var messages = new (require('../models/messages'))();
         var users = new (require('../models/users'))();
         
         users.user( req.session.uid, function(err, data) {
@@ -293,11 +294,49 @@ exports.start = function(req, res) {
                             autocomplete: autocomplete,
                             section: 'start'
                         }); 
+                    }); 
+                } );
+            });
+        } );*/
+    }
+};
+
+var home_factory = function(session_uid, callback) {
+    var messages = new (require('../models/messages'))();
+    var users = new (require('../models/users'))();
+
+    users.user( session_uid, function(err, data) {
+        messages.find( session_uid, data.connections.slice(0), new Date(), function(err, docs) {
+            messages.count( session_uid, [], function(err, cnt) {
+                users.connections( session_uid, function(err, conns) {
+
+                    var autocomplete = "[";
+                    for( var i = 0 ; i < data.connections.length ; i++ ) {
+                        var obj = "{'id':'" + data.connections[i] + "', 'name':':" + data.connections[i] + "', 'avatar': '/avatars/" + data.connections[i] + "/avatar.square.jpg" + "', 'icon':'" + "', 'type':'contact'}";
+
+                        if( i < (data.connections.length - 1) ) {
+                            obj += ",";
+                        }
+
+                        autocomplete += obj;
+                    }
+                    autocomplete += "]";
+
+
+                    callback({
+                        user: req.session.uid,
+                        username: '',
+                        messages: docs,
+                        count: cnt,
+                        connections: data.connections.length,
+                        connecteds: conns.length,
+                        autocomplete: autocomplete,
+                        section: 'start'
+                    });
                 }); 
-} );
-});
-} );
-}
+            } );
+        });
+    } );
 };
 
 exports.messages = function(req, res) {
