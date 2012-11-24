@@ -119,7 +119,7 @@
                                                 <% if( data.sender != user ) { %>
                                                 <button class="btn" onclick="$('#message').append(':<%=data.sender%> ');$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();"><i class="icon-share-alt"></i></button>
                                                 <% if( data.ids.length > 1 ) { %>
-                                                    <button class="btn" onclick="$('#message').append(':<%=data.ids.join(" :")%> ');$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();"><i class="icon-share-alt"><i class="icon-share-alt"></i></button>
+                                                    <button class="btn" onclick="$('#message').append(':<%=data.ids.join(" :")%> ');$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();"><i class="icon-share-alt"> </i>To all</button>
                                                 <% } %>
                                                 <% } %>
                                                 <% if( data.sender == user ) { %>
