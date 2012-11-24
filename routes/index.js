@@ -249,12 +249,73 @@ exports.user = function(req, res) {
 } );
 };
 
+var mobile_security = function(req, res, callback) {
+    var users = new (require('../models/users'))();
+
+    users.user( req.session.uid, function(err, data) {
+        if( data.mobile.sessions.indexOf( req.body.token ) != -1 ) {
+            callback(req, res);
+        } else {
+            res.json({
+                result: false,
+                message: 'Unauthorized'
+            });
+        }
+    });
+};
+
 var date_sort_desc = function (date1, date2) {
   // This is a comparison function that will result in dates being sorted in
   // DESCENDING order.
   if (date1 > date2) return -1;
   if (date1 < date2) return 1;
   return 0;
+};
+
+var home_factory = function(session_uid, callback) {
+    var messages = new (require('../models/messages'))();
+    var users = new (require('../models/users'))();
+
+    users.user( session_uid, function(err, data) {
+        messages.find( session_uid, data.connections.slice(0), new Date(), function(err, docs) {
+            messages.count( session_uid, [], function(err, cnt) {
+                users.connections( session_uid, function(err, conns) {
+
+                    var autocomplete = "[";
+                    for( var i = 0 ; i < data.connections.length ; i++ ) {
+                        var obj = "{'id':'" + data.connections[i] + "', 'name':':" + data.connections[i] + "', 'avatar': '/avatars/" + data.connections[i] + "/avatar.square.jpg" + "', 'icon':'" + "', 'type':'contact'}";
+
+                        if( i < (data.connections.length - 1) ) {
+                            obj += ",";
+                        }
+
+                        autocomplete += obj;
+                    }
+                    autocomplete += "]";
+
+
+                    callback({
+                        user: req.session.uid,
+                        username: '',
+                        messages: docs,
+                        count: cnt,
+                        connections: data.connections.length,
+                        connecteds: conns.length,
+                        autocomplete: autocomplete,
+                        section: 'start'
+                    });
+                }); 
+            } );
+        });
+    } );
+};
+
+exports.start_mobile = function(req, res) {
+    mobile_security(req, res, function(request, response){
+        home_factory(req.body.username, function(data){
+            response.json(data);
+        });
+    });
 };
 
 exports.start = function(req, res) {
@@ -296,44 +357,6 @@ exports.start = function(req, res) {
             });
         } );
     }
-};
-
-var home_factory = function(session_uid, callback) {
-    var messages = new (require('../models/messages'))();
-    var users = new (require('../models/users'))();
-
-    users.user( session_uid, function(err, data) {
-        messages.find( session_uid, data.connections.slice(0), new Date(), function(err, docs) {
-            messages.count( session_uid, [], function(err, cnt) {
-                users.connections( session_uid, function(err, conns) {
-
-                    var autocomplete = "[";
-                    for( var i = 0 ; i < data.connections.length ; i++ ) {
-                        var obj = "{'id':'" + data.connections[i] + "', 'name':':" + data.connections[i] + "', 'avatar': '/avatars/" + data.connections[i] + "/avatar.square.jpg" + "', 'icon':'" + "', 'type':'contact'}";
-
-                        if( i < (data.connections.length - 1) ) {
-                            obj += ",";
-                        }
-
-                        autocomplete += obj;
-                    }
-                    autocomplete += "]";
-
-
-                    callback({
-                        user: req.session.uid,
-                        username: '',
-                        messages: docs,
-                        count: cnt,
-                        connections: data.connections.length,
-                        connecteds: conns.length,
-                        autocomplete: autocomplete,
-                        section: 'start'
-                    });
-                }); 
-            } );
-        });
-    } );
 };
 
 exports.messages = function(req, res) {
@@ -718,18 +741,6 @@ exports.invitation = function(req, res) {
     });
 };
 
-/*{ 
- *  "_id" : "sarriaroman", 
- *  "connections" : [ "koliffato" ], 
- *  "createdDate" : ISODate("2012-09-25T03:43:40.223Z"), 
- *  "description" : "Coolpa lover", 
- *  "email" : "agustin478@gmail.com", 
- *  "invites" : 50, 
- *  "lastname" : "Sarria", 
- *  "name" : "Roman", 
- *  "password" : "eb0a191797624dd3a48fa681d3061212", 
- *  "updatedDate" : ISODate("2012-10-27T19:44:53.250Z") 
- *} */
  exports.invitation_data = function(req, res) {
     var users = new (require('../models/users'))();
     var invites = new (require('../models/invitations'))();
