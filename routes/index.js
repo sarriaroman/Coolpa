@@ -73,7 +73,8 @@ exports.message = function(req, res) {
         ids: ids,
         sender: req.body.uid,
         public: (req.body.public == 55) ? true : false,
-        hidden: false
+        hidden: false,
+        from: 'Web'
     }, function(msg, err) {
         if( msg.public === true ) {
 
@@ -237,7 +238,7 @@ exports.start = function(req, res) {
         res.redirect('/');
     } else {
         console.log(req.session);
-        
+
         var messages = new (require('../models/messages'))();
         var users = new (require('../models/users'))();
         
