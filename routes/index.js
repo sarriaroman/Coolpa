@@ -236,6 +236,8 @@ exports.start = function(req, res) {
     if( req.session.uid == undefined ) {
         res.redirect('/');
     } else {
+        console.log(req.session);
+        
         var messages = new (require('../models/messages'))();
         var users = new (require('../models/users'))();
         
