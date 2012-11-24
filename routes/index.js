@@ -253,14 +253,15 @@ var mobile_security = function(req, res, callback) {
     var users = new (require('../models/users'))();
 
     users.user( req.body.username, function(err, data) {
-        if( data.mobile.sessions.indexOf( req.body.token ) != -1 ) {
+        console.log(data);
+        /*if( data.mobile.sessions.indexOf( req.body.token ) != -1 ) {
             callback(req, res);
         } else {
             res.json({
                 result: false,
                 message: 'Unauthorized'
             });
-        }
+        }*/
     });
 };
 
@@ -292,7 +293,6 @@ var home_factory = function(session_uid, callback) {
                         autocomplete += obj;
                     }
                     autocomplete += "]";
-
 
                     callback({
                         user: data._id,
