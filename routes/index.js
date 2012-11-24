@@ -295,7 +295,7 @@ var home_factory = function(session_uid, callback) {
 
 
                     callback({
-                        user: req.session.uid,
+                        user: data._id,
                         username: '',
                         messages: docs,
                         count: cnt,
