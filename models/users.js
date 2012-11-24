@@ -52,8 +52,8 @@ var users = (function( ) {
     };
 
     users.prototype.addMobileSession = function(current, sid, callback) {
-        this.database.connection().collection('Users').updateById(current, { $set: { mobile: { $push: {sessions: sid} } }, function(err){
-            callback(sid);
+        this.database.connection().collection('Users').updateById(current, { $set: { mobile: { $push: { sessions: sid } } } }, function(err){
+            callback( sid );
         });
     };
 
