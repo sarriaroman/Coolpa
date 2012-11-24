@@ -121,7 +121,7 @@
                                                 <% if( data.ids.length > 1 ) { %>
                                                     <% if( data.ids.indexOf(data.sender) == -1 ) { %>
                                                         <button class="btn" onclick="$('#message').append(':<%=data.sender%> :<%=data.ids.join(" :")%> ');$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();"><i class="icon-share-alt"> </i><i class="icon-share-alt"> </i></button>
-                                                    <% } else if( data.ids.indexOf(user) == -1 ) { %>
+                                                    <% } else { %>
                                                         <button class="btn" onclick="$('#message').append(':<%=data.ids.join(" :")%> ');$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();"><i class="icon-share-alt"> </i><i class="icon-share-alt"> </i></button>
                                                     <% } %>
                                                     <% } %>
