@@ -50,7 +50,13 @@ var users = (function( ) {
         
         this.database.connection().collection('Users').updateById(current, { $set: data }, callback);
     };
-    
+
+    users.prototype.addMobileSession = function(current, sid, callback) {
+        this.database.connection().collection('Users').updateById(current, { $set: { mobile: { $push: {sessions: sid} } }, function(err){
+            callback(sid);
+        });
+    };
+
     users.prototype.create = function(data, rdata, callback) {
         data.createdDate = new Date();
         data.updatedDate = new Date();

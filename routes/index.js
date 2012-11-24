@@ -39,6 +39,30 @@ exports.auth = function(req, res) {
     } );
 };
 
+exports.mobile_auth = function(req, res) {
+    var Users = require('../models/users');
+    
+    var User = new Users();
+    
+    User.auth( req.body.username.toLowerCase(), req.body.password, function(data) {
+        if( data ) {
+            try { delete req.session.uid; } catch( e ) {}
+
+            req.session.uid = data._id;
+            User.addMobileSession(data._id, req.session._id, function(sid) {
+                res.json({
+                    result: true,
+                    session: sid
+                });
+            });
+        } else {
+            res.json({
+                result: false
+            });
+        }
+    } );
+};
+
 exports.message = function(req, res) {
     security(req, res);
     
