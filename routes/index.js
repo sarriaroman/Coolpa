@@ -252,18 +252,23 @@ exports.user = function(req, res) {
 var mobile_security = function(req, res, callback) {
     var users = new (require('../models/users'))();
 
-    console.log(req);
-    users.user( req.body.username, function(err, data) {
-        console.log(data);
-        /*if( data.mobile.sessions.indexOf( req.body.token ) != -1 ) {
-            callback(req, res);
-        } else {
-            res.json({
-                result: false,
-                message: 'Unauthorized'
-            });
-        }*/
-    });
+    if( req.body == null ) {
+        res.json({
+            result: false,
+            message: 'Unauthorized'
+        });
+    } else {
+        users.user( req.body.username, function(err, data) {
+            if( data.mobile.sessions.indexOf( req.body.token ) != -1 ) {
+                callback(req, res);
+            } else {
+                res.json({
+                    result: false,
+                    message: 'Unauthorized'
+                });
+            }
+        });
+    }
 };
 
 var date_sort_desc = function (date1, date2) {
