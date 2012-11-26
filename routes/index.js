@@ -167,7 +167,7 @@ exports.mobile_message = function(req, res) {
     mobile_security(req, res, function(request, response){
         message_factory(request, response,
             {
-                uid: req.body.uid,
+                uid: req.body.username,
                 message: req.body.message,
                 public: (req.body.public == 68),
                 from: 'Mobile application'
