@@ -63,6 +63,135 @@ exports.mobile_auth = function(req, res) {
     } );
 };
 
+var message_factory = function(req, res, information, callback) {
+    var Messages = require('../models/messages');
+    var users = new (require('../models/users'))();
+    var fs = require('fs');
+    var ses = new (require('../classes/ses'))();
+    var ejs = require('ejs');
+    
+    var Message = new Messages();
+    
+    var msg = information.message;
+    
+    if( msg.trim() == '' ) {
+        callback(req, res, information);
+        return;
+    }
+    
+    var ids = new Array();
+    msg.replace(/[:]+[A-Za-z0-9-_]+/g, function(u) {
+        var uname = u.replace(':', '').toLowerCase();
+        
+        if( uname.length > 2 ) {
+            if(ids.indexOf(uname) == -1) {
+                ids.push( uname );
+            }
+        }
+    });
+    
+    Message.add({
+        message: msg,
+        ids: ids,
+        sender: information.uid,
+        public: information.public,
+        hidden: false,
+        from: information.from
+    }, function(msg, err) {
+        if( msg.public === true ) {
+
+
+            fs.readFile('views/email_template.html', 'UTF-8', function(err, html) {
+
+                for( var i = 0 ; i < ids.length ; i++ ) {
+                    var uid = ids[i];
+                    console.log(uid);
+
+                    users.user(uid, function(err, data){
+                        if( data != undefined ) {
+
+                            ses.get().send({
+                                from: 'Coolpa.net <info@coolpa.net>',
+                                to: [data.email],
+                                subject: 'You have new mentions on Coolpa',
+                                body: {
+                                    html: ejs.render(html, {
+                                        username: data._id, 
+                                        uid: req.session.uid
+                                    })
+                                }
+                            });
+                            console.log('Email sent to ' + data._id);
+
+                        }
+                    });
+                }
+
+            });
+} else {
+    fs.readFile('views/private_template.html', 'UTF-8', function(err, html) {
+
+        for( var i = 0 ; i < ids.length ; i++ ) {
+            var uid = ids[i];
+            console.log(uid);
+            
+            users.user(uid, function(err, data){
+                if( data != undefined ) {
+
+                    ses.get().send({
+                        from: 'Coolpa.net <info@coolpa.net>',
+                        to: [data.email],
+                        subject: 'You have new private messages on Coolpa',
+                        body: {
+                            html: ejs.render(html, {
+                                username: data._id, 
+                                uid: req.session.uid
+                            })
+                        }
+                    });
+                    
+                }
+            });
+        }
+
+    });
+}
+
+callback(req, res, information);
+};
+
+exports.mobile_message = function(req, res) {
+    mobile_security(req, res, function(request, response){
+        message_factory(request, response,
+            {
+                uid: req.body.uid,
+                message: req.body.message,
+                public: (req.body.public == 68),
+                from: 'Mobile application'
+            }, 
+            function(req, res, information) {
+                if( information.message.trim() == '' ) {
+                    res.json({
+                        result: false
+                    });
+                } else {
+                    var users = new (require('../models/users'))();
+                    var messages = (require('../models/messages'))();
+
+                    users.user( information.uid, function(err, data) {
+                        messages.newest( data._id, data.connections.slice(0), req.body.lastdate, function(err, docs) {
+                            res.json({
+                                result: true,
+                                messages: docs
+                            })
+                        });
+                    });
+                }
+            }
+        );
+    });
+};
+
 exports.message = function(req, res) {
     security(req, res);
     
