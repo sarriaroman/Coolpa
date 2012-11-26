@@ -179,7 +179,7 @@ exports.mobile_message = function(req, res) {
                     });
                 } else {
                     var users = new (require('../models/users'))();
-                    var messages = (require('../models/messages'))();
+                    var messages = new (require('../models/messages'))();
 
                     users.user( information.uid, function(err, data) {
                         messages.newest( data._id, data.connections.slice(0), req.body.lastdate, function(err, docs) {
