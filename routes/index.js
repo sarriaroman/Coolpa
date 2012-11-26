@@ -168,7 +168,7 @@ exports.mobile_newest = function(req, res) {
         var users = new (require('../models/users'))();
         var messages = new (require('../models/messages'))();
 
-        users.user( information.uid, function(err, data) {
+        users.user( request.username, function(err, data) {
             messages.newest( data._id, data.connections.slice(0), new Date(req.body.lastdate), function(err, docs) {
                 res.json({
                     result: true,
@@ -184,7 +184,7 @@ exports.mobile_more = function(req, res) {
         var users = new (require('../models/users'))();
         var messages = new (require('../models/messages'))();
 
-        users.user( information.uid, function(err, data) {
+        users.user( request.username, function(err, data) {
             messages.find( data._id, data.connections.slice(0), new Date(req.body.lastdate), function(err, docs) {
                 res.json({
                     result: true,
