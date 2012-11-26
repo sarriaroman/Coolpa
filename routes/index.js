@@ -157,7 +157,10 @@ var message_factory = function(req, res, information, callback) {
     });
 }
 
-callback(req, res, information);
+    callback(req, res, information);
+
+});
+
 };
 
 exports.mobile_message = function(req, res) {
