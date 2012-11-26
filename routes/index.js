@@ -182,7 +182,7 @@ exports.mobile_message = function(req, res) {
                     var messages = new (require('../models/messages'))();
 
                     users.user( information.uid, function(err, data) {
-                        messages.newest( data._id, data.connections.slice(0), req.body.lastdate, function(err, docs) {
+                        messages.newest( data._id, data.connections.slice(0), new Date(req.body.lastdate), function(err, docs) {
                             res.json({
                                 result: true,
                                 messages: docs
