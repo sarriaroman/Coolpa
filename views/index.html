@@ -114,7 +114,10 @@
                                             </p>
                                             <span class="post-divider"></span>
                                             <!--<a href="{Permalink}" class="read_more">Read More ...</a>-->
-                                            <time class="timeago read_more" datetime="<%=data.creationDate.toISOString()%>"></time>
+                                            <div style="float:left; max-width: 40%;">
+                                                <time class="timeago read_more" datetime="<%=data.creationDate.toISOString()%>"></time>
+                                                <span class="read_more"> from <%=data.from%></span>
+                                            </div>
                                             <div style="float:right;">
                                                 <% if( data.sender != user ) { %>
                                                 <button class="btn" onclick="$('#message').append(':<%=data.sender%> ');$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();"><i class="icon-share-alt"></i></button>
