@@ -163,6 +163,38 @@ var message_factory = function(req, res, information, callback) {
 
 };
 
+exports.mobile_newest = function(req, res) {
+    mobile_security(req, res, function(request, response){
+        var users = new (require('../models/users'))();
+        var messages = new (require('../models/messages'))();
+
+        users.user( information.uid, function(err, data) {
+            messages.newest( data._id, data.connections.slice(0), new Date(req.body.lastdate), function(err, docs) {
+                res.json({
+                    result: true,
+                    messages: docs
+                });
+            });
+        });
+    });
+};
+
+exports.mobile_more = function(req, res) {
+    mobile_security(req, res, function(request, response){
+        var users = new (require('../models/users'))();
+        var messages = new (require('../models/messages'))();
+
+        users.user( information.uid, function(err, data) {
+            messages.find( data._id, data.connections.slice(0), new Date(req.body.lastdate), function(err, docs) {
+                res.json({
+                    result: true,
+                    messages: docs
+                });
+            });
+        });
+    });
+};
+
 exports.mobile_message = function(req, res) {
     mobile_security(req, res, function(request, response){
         message_factory(request, response,
