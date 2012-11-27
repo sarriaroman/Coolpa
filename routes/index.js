@@ -166,7 +166,9 @@ var message_factory = function(req, res, information, callback) {
                     });
                 }
 
-                gcm_message.registration_id = registrationIds;
+                gcm_message.registration_ids = registrationIds;
+
+                console.log(gcm_message);
 
                 gcm.send(gcm_message, function(err, messageId){
                     if (err) {
@@ -224,7 +226,9 @@ var message_factory = function(req, res, information, callback) {
                     });
                 }
 
-                gcm_message.registration_id = registrationIds;
+                gcm_message.registration_ids = registrationIds;
+
+                console.log(gcm_message);
 
                 gcm.send(gcm_message, function(err, messageId){
                     if (err) {
