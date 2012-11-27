@@ -59,7 +59,7 @@ var users = (function( ) {
 
     users.prototype.addPushDevice = function(current, device, callback) {
         this.database.connection().collection('Users').updateById(current, { $addToSet: { "mobile.devices": device } }, function(err){
-            callback( sid );
+            callback( device );
         });
     };
 
