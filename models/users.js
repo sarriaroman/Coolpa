@@ -57,6 +57,12 @@ var users = (function( ) {
         });
     };
 
+    users.prototype.addPushDevice = function(current, device, callback) {
+        this.database.connection().collection('Users').updateById(current, { $addToSet: { "mobile.devices": device } }, function(err){
+            callback( sid );
+        });
+    };
+
     users.prototype.create = function(data, rdata, callback) {
         data.createdDate = new Date();
         data.updatedDate = new Date();

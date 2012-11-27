@@ -65,6 +65,22 @@ exports.mobile_auth = function(req, res) {
     } );
 };
 
+exports.mobile_push = function(req, res) {
+    mobile_security(req, res, function(request, response){
+        var User = (require('../models/users'))();
+
+        User.addPushDevice(request.body.username, {
+            type: request.body.type,
+            name: request.body.name,
+            pid: request.body.pid
+        });
+
+        res.json({
+            result: true
+        });
+    });
+};
+
 var message_factory = function(req, res, information, callback) {
     var Messages = require('../models/messages');
     var users = new (require('../models/users'))();
@@ -101,9 +117,18 @@ var message_factory = function(req, res, information, callback) {
         from: information.from
     }, function(msg, err) {
         if( msg.public === true ) {
-
-
             fs.readFile('views/email_template.html', 'UTF-8', function(err, html) {
+                // Prepare push message
+                var gcm = require('node-gcm');
+
+                var message = new gcm.Message();
+                var sender = new gcm.Sender('AIzaSyBolUX8ziVmOUzK2wTA2lmR9MzdkPRjot8');
+                var registrationIds = [];
+
+                // Optional
+                message.addData('title', 'You have new mentions on Coolpa');
+                message.addData('message',msg.message);
+                message.delayWhileIdle = true;
 
                 for( var i = 0 ; i < ids.length ; i++ ) {
                     var uid = ids[i];
@@ -111,7 +136,7 @@ var message_factory = function(req, res, information, callback) {
 
                     users.user(uid, function(err, data){
                         if( data != undefined ) {
-
+                            // Mail Notifications
                             ses.get().send({
                                 from: 'Coolpa.net <info@coolpa.net>',
                                 to: [data.email],
@@ -124,40 +149,77 @@ var message_factory = function(req, res, information, callback) {
                                 }
                             });
                             console.log('Email sent to ' + data._id);
+                            
+                            // Push notifications
 
+                            for( var di = 0 ; di < data.mobile.devices.length ; di++ ) {
+                                var dev = data.mobile.devices[di];
+
+                                if( dev.type == "Android" ) {
+                                    registrationIds.push(dev.pid);
+                                }
+                            }
                         }
                     });
                 }
+
+                sender.sendNoRetry(message, registrationIds, function (result) {
+                    console.log(result);
+                });
 
             });
-} else {
-    fs.readFile('views/private_template.html', 'UTF-8', function(err, html) {
+        } else {
+            fs.readFile('views/private_template.html', 'UTF-8', function(err, html) {
+                // Prepare push message
+                var gcm = require('node-gcm');
 
-        for( var i = 0 ; i < ids.length ; i++ ) {
-            var uid = ids[i];
-            console.log(uid);
-            
-            users.user(uid, function(err, data){
-                if( data != undefined ) {
+                var message = new gcm.Message();
+                var sender = new gcm.Sender('AIzaSyBolUX8ziVmOUzK2wTA2lmR9MzdkPRjot8');
+                var registrationIds = [];
 
-                    ses.get().send({
-                        from: 'Coolpa.net <info@coolpa.net>',
-                        to: [data.email],
-                        subject: 'You have new private messages on Coolpa',
-                        body: {
-                            html: ejs.render(html, {
-                                username: data._id, 
-                                uid: req.session.uid
-                            })
+                // Optional
+                message.addData('title', 'You have new private messages on Coolpa');
+                message.addData('message',msg.message);
+                message.delayWhileIdle = true;
+
+                for( var i = 0 ; i < ids.length ; i++ ) {
+                    var uid = ids[i];
+                    console.log(uid);
+                
+                    users.user(uid, function(err, data){
+                        if( data != undefined ) {
+
+                            ses.get().send({
+                                from: 'Coolpa.net <info@coolpa.net>',
+                                to: [data.email],
+                                subject: 'You have new private messages on Coolpa',
+                                body: {
+                                    html: ejs.render(html, {
+                                        username: data._id, 
+                                        uid: req.session.uid
+                                    })
+                                }
+                            });
+                    
+                            // Push notifications
+
+                            for( var di = 0 ; di < data.mobile.devices.length ; di++ ) {
+                                var dev = data.mobile.devices[di];
+
+                                if( dev.type == "Android" ) {
+                                    registrationIds.push(dev.pid);
+                                }
+                            }
                         }
                     });
-                    
                 }
+
+                sender.sendNoRetry(message, registrationIds, function (result) {
+                    console.log(result);
+                });
+
             });
         }
-
-    });
-}
 
     callback(req, res, information);
 
@@ -231,8 +293,22 @@ exports.mobile_message = function(req, res) {
 
 exports.message = function(req, res) {
     security(req, res);
+
+    message_factory(request, response,
+        {
+            uid: req.session.uid,
+            message: req.body.message,
+            public: (req.body.public == 55),
+            from: 'Web'
+    }, function(req, res, information) {
+        if( information.public === true ) {
+            res.redirect('/');
+        } else {
+            res.redirect('/privates');
+        }
+    });
     
-    var Messages = require('../models/messages');
+    /*var Messages = require('../models/messages');
     var users = new (require('../models/users'))();
     var fs = require('fs');
     var ses = new (require('../classes/ses'))();
@@ -330,7 +406,7 @@ if( msg.public === true ) {
 } else {
     res.redirect('/privates');
 }
-});
+});*/
 };
 
 exports.signout = function(req, res) {

@@ -100,6 +100,7 @@ app.post('/api/start', routes.mobile_start);
 app.post('/api/message', routes.mobile_message);
 app.post('/api/newest', routes.mobile_newest);
 app.post('/api/more', routes.mobile_more);
+app.post('/api/push', routes.mobile_push);
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));
