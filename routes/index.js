@@ -121,16 +121,17 @@ var message_factory = function(req, res, information, callback) {
         if( msg.public === true ) {
             fs.readFile('views/email_template.html', 'UTF-8', function(err, html) {
                 // Prepare push message
-                var gcm = require('node-gcm');
+                var GCM = require('gcm').GCM;
 
-                var message = new gcm.Message();
-                var sender = new gcm.Sender('AIzaSyBolUX8ziVmOUzK2wTA2lmR9MzdkPRjot8');
+                var gcm = new GCM('AIzaSyBolUX8ziVmOUzK2wTA2lmR9MzdkPRjot8');
+
+                var gcm_message = {
+                    collapse_key: 'New Mentions', 
+                    'data.title': 'You have new mentions on Coolpa',
+                    'data.message': msg.message
+                };
+
                 var registrationIds = [];
-
-                // Optional
-                message.addData('title', 'You have new mentions on Coolpa');
-                message.addData('message',msg.message);
-                message.delayWhileIdle = true;
 
                 for( var i = 0 ; i < ids.length ; i++ ) {
                     var uid = ids[i];
@@ -165,24 +166,31 @@ var message_factory = function(req, res, information, callback) {
                     });
                 }
 
-                sender.sendNoRetry(message, registrationIds, function (result) {
-                    console.log(result);
+                gcm_message.registration_id = registrationIds;
+
+                gcm.send(gcm_message, function(err, messageId){
+                    if (err) {
+                        console.log("Something has gone wrong!");
+                    } else {
+                        console.log("Sent with message ID: ", messageId);
+                    }
                 });
 
             });
         } else {
             fs.readFile('views/private_template.html', 'UTF-8', function(err, html) {
                 // Prepare push message
-                var gcm = require('node-gcm');
+                var GCM = require('gcm').GCM;
 
-                var message = new gcm.Message();
-                var sender = new gcm.Sender('AIzaSyBolUX8ziVmOUzK2wTA2lmR9MzdkPRjot8');
+                var gcm = new GCM('AIzaSyBolUX8ziVmOUzK2wTA2lmR9MzdkPRjot8');
+
+                var gcm_message = {
+                    collapse_key: 'New Privates', 
+                    'data.title': 'You have new private messages on Coolpa',
+                    'data.message': msg.message
+                };
+
                 var registrationIds = [];
-
-                // Optional
-                message.addData('title', 'You have new private messages on Coolpa');
-                message.addData('message',msg.message);
-                message.delayWhileIdle = true;
 
                 for( var i = 0 ; i < ids.length ; i++ ) {
                     var uid = ids[i];
@@ -216,8 +224,14 @@ var message_factory = function(req, res, information, callback) {
                     });
                 }
 
-                sender.sendNoRetry(message, registrationIds, function (result) {
-                    console.log(result);
+                gcm_message.registration_id = registrationIds;
+
+                gcm.send(gcm_message, function(err, messageId){
+                    if (err) {
+                        console.log("Something has gone wrong!");
+                    } else {
+                        console.log("Sent with message ID: ", messageId);
+                    }
                 });
 
             });
