@@ -73,6 +73,8 @@ exports.mobile_push = function(req, res) {
             type: request.body.type,
             name: request.body.name,
             pid: request.body.pid
+        }, function(rpid){
+            console.log("Registered: " + rpid);
         });
 
         res.json({
