@@ -170,7 +170,7 @@ var message_factory = function(req, res, information, callback) {
 
                 gcm.send(gcm_message, function(err, messageId){
                     if (err) {
-                        console.log("Something has gone wrong!");
+                        console.log("Something has gone wrong! " + err);
                     } else {
                         console.log("Sent with message ID: ", messageId);
                     }
@@ -228,7 +228,7 @@ var message_factory = function(req, res, information, callback) {
 
                 gcm.send(gcm_message, function(err, messageId){
                     if (err) {
-                        console.log("Something has gone wrong!");
+                        console.log("Something has gone wrong! " + err);
                     } else {
                         console.log("Sent with message ID: ", messageId);
                     }
