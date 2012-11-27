@@ -43,6 +43,7 @@ exports.mobile_auth = function(req, res) {
     var Users = require('../models/users');
     
     var User = new Users();
+    console.log(req.body);
     
     User.auth( req.body.username.toLowerCase(), req.body.password, function(data) {
         if( data ) {
