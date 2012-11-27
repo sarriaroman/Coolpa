@@ -131,8 +131,6 @@ var message_factory = function(req, res, information, callback) {
                     'data.message': msg.message
                 };
 
-                var registrationIds = [];
-
                 for( var i = 0 ; i < ids.length ; i++ ) {
                     var uid = ids[i];
                     console.log(uid);
@@ -160,24 +158,20 @@ var message_factory = function(req, res, information, callback) {
 
                                 console.log(dev);
                                 if( dev.type == "Android" ) {
-                                    registrationIds.push(dev.pid);
+                                    gcm_message.registration_id = dev.pid;
+
+                                    gcm.send(gcm_message, function(err, messageId){
+                                        if (err) {
+                                            console.log("Something has gone wrong! " + err);
+                                        } else {
+                                            console.log("Sent with message ID: ", messageId);
+                                        }
+                                    });
                                 }
                             }
                         }
                     });
                 }
-
-                gcm_message.registration_ids = registrationIds;
-
-                console.log(gcm_message);
-
-                gcm.send(gcm_message, function(err, messageId){
-                    if (err) {
-                        console.log("Something has gone wrong! " + err);
-                    } else {
-                        console.log("Sent with message ID: ", messageId);
-                    }
-                });
 
             });
         } else {
@@ -192,8 +186,6 @@ var message_factory = function(req, res, information, callback) {
                     'data.title': 'You have new private messages on Coolpa',
                     'data.message': msg.message
                 };
-
-                var registrationIds = [];
 
                 for( var i = 0 ; i < ids.length ; i++ ) {
                     var uid = ids[i];
@@ -221,24 +213,20 @@ var message_factory = function(req, res, information, callback) {
 
                                 console.log(dev);
                                 if( dev.type == "Android" ) {
-                                    registrationIds.push(dev.pid);
+                                    gcm_message.registration_id = dev.pid;
+
+                                    gcm.send(gcm_message, function(err, messageId){
+                                        if (err) {
+                                            console.log("Something has gone wrong! " + err);
+                                        } else {
+                                            console.log("Sent with message ID: ", messageId);
+                                        }
+                                    });
                                 }
                             }
                         }
                     });
                 }
-
-                gcm_message.registration_ids = registrationIds;
-
-                console.log(gcm_message);
-
-                gcm.send(gcm_message, function(err, messageId){
-                    if (err) {
-                        console.log("Something has gone wrong! " + err);
-                    } else {
-                        console.log("Sent with message ID: ", messageId);
-                    }
-                });
 
             });
         }
