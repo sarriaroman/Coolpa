@@ -67,9 +67,9 @@ exports.mobile_auth = function(req, res) {
 
 exports.mobile_push = function(req, res) {
     mobile_security(req, res, function(request, response){
-        var User = (require('../models/users'))();
+        var users = new (require('../models/users'))();
 
-        User.addPushDevice(request.body.username, {
+        users.addPushDevice(request.body.username, {
             type: request.body.type,
             name: request.body.name,
             pid: request.body.pid
@@ -306,106 +306,6 @@ exports.message = function(req, res) {
             res.redirect('/privates');
         }
     });
-    
-    /*var Messages = require('../models/messages');
-    var users = new (require('../models/users'))();
-    var fs = require('fs');
-    var ses = new (require('../classes/ses'))();
-    var ejs = require('ejs');
-    
-    var Message = new Messages();
-    
-    var msg = req.body.message;
-    
-    if( msg.trim() == '' ) {
-        res.redirect('/');
-        return;
-    }
-    
-    var ids = new Array();
-    msg.replace(/[:]+[A-Za-z0-9-_]+/g, function(u) {
-        var uname = u.replace(':', '').toLowerCase();
-        
-        if( uname.length > 2 ) {
-            if(ids.indexOf(uname) == -1) {
-                ids.push( uname );
-            }
-        }
-    });
-    
-    Message.add({
-        message: msg,
-        ids: ids,
-        sender: req.body.uid,
-        public: (req.body.public == 55) ? true : false,
-        hidden: false,
-        from: 'Web'
-    }, function(msg, err) {
-        if( msg.public === true ) {
-
-
-            fs.readFile('views/email_template.html', 'UTF-8', function(err, html) {
-
-                for( var i = 0 ; i < ids.length ; i++ ) {
-                    var uid = ids[i];
-                    console.log(uid);
-
-                    users.user(uid, function(err, data){
-                        if( data != undefined ) {
-
-                            ses.get().send({
-                                from: 'Coolpa.net <info@coolpa.net>',
-                                to: [data.email],
-                                subject: 'You have new mentions on Coolpa',
-                                body: {
-                                    html: ejs.render(html, {
-                                        username: data._id, 
-                                        uid: req.session.uid
-                                    })
-                                }
-                            });
-                            console.log('Email sent to ' + data._id);
-
-                        }
-                    });
-                }
-
-            });
-} else {
-    fs.readFile('views/private_template.html', 'UTF-8', function(err, html) {
-
-        for( var i = 0 ; i < ids.length ; i++ ) {
-            var uid = ids[i];
-            console.log(uid);
-            
-            users.user(uid, function(err, data){
-                if( data != undefined ) {
-
-                    ses.get().send({
-                        from: 'Coolpa.net <info@coolpa.net>',
-                        to: [data.email],
-                        subject: 'You have new private messages on Coolpa',
-                        body: {
-                            html: ejs.render(html, {
-                                username: data._id, 
-                                uid: req.session.uid
-                            })
-                        }
-                    });
-                    
-                }
-            });
-        }
-
-    });
-}
-
-if( msg.public === true ) {
-    res.redirect('/');
-} else {
-    res.redirect('/privates');
-}
-});*/
 };
 
 exports.signout = function(req, res) {
