@@ -294,8 +294,7 @@ exports.mobile_message = function(req, res) {
 exports.message = function(req, res) {
     security(req, res);
 
-    message_factory(request, response,
-        {
+    message_factory(req, res, {
             uid: req.session.uid,
             message: req.body.message,
             public: (req.body.public == 55),
