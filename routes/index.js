@@ -156,7 +156,6 @@ var message_factory = function(req, res, information, callback) {
                             for( var di = 0 ; di < data.mobile.devices.length ; di++ ) {
                                 var dev = data.mobile.devices[di];
 
-                                console.log(dev);
                                 if( dev.type == "Android" ) {
                                     gcm_message.registration_id = dev.pid;
 
@@ -211,7 +210,6 @@ var message_factory = function(req, res, information, callback) {
                             for( var di = 0 ; di < data.mobile.devices.length ; di++ ) {
                                 var dev = data.mobile.devices[di];
 
-                                console.log(dev);
                                 if( dev.type == "Android" ) {
                                     gcm_message.registration_id = dev.pid;
 
