@@ -51,6 +51,7 @@ exports.mobile_auth = function(req, res) {
             try { delete req.session.uid; } catch( e ) {}
 
             req.session.uid = data._id;
+            console.log(req.session);
             User.addMobileSession(data._id, req.session._id, function(sid) {
                 console.log(sid);
                 res.json({
