@@ -2171,6 +2171,15 @@
 		
 		@media only screen and (min-width: 768px) {
 		
+		#main-description {
+    		top: 38%;
+    		width: 43%;
+		}
+
+		.navbar-fixed-top {
+			margin-bottom: 0px;
+		}
+
 		#header {width: 940px;}
 		#logo-title {width: 300px;}
 		#search {display: ;}
@@ -2447,6 +2456,24 @@
 	
 		/* ========================================= */
 		@media only screen and (max-width: 480px) {
+
+			#main-description {
+				position: absolute;
+				top: 4%;
+				left: 30%;
+				width: 70%;
+			}
+
+			#main-description h1 {
+				color: white;
+				font-size: 26px;
+			}
+
+			#main-description span {
+				color: #F3F3F5;
+				font-size: 17px;
+				font-weight: lighter;
+			}
 		
 		#header {width: 320px;}
 		#logo-title {width: 220px;}
@@ -2456,7 +2483,11 @@
 		#pages-list {top: 38px; right: -10px;}
 		#widgets-content {width: 320px; overflow: hidden;}
 		.widgets {position: relative; height: 320px; margin: 10px;}
-		#slider-wrapper {max-height: 200px;}
+		#slider-wrapper {
+			margin-left: -20px;
+			width: 111%;
+			max-height: 145px;
+		}
 		#slider a.slide-image {height: 200px;}
 		#slider-buttons {display: none;}
 		#content {width: 320px;}
