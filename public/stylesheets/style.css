@@ -2474,6 +2474,10 @@
 				font-size: 17px;
 				font-weight: lighter;
 			}
+
+			.navbar-fixed-top {
+				margin-bottom: 0px;
+			}
 		
 		#header {width: 320px;}
 		#logo-title {width: 220px;}
