@@ -2318,7 +2318,7 @@
 
 			#main-description {
     		top: 38%;
-    		width: 43%;
+    		width: 48%;
 		}
 
 		.navbar-fixed-top {
@@ -2333,7 +2333,11 @@
 		#pages-list {top: 38px; right: -10px;}
 		#widgets-content {width: 640px;}
 		.widgets {position: relative; top: 10px; height: auto;}
-		#slider-wrapper {max-height: 300px;}
+		#slider-wrapper {
+			margin-left: -20px;
+			width: 111%;
+			max-height: 200px;
+		}
 		#slider a.slide-image {height: 300px;}
 		#slider-buttons {display: none;}
 		#content {width: 400px;}
