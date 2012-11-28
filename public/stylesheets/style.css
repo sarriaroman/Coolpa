@@ -2335,7 +2335,7 @@
 		.widgets {position: relative; top: 10px; height: auto;}
 		#slider-wrapper {
 			margin-left: -20px;
-			width: 111%;
+			width: 106%;
 			max-height: 200px;
 		}
 		#slider a.slide-image {height: 300px;}
