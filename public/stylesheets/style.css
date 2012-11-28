@@ -41,6 +41,22 @@
 		z-index: 1000;
 	}
 	
+	#main-description {
+		position: absolute;
+    	top: 36%;
+    	left: 42%;
+    	width: 24%;
+	}
+
+	#main-description h1 {
+		color: white;
+	}
+
+	#main-description span {
+		color: #F3F3F5;
+    	font-size: 19px;
+    	font-weight: lighter;
+	}
 	
 	
 	/*========== MENU NAVIGATION ==========*/
