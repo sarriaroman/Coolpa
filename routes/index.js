@@ -514,6 +514,38 @@ exports.start = function(req, res) {
     }
 };
 
+var privates_factory = function(session_uid, callback) {
+    var messages = new (require('../models/messages'))();
+    var users = new (require('../models/users'))();
+
+    users.user( session_uid, function(err, data) {
+        messages.privates( session_uid, new Date(), function(err, docs) {
+            messages.count(session_uid, [], function(err, cnt) {
+                users.connections( session_uid, function(err, conns) {
+
+                    callback({
+                        user: req.session.uid,
+                        username: '',
+                        messages: docs, // Reversing array
+                        count: cnt,
+                        connections: data.connections.length,
+                        connecteds: conns.length,
+                        section: 'privates'
+                    });
+                }); 
+            } );
+        });
+    } );
+};
+
+exports.mobile_privates = function(req, res) {
+    mobile_security(req, res, function(request, response){
+        privates_factory(request.body.username, function(data){
+            response.json(data);
+        });
+    });
+};
+
 exports.messages = function(req, res) {
     if( req.session.uid == undefined ) {
         res.redirect('/');

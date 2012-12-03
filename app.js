@@ -98,6 +98,7 @@ app.post('/search', routes.search);
 app.post('/api/login', routes.mobile_auth);
 app.post('/api/start', routes.mobile_start);
 app.post('/api/mentions', routes.mobile_mentions);
+app.post('/api/privates', routes.mobile_privates);
 app.post('/api/message', routes.mobile_message);
 app.post('/api/newest', routes.mobile_newest);
 app.post('/api/more', routes.mobile_more);
