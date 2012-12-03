@@ -524,7 +524,7 @@ var privates_factory = function(session_uid, callback) {
                 users.connections( session_uid, function(err, conns) {
 
                     callback({
-                        user: req.session.uid,
+                        user: session_uid,
                         username: '',
                         messages: docs, // Reversing array
                         count: cnt,
