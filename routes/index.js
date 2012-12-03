@@ -579,6 +579,51 @@ exports.more = function(req, res) {
     }
 };
 
+var mentions_factory = function(session_uid, callback) {
+    var messages = new (require('../models/messages'))();
+    var users = new (require('../models/users'))();
+
+    users.user( session_uid, function(err, data) {
+        messages.mentions( session_uid, new Date(), function(err, docs) {
+            messages.count( session_uid, [], function(err, cnt) {
+                users.connections( session_uid, function(err, conns) {
+
+                    var autocomplete = "[";
+                    for( var i = 0 ; i < data.connections.length ; i++ ) {
+                        var obj = "{'id':'" + data.connections[i] + "', 'name':':" + data.connections[i] + "', 'avatar': '/avatars/" + data.connections[i] + "/avatar.square.jpg" + "', 'icon':'" + "', 'type':'contact'}";
+
+                        if( i < (data.connections.length - 1) ) {
+                            obj += ",";
+                        }
+
+                        autocomplete += obj;
+                    }
+                    autocomplete += "]";
+                    
+                    callback({
+                        user: session_uid,
+                        username: '',
+                            messages: docs, // Reversing array
+                            count: cnt,
+                            connections: data.connections.length,
+                            connecteds: conns.length,
+                            autocomplete: autocomplete,
+                            section: 'mentions'
+                        });
+                }); 
+            } );
+        });
+    } );
+};
+
+exports.mobile_mentions = function(req, res) {
+    mobile_security(req, res, function(request, response){
+        mentions_factory(request.body.username, function(data){
+            response.json(data);
+        });
+    });
+};
+
 exports.mentions = function(req, res) {
     if( req.session.uid == undefined ) {
         res.redirect('/');
@@ -613,11 +658,11 @@ exports.mentions = function(req, res) {
                             autocomplete: autocomplete,
                             section: 'mentions'
                         }); 
-                }); 
-} );
-});
-} );
-}
+                    }); 
+                } );
+            });
+        } );
+    }
 };
 
 exports.reading = function(req, res) {
