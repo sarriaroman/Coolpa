@@ -15,6 +15,12 @@
     }
 };
 
+exports.about = function(req, res) {
+    res.render('about', {
+        user: req.session.uid
+    });
+};
+
 exports.auth = function(req, res) {
     var Users = require('../models/users');
     
