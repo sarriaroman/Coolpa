@@ -27,6 +27,8 @@
 		margin-bottom: 10px;
 		display: block;
 		overflow: hidden;
+		padding-left: 10px;
+		padding-right: 10px;
 	}
 
 	#footer a {
