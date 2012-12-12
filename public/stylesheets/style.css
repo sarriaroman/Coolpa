@@ -23,7 +23,9 @@
 	a img {border: none;}
 	p {font-weight: normal;}
 	
-	
+	#footer {
+		margin-bottom: 10px;
+	}
 	/* =============================================
 	LAYOUT POSITION
 	================================================ */
