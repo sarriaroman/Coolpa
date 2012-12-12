@@ -22,59 +22,36 @@
 
                 <div id="picture-profile">
                     <a href="/">
+                        <% if( user == undefined ) { %>
                         <img src="/avatars/avatar.jpg" />
+                        <% } else { %>
+                        <img src="/avatars/<%= user %>/avatar.square.jpg" alt="" />
+                        <% } %>
                     </a>
                 </div>
 
-                <form method="POST" action="/auth">
                     <div id="profile-description">
                         <div class="timeline-preview">
-                            <div class="timeline-icon-pp"><a href="/" class="icon-profile"></a></div>
+                            <div class="timeline-icon-pp"><a href="/" class="icon-answer"></a></div>
                             <div class="timeline-pointer-pp"><span class="tl-pointer"></span></div>
                             <div class="timeline-content">
                                 <p class="description">
-                                    <input type="text" id="username" name="username" placeholder="Username" value="" style="width: 95%" /><br/>
-                                    <input type="password" id="password" name="password" placeholder="Password" value="" style="width: 95%" /><br/>
+                                    <div class="textpost">
+                                    <h2 class="post-title">About Coolpa.net</h2>
+                                    <span class="post-divider"></span>
+                                    <p>
+                                    
+                                    </p>
+                                </div>
                                 </p>
                             </div>
                             <div class="timeline-bar">
                                 <div>
-                                    <input type="submit" value="Log In" class="btn btn-large" />
+                                    <a class="btn" href="/">Back to Coolpa</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </form>
-
-                <form method="POST" action="/auth">
-                    <div class="post">
-                        <div class="timeline-preview">
-                            <div class="timeline-icon"><span class="icon-answer"></span></div>
-                            <div class="timeline-pointer"><span class="tl-pointer"></span></div>
-                            <div class="timeline-content-page">
-                                <div class="textpost">
-                                    <h2 class="post-page-title">
-                                        Why beta?
-                                    </h2>
-                                    <span class="post-divider"></span>
-
-                                    <div class="bodytext">
-                                        <p>
-                                            Right now we are doing all the test to the system previous to launch. If you want to help us to test Coolpa, please suscribe it in the next form and we will be inviting you as soon as we were ready!
-                                        </p>
-                                        <span class="post-divider"></span>
-
-                                        <input type="email" id="email" name="email" placeholder="Suscribe to beta" style="width: 95%" />
-
-                                        <span class="post-divider"></span>
-
-                                        <input type="submit" value="Suscribe" class="btn" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
 
                 
             </div>
