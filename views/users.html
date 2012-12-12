@@ -67,7 +67,11 @@
 
                             <div class="bodytext">
                                 <p>
+                                    <% if( data.description == "" ) { %>
+                                    No Description
+                                    <% } else { %>
                                     <%= data.description %>
+                                    <% } %>
                                 </p>
 
                                 <span class="post-divider"></span>
