@@ -69,6 +69,17 @@
                                 <p>
                                     <%= data.description %>
                                 </p>
+
+                                <span class="post-divider"></span>
+                                <div style="float:right;">
+                                    <% if( data._id != user ) { %>
+                                        <% if( user_data.connections.indexOf( data._id ) ) { %>
+                                            <a href="/disconnect/<%=data._id%>" id="connectionbtn" class="btn btn-danger">Disconnect</a><br/>
+                                        <% } else { %>
+                                            <a href="/connect/<%=data._id%>" id="connectionbtn" class="btn btn-inverse">Connect</a><br/>
+                                        <% } %>
+                                    <% } %>
+                                </div>
                             </div>
                         </div>
                     </div>

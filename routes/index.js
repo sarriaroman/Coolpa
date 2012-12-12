@@ -711,15 +711,18 @@ exports.reading = function(req, res) {
             messages.count(username, [], function(err, cnt) {
                 users.connections( username, function(err, conns) {
                     users.users( data.connections, function(err, users) {
-                        res.render('users', {
-                            title: 'Reading',
-                            user: req.session.uid,
-                            username: username,
-                            users: users,
-                            count: cnt,
-                            connections: data.connections.length,
-                            connecteds: conns.length
-                        }); 
+                        users.user( req.session.uid, function(err, sdata) {
+                            res.render('users', {
+                                title: 'Reading',
+                                user: req.session.uid,
+                                user_data: sdata,
+                                username: username,
+                                users: users,
+                                count: cnt,
+                                connections: data.connections.length,
+                                connecteds: conns.length
+                            }); 
+                        } ); 
                     });
                 }); 
             } );
@@ -739,14 +742,17 @@ exports.readers = function(req, res) {
         users.user( username, function(err, data) {
             messages.count(username, [], function(err, cnt) {
                 users.connections( username, function(err, conns) {
-                    res.render('users', {
-                        title: 'Readers',
-                        user: req.session.uid,
-                        username: username,
-                        users: conns,
-                        count: cnt,
-                        connections: data.connections.length,
-                        connecteds: conns.length
+                    users.user( req.session.uid, function(err, sdata) {
+                        res.render('users', {
+                            title: 'Readers',
+                            user: req.session.uid,
+                            user_data: sdata,
+                            username: username,
+                            users: conns,
+                            count: cnt,
+                            connections: data.connections.length,
+                            connecteds: conns.length
+                        }); 
                     }); 
                 });
             } );

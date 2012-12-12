@@ -48,9 +48,9 @@
                         <div style="float:left;">
                             <% if( mustConnect ) { %>
                             <% if( isConnected ) { %>
-                            <a href="/disconnect/<%=username%>" class="btn btn-danger">Disconnect</a><br/>
+                            <a href="/disconnect/<%=username%>" id="connectionbtn" class="btn btn-danger">Disconnect</a><br/>
                             <% } else { %>
-                            <a href="/connect/<%=username%>" class="btn btn-inverse">Connect</a><br/>
+                            <a href="/connect/<%=username%>" id="connectionbtn" class="btn btn-inverse">Connect</a><br/>
                             <% } %>
                             <% } %>
                         </div>
