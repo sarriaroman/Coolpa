@@ -710,14 +710,14 @@ exports.reading = function(req, res) {
         users.user( username, function(err, data) {
             messages.count(username, [], function(err, cnt) {
                 users.connections( username, function(err, conns) {
-                    users.users( data.connections, function(err, users) {
+                    users.users( data.connections, function(err, reads) {
                         users.user( req.session.uid, function(err, sdata) {
                             res.render('users', {
                                 title: 'Reading',
                                 user: req.session.uid,
                                 user_data: sdata,
                                 username: username,
-                                users: users,
+                                users: reads,
                                 count: cnt,
                                 connections: data.connections.length,
                                 connecteds: conns.length
