@@ -1,59 +1,85 @@
-<% include header.html %>
+    <% include header.html %>
 
-<section id="slider-wrapper">
-    <div class="flexslider">
-        <ul class="slides"> 
-            <li>
-                <img src="/images/top-header.jpg" alt="" />
-                <div id="main-description">
-                    <h1>Welcome to Coolpa!</h1>
-                    <span>Find out what's up with your family and friends.</span>
+    <section id="slider-wrapper">
+        <div class="flexslider">
+            <ul class="slides"> 
+                <li>
+                    <img src="/images/top-header.jpg" alt="" />
+                    <div id="main-description">
+                        <h1>Welcome to Coolpa!</h1>
+                        <span>Find out what's up with your family and friends.</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="content-wrapper">
+        <div id="content">
+            <div id="timeline">
+                <div id="time-line">
                 </div>
-            </li>
-        </ul>
-    </div>
-</section>
 
-<section id="content-wrapper">
-    <div id="content">
-        <div id="timeline">
-            <div id="time-line">
-            </div>
+                <div id="picture-profile">
+                    <a href="/">
+                        <img src="/avatars/avatar.jpg" />
+                    </a>
+                </div>
 
-            <div id="picture-profile">
-                <a href="/">
-                    <img src="/avatars/avatar.jpg" />
-                </a>
-            </div>
-
-            <form method="POST" action="/auth">
-                <div id="profile-description">
-                    <div class="timeline-preview">
-                        <div class="timeline-icon-pp"><a href="/" class="icon-profile"></a></div>
-                        <div class="timeline-pointer-pp"><span class="tl-pointer"></span></div>
-                        <div class="timeline-content">
-                            <p class="description">
-                                <input type="text" id="username" name="username" placeholder="Username" value="" style="width: 95%" /><br/>
-                                <input type="password" id="password" name="password" placeholder="Password" value="" style="width: 95%" /><br/>
-                            </p>
-                        </div>
-                        <div class="timeline-bar">
-                            <div>
-                                <input type="submit" value="Log In" class="btn btn-large" />
+                <form method="POST" action="/auth">
+                    <div id="profile-description">
+                        <div class="timeline-preview">
+                            <div class="timeline-icon-pp"><a href="/" class="icon-profile"></a></div>
+                            <div class="timeline-pointer-pp"><span class="tl-pointer"></span></div>
+                            <div class="timeline-content">
+                                <p class="description">
+                                    <input type="text" id="username" name="username" placeholder="Username" value="" style="width: 95%" /><br/>
+                                    <input type="password" id="password" name="password" placeholder="Password" value="" style="width: 95%" /><br/>
+                                </p>
+                            </div>
+                            <div class="timeline-bar">
+                                <div>
+                                    <input type="submit" value="Log In" class="btn btn-large" />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+
+                <form method="POST" action="/auth">
+                    <div class="post">
+                        <div class="timeline-preview">
+                            <div class="timeline-icon"><a href="/" class="icon-answer"></div>
+                        </div>
+                        <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                        <div class="timeline-content-page">
+                            <div class="textpost">
+                                <h2 class="post-title">
+                                    Why beta?
+                                </h2>
+                                <span class="post-divider"></span>
+
+                                <div class="bodytext">
+                                    <p>
+                                        Right now we are doing all the test to the system previous to lunch. If you want to help us to test Coolpa, please suscribe it in the next form and we will be inviting you as soon as we were ready!
+                                    </p>
+                                    <span class="post-divider"></span>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div> <!-- End .timeline-preview -->
-</div> <!-- End .post -->               
+    </div> 
+</div> 
 
-</div><!-- End #blogpost -->
+</div>
 
-</div><!-- End #timeline -->
+</div>
 
-</div><!-- End #content -->
+</div>
 </section>
 
 <% include footer.html %>

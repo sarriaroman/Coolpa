@@ -30,7 +30,14 @@
                     </div>
                     <div style="float:right;">
                         <% if( data.sender != user ) { %>
-                        <button class="btn" onclick="$('#message').append(':<%=data.sender%> ');$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();"><i class="icon-share-alt"></i></button>
+                            <button class="btn" onclick="$('#message').val(':<%=data.sender%> ');$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();$('#reply_to').val('<%=data._id%>');"><i class="icon-share-alt"></i></button>
+                            <% if( data.ids.length > 1 ) { %>
+                                <% if( data.ids.indexOf(data.sender) == -1 ) { %>
+                                    <button class="btn" onclick="$('#message').val( (':<%=data.sender%> :<%=data.ids.join(" :")%> ') );$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();$('#reply_to').val('<%=data._id%>');"><i class="icon-share-alt"> </i><i class="icon-share-alt"> </i></button>
+                                <% } else { %>
+                                    <button class="btn" onclick="$('#message').val((':<%=data.ids.join(" :")%> '));$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();$('#reply_to').val('<%=data._id%>');"><i class="icon-share-alt"> </i><i class="icon-share-alt"> </i></button>
+                                <% } %>
+                            <% } %>
                         <% } %>
                         <% if( data.sender == user ) { %>
                         <button class="btn" onclick="location.href='/remove/<%=data._id%>';"><i class="icon-remove"></i></button>
