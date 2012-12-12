@@ -32,6 +32,11 @@ $(document).ready(function() {
     } else {
         $("#message").charCount({
             css: 'pull-right',
+            textFunction: function(text) {
+                if( $('#reply_to').val() != -1 && text.length == 0 ) {
+                    $('#reply_to').val('-1');
+                } 
+            },
             exceededFunction: function( exceeded ) {
                 if( exceeded ) {
                     $("#sendBtn").attr('disabled', "disabled");

@@ -115,6 +115,7 @@ var message_factory = function(req, res, information, callback) {
         ids: ids,
         sender: information.uid,
         public: information.public,
+        reply_to: information.reply_to,
         hidden: false,
         from: information.from
     }, function(msg, err) {
@@ -274,6 +275,7 @@ exports.mobile_message = function(req, res) {
                 uid: req.body.username,
                 message: req.body.message,
                 public: (req.body.public == 68),
+                reply_to: -1,
                 from: 'Mobile application'
             }, 
             function(req, res, information) {
@@ -306,6 +308,7 @@ exports.message = function(req, res) {
             uid: req.session.uid,
             message: req.body.message,
             public: (req.body.public == 55),
+            reply_to: req.body.reply_to,
             from: 'Web'
     }, function(req, res, information) {
         if( information.public === true ) {
