@@ -835,6 +835,8 @@ exports.user_data = function(req, res) {
         // Lectores
         
         var users = new (require('../models/users'))();
+
+        console.log(req.body);
         
         if( req.body.password != "" && req.body.password == req.body.repeatpassword ) {
             users.update( req.session.uid, {
