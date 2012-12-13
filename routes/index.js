@@ -13,6 +13,7 @@
         });
 
         if(req.session.auth_notification != undefined) {
+            req.session.auth_notification = undefined;
             delete req.session.auth_notification;
         }
         
@@ -49,10 +50,10 @@ exports.auth = function(req, res) {
                 
                 res.redirect( backUrl );
             } else {
-                req.session.auth_notification = 'Wrong username or password.';
                 res.redirect('/start');
             }
         } else {
+            req.session.auth_notification = 'Wrong username or password.';
             res.redirect('/');
         }
     } );
