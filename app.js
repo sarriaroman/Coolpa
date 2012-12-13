@@ -68,6 +68,7 @@ String.prototype.parseSearches = function() {
 // GET
 app.get('/', routes.index);
 app.get('/about', routes.about);
+app.get('/terms', routes.terms);
 app.get('/start', routes.start);
 app.get('/mentions', routes.mentions);
 app.get('/privates', routes.messages);
