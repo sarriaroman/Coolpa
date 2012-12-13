@@ -844,8 +844,8 @@ exports.user_data = function(req, res) {
                 description: req.body.description.substring(0, 139),
                 password: users.hashPass( req.body.password ),
                 notifications: {
-                    mentions: (req.body.mentions == 'on') ? 1 : 0,
-                    privates: (req.body.privates == 'on') ? 1 : 0,
+                    mentions: (req.body.mentions == undefined) ? 0 : 1,
+                    privates: (req.body.privates == undefined) ? 0 : 1,
                     readers: 1
                 }
             }, function() {
