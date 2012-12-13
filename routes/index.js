@@ -47,7 +47,7 @@ exports.auth = function(req, res) {
 };
 
 exports.request_beta = function(req, res) {
-    var Beta = (require('../models/beta'))();
+    var Beta = new (require('../models/beta'))();
 
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 

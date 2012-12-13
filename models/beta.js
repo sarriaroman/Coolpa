@@ -16,7 +16,7 @@ var beta = (function( ) {
     };
     
     beta.prototype.remove = function( id, callback ) {
-        return this.database.connection().collection('Invitations').remove({_id: id}, callback);
+        return this.database.connection().collection('Beta').remove({_id: id}, callback);
     };
     
     return beta;
