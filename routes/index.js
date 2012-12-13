@@ -180,7 +180,7 @@ var message_factory = function(req, res, information, callback) {
                                 body: {
                                     html: ejs.render(html, {
                                         username: data._id, 
-                                        uid: req.session.uid
+                                        uid: msg.sender
                                     })
                                 }
                             });
@@ -235,7 +235,7 @@ var message_factory = function(req, res, information, callback) {
                                 body: {
                                     html: ejs.render(html, {
                                         username: data._id, 
-                                        uid: req.session.uid
+                                        uid: msg.sender
                                     })
                                 }
                             });
