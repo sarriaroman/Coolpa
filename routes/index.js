@@ -831,7 +831,7 @@ exports.user_data = function(req, res) {
         if( req.body.password != "" && req.body.password == req.body.repeatpassword ) {
             users.update( req.session.uid, {
                 name: req.body.name,
-                description: req.body.description,
+                description: req.body.description.substring(0, 139),
                 password: users.hashPass( req.body.password )
             }, function() {
 
