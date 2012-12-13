@@ -87,6 +87,7 @@ app.get('/search/:token', routes.search);
 
 // POST
 app.post('/auth', routes.auth);
+app.post('/request_beta', routes.request_beta);
 app.post('/message', routes.message);
 app.post('/more', routes.more);
 app.post('/upload_image', routes.upload_image);

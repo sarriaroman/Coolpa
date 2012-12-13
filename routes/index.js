@@ -7,7 +7,8 @@
     if( req.session.uid == undefined ) {
 
         res.render('start', {
-            user: req.session.uid
+            user: req.session.uid,
+            beta_notification: ''
         });
         
     } else {
@@ -43,6 +44,23 @@ exports.auth = function(req, res) {
             res.redirect('/');
         }
     } );
+};
+
+exports.request_beta = function(req, res) {
+    var Beta = (require('../models/beta'))();
+
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if( re.test( req.body.email ) ) {
+        Beta.add({
+            email: email
+        }, function(err) {
+            res.render('start', {
+                user: req.session.uid,
+                beta_notification: 'Thanks for your insterest. You will be notified soon.'
+            });
+        });
+    }
 };
 
 exports.mobile_auth = function(req, res) {

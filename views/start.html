@@ -46,7 +46,7 @@
                     </div>
                 </form>
 
-                <form method="POST" action="/auth">
+                <form method="POST" action="/request_beta">
                     <div class="post">
                         <div class="timeline-preview">
                             <div class="timeline-icon"><span class="icon-answer"></span></div>
@@ -59,6 +59,7 @@
                                     <span class="post-divider"></span>
 
                                     <div class="bodytext">
+                                        <% if( beta_notification == '' ) { %>
                                         <p>
                                             Right now we are doing all the test to the system previous to launch. If you want to help us to test Coolpa, please suscribe it in the next form and we will be inviting you as soon as we were ready!
                                         </p>
@@ -69,6 +70,10 @@
                                         <span class="post-divider"></span>
 
                                         <input type="submit" value="Suscribe" class="btn" />
+
+                                        <% } else { %>
+                                            <p><%=beta_notification%></p>
+                                        <% } %>
                                     </div>
                                 </div>
                             </div>
