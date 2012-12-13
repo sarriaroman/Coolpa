@@ -58,10 +58,10 @@ exports.request_beta = function(req, res) {
             var ses = new (require('../classes/ses'))();
             ses.get().send({
                 from: 'Coolpa.net <info@coolpa.net>',
-                to: 'rsarria@speryans.com',
+                to: ['rsarria@speryans.com'],
                 subject: 'New beta request',
                 body: {
-                    html: 'New beta request from: ' + req.body.email
+                    text: 'New beta request from: ' + req.body.email
                 }
             });
 
