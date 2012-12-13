@@ -860,7 +860,12 @@ exports.user_data = function(req, res) {
         } else {
             users.update( req.session.uid, {
                 name: req.body.name,
-                description: req.body.description
+                description: req.body.description,
+                notifications: {
+                    mentions: (req.body.mentions == undefined) ? 0 : 1,
+                    privates: (req.body.privates == undefined) ? 0 : 1,
+                    readers: 1
+                }
             }, function() {
                 req.session.notification = {
                     type: 'alert-success',
