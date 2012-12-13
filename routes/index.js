@@ -55,6 +55,16 @@ exports.request_beta = function(req, res) {
         Beta.add({
             email: req.body.email
         }, function(err) {
+            var ses = new (require('../classes/ses'))();
+            ses.get().send({
+                from: 'Coolpa.net <info@coolpa.net>',
+                to: 'rsarria@speryans.com',
+                subject: 'New beta request',
+                body: {
+                    text: 'New beta request from: ' + req.body.email
+                }
+            });
+
             res.render('start', {
                 user: req.session.uid,
                 beta_notification: 'Thanks for your insterest. You will be notified soon.'
