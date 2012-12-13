@@ -860,7 +860,7 @@ exports.user_data = function(req, res) {
         } else {
             users.update( req.session.uid, {
                 name: req.body.name,
-                description: req.body.description,
+                description: req.body.description.substring(0, 139),
                 notifications: {
                     mentions: (req.body.mentions == undefined) ? 0 : 1,
                     privates: (req.body.privates == undefined) ? 0 : 1,
