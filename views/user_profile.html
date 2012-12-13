@@ -77,6 +77,24 @@
                                             <input type="password" id="inputRepeatPassword" name="repeatpassword" placeholder="Repeat Password">
                                         </div>
                                     </div>
+
+                                    <div class="control-group">
+                                        <small>Change notifications settings</small>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputEmail">Mentions</label>
+                                        <div class="controls">
+                                            <input type="checkbox" name="mentions" id="inputMentions" <% if( data.notifications.mentions == 1 ) { %>checked="checked"<% } %>>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputEmail">Privates messages</label>
+                                        <div class="controls">
+                                            <input type="checkbox" name="mentions" id="inputMentions" <% if( data.notifications.privates == 1 ) { %>checked="checked"<% } %>>
+                                        </div>
+                                    </div>
                                 </div>
                             </p>
                         </div>
