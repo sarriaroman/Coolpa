@@ -12,7 +12,7 @@
             auth_notification: (req.session.auth_notification == undefined) ? '' : req.session.auth_notification
         });
 
-        if(req.session.auth_notification == undefined) {
+        if(req.session.auth_notification != undefined) {
             delete req.session.auth_notification;
         }
         
