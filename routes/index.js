@@ -53,7 +53,6 @@ exports.auth = function(req, res) {
                 res.redirect('/start');
             }
         } else {
-            req.session.auth_notification = 'Wrong username or password.';
             res.redirect('/');
         }
     } );
