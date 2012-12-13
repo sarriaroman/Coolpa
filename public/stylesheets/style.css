@@ -1,28 +1,31 @@
 * {margin: 0; padding: 0;}
-	
-	body {
-		background-color: #e4e6e9;
-		background-image: url('/images/bg-pattern.png');
-		background-attachment: fixed;
-		font-family: Helvetica, sans-serif;
-		/*font-size: 11px;*/
-		font-weight: normal;
-		color: #626a76;
-	}
-	h1,h2,h3,h4,h5,h6 {
-		font-family: 'Armata', sans-serif;
-		font-weight: normal;
-	}
-	a {
-		color: #9fa2aa;
-		text-decoration: none;
-	}
-	a:hover {
-		color: #4785d5;
-	}
-	a img {border: none;}
-	p {font-weight: normal;}
-	
+
+body {
+	background-color: #e4e6e9;
+	background-image: url('/images/bg-pattern.png');
+	background-attachment: fixed;
+	font-family: Helvetica, sans-serif;
+	/*font-size: 11px;*/
+	font-weight: normal;
+	color: #626a76;
+}
+h1,h2,h3,h4,h5,h6 {
+	font-family: 'Armata', sans-serif;
+	font-weight: normal;
+}
+a {
+	color: #9fa2aa;
+	text-decoration: none;
+}
+a:hover {
+	color: #4785d5;
+}
+a img {border: none;}
+p {font-weight: normal;}
+
+	/* =============================================
+	FOOTER
+	================================================ */
 	#footer {
 		margin-bottom: 10px;
 		display: block;
@@ -33,6 +36,18 @@
 
 	#footer a {
 		color: #6A6A6A;
+	}
+
+	#footer #left {
+		float:left; 
+		overflow: hidden; 
+		display:block;
+	}
+
+	#footer #right {
+		float: right; 
+		overflow: hidden; 
+		display:block;
 	}
 	/* =============================================
 	LAYOUT POSITION
@@ -53,9 +68,9 @@
 	
 	#main-description {
 		position: absolute;
-    	top: 36%;
-    	left: 42%;
-    	width: 24%;
+		top: 36%;
+		left: 42%;
+		width: 24%;
 	}
 
 	#main-description h1 {
@@ -64,8 +79,8 @@
 
 	#main-description span {
 		color: #F3F3F5;
-    	font-size: 19px;
-    	font-weight: lighter;
+		font-size: 19px;
+		font-weight: lighter;
 	}
 	
 	
@@ -102,12 +117,12 @@
 		background-repeat: no-repeat; 
 		background-position: left top;
 	}
-		#nav-menu ul.menu-top-icon li.menu a.menu:hover {
-			background-position: left center;
-		}
-		#nav-menu ul.menu-top-icon li.menu a.menu:active {
-			background-position: left bottom;
-		}
+	#nav-menu ul.menu-top-icon li.menu a.menu:hover {
+		background-position: left center;
+	}
+	#nav-menu ul.menu-top-icon li.menu a.menu:active {
+		background-position: left bottom;
+	}
 	
 	
 	
@@ -118,35 +133,35 @@
 		height: 32px;
 		background: url('http://static.tumblr.com/bygdzhm/jyxlyndzd/btn-menu-bg.jpg') repeat-x left top;
 	}
-		#nav-menu ul.menu-top-list li.menu:first-child {
-			height: 32px;
-			background: url('http://static.tumblr.com/bygdzhm/QKklyne0b/btn-menu-bgfirst.png') no-repeat left top;
-		}
-		#nav-menu ul.menu-top-list li.menu:hover:first-child {
-			background: url('http://static.tumblr.com/bygdzhm/QKklyne0b/btn-menu-bgfirst.png') no-repeat left center;
-		}
-		#nav-menu ul.menu-top-list li.menu:active:first-child {
-			background: url('http://static.tumblr.com/bygdzhm/QKklyne0b/btn-menu-bgfirst.png') no-repeat left bottom;
-		}
-		
-		#nav-menu ul.menu-top-list li.menu:last-child {
-			width: ;
-			height: 32px;
-			background: url('http://static.tumblr.com/bygdzhm/4Wnlyne29/btn-menu-bglast.png') no-repeat right top;
-		}
-		#nav-menu ul.menu-top-list li.menu:hover:last-child {
-			background: url('http://static.tumblr.com/bygdzhm/4Wnlyne29/btn-menu-bglast.png') no-repeat right center;
-		}
-		#nav-menu ul.menu-top-list li.menu:active:last-child {
-			background: url('http://static.tumblr.com/bygdzhm/4Wnlyne29/btn-menu-bglast.png') no-repeat right bottom;
-		}
-		
-		#nav-menu ul.menu-top-list li.menu:hover {
-			background: url('http://static.tumblr.com/bygdzhm/jyxlyndzd/btn-menu-bg.jpg') repeat-x left center;
-		}
-		#nav-menu ul.menu-top-list li.menu:active {
-			background: url('http://static.tumblr.com/bygdzhm/jyxlyndzd/btn-menu-bg.jpg') repeat-x left bottom;
-		}
+	#nav-menu ul.menu-top-list li.menu:first-child {
+		height: 32px;
+		background: url('http://static.tumblr.com/bygdzhm/QKklyne0b/btn-menu-bgfirst.png') no-repeat left top;
+	}
+	#nav-menu ul.menu-top-list li.menu:hover:first-child {
+		background: url('http://static.tumblr.com/bygdzhm/QKklyne0b/btn-menu-bgfirst.png') no-repeat left center;
+	}
+	#nav-menu ul.menu-top-list li.menu:active:first-child {
+		background: url('http://static.tumblr.com/bygdzhm/QKklyne0b/btn-menu-bgfirst.png') no-repeat left bottom;
+	}
+	
+	#nav-menu ul.menu-top-list li.menu:last-child {
+		width: ;
+		height: 32px;
+		background: url('http://static.tumblr.com/bygdzhm/4Wnlyne29/btn-menu-bglast.png') no-repeat right top;
+	}
+	#nav-menu ul.menu-top-list li.menu:hover:last-child {
+		background: url('http://static.tumblr.com/bygdzhm/4Wnlyne29/btn-menu-bglast.png') no-repeat right center;
+	}
+	#nav-menu ul.menu-top-list li.menu:active:last-child {
+		background: url('http://static.tumblr.com/bygdzhm/4Wnlyne29/btn-menu-bglast.png') no-repeat right bottom;
+	}
+	
+	#nav-menu ul.menu-top-list li.menu:hover {
+		background: url('http://static.tumblr.com/bygdzhm/jyxlyndzd/btn-menu-bg.jpg') repeat-x left center;
+	}
+	#nav-menu ul.menu-top-list li.menu:active {
+		background: url('http://static.tumblr.com/bygdzhm/jyxlyndzd/btn-menu-bg.jpg') repeat-x left bottom;
+	}
 	#nav-menu ul.menu-top-list li.menu a.menu {
 		position: relative;
 		float: left;
@@ -158,13 +173,13 @@
 		padding: 10px 15px;
 		background: url('http://static.tumblr.com/bygdzhm/4Fblyne3v/menu-spliter.png') no-repeat right top;
 	}
-		#nav-menu ul.menu-top-list li.menu:last-child a {
-			background: none;
-		}
-		#nav-menu ul.menu-top-list li.menu a:hover {
-			color: #858994;
-			text-shadow: 0px 1px 0 #121317;
-		}
+	#nav-menu ul.menu-top-list li.menu:last-child a {
+		background: none;
+	}
+	#nav-menu ul.menu-top-list li.menu a:hover {
+		color: #858994;
+		text-shadow: 0px 1px 0 #121317;
+	}
 	#nav-menu ul.menu-top-list li.pages {
 		
 	}
@@ -223,9 +238,9 @@
 		float: left;
 		background: url('http://static.tumblr.com/bygdzhm/Romlyne6a/divider.png') repeat-x left bottom;
 	}
-		#pages-list ul.submenu-top li.submenu:last-child {
-			background: none;
-		}
+	#pages-list ul.submenu-top li.submenu:last-child {
+		background: none;
+	}
 	#pages-list ul.submenu-top li.submenu a {
 		float: left;
 		overflow: ;
@@ -238,22 +253,22 @@
 		color: #858994;
 		text-shadow: 0px 1px 0 #121317;
 	}
-		#pages-list ul.submenu-top li.submenu:first-child a {
-			-webkit-border-radius: 3px 3px 0px 0px;
-			-khtml-border-radius: 3px 3px 0px 0px;
-			-moz-border-radius: 3px 3px 0px 0px;
-			border-radius: 3px 3px 0px 0px;
-		}
-		#pages-list ul.submenu-top li.submenu:last-child a {
-			margin-bottom: 0px;
-			-webkit-border-radius: 0px 0px 3px 3px;
-			-khtml-border-radius: 0px 0px 3px 3px;
-			-moz-border-radius: 0px 0px 3px 3px;
-			border-radius: 0px 0px 3px 3px;
-		}
-		#pages-list ul.submenu-top li.submenu a:hover {
-			background: url('http://static.tumblr.com/bygdzhm/flylz10zh/btn-submenu-bg.png') repeat-x left bottom;
-		}
+	#pages-list ul.submenu-top li.submenu:first-child a {
+		-webkit-border-radius: 3px 3px 0px 0px;
+		-khtml-border-radius: 3px 3px 0px 0px;
+		-moz-border-radius: 3px 3px 0px 0px;
+		border-radius: 3px 3px 0px 0px;
+	}
+	#pages-list ul.submenu-top li.submenu:last-child a {
+		margin-bottom: 0px;
+		-webkit-border-radius: 0px 0px 3px 3px;
+		-khtml-border-radius: 0px 0px 3px 3px;
+		-moz-border-radius: 0px 0px 3px 3px;
+		border-radius: 0px 0px 3px 3px;
+	}
+	#pages-list ul.submenu-top li.submenu a:hover {
+		background: url('http://static.tumblr.com/bygdzhm/flylz10zh/btn-submenu-bg.png') repeat-x left bottom;
+	}
 	
 	
 	/* =============================================
@@ -275,12 +290,12 @@
 		background-repeat: no-repeat; 
 		background-position: left top;
 	}
-		#widget-button a:hover {
-			background-position: left center;
-		}
-		#widget-button a:active, #widget-button a:focus {
-			background-position: left bottom;
-		}
+	#widget-button a:hover {
+		background-position: left center;
+	}
+	#widget-button a:active, #widget-button a:focus {
+		background-position: left bottom;
+	}
 	
 	/*========== WIDGETS CONTAINER ==========*/
 	#widgets-wrapper {
@@ -361,7 +376,7 @@
 		-khtml-border-radius: 3px;
 		-moz-border-radius: 3px;
 		border-radius: 3px;
-	    text-indent: -10000px;
+		text-indent: -10000px;
 	}
 	#widgets-content a.next {
 		position: absolute;
@@ -378,18 +393,18 @@
 		-khtml-border-radius: 3px;
 		-moz-border-radius: 3px;
 		border-radius: 3px;
-	    text-indent: -10000px;
+		text-indent: -10000px;
 	}
-		#widgets-content a.prev:hover,
-		#widgets-content a.next:hover {
-			background-color: #1d1e25;
-		}
+	#widgets-content a.prev:hover,
+	#widgets-content a.next:hover {
+		background-color: #1d1e25;
+	}
 	
 	
 	/*========== TWEETROLL ==========*/
 	.stream {
 		width: 220px;
-	    height: 260px;
+		height: 260px;
 		margin: 0;
 		float: left;
 	}
@@ -475,12 +490,12 @@
 		padding: 0px;
 	}
 	
-    
-    /*========== FACEBOOK PAGES ==========*/
-    .facebook_like {
-        overflow: hidden;
+	
+	/*========== FACEBOOK PAGES ==========*/
+	.facebook_like {
+		overflow: hidden;
 		width: 220px;
-	    height: 230px;
+		height: 230px;
 		margin: 0;
 		float: left;
 	}
@@ -500,10 +515,10 @@
 		margin-bottom: 10px;
 	}
 	.dribbble-shot ul li a {
-	    text-decoration: none;
+		text-decoration: none;
 		border: none; 
 		margin: 5px;
-	    float: left;         
+		float: left;         
 	}
 	.dribbble-shot ul li a img {
 		width: 60px;
@@ -521,19 +536,19 @@
 	.following {
 		overflow: hidden;
 		width: 220px;
-        height: 220px;
-        margin-left: 5px;
+		height: 220px;
+		margin-left: 5px;
 	}
 	.following ul li {
 		list-style: none;
 		float: left;
-    	margin-bottom: 10px;
+		margin-bottom: 10px;
 	}
 	.following ul li a {
-	    text-decoration: none;
+		text-decoration: none;
 		border: none; 
 		margin: 5px;
-	    float: left;         
+		float: left;         
 	}
 	.following ul li a img {
 		width: 60px;
@@ -552,18 +567,18 @@
 		width: 220px;
 		height: 220px;
 	}
-    #photos {
-        overflow: hidden;
-        width: 220px;
-        height: 220px;
-        float: left;
-        margin-left: 5px;
-    }
+	#photos {
+		overflow: hidden;
+		width: 220px;
+		height: 220px;
+		float: left;
+		margin-left: 5px;
+	}
 	#photos a {
-	    text-decoration: none;
+		text-decoration: none;
 		border: none; 
 		margin: 5px 5px 15px 5px;
-	    float: left;         
+		float: left;         
 	}
 	#photos a img {
 		width: 60px;
@@ -575,45 +590,45 @@
 		border-radius: 3px;         
 	}
 	
-    .show_photo {
-        margin-top: 15px;
-        margin-left: 5px;
-        float: left;
-    }
-    
-    
+	.show_photo {
+		margin-top: 15px;
+		margin-left: 5px;
+		float: left;
+	}
+	
+	
 	/*========== TAG CLOUD ==========*/
 	#taglist {
-        overflow: hidden;
-        height: 240px;
-        float: left;
+		overflow: hidden;
+		height: 240px;
+		float: left;
 	}
-    #tag_list {
-	    position: relative;
-	    overflow: hidden;
+	#tag_list {
+		position: relative;
+		overflow: hidden;
 		width: 220px;
-	    height: 237px;
-	    margin: 0;
-	    float: left;
+		height: 237px;
+		margin: 0;
+		float: left;
 	}
 	#tag_list li {
-	    list-style: none;
-	    background-color: #1b1d26;    
-	    padding: 6px 10px;
-	    margin: 3px 3px;
-	    float: left;
-	    border-radius: 5px;
-	    -webkit-border-radius: 5px;
-	    -moz-border-radius: 5px;
-	    -khtml-border-radius: 5px;
-	    font-size: 12px !important; 
-        line-height: 12px;
+		list-style: none;
+		background-color: #1b1d26;    
+		padding: 6px 10px;
+		margin: 3px 3px;
+		float: left;
+		border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		-khtml-border-radius: 5px;
+		font-size: 12px !important; 
+		line-height: 12px;
 	}
 	#tag_list li:hover {
-	    background-color: {color:Link};     
+		background-color: {color:Link};     
 	}
 	#tag_list li a, #tag_list li a:hover {
-	    color: #ffffff;
+		color: #ffffff;
 	}
 	
 	
@@ -661,30 +676,30 @@
 	}
 	
 	#slider-buttons {   
-	    position: absolute;   
-	    display: block;     
-	    bottom: 20px; 
-	    right: 47%;   
+		position: absolute;   
+		display: block;     
+		bottom: 20px; 
+		right: 47%;   
 	}
-	 #slider-buttons li {
-	 	list-style: none;
-	 	padding: 0;
-	 	margin: 10px;
-	 	float: left;
-	 }    
-	 #slider-buttons li a {   
-	    float: left;   
-	    display: block;     
-	    width: 12px;   
-	    height: 12px;      
-	    outline: none;   
-	    background-image: url('http://static.tumblr.com/bygdzhm/jkllycuad/slide-btn-netral.png'); 
-	    background-repeat: no-repeat;
-	    background-position: left top;    
-	 }   
-		 #slider-buttons li.active a, #slider-buttons li a:hover {   
-		    background-position: left bottom;   
-		 } 
+	#slider-buttons li {
+		list-style: none;
+		padding: 0;
+		margin: 10px;
+		float: left;
+	}    
+	#slider-buttons li a {   
+		float: left;   
+		display: block;     
+		width: 12px;   
+		height: 12px;      
+		outline: none;   
+		background-image: url('http://static.tumblr.com/bygdzhm/jkllycuad/slide-btn-netral.png'); 
+		background-repeat: no-repeat;
+		background-position: left top;    
+	}   
+	#slider-buttons li.active a, #slider-buttons li a:hover {   
+		background-position: left bottom;   
+	} 
 	
 	
 	
@@ -697,32 +712,32 @@
 	}
 
 	.minipic {
-			width: 38px;
-			height: 38px;
-			background: #c8cbd6;
-			border: 4px solid #c8cbd6;
-			-webkit-border-radius: 50%;
-			-khtml-border-radius: 50%;
-			-moz-border-radius: 50%;
-			border-radius: 50%;
-			border-radius: 74px;
-			float: left;
-			z-index: 10;
-		}
-		.minipic a,
-		.minipic a img {
-			position: relative;
-			overflow: hidden;
-			width: 38px;
-			height: 38px;
-			-webkit-border-radius: 50%;
-			-khtml-border-radius: 50%;
-			-moz-border-radius: 50%;
-			border-radius: 50%;
-			border-radius: 64px;
-			float: left;
-			border: none;
-		}
+		width: 38px;
+		height: 38px;
+		background: #c8cbd6;
+		border: 4px solid #c8cbd6;
+		-webkit-border-radius: 50%;
+		-khtml-border-radius: 50%;
+		-moz-border-radius: 50%;
+		border-radius: 50%;
+		border-radius: 74px;
+		float: left;
+		z-index: 10;
+	}
+	.minipic a,
+	.minipic a img {
+		position: relative;
+		overflow: hidden;
+		width: 38px;
+		height: 38px;
+		-webkit-border-radius: 50%;
+		-khtml-border-radius: 50%;
+		-moz-border-radius: 50%;
+		border-radius: 50%;
+		border-radius: 64px;
+		float: left;
+		border: none;
+	}
 
 	#content-wrapper {
 		position: relative;
@@ -775,43 +790,43 @@
 		z-index: 1;
 	}
 	.timeline-icon-bottom a.icon-totop {
-	    position: absolute;
-	    bottom: 0px;
+		position: absolute;
+		bottom: 0px;
 		left: 0px;
 		width: 30px;
 		height: 30px;
 		margin: 0;
-	    background: #c8cbd6;
+		background: #c8cbd6;
 		background-image: url('http://static.tumblr.com/bygdzhm/lHylylgnf/icon-totop.png');
-	    background-repeat: no-repeat;
-	    background-position: center center; 
-	    -webkit-border-radius: 50%;
-	    -khtml-border-radius: 50%;
+		background-repeat: no-repeat;
+		background-position: center center; 
+		-webkit-border-radius: 50%;
+		-khtml-border-radius: 50%;
 		-moz-border-radius: 50%;
 		border-radius: 50%;
 		border-radius: 15px;
 		float: left;
-	    z-index: 100;
+		z-index: 100;
 	}
-		.timeline-icon-bottom span.tophov {
-			display: none;
-			position: absolute;
-			top: 4px;
-			left: 35px;
-			width: 78px;
-			height: 22px;
-			padding-left: 10px;
-			font-family: 'Armata', sans-serif;
-			font-size: 10px;
-			line-height: 22px;
-			color: #fff;
-			background: url('http://static.tumblr.com/bygdzhm/tsalz25w7/tophov-bg.png') no-repeat left top;
-			float: left;
-		}
+	.timeline-icon-bottom span.tophov {
+		display: none;
+		position: absolute;
+		top: 4px;
+		left: 35px;
+		width: 78px;
+		height: 22px;
+		padding-left: 10px;
+		font-family: 'Armata', sans-serif;
+		font-size: 10px;
+		line-height: 22px;
+		color: #fff;
+		background: url('http://static.tumblr.com/bygdzhm/tsalz25w7/tophov-bg.png') no-repeat left top;
+		float: left;
+	}
 	
 	.timeline-icon-pp a.icon-profile {
 		width: 46px;
-	    height: 46px;
+		height: 46px;
 		margin: 0;
 		background: url('/images/icon-profile.png') no-repeat center center;
 		float: left;
@@ -819,7 +834,7 @@
 
 	.timeline-icon .icon-profile {
 		width: 46px;
-	    height: 46px;
+		height: 46px;
 		margin: 0;
 		background: url('/images/icon-profile.png') no-repeat center center;
 		float: left;
@@ -960,7 +975,7 @@
 		box-shadow: inset 0px 0px 0px 1px #f5f6f7;
 	}
 	.timeline-content-page {
-	    position: relative;
+		position: relative;
 		overflow: hidden;
 		float: left;
 		margin-left: 0px;
@@ -1038,9 +1053,9 @@
 		margin-right: 10px;
 		background: url('http://static.tumblr.com/bygdzhm/Viwlz11tx/btn-share-bg.png') no-repeat left bottom;
 	}
-		.button-share:hover {
-			background: url('http://static.tumblr.com/bygdzhm/Viwlz11tx/btn-share-bg.png') no-repeat left top;
-		}
+	.button-share:hover {
+		background: url('http://static.tumblr.com/bygdzhm/Viwlz11tx/btn-share-bg.png') no-repeat left top;
+	}
 	
 	.button-share .share-icon {
 		position: relative;
@@ -1065,14 +1080,14 @@
 		transition: 0.5s ease-in-out;
 		z-index: 100;
 	}
-		.button-share .share-icon span.share-btn:hover {
-			background: url('http://static.tumblr.com/bygdzhm/LC3lz11v5/btn-share.png') no-repeat right top;
-			z-index: -100;
-		}
-		.button-share .share-icon:hover>span.share-btn {
-			background: url('http://static.tumblr.com/bygdzhm/LC3lz11v5/btn-share.png') no-repeat right top;
-			z-index: -100;
-		}
+	.button-share .share-icon span.share-btn:hover {
+		background: url('http://static.tumblr.com/bygdzhm/LC3lz11v5/btn-share.png') no-repeat right top;
+		z-index: -100;
+	}
+	.button-share .share-icon:hover>span.share-btn {
+		background: url('http://static.tumblr.com/bygdzhm/LC3lz11v5/btn-share.png') no-repeat right top;
+		z-index: -100;
+	}
 	.button-share .share-icon a.share-twitter {
 		width: 16px;
 		height: 16px;
@@ -1081,9 +1096,9 @@
 		background: url('http://static.tumblr.com/bygdzhm/59olylhu1/btnshare-twitter.png') no-repeat left top;
 		float: left;
 	}
-		.button-share .share-icon a.share-twitter:hover {
-			background: url('http://static.tumblr.com/bygdzhm/59olylhu1/btnshare-twitter.png') no-repeat left bottom;
-		}
+	.button-share .share-icon a.share-twitter:hover {
+		background: url('http://static.tumblr.com/bygdzhm/59olylhu1/btnshare-twitter.png') no-repeat left bottom;
+	}
 	.button-share .share-icon a.share-facebook {
 		width: 16px;
 		height: 16px;
@@ -1092,9 +1107,9 @@
 		background: url('http://static.tumblr.com/bygdzhm/NRllylhup/btnshare-facebook.png') no-repeat left top;
 		float: left;
 	}
-		.button-share .share-icon a.share-facebook:hover {
-			background: url('http://static.tumblr.com/bygdzhm/NRllylhup/btnshare-facebook.png') no-repeat left bottom;
-		}
+	.button-share .share-icon a.share-facebook:hover {
+		background: url('http://static.tumblr.com/bygdzhm/NRllylhup/btnshare-facebook.png') no-repeat left bottom;
+	}
 	
 	.button-viewpost {
 		position: relative;
@@ -1112,9 +1127,9 @@
 		background-repeat: no-repeat;
 		background-position: left top;
 	}
-		.button-viewpost a:hover {
-			background-position: left bottom;
-		}
+	.button-viewpost a:hover {
+		background-position: left bottom;
+	}
 	
 	.button-viewdetails {	/* only available in 320px layout */
 		position: relative;
@@ -1132,9 +1147,9 @@
 		background-repeat: no-repeat;
 		background-position: left top;
 	}
-		.button-viewdetails a.view-details:hover {
-			background-position: left bottom;
-		}
+	.button-viewdetails a.view-details:hover {
+		background-position: left bottom;
+	}
 	
 	
 	/*========== PICTURE PROFILE ========== */
@@ -1172,9 +1187,9 @@
 		background-repeat: no-repeat;
 		background-position: left top;
 	}
-		.button-ask a:hover {
-			background-position: left bottom;
-		}
+	.button-ask a:hover {
+		background-position: left bottom;
+	}
 	
 	.social-links {
 		position: relative;
@@ -1185,8 +1200,8 @@
 		float: right;
 	}
 	.social-links a {
-        width: 28px;
-    	height: 30px;
+		width: 28px;
+		height: 30px;
 		padding: 0;
 	}
 	.social-links a.twitter {
@@ -1221,9 +1236,9 @@
 		background: url('http://static.tumblr.com/bygdzhm/u1Rlylhfe/icon-skype.png') no-repeat left top;
 		float: left;
 	}
-		.social-links a:hover {
-			margin-top: 1px;
-		}
+	.social-links a:hover {
+		margin-top: 1px;
+	}
 	
 	
 	/*================================================
@@ -1270,10 +1285,10 @@
 		-moz-border-radius: 3px;
 		border-radius: 3px;
 	}
-		.permalink-post-pagination a.arrow-left:hover,
-		.permalink-post-pagination a.arrow-right:hover {
-			background-color: {color:Timeline};
-		}
+	.permalink-post-pagination a.arrow-left:hover,
+	.permalink-post-pagination a.arrow-right:hover {
+		background-color: {color:Timeline};
+	}
 	
 	
 	/*========== POST ==========*/
@@ -1417,9 +1432,9 @@
 		font-size: 20px;
 		font-weight: normal;
 		line-height: 20px;
-	    text-transform: uppercase;
-	    margin-top: 20px;
-	    margin-bottom: 15px;
+		text-transform: uppercase;
+		margin-top: 20px;
+		margin-bottom: 15px;
 	}
 	.track-name {
 		font-size: 16px;
@@ -1489,7 +1504,7 @@
 	
 	/*========== POST TEXT ==========*/
 	.post-title {
-	    width: 100%;
+		width: 100%;
 		font-size: 20px;
 		font-weight: normal;
 		line-height: 26px;
@@ -1500,7 +1515,7 @@
 		padding-bottom: 10px;
 	}
 	.post-page-title {
-	    font-size: 16px;
+		font-size: 16px;
 		font-weight: normal;
 		line-height: 20px;
 		color: #777b89;
@@ -1528,7 +1543,7 @@
 	
 	/*========== POST QUOTE ==========*/
 	.quoteline {
-	    width: 100%;
+		width: 100%;
 		font-size: 20px;
 		font-weight: normal;
 		line-height: 26px;
@@ -1549,7 +1564,7 @@
 	
 	/*========== POST CHAT ==========*/
 	.chat-lines {
-	    width: 100%;
+		width: 100%;
 		float: left;
 		padding: 0;
 		font-size: 12px;
@@ -1587,7 +1602,7 @@
 	
 	/*========== POST LINK ==========*/
 	h2.post-link-url {
-	    width: 100%;
+		width: 100%;
 		font-size: 20px;
 		font-weight: normal;
 		line-height: 26px;
@@ -1712,9 +1727,9 @@
 	.postdetail li a {
 		color: #5c6266;
 	}
-		.postdetail li a:hover {
-			color: #4785d5;
-		}
+	.postdetail li a:hover {
+		color: #4785d5;
+	}
 	.postdetail ul.tagged {
 		position: relative;
 		display: inline;	
@@ -1752,12 +1767,12 @@
 		line-height: 12px;
 		float: left;
 	}
-		.postdetail li.taglist a:after {
-			content: ", ";
-		}
-		.postdetail li.taglist a:last-child:after {
-			content: " ";
-		}
+	.postdetail li.taglist a:after {
+		content: ", ";
+	}
+	.postdetail li.taglist a:last-child:after {
+		content: " ";
+	}
 	
 	.postdetail .sharethis {
 		float: left;
@@ -1772,7 +1787,7 @@
 	}
 	.postdetail .sharethis .shortURL {
 		width: 202px;
-	    height: 25px;
+		height: 25px;
 		margin-bottom: 10px;
 		padding: 10px 20px 10px 20px;
 		line-height: 25px;
@@ -1781,7 +1796,7 @@
 		background: url('http://static.tumblr.com/bygdzhm/K63lyc50j/bg-shorturl.png') no-repeat left top;
 		border: none;
 		outline: none;
-	    float: left;
+		float: left;
 	}
 	
 	.show-comments {
@@ -1801,9 +1816,9 @@
 		background-position: left top;
 		float: left;
 	}
-		.show-comments a.show-comment-btn:hover {
-			background-position: left bottom;
-		}
+	.show-comments a.show-comment-btn:hover {
+		background-position: left bottom;
+	}
 	
 	
 	/*========== DISQUS ==========*/
@@ -1811,14 +1826,14 @@
 		position: relative;
 		width: 100%;		
 		margin-bottom: 10px;
-	    padding-bottom: 10px;
-	    float: left;
+		padding-bottom: 10px;
+		float: left;
 	}
 	#disqus h3 {
-	    font-size: 12px;           
-	    line-height: 20px;
-	    color: #626a76;
-	    text-shadow : 1px 1px 1px #fff; 
+		font-size: 12px;           
+		line-height: 20px;
+		color: #626a76;
+		text-shadow : 1px 1px 1px #fff; 
 	}
 	
 	
@@ -1838,44 +1853,44 @@
 		margin-bottom: 10px;
 	}
 	ol.notes {
-	    padding: 0px;
-	    margin: 10px 0px;
-	    list-style-type: none;
-	    border-bottom: none;
+		padding: 0px;
+		margin: 10px 0px;
+		list-style-type: none;
+		border-bottom: none;
 	}
 	ol.notes a {
-	    color: {color:Link};
+		color: {color:Link};
 	}
 	ol.notes li.note {
-	    border-top: none;
-	    padding: 0px;
-	    line-height: 30px;
+		border-top: none;
+		padding: 0px;
+		line-height: 30px;
 	}
 	
 	ol.notes li.note img.avatar {
-	    vertical-align: -4px;
-	    margin-right: 10px;
-	    width: 16px;
-	    height: 16px;
+		vertical-align: -4px;
+		margin-right: 10px;
+		width: 16px;
+		height: 16px;
 	}
 	
 	ol.notes li.note span.action {
-	    font-weight: normal;
+		font-weight: normal;
 	}
 	
 	ol.notes li.note .answer_content {
-	    font-weight: normal;
+		font-weight: normal;
 	}
 	
 	ol.notes li.note blockquote {
-	    border-left: 2px solid #eee;
-	    padding: 4px 10px;
-	    margin: 10px 0px 0px 25px;
-	    font-style: italic;
+		border-left: 2px solid #eee;
+		padding: 4px 10px;
+		margin: 10px 0px 0px 25px;
+		font-style: italic;
 	}
 	
 	ol.notes li.note blockquote a {
-	    text-decoration: none;
+		text-decoration: none;
 	}
 	
 	
@@ -1903,20 +1918,20 @@
 		z-index: 1;
 	}
 	#post_box_wrap {
-	    position: relative;
-	    margin: 0 auto;
-	    height: 94%;
+		position: relative;
+		margin: 0 auto;
+		height: 94%;
 	}
 	#permalink-container, #permalink-wrapper {
 		position: relative;
 		min-height: 400px;
-	    margin: 0px auto;
+		margin: 0px auto;
 		-webkit-border-radius: 3px;
 		-khtml-border-radius: 3px;
 		-moz-border-radius: 3px;
 		border-radius: 3px;
 		z-index: 2;
-	    
+		
 	}
 	
 	#permalink-container{
@@ -1937,7 +1952,7 @@
 	.photo-post, .photoset-post, .video-post, 
 	.audio-post, .text-post, .quote-post, 
 	.chat-post, .link-post, .answer-post {
-	    position: relative;	
+		position: relative;	
 		height: auto;
 		margin: 0;
 		padding: 0;
@@ -1962,9 +1977,9 @@
 		z-index: 200;
 		display: none;
 	}
-		#popupClose:hover {
-			background: url('http://static.tumblr.com/bygdzhm/5EElyc4jt/close-btn.png') no-repeat left bottom;
-		}
+	#popupClose:hover {
+		background: url('http://static.tumblr.com/bygdzhm/5EElyc4jt/close-btn.png') no-repeat left bottom;
+	}
 	
 	.navigation-post {
 		position: fixed;
@@ -1978,9 +1993,9 @@
 		float: left;
 		background: url('http://static.tumblr.com/bygdzhm/tJGlyc4lv/btn-older.png') no-repeat left top;
 	}
-		.navigation-post a.older:hover {
-			background: url('http://static.tumblr.com/bygdzhm/tJGlyc4lv/btn-older.png') no-repeat left bottom;
-		}
+	.navigation-post a.older:hover {
+		background: url('http://static.tumblr.com/bygdzhm/tJGlyc4lv/btn-older.png') no-repeat left bottom;
+	}
 	.navigation-post a.newer {
 		position: absolute;
 		width: 42px;
@@ -1989,9 +2004,9 @@
 		background: url('http://static.tumblr.com/bygdzhm/tkolyc4my/btn-newer.png') no-repeat left top;
 		z-index: 1000;
 	}
-		.navigation-post a.newer:hover {
-			background: url('http://static.tumblr.com/bygdzhm/tkolyc4my/btn-newer.png') no-repeat left bottom;
-		}
+	.navigation-post a.newer:hover {
+		background: url('http://static.tumblr.com/bygdzhm/tkolyc4my/btn-newer.png') no-repeat left bottom;
+	}
 	
 	
 	#sidebar ul.sidebar-lists {
@@ -2061,9 +2076,9 @@
 	#sidebar li a {
 		color: #5c6266;
 	}
-		#sidebar li a:hover {
-			color: #4785d5;
-		}
+	#sidebar li a:hover {
+		color: #4785d5;
+	}
 	#sidebar ul.tagged {
 		position: relative;
 		display: inline;	
@@ -2101,12 +2116,12 @@
 		line-height: 12px;
 		float: left;
 	}
-		#sidebar li.taglist a:after {
-			content: ", ";
-		}
-		#sidebar li.taglist a:last-child:after {
-			content: " ";
-		}
+	#sidebar li.taglist a:after {
+		content: ", ";
+	}
+	#sidebar li.taglist a:last-child:after {
+		content: " ";
+	}
 	
 	#sidebar .sharethis {
 		float: left;
@@ -2120,7 +2135,7 @@
 	}
 	#sidebar .sharethis .shortURL {
 		width: 202px;
-	    height: 25px;
+		height: 25px;
 		margin-top: 7px;
 		padding: 10px 20px 10px 20px;
 		line-height: 25px;
@@ -2153,9 +2168,9 @@
 		background-position: left top;
 		float: left;
 	}
-		.permalink-show-comments a:hover {
-			background-position: left bottom;
-		}
+	.permalink-show-comments a:hover {
+		background-position: left bottom;
+	}
 	
 	
 	/* Tiny Scrollbar */
@@ -2170,20 +2185,20 @@
 	
 	/* Infinity scroll Loading */
 	#infscr-loading img, #infscr-loading div{
-			margin-top: 20px !important;
-			line-height: 50px;
+		margin-top: 20px !important;
+		line-height: 50px;
 	}
-		
+	
 	
 	/* =============================================== 
 	Media Queries
 	================================================== */
-		
-		@media only screen and (min-width: 768px) {
+	
+	@media only screen and (min-width: 768px) {
 		
 		#main-description {
-    		top: 38%;
-    		width: 43%;
+			top: 38%;
+			width: 43%;
 		}
 
 		.navbar-fixed-top {
@@ -2288,47 +2303,69 @@
 		.show-comments a.show-comment-btn {margin-left: 185px;}
 		#disqus {width: 500px;}
 		
-	    #post_box_wrap {width: 835px;}
+		#post_box_wrap {width: 835px;}
 		#permalink-container {width: 835px;}
-	    .navigation-post {width: 835px;}
-	    .navigation-post a.older {top: 270px;left: -60px;}
-	    .navigation-post a.newer {top: 270px;right: -60px;}
+		.navigation-post {width: 835px;}
+		.navigation-post a.older {top: 270px;left: -60px;}
+		.navigation-post a.newer {top: 270px;right: -60px;}
 		#permalink-post {width: 525px;}
-	    #permalink-post {
-		    -webkit-border-radius: 3px 0 0 3px;
-		    -khtml-border-radius: 3px 0 0 3px;
-		    -moz-border-radius: 3px 0 0 3px;
-		    border-radius: 3px 0 0 3px;
-	    }
+		#permalink-post {
+			-webkit-border-radius: 3px 0 0 3px;
+			-khtml-border-radius: 3px 0 0 3px;
+			-moz-border-radius: 3px 0 0 3px;
+			border-radius: 3px 0 0 3px;
+		}
 		#permalink-post .viewport {width: 500px; height: 500px; overflow: hidden; position: relative;}
 		.photo-post, .photoset-post, .video-post, 
 		.audio-post, .text-post, .quote-post, 
 		.chat-post, .link-post, .answer-post {width: 500px;}
 		#sidebar-post {margin-top: 70px;width: 290px;}
-	    #sidebar {
-	        position: relative;
-		    margin: 0;
-		    width: 289px;
-		    min-height: 530px;
-		    background: #e8ecef;
-		    border-left: 1px solid #d6dce1;
-		    -webkit-border-radius: 0 3px 3px 0;
-		    -khtml-border-radius: 0 3px 3px 0;
-		    -moz-border-radius: 0 3px 3px 0;
-		    border-radius: 0 3px 3px 0;
-		    z-index: 100;
-	    }
-	    #sidebar ul.sidebar-lists {margin-top: 40px;}
-		
+		#sidebar {
+			position: relative;
+			margin: 0;
+			width: 289px;
+			min-height: 530px;
+			background: #e8ecef;
+			border-left: 1px solid #d6dce1;
+			-webkit-border-radius: 0 3px 3px 0;
+			-khtml-border-radius: 0 3px 3px 0;
+			-moz-border-radius: 0 3px 3px 0;
+			border-radius: 0 3px 3px 0;
+			z-index: 100;
 		}
+		#sidebar ul.sidebar-lists {margin-top: 40px;}
 		
-		
-		/* ========================================= */
-		@media only screen and (min-width: 480px) and (max-width: 768px) {
+	}
+	
+	
+	/* ========================================= */
+	@media only screen and (min-width: 480px) and (max-width: 768px) {
 
-			#main-description {
-    		top: 23%;
-    		width: 48%;
+		#footer {
+			margin-bottom: 10px;
+			display: block;
+			overflow: hidden;
+		}
+
+		#footer #left {
+			overflow: hidden; 
+			display:block;
+			width: 100%;
+			text-align: center;
+			padding: 2px;
+		}
+
+		#footer #right {
+			overflow: hidden; 
+			display:block;
+			width: 100%;
+			text-align: center;
+			padding: 2px;
+		}
+
+		#main-description {
+			top: 23%;
+			width: 48%;
 		}
 
 		.navbar-fixed-top {
@@ -2438,69 +2475,91 @@
 		.show-comments a.show-comment-btn {margin-left: 25%;}
 		#disqus {width: 250px;}
 		
-	    #post_box_wrap {width: 585px;}
+		#post_box_wrap {width: 585px;}
 		#permalink-container {width: 585px;}
-	    .navigation-post {width: 585px;}
-	    .navigation-post a.older {top: 270px;left: -42px;}
-	    .navigation-post a.newer {top: 270px;right: -42px;}
+		.navigation-post {width: 585px;}
+		.navigation-post a.older {top: 270px;left: -42px;}
+		.navigation-post a.newer {top: 270px;right: -42px;}
 		#permalink-post {width: 275px;}
-	    #permalink-post {
-	        -webkit-border-radius: 3px 0 0 3px;
-		    -khtml-border-radius: 3px 0 0 3px;
-		    -moz-border-radius: 3px 0 0 3px;
-		    border-radius: 3px 0 0 3px;
-	    }
+		#permalink-post {
+			-webkit-border-radius: 3px 0 0 3px;
+			-khtml-border-radius: 3px 0 0 3px;
+			-moz-border-radius: 3px 0 0 3px;
+			border-radius: 3px 0 0 3px;
+		}
 		#permalink-post .viewport {width: 250px; height: 500px; overflow: hidden; position: relative;}
 		.photo-post, .photoset-post, .video-post, 
 		.audio-post, .text-post, .quote-post, 
 		.chat-post, .link-post, .answer-post {width: 250px;}
 		#sidebar-post {margin-top: 70px;width: 290px;}
-	    #sidebar {
-	        position: relative;
-	        margin: 0;
-		    width: 289px;
-		    min-height: 530px;
-		    background: #e8ecef;
-		    border-left: 1px solid #d6dce1;
-		    -webkit-border-radius: 0 3px 3px 0;
-		    -khtml-border-radius: 0 3px 3px 0;
-		    -moz-border-radius: 0 3px 3px 0;
-		    border-radius: 0 3px 3px 0;
-		    z-index: 100;
-	    }
-	    #sidebar ul.sidebar-lists {margin-top: 40px;}
-	    
+		#sidebar {
+			position: relative;
+			margin: 0;
+			width: 289px;
+			min-height: 530px;
+			background: #e8ecef;
+			border-left: 1px solid #d6dce1;
+			-webkit-border-radius: 0 3px 3px 0;
+			-khtml-border-radius: 0 3px 3px 0;
+			-moz-border-radius: 0 3px 3px 0;
+			border-radius: 0 3px 3px 0;
+			z-index: 100;
+		}
+		#sidebar ul.sidebar-lists {margin-top: 40px;}
+		
 		/* jcarousel css style */
 		
-			.jcarousel-skin-tango .jcarousel-container-horizontal{width: 515px;margin-left: 20px;}
-			.jcarousel-skin-tango .jcarousel-clip-horizontal{width: 470px;margin-left: 25px;}
-								
-		}
+		.jcarousel-skin-tango .jcarousel-container-horizontal{width: 515px;margin-left: 20px;}
+		.jcarousel-skin-tango .jcarousel-clip-horizontal{width: 470px;margin-left: 25px;}
+		
+	}
 	
-		/* ========================================= */
-		@media only screen and (max-width: 480px) {
+	/* ========================================= */
+	@media only screen and (max-width: 480px) {
 
-			#main-description {
-				position: absolute;
-				top: 4%;
-				left: 30%;
-				width: 70%;
-			}
+		#footer {
+			margin-bottom: 10px;
+			display: block;
+			overflow: hidden;
+		}
 
-			#main-description h1 {
-				color: white;
-				font-size: 26px;
-			}
+		#footer #left {
+			overflow: hidden; 
+			display:block;
+			width: 100%;
+			text-align: center;
+			padding: 2px;
+		}
 
-			#main-description span {
-				color: #F3F3F5;
-				font-size: 17px;
-				font-weight: lighter;
-			}
+		#footer #right {
+			overflow: hidden; 
+			display:block;
+			width: 100%;
+			text-align: center;
+			padding: 2px;
+		}
 
-			.navbar-fixed-top {
-				margin-bottom: 0px;
-			}
+		#main-description {
+			position: absolute;
+			top: 4%;
+			left: 30%;
+			width: 70%;
+		}
+
+		#main-description h1 {
+			color: white;
+			font-size: 26px;
+		}
+
+		#main-description span {
+			color: #F3F3F5;
+			font-size: 17px;
+			font-weight: lighter;
+		}
+
+		.navbar-fixed-top {
+			margin-bottom: 0px;
+		}
 		
 		#header {width: 320px;}
 		#logo-title {width: 220px;}
@@ -2615,40 +2674,40 @@
 		.show-comments a.show-comment-btn {margin-left: 25%;}
 		#disqus {width: 250px;}
 		
-	    #post_box_wrap {width: 295px;}
+		#post_box_wrap {width: 295px;}
 		#permalink-container {width: 295px;}
-	    .navigation-post {width: 295px;}
-	    .navigation-post a.older {top: 20px;left: 0px;}
-	    .navigation-post a.newer {top: 20px;right: 0px;}
+		.navigation-post {width: 295px;}
+		.navigation-post a.older {top: 20px;left: 0px;}
+		.navigation-post a.newer {top: 20px;right: 0px;}
 		#permalink-post {width: 275px;}
-	    #permalink-post {
-	        -webkit-border-radius: 3px 3px 0 0;
-		    -khtml-border-radius: 3px 3px 0 0;
-		    -moz-border-radius: 3px 3px 0 0;
-		    border-radius: 3px 3px 0 0;
-	    }
+		#permalink-post {
+			-webkit-border-radius: 3px 3px 0 0;
+			-khtml-border-radius: 3px 3px 0 0;
+			-moz-border-radius: 3px 3px 0 0;
+			border-radius: 3px 3px 0 0;
+		}
 		#permalink-post .viewport {width: 250px; height: 500px; overflow: hidden; position: relative;}
 		.photo-post, .photoset-post, .video-post, 
 		.audio-post, .text-post, .quote-post, 
 		.chat-post, .link-post, .answer-post {width: 250px;}
 		#sidebar-post {margin-top: 0px;width: 295px;}
-	    #sidebar {
-	        position: relative;
-	        margin: 0;
-		    width: 295px;
-		    height: auto;
-		    background: #e8ecef;
-		    border-left: 0px solid #d6dce1;
-		    -webkit-border-radius: 0 0 3px 3px;
-		    -khtml-border-radius: 0 0 3px 3px;
-		    -moz-border-radius: 0 0 3px 3px;
-		    border-radius: 0 0 3px 3px;
-		    z-index: 100;
-	    }
-	    #sidebar ul.sidebar-lists {margin-top: 20px;}
-	    
-	    /* jcarousel css style */
-	    
-	    	.jcarousel-skin-tango .jcarousel-container-horizontal{width: 230px;margin-left: 30px;}
-	    	.jcarousel-skin-tango .jcarousel-clip-horizontal{width: 230px;}
+		#sidebar {
+			position: relative;
+			margin: 0;
+			width: 295px;
+			height: auto;
+			background: #e8ecef;
+			border-left: 0px solid #d6dce1;
+			-webkit-border-radius: 0 0 3px 3px;
+			-khtml-border-radius: 0 0 3px 3px;
+			-moz-border-radius: 0 0 3px 3px;
+			border-radius: 0 0 3px 3px;
+			z-index: 100;
+		}
+		#sidebar ul.sidebar-lists {margin-top: 20px;}
+		
+		/* jcarousel css style */
+		
+		.jcarousel-skin-tango .jcarousel-container-horizontal{width: 230px;margin-left: 30px;}
+		.jcarousel-skin-tango .jcarousel-clip-horizontal{width: 230px;}
 
