@@ -8,7 +8,8 @@
 
         res.render('start', {
             user: req.session.uid,
-            beta_notification: ''
+            beta_notification: '',
+            auth_notification: (req.session.auth_notification == undefined) ? '' : req.session.auth_notification
         });
         
     } else {
@@ -38,9 +39,11 @@ exports.auth = function(req, res) {
                 
                 res.redirect( backUrl );
             } else {
+                req.session.auth_notification = 'Wrong username or password.';
                 res.redirect('/start');
             }
         } else {
+            req.session.auth_notification = 'Wrong username or password.';
             res.redirect('/');
         }
     } );
@@ -67,7 +70,8 @@ exports.request_beta = function(req, res) {
 
             res.render('start', {
                 user: req.session.uid,
-                beta_notification: 'Thanks for your insterest. You will be notified soon.'
+                beta_notification: 'Thanks for your insterest. You will be notified soon.',
+                auth_notification: ''
             });
         });
     }

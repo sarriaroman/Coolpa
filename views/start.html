@@ -33,6 +33,9 @@
                             <div class="timeline-pointer-pp"><span class="tl-pointer"></span></div>
                             <div class="timeline-content">
                                 <p class="description">
+                                    <% if( auth_notification != '' ) { %>
+                                    <p><%=auth_notification%></p>
+                                    <% } %>
                                     <input type="text" id="username" name="username" placeholder="Username" value="" style="width: 95%" /><br/>
                                     <input type="password" id="password" name="password" placeholder="Password" value="" style="width: 95%" /><br/>
                                 </p>
