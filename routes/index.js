@@ -53,7 +53,7 @@ exports.request_beta = function(req, res) {
 
     if( re.test( req.body.email ) ) {
         Beta.add({
-            email: email
+            email: req.body.email
         }, function(err) {
             res.render('start', {
                 user: req.session.uid,
