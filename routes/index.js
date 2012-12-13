@@ -61,7 +61,7 @@ exports.request_beta = function(req, res) {
                 to: ['rsarria@speryans.com'],
                 subject: 'New beta request',
                 body: {
-                    text: 'New beta request from: ' + req.body.email
+                    html: 'New beta request from: ' + req.body.email
                 }
             });
 
