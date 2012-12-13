@@ -143,7 +143,7 @@ p {font-weight: normal;}
 	#nav-menu ul.menu-top-list li.menu:active:first-child {
 		background: url('http://static.tumblr.com/bygdzhm/QKklyne0b/btn-menu-bgfirst.png') no-repeat left bottom;
 	}
-	
+
 	#nav-menu ul.menu-top-list li.menu:last-child {
 		width: ;
 		height: 32px;
@@ -155,7 +155,7 @@ p {font-weight: normal;}
 	#nav-menu ul.menu-top-list li.menu:active:last-child {
 		background: url('http://static.tumblr.com/bygdzhm/4Wnlyne29/btn-menu-bglast.png') no-repeat right bottom;
 	}
-	
+
 	#nav-menu ul.menu-top-list li.menu:hover {
 		background: url('http://static.tumblr.com/bygdzhm/jyxlyndzd/btn-menu-bg.jpg') repeat-x left center;
 	}
@@ -490,7 +490,7 @@ p {font-weight: normal;}
 		padding: 0px;
 	}
 	
-	
+
 	/*========== FACEBOOK PAGES ==========*/
 	.facebook_like {
 		overflow: hidden;
@@ -595,8 +595,8 @@ p {font-weight: normal;}
 		margin-left: 5px;
 		float: left;
 	}
-	
-	
+
+
 	/*========== TAG CLOUD ==========*/
 	#taglist {
 		overflow: hidden;
@@ -840,6 +840,14 @@ p {font-weight: normal;}
 		float: left;
 	}
 
+	.timeline-icon-pp a.icon-photo {
+		width: 46px;
+		height: 46px;
+		margin: 0;
+		background: url('/images/icon-photo.png') no-repeat center center;
+		float: left;
+	}
+
 	.timeline-icon a.icon-photo {
 		width: 46px;
 		height: 46px;
@@ -914,6 +922,15 @@ p {font-weight: normal;}
 		background: url('http://static.tumblr.com/bygdzhm/Tdglylgvc/icon-link.png') no-repeat center center;
 		float: left;
 	}
+
+	.timeline-icon-pp a.icon-answer {
+		width: 46px;
+		height: 46px;
+		margin: 0;
+		background: url('/images/icon-answer.png') no-repeat center center;
+		float: left;
+	}
+
 	.timeline-icon a.icon-answer {
 		width: 46px;
 		height: 46px;
@@ -1931,7 +1948,7 @@ p {font-weight: normal;}
 		-moz-border-radius: 3px;
 		border-radius: 3px;
 		z-index: 2;
-		
+
 	}
 	
 	#permalink-container{
@@ -2188,12 +2205,12 @@ p {font-weight: normal;}
 		margin-top: 20px !important;
 		line-height: 50px;
 	}
-	
+
 	
 	/* =============================================== 
 	Media Queries
 	================================================== */
-	
+
 	@media only screen and (min-width: 768px) {
 		
 		#main-description {
@@ -2336,8 +2353,8 @@ p {font-weight: normal;}
 		#sidebar ul.sidebar-lists {margin-top: 40px;}
 		
 	}
-	
-	
+
+
 	/* ========================================= */
 	@media only screen and (min-width: 480px) and (max-width: 768px) {
 
@@ -2506,12 +2523,12 @@ p {font-weight: normal;}
 			z-index: 100;
 		}
 		#sidebar ul.sidebar-lists {margin-top: 40px;}
-		
+
 		/* jcarousel css style */
 		
 		.jcarousel-skin-tango .jcarousel-container-horizontal{width: 515px;margin-left: 20px;}
 		.jcarousel-skin-tango .jcarousel-clip-horizontal{width: 470px;margin-left: 25px;}
-		
+
 	}
 	
 	/* ========================================= */
@@ -2705,9 +2722,9 @@ p {font-weight: normal;}
 			z-index: 100;
 		}
 		#sidebar ul.sidebar-lists {margin-top: 20px;}
-		
+
 		/* jcarousel css style */
-		
+
 		.jcarousel-skin-tango .jcarousel-container-horizontal{width: 230px;margin-left: 30px;}
 		.jcarousel-skin-tango .jcarousel-clip-horizontal{width: 230px;}
 
