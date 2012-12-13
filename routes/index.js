@@ -181,6 +181,7 @@ var message_factory = function(req, res, information, callback) {
                     users.user(uid, function(err, data){
                         if( data != undefined ) {
                             // Mail Notifications
+                            if( data.notifications.mentions == 1 ) {
                             ses.get().send({
                                 from: 'Coolpa.net <info@coolpa.net>',
                                 to: [data.email],
@@ -193,6 +194,7 @@ var message_factory = function(req, res, information, callback) {
                                 }
                             });
                             console.log('Email sent to ' + data._id);
+                            }
                             
                             // Push notifications
 
@@ -235,7 +237,7 @@ var message_factory = function(req, res, information, callback) {
                 
                     users.user(uid, function(err, data){
                         if( data != undefined ) {
-
+                            if( data.notifications.privates == 1 ) {
                             ses.get().send({
                                 from: 'Coolpa.net <info@coolpa.net>',
                                 to: [data.email],
@@ -247,6 +249,7 @@ var message_factory = function(req, res, information, callback) {
                                     })
                                 }
                             });
+                            }
                     
                             // Push notifications
 
