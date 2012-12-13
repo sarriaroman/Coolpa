@@ -27,6 +27,12 @@ exports.about = function(req, res) {
     });
 };
 
+exports.terms = function(req, res) {
+    res.render('terms', {
+        user: req.session.uid
+    });
+};
+
 exports.auth = function(req, res) {
     var Users = require('../models/users');
     
