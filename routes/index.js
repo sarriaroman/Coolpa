@@ -1237,21 +1237,24 @@ exports.search = function(req, res) {
                 users.search( search, function( err, userssearch ) {
                     messages.count(username, [], function(err, cnt) {
                         users.connections( username, function(err, conns) {
-                            res.render('search', {
-                                user: req.session.uid,
-                                search: search,
-                                username: '',
-                                users: userssearch,
-                                messages: docs,
-                                count: cnt,
-                                connections: data.connections.length,
-                                connecteds: conns.length
-                            }); 
+                            users.user( req.session.uid, function(err, sdata) {
+                                res.render('search', {
+                                    user: req.session.uid,
+                                    user_data: sdata,
+                                    search: search,
+                                    username: '',
+                                    users: userssearch,
+                                    messages: docs,
+                                    count: cnt,
+                                    connections: data.connections.length,
+                                    connecteds: conns.length
+                                }); 
+                            });
                         }); 
                     } ); 
                 });
             });
-        } );
+} );
     }
 };
 
