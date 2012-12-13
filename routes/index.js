@@ -840,7 +840,12 @@ exports.user_data = function(req, res) {
             users.update( req.session.uid, {
                 name: req.body.name,
                 description: req.body.description.substring(0, 139),
-                password: users.hashPass( req.body.password )
+                password: users.hashPass( req.body.password ),
+                notifications: {
+                    mentions: (req.body.mentions) ? 1 : 0,
+                    privates: (req.body.privates) ? 1 : 0,
+                    readers: 1
+                }
             }, function() {
 
                 req.session.notification = {
