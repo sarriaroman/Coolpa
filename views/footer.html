@@ -51,7 +51,8 @@ $(document).ready(function() {
                 } 
                 if( $('#author').val() != -1 && text.length == 0 ) {
                     $('#author').val('');
-                } 
+                    $('#original_id').val('');
+                }
             },
             exceededFunction: function( exceeded ) {
                 if( exceeded ) {
