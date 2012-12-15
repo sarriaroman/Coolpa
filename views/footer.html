@@ -49,6 +49,9 @@ $(document).ready(function() {
                 if( $('#reply_to').val() != -1 && text.length == 0 ) {
                     $('#reply_to').val('-1');
                 } 
+                if( $('#author').val() != -1 && text.length == 0 ) {
+                    $('#author').val('');
+                } 
             },
             exceededFunction: function( exceeded ) {
                 if( exceeded ) {
