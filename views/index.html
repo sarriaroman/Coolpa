@@ -119,7 +119,7 @@
                                             <div class="data_mark">
                                                 <time class="timeago read_more" datetime="<%=data.creationDate.toISOString()%>"></time>
                                                 <span class="read_more"> from <%=data.from%></span>
-                                                <% if( data.author != '' ) { %>
+                                                <% if( data.author != '' && data.author != null && data.author != undefined ) { %>
                                                 <br/><span class="read_more">Created by <%=data.author%></span>
                                                 <% } %>
                                             </div>
