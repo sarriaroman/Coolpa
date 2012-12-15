@@ -24,13 +24,16 @@
                         <%- data.message.parseURL().parseUsername().parseSearches() %>
                     </p>
                     <span class="post-divider"></span>
-                    <div style="float:left; max-width: 30%;">
+                    <div class="data_mark">
                         <time class="timeago read_more" datetime="<%=data.creationDate.toISOString()%>"></time>
                         <span class="read_more"> from <%=data.from%></span>
+                        <% if( data.author != '' ) { %>
+                        <br/><span class="read_more">Created by <%=data.author%></span>
+                        <& } %>
                     </div>
-                    <div style="float:right;">
+                    <div class="data_buttons">
                         <button class="btn" onclick="$('#message').val('<%=data.message%> ');$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();$('#author').val('<%=data.sender%>');"><i class="icon-repeat"></i></button>
-                        
+
                         <% if( data.sender != user ) { %>
                             <button class="btn" onclick="$('#message').val(':<%=data.sender%> ');$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();$('#reply_to').val('<%=data._id%>');"><i class="icon-share-alt"></i></button>
                             <% if( data.ids.length > 1 ) { %>

@@ -631,7 +631,15 @@ p {font-weight: normal;}
 		-moz-border-radius: 5px;
 		border-radius: 5px;
 	}
+
+	.bodytext .data_mark {
+		float:left; 
+		max-width: 60%;
+	}
 	
+	.bodytext .data_buttons {
+		float:right;
+	}
 	
 	/*========== POST QUOTE ==========*/
 	.quoteline {
@@ -919,6 +927,15 @@ p {font-weight: normal;}
 		.navbar-fixed-top {
 			margin-bottom: 0px;
 		}
+
+		.bodytext .data_mark {
+			float:left; 
+			max-width: 30%;
+		}
+	
+		.bodytext .data_buttons {
+			float:right;
+		}
 		
 		#header {width: 620px;}
 		#logo-title {width: 300px;}
@@ -1107,6 +1124,18 @@ p {font-weight: normal;}
 
 		.navbar-fixed-top {
 			margin-bottom: 0px;
+		}
+
+		.bodytext .data_mark {
+			overflow: hidden; 
+			display:block;
+			width: 100%;
+		}
+	
+		.bodytext .data_buttons {
+			overflow: hidden; 
+			display:block;
+			width: 100%;
 		}
 		
 		#header {width: 320px;}
