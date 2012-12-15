@@ -29,7 +29,7 @@
                         <span class="read_more"> from <%=data.from%></span>
                         <% if( data.author != '' ) { %>
                         <br/><span class="read_more">Created by <%=data.author%></span>
-                        <& } %>
+                        <% } %>
                     </div>
                     <div class="data_buttons">
                         <button class="btn" onclick="$('#message').val('<%=data.message%> ');$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();$('#author').val('<%=data.sender%>');"><i class="icon-repeat"></i></button>
