@@ -1105,6 +1105,11 @@ exports.invitation = function(req, res) {
                                 description: '',
                                 name: bdata.name,
                                 email: bdata.email,
+                                notifications : { mentions: 1, privates: 1, readers: 1 },
+                                mobile: {
+                                    sessions: [],
+                                    devices: []
+                                }
                                 invites: 2,
                                 password: users.hashPass( bdata.password )
                             }, bdata, function( dt, rdt ) {
