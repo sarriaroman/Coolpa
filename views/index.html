@@ -121,7 +121,7 @@
                                                 <time class="timeago read_more" datetime="<%=data.creationDate.toISOString()%>"></time>
                                                 <span class="read_more"> from <%=data.from%></span>
                                                 <% if( data.author != '' && data.author != null && data.author != undefined ) { %>
-                                                <br/><span class="read_more">Created by <%=data.author%></span>
+                                                <br/><span class="read_more">Created by <a href="/users/<%=data.author%>"><%=data.author%></a></span>
                                                 <% } %>
                                             </div>
                                             <div class="data_buttons">
