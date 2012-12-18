@@ -52,7 +52,7 @@ String.prototype.parseUsername = function() {
         if( username.length >= 3 ) {
         	return u.link("http://coolpa.net/users/"+username);
         } else {
-        	return ":" + username;
+        	return u;
         }
     });
 };
