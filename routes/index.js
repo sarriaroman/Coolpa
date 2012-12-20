@@ -415,6 +415,30 @@ exports.connect = function(req, res) {
     });
 };
 
+exports.favorite = function(req, res) {
+    if( req.session.uid == undefined ) {
+        res.json({result: false});
+    } else {
+        var users = new (require('../models/users'))();
+        
+        users.addFavorite(req.session.uid, req.body.mid, function(err) {
+            res.json({result: true});
+        }); 
+    }
+};
+
+exports.unfavorite = function(req, res) {
+    if( req.session.uid == undefined ) {
+        res.json({result: false});
+    } else {
+        var users = new (require('../models/users'))();
+        
+        users.removeFavorite(req.session.uid, req.body.mid, function(err) {
+            res.json({result: true});
+        }); 
+    }
+};
+
 exports.disconnect = function(req, res) {
     security( req, res );
     var users = new (require('../models/users'))();
@@ -559,14 +583,15 @@ exports.start = function(req, res) {
 
                     res.render('index', {
                         user: req.session.uid,
+                        user_data: data,
                         username: '',
-                            messages: docs, // Reversing array
-                            count: cnt,
-                            connections: data.connections.length,
-                            connecteds: conns.length,
-                            autocomplete: autocomplete,
-                            section: 'start'
-                        }); 
+                        messages: docs, // Reversing array
+                        count: cnt,
+                        connections: data.connections.length,
+                        connecteds: conns.length,
+                        autocomplete: autocomplete,
+                        section: 'start'
+                    }); 
                     }); 
                 } );
             });
@@ -643,11 +668,14 @@ exports.more = function(req, res) {
 
     if( req.body.section == 'mentions' ) {
         users.user( uid, function(err, data) {
-            messages.mentions( uid, new Date( date ), function(err, docs) {
-                res.render('more', {
-                    user: req.session.uid,
-                    messages: docs
-                }); 
+            users.user( req.session.uid, function(err, udata) {
+                messages.mentions( uid, new Date( date ), function(err, docs) {
+                    res.render('more', {
+                        user: req.session.uid,,
+                        user_data: udata,
+                        messages: docs
+                    }); 
+                });
             });
         } );    
     } else if( req.body.section == 'privates' ) {
@@ -661,11 +689,14 @@ exports.more = function(req, res) {
         } );
     } else {
         users.user( uid, function(err, data) {
-            messages.find( uid, data.connections.slice(0), new Date( date ), function(err, docs) {
-                res.render('more', {
-                    user: req.session.uid,
-                    messages: docs
-                }); 
+            users.user( req.session.uid, function(err, udata) {
+                messages.find( uid, data.connections.slice(0), new Date( date ), function(err, docs) {
+                    res.render('more', {
+                        user: req.session.uid,
+                        user_data: udata,
+                        messages: docs
+                    }); 
+                });
             });
         } );
     }
@@ -742,6 +773,7 @@ exports.mentions = function(req, res) {
                     
                     res.render('index', {
                         user: req.session.uid,
+                        user_data: data,
                         username: '',
                             messages: docs, // Reversing array
                             count: cnt,
@@ -1114,6 +1146,7 @@ exports.invitation = function(req, res) {
                                     sessions: [],
                                     devices: []
                                 },
+                                favorites: [],
                                 invites: 2,
                                 password: users.hashPass( bdata.password )
                             }, bdata, function( dt, rdt ) {

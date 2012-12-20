@@ -63,6 +63,14 @@ var users = (function( ) {
         });
     };
 
+    users.prototype.addFavorite = function(current, mid, callback) {
+        this.database.connection().collection('Users').updateById(current, { $addToSet: { "favorites": mid } }, callback);
+    };
+
+    users.prototype.removeFavorite = function(current, mid, callback) {
+        this.database.connection().collection('Users').updateById(current, { $pull: { favorites: mid }}, callback);
+    };
+
     users.prototype.create = function(data, rdata, callback) {
         data.createdDate = new Date();
         data.updatedDate = new Date();

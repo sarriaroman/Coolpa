@@ -96,6 +96,8 @@ app.post('/user_data', routes.user_data);
 app.post('/invite', routes.invite);
 app.post('/invitation', routes.invitation_data);
 app.post('/search', routes.search);
+app.post('/favorite', routes.favorite);
+app.post('/unfavorite', routes.unfavorite);
 
 // API's
 app.post('/api/login', routes.mobile_auth);

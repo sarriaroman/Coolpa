@@ -71,6 +71,25 @@ $(document).ready(function() {
 
     $('.timeago').timeago();
 });
+
+function favorite(mid) {
+    location.href=;
+    if( $('#fav_' + mid + ' i').attr('class') == 'icon-star-empty' ) {
+        $.post('/favorite/', {
+            mid: mid
+        }, function(data) {
+            $('#fav_' + mid + ' i').removeClass('icon-star-empty');
+            $('#fav_' + mid + ' i').addClass('icon-star');
+        }, 'json');
+    } else {
+        $.post('/unfavorite/', {
+            mid: mid
+        }, function(data) {
+            $('#fav_' + mid + ' i').removeClass('icon-star');
+            $('#fav_' + mid + ' i').addClass('icon-star-empty');
+        }, 'json');
+    }
+}
 </script>
 
 <style>
