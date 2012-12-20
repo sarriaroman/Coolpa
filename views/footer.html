@@ -73,7 +73,6 @@ $(document).ready(function() {
 });
 
 function favorite(mid) {
-    location.href=;
     if( $('#fav_' + mid + ' i').attr('class') == 'icon-star-empty' ) {
         $.post('/favorite/', {
             mid: mid
