@@ -146,7 +146,7 @@
                                                 <% } %>
                                                 <button class="btn"><a href="/message/<%= data._id %>" target="_BLANK"><i class="icon-globe"></i></a></button>
                                                 <button class="btn" onclick="javascript:favorite('<%=data._id%>');" id="fav_<%=data._id%>"><% if( user_data.favorites.indexOf(data._id) == -1 ) { %><i class="icon-star-empty"></i><% } else { %><i class="icon-star"></i><% } %></button>
-                                                
+                                                <% console.log( user_data.favorites.indexOf(data._id) ); %>
                                             </div>
                                         </div>
                                     </div>
