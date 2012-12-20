@@ -50,7 +50,11 @@ var messages = (function( ) {
     };
     
     messages.prototype.messagesIn = function( uid, messages_in, callback ) {
-        return this.database.connection().collection('Messages').findItems({ _id: { $all: messages_in }, public: true },{sort: { creationDate: -1 } }, callback);
+        var arr_c = [];
+        for( var i = 0 ; i < messages_in.length ; i++ ) {
+            arr_c.push( this.database.getObjectID( messages_in[i] ) );
+        }
+        return this.database.connection().collection('Messages').findItems({ _id: { $in: arr_c }, public: true },{sort: { creationDate: -1 } }, callback);
     };
 
     messages.prototype.count = function( uid, connections, callback ) {
