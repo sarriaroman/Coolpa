@@ -50,9 +50,7 @@ var messages = (function( ) {
     };
     
     messages.prototype.messagesIn = function( uid, messages_in, callback ) {
-        connections.push( uid );
-        
-        return this.database.connection().collection('Messages').findItems({_id: { $in: messages_in }, public: true },{sort: { creationDate: -1 } }, callback);
+        return this.database.connection().collection('Messages').findItems({ _id: { $in: messages_in }, public: true },{sort: { creationDate: -1 } }, callback);
     };
 
     messages.prototype.count = function( uid, connections, callback ) {
