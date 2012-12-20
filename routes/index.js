@@ -178,7 +178,7 @@ var message_factory = function(req, res, information, callback) {
 
                 var gcm_message = {
                     collapse_key: 'New Mentions', 
-                    'data.title': 'You have new mentions on Coolpa',
+                    'data.title': ':' + msg.sender + ' is talking about you on Coolpa',
                     'data.message': msg.message
                 };
 
@@ -235,7 +235,7 @@ var message_factory = function(req, res, information, callback) {
 
                 var gcm_message = {
                     collapse_key: 'New Privates', 
-                    'data.title': 'You have new private messages on Coolpa',
+                    'data.title': ':' + msg.sender + ' sent you a new private message on Coolpa',
                     'data.message': msg.message
                 };
 
