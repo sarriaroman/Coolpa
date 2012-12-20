@@ -420,9 +420,7 @@ exports.favorites = function(req, res) {
     var users = new (require('../models/users'))();
 
     users.user( req.session.uid, function(err, data) {
-        console.log(data);
         messages.messagesIn( req.session.uid, data.favorites, function(err, docs) {
-            console.log(docs);
             users.connections( req.session.uid, function(err, conns) {
                 res.render('index', {
                     user: req.session.uid,

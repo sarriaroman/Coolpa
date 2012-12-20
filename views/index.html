@@ -121,6 +121,7 @@
                                                 <% } %>
                                             </div>
                                             <div class="data_buttons">
+                                                <% if( section != 'favorites' ) { %>
                                                 <button class="btn" onclick="$('#message').val('<%=data.message%> ');$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();$('#author').val('<%=data.sender%>');$('#original_id').val('<%=data._id%>');"><i class="icon-repeat"></i></button>
 
                                                 <% if( data.sender != user ) { %>
@@ -132,6 +133,7 @@
                                                         <button class="btn" onclick="$('#message').val((':<%=data.ids.join(" :")%> '));$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();$('#reply_to').val('<%=data._id%>');"><i class="icon-share-alt"> </i><i class="icon-share-alt"> </i></button>
                                                     <% } %>
                                                     <% } %>
+                                                <% } %>
                                                 <% } %>
                                                 <% if( data.sender == user ) { %>
                                                 <button class="btn" onclick="location.href='/remove/<%=data._id%>';"><i class="icon-remove"></i></button>
