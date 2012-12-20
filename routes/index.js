@@ -422,7 +422,7 @@ exports.favorites = function(req, res) {
     users.user( req.session.uid, function(err, data) {
         messages.messagesIn( req.session.uid, data.favorites, function(err, docs) {
             users.connections( req.session.uid, function(err, conns) {
-
+                console.log(data);
                 res.render('index', {
                     user: req.session.uid,
                     user_data: data,
