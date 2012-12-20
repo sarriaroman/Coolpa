@@ -45,7 +45,7 @@
                             <% } %>
                         <% } %>
                         <% if( data.sender == user ) { %>
-                        <button class="btn" onclick="location.href='/remove/<%=data._id%>';"><i class="icon-remove"></i></button>
+                        <button class="btn"  rel="tooltip" title="Delete message" onclick="location.href='/remove/<%=data._id%>';"><i class="icon-remove"></i></button>
 
                         <% if( data.hidden == false ) { %>
                         <button class="btn" rel="tooltip" title="Hide message" onclick="location.href='/hide/<%=data._id%>';"><i class="icon-eye-close"></i></button>
