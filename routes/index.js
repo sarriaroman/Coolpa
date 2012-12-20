@@ -671,7 +671,7 @@ exports.more = function(req, res) {
             users.user( req.session.uid, function(err, udata) {
                 messages.mentions( uid, new Date( date ), function(err, docs) {
                     res.render('more', {
-                        user: req.session.uid,,
+                        user: req.session.uid,
                         user_data: udata,
                         messages: docs
                     }); 
