@@ -431,7 +431,7 @@ exports.favorites = function(req, res) {
                     messages: docs,
                     connections: data.connections.length,
                     connecteds: conns.length,
-                    autocomplete: '',
+                    autocomplete: '' ,
                     section: 'favorites'
                 }); 
             }); 
