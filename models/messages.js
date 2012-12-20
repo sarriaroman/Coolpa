@@ -51,8 +51,8 @@ var messages = (function( ) {
     
     messages.prototype.messagesIn = function( uid, messages_in, callback ) {
         var arr_c = [];
-        for( var msg in messages_in ) {
-            arr_c.push( this.database.getObjectID( msg ) );
+        for( var indx in messages_in ) {
+            arr_c.push( this.database.getObjectID( messages_in[indx] ) );
         }
         return this.database.connection().collection('Messages').findItems({ _id: { $in: arr_c }, public: true },{sort: { creationDate: -1 } }, callback);
     };
