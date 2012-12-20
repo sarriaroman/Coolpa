@@ -116,7 +116,7 @@ http.createServer(app).listen(app.get('port'), function(){
 
 // Exception Handling
 process.on('uncaughtException', function (err) {
-	console.error(err);
+	console.trace(err);
 	var ses = new (require('./classes/ses'))();
 	
 	ses.get().send({
