@@ -77,6 +77,7 @@ app.get('/readers/:username', routes.readers);
 app.get('/message/:id', routes.showmessage);
 app.get('/profile', routes.profile);
 app.get('/signout', routes.signout);
+app.get('/favorites', routes.favorites);
 app.get('/users/:username', routes.user);
 app.get('/connect/:username', routes.connect);
 app.get('/disconnect/:username', routes.disconnect);

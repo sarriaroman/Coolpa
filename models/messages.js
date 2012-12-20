@@ -49,6 +49,12 @@ var messages = (function( ) {
         return this.database.connection().collection('Messages').findOne({_id: this.database.getObjectID(_id)}, callback);
     };
     
+    messages.prototype.messagesIn = function( uid, messages_in, callback ) {
+        connections.push( uid );
+        
+        return this.database.connection().collection('Messages').findItems({_id: { $in: messages_in }, public: true },{sort: { creationDate: -1 } }, callback);
+    };
+
     messages.prototype.count = function( uid, connections, callback ) {
         connections.push( uid );
         

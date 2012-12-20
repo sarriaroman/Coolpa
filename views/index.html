@@ -27,6 +27,7 @@
                 </a>
             </div>
 
+            <% if( section != 'favorites' ) { %>
             <form method="POST" action="/message" id="message_sender">
                 <div id="profile-description">
                     <div class="timeline-preview">
@@ -63,31 +64,26 @@
                     </div>
                 </div>
             </div>
-
-
-                    <!--<div class="post">
-                        <div class="timeline-preview">
-                            <div class="timeline-icon"><span class="icon-taggedpost"></span></div>
-                            <div class="timeline-pointer"><span class="tl-pointer"></span></div>
-                            <div class="timeline-content-page">
-                                <div class="textpost">
-                                    <h2 class="post-page-title">Posts tagged with <strong><a href="{TagURL}">{Tag}</a></strong></h2>
-                                </div>
+            <% } else { %>
+            <div id="profile-description">
+                <div class="timeline-preview">
+                    <div class="timeline-icon-pp"><a href="/" class="icon-profile"></a></div>
+                    <div class="timeline-pointer-pp"><span class="tl-pointer"></span></div>
+                    <div class="timeline-content">
+                        <p class="description">
+                            <div class="textpost">
+                                Favorites: <%=user_data.favorites.length%>
                             </div>
+                        </p>
+                    </div>
+                    <div class="timeline-bar">
+                        <div>
+                            <a class="btn" href="/">Go to home</a>
                         </div>
                     </div>
-                    
-                    <div class="post">
-                        <div class="timeline-preview">
-                            <div class="timeline-icon"><span class="icon-datepost"></span></div>
-                            <div class="timeline-pointer"><span class="tl-pointer"></span></div>
-                            <div class="timeline-content-page">
-                                <div class="textpost">
-                                    <h2 class="post-page-title">Posts for <strong>{DayOfWeek}, {DayOfMonth} {Month} {Year}</strong></h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>-->
+                </div>
+            </div>
+            <% } %>
 
                     <div id="messages">
                         <% messages.forEach(function(data){ %>
@@ -175,14 +171,14 @@
                         <% } %>
                         <% } %>
                     </div>
-                </div> <!-- End .timeline-preview -->
-            </div> <!-- End .post -->               
+                </div> 
+            </div> 
 
-        </div><!-- End #blogpost -->
+        </div>
 
-    </div><!-- End #timeline -->
+    </div>
 
-</div><!-- End #content -->
+</div>
 </section>
 
 <script>

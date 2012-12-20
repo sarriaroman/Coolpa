@@ -415,6 +415,32 @@ exports.connect = function(req, res) {
     });
 };
 
+exports.favorites = function(req, res) {
+    var messages = new (require('../models/messages'))();
+        var users = new (require('../models/users'))();
+        
+        users.user( req.session.uid, function(err, data) {
+            messages.messagesIn( req.session.uid, data.favorites, function(err, docs) {
+                messages.count(req.session.uid, [], function(err, cnt) {
+                    users.connections( req.session.uid, function(err, conns) {
+
+                        res.render('index', {
+                            user: req.session.uid,
+                            user_data: data,
+                            username: '',
+                            messages: docs,
+                            count: cnt,
+                            connections: data.connections.length,
+                            connecteds: conns.length,
+                            autocomplete: autocomplete,
+                            section: 'favorites'
+                        }); 
+                    }); 
+                } );
+            });
+        } );
+};
+
 exports.favorite = function(req, res) {
     if( req.session.uid == undefined ) {
         res.json({result: false});
