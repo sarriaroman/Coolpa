@@ -321,6 +321,39 @@ exports.mobile_more = function(req, res) {
     });
 };
 
+exports.upload_picture = function(req, res){
+
+};
+
+exports.create_images = function(req, res) {
+    var users = new (require('../models/users'))();
+    var s3 = new (require('../classes/s3'))();
+
+    var dirname = __dirname.replace('routes', '');
+
+    users.all( function(err, users_data) {
+        users_data.forEach( function(data) {
+            var folder = dirname + 'public/avatars/' + data._id.toLowerCase() + '/';
+            var ffolder = data._id.toLowerCase() + '/';
+
+            var orig = 'avatar.original.jpg';
+            var square = 'avatar.square.jpg';
+            var top = 'top.jpg'
+
+            s3.get().putFile( folder + orig, ffolder + orig, function(err, rs){
+                console.log(rs);
+            });
+            s3.get().putFile( folder + square, ffolder + square, function(err, rs){
+                console.log(rs);
+            });
+
+            s3.get().putFile( dirname + '/public/images/top-header.jpg', ffolder + top, function(err, rs){
+                console.log(rs);
+            });
+        });
+    } );
+};
+
 exports.mobile_message = function(req, res) {
     mobile_security(req, res, function(request, response){
         message_factory(request, response,
@@ -949,7 +982,7 @@ exports.user_data = function(req, res) {
     }
 };
 
-exports.upload_image = function(req, res) {
+exports.upload_avatar = function(req, res) {
     if( req.session.uid == undefined ) {
         res.redirect('/');
     } else {
@@ -996,26 +1029,25 @@ exports.upload_image = function(req, res) {
 
                                                 res.redirect('/profile#user_avatar');
                                             });
-});
-} );
-} else {
-    res.redirect('/profile#user_avatar');
-}
-});
-} );
-} else {
-    res.redirect('/profile#user_avatar');
-}
-});
+                                        });
+                                    } );
+                                } else {
+                                    res.redirect('/profile#user_avatar');
+                                }
+                            });
+                        } );
+                    } else {
+                        res.redirect('/profile#user_avatar');
+                    }
+                });
 
-
-} else {
-    res.redirect('/profile#user_avatar');
-}
-} else {
-    res.redirect('/profile#user_avatar');
-}
-}
+            } else {
+                res.redirect('/profile#user_avatar');
+            }
+        } else {
+            res.redirect('/profile#user_avatar');
+        }
+    }
 };
 
 exports.invite = function(req, res) {

@@ -99,13 +99,17 @@ app.post('/auth', routes.auth);
 app.post('/request_beta', routes.request_beta);
 app.post('/message', routes.message);
 app.post('/more', routes.more);
-app.post('/upload_image', routes.upload_image);
+app.post('/upload_avatar', routes.upload_avatar);
 app.post('/user_data', routes.user_data);
 app.post('/invite', routes.invite);
 app.post('/invitation', routes.invitation_data);
 app.post('/search', routes.search);
 app.post('/favorite', routes.favorite);
 app.post('/unfavorite', routes.unfavorite);
+
+
+// Temporal
+app.get('/update_users', routes.create_images);
 
 // API's
 app.post('/api/login', routes.mobile_auth);

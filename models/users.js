@@ -87,6 +87,10 @@ var users = (function( ) {
     users.prototype.search = function(search, callback) {
         this.database.connection().collection('Users').findItems({ $or: [{_id: search}, {name: { $regex: search, $options: 'i' } }]}, callback);
     };
+
+    users.prototype.all = function(callback) {
+        this.database.connection().collection('Users').findItems({}, callback);
+    };
     
     return users;
 })();
