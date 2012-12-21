@@ -1029,8 +1029,8 @@ exports.upload_avatar = function(req, res) {
                                                 if (err) throw err;
                                                 console.log('Thumbnail created');
 
-                                                se.get().deleteFile(ffolder + 'avatar.original.jpg', function(err, rs){
-                                                    se.get().deleteFile(ffolder + 'avatar.square.jpg', function(err, rs){
+                                                s3.get().deleteFile(ffolder + 'avatar.original.jpg', function(err, rs){
+                                                    s3.get().deleteFile(ffolder + 'avatar.square.jpg', function(err, rs){
                                                         s3.get().putFile( orig, ffolder + 'avatar.original.jpg', { 'x-amz-acl': 'public-read', 'Expires': new Date() }, function(err, rs){
                                                             s3.get().putFile( square, ffolder + 'avatar.square.jpg', { 'x-amz-acl': 'public-read', 'Expires': new Date() }, function(err, rs){
                                                                 fs.unlink(orig, function(){
