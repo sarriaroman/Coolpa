@@ -355,7 +355,15 @@ exports.create_images = function(req, res) {
 };
 
 exports.avatars = function(req, res) {
-    res.redirect('https://coolpa.s3.amazonaws.com/' + req.params.username + '/' + req.params.file);
+    var users = new (require('../models/users'))();
+
+    users.user(req.params.username, function(err, data) {
+        if( req.params.file == 'avatar.original.jpg' ) {
+            res.redirect('https://coolpa.s3.amazonaws.com/' + data._id + '/' + data.images.original );
+        } else {
+            res.redirect('https://coolpa.s3.amazonaws.com/' + data._id + '/' + data.images.original );
+        }
+    });    
 };
 
 exports.mobile_message = function(req, res) {
@@ -995,6 +1003,7 @@ exports.upload_avatar = function(req, res) {
                 var easyimg = require('easyimage');
                 var fs = require('fs');
                 var s3 = new (require('../classes/s3'))();
+                var users = new (require('../models/users'))();
                 
                 var avatar = req.files.avatar;
                 
@@ -1005,7 +1014,11 @@ exports.upload_avatar = function(req, res) {
                 
                 var ffolder = req.session.uid + '/';
 
-                fs.exists(orig, function(oexists) {
+                var final_orig = ffolder + (new Date()).getTime() + '_original.jpg';
+                var final_square = ffolder + (new Date()).getTime() + '_square.jpg';
+
+                users.user(req.session.uid, function(err, data) {
+                    fs.exists(orig, function(oexists) {
                     if( oexists ) {
                         fs.unlink( orig, function() {
                             fs.exists(square, function(sexists) {
@@ -1029,18 +1042,23 @@ exports.upload_avatar = function(req, res) {
                                                 if (err) throw err;
                                                 console.log('Thumbnail created');
 
-                                                s3.get().deleteFile(ffolder + 'avatar.original.jpg', function(err, rs){
-                                                    s3.get().deleteFile(ffolder + 'avatar.square.jpg', function(err, rs){
-                                                        s3.get().putFile( orig, ffolder + 'avatar.original.jpg', { 'x-amz-acl': 'public-read' }, function(err, rs){
-                                                            s3.get().putFile( square, ffolder + 'avatar.square.jpg', { 'x-amz-acl': 'public-read' }, function(err, rs){
+                                                s3.get().deleteFile(data.images.original, function(err, rs){
+                                                    s3.get().deleteFile(data.images.square, function(err, rs){
+                                                        s3.get().putFile( orig, final_orig, { 'x-amz-acl': 'public-read' }, function(err, rs){
+                                                            s3.get().putFile( square, final_square, { 'x-amz-acl': 'public-read' }, function(err, rs){
                                                                 fs.unlink(orig, function(){
                                                                     fs.unlink(square, function(){
-                                                                        req.session.notification = {
+                                                                        users.update( req.session.uid, {
+                                                                            'images.original' : final_orig,
+                                                                            'images.square' : final_square
+                                                                        }, function(err) {
+                                                                            req.session.notification = {
                                                                             type: 'alert-success',
                                                                             message: 'Your avatar was changed succesfully'
                                                                         };
 
                                                                         res.redirect('/profile#user_avatar');
+                                                                        } );
                                                                     });
                                                                 });
                                                             });
@@ -1058,6 +1076,7 @@ exports.upload_avatar = function(req, res) {
                     } else {
                         res.redirect('/profile#user_avatar');
                     }
+                });
                 });
 
             } else {
@@ -1221,6 +1240,11 @@ exports.invitation = function(req, res) {
                                 mobile: {
                                     sessions: [],
                                     devices: []
+                                },
+                                images : { 
+                                    original : bdata.username.toLowerCase() + '/avatar.original.jpg', 
+                                    square : bdata.username.toLowerCase() + '/avatar.square.jpg', 
+                                    top: bdata.username.toLowerCase() + '/top.jpg' 
                                 },
                                 favorites: [],
                                 invites: 2,
