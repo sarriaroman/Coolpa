@@ -1031,8 +1031,8 @@ exports.upload_avatar = function(req, res) {
 
                                                 s3.get().deleteFile(ffolder + 'avatar.original.jpg', function(err, rs){
                                                     s3.get().deleteFile(ffolder + 'avatar.square.jpg', function(err, rs){
-                                                        s3.get().putFile( orig, ffolder + 'avatar.original.jpg', { 'x-amz-acl': 'public-read', 'Expires': new Date() }, function(err, rs){
-                                                            s3.get().putFile( square, ffolder + 'avatar.square.jpg', { 'x-amz-acl': 'public-read', 'Expires': new Date() }, function(err, rs){
+                                                        s3.get().putFile( orig, ffolder + 'avatar.original.jpg', { 'x-amz-acl': 'public-read' }, function(err, rs){
+                                                            s3.get().putFile( square, ffolder + 'avatar.square.jpg', { 'x-amz-acl': 'public-read' }, function(err, rs){
                                                                 fs.unlink(orig, function(){
                                                                     fs.unlink(square, function(){
                                                                         req.session.notification = {
