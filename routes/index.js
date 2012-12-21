@@ -994,6 +994,7 @@ exports.upload_avatar = function(req, res) {
             if( req.files.avatar.length > 0 ) {
                 var easyimg = require('easyimage');
                 var fs = require('fs');
+                var s3 = new (require('../classes/s3'))();
                 
                 var avatar = req.files.avatar;
                 
@@ -1002,6 +1003,8 @@ exports.upload_avatar = function(req, res) {
                 var orig = dirname + 'public/avatars/' + req.session.uid + '/avatar.original.jpg';
                 var square = dirname + '/public/avatars/' + req.session.uid + '/avatar.square.jpg';
                 
+                var ffolder = req.session.uid + '/';
+
                 fs.exists(orig, function(oexists) {
                     if( oexists ) {
                         fs.unlink( orig, function() {
@@ -1025,13 +1028,21 @@ exports.upload_avatar = function(req, res) {
                                             function(err, image) {
                                                 if (err) throw err;
                                                 console.log('Thumbnail created');
-                                                
-                                                req.session.notification = {
-                                                    type: 'alert-success',
-                                                    message: 'Your avatar was changed succesfully'
-                                                };
 
-                                                res.redirect('/profile#user_avatar');
+                                                s3.get().putFile( orig, ffolder + 'avatar.original.jpg', { 'x-amz-acl': 'public-read' }, function(err, rs){
+                                                    s3.get().putFile( square, ffolder + 'avatar.square.jpg', { 'x-amz-acl': 'public-read' }, function(err, rs){
+                                                        fs.unlink(orig, function(){
+                                                            fs.fs.unlink(square, function(){
+                                                                req.session.notification = {
+                                                                    type: 'alert-success',
+                                                                    message: 'Your avatar was changed succesfully'
+                                                                };
+
+                                                                res.redirect('/profile#user_avatar');
+                                                            });
+                                                        });
+                                                    });
+                                                });
                                             });
                                         });
                                     } );
@@ -1146,6 +1157,7 @@ exports.invitation = function(req, res) {
  exports.invitation_data = function(req, res) {
     var users = new (require('../models/users'))();
     var invites = new (require('../models/invitations'))();
+    var s3 = new (require('../classes/s3'))();
 
     var fs = require('fs');
     var ses = new (require('../classes/ses'))();
@@ -1213,73 +1225,72 @@ exports.invitation = function(req, res) {
                                 // Create folders for avatars
                                 var dirname = __dirname.replace('routes', '');
 
-                                var folder = dirname + 'public/avatars/' + rdt.username.toLowerCase() + '/';
-
                                 var orig = folder + 'avatar.original.jpg';
                                 var square = folder + 'avatar.square.jpg';
+                                var top = 'top.jpg'
+                                
+                                var ffolder = rdt.username.toLowerCase() + '/';
 
-                                fs.mkdir(folder, function(err) {
-                                    var inStr = fs.createReadStream(dirname + 'public/avatars/avatar.jpg');
-                                    var origOutStr = fs.createWriteStream(orig);
-                                    var squareOutStr = fs.createWriteStream(square);
+                                s3.get().putFile( dirname + 'public/avatars/avatar.jpg', ffolder + orig, { 'x-amz-acl': 'public-read' }, function(err, rs){
+                                    s3.get().putFile( dirname + 'public/avatars/avatar.jpg', ffolder + square, { 'x-amz-acl': 'public-read' }, function(err, rs){
+                                        s3.get().putFile( dirname + '/public/images/top-header.jpg', ffolder + top, { 'x-amz-acl': 'public-read' }, function(err, rs){
+                                            fs.readFile('views/welcome_template.html', 'UTF-8', function(err, html) {
+                                                ses.get().send({
+                                                    from: 'Coolpa.net <info@coolpa.net>',
+                                                    to: [rdt.email],
+                                                    subject: 'You are succesfully registered on Coolpa.net',
+                                                    body: {
+                                                        html: ejs.render(html, {
+                                                            username: rdt.username.toLowerCase(),
+                                                            password: rdt.password
+                                                        })
+                                                    }
+                                                });
 
-                                    inStr.pipe(origOutStr);
-                                    inStr.pipe(squareOutStr);
+                                                fs.readFile('views/joined_template.html', 'UTF-8', function(err, jhtml) {
+                                                    ses.get().send({
+                                                        from: 'Coolpa.net <info@coolpa.net>',
+                                                        to: [inviter.email],
+                                                        subject: rdt.username.toLowerCase() + ' has joined Coolpa.net',
+                                                        body: {
+                                                            html: ejs.render(jhtml, {
+                                                                username: inviter._id,
+                                                                user: rdt.username.toLowerCase()
+                                                            })
+                                                        }
+                                                    });
+                                                });
 
-                                    fs.readFile('views/welcome_template.html', 'UTF-8', function(err, html) {
-                                        ses.get().send({
-                                            from: 'Coolpa.net <info@coolpa.net>',
-                                            to: [rdt.email],
-                                            subject: 'You are succesfully registered on Coolpa.net',
-                                            body: {
-                                                html: ejs.render(html, {
-                                                    username: rdt.username.toLowerCase(),
-                                                    password: rdt.password
-                                                })
-                                            }
-                                        });
-                                        
-                                        fs.readFile('views/joined_template.html', 'UTF-8', function(err, jhtml) {
-                                            ses.get().send({
-                                                from: 'Coolpa.net <info@coolpa.net>',
-                                                to: [inviter.email],
-                                                subject: rdt.username.toLowerCase() + ' has joined Coolpa.net',
-                                                body: {
-                                                    html: ejs.render(jhtml, {
-                                                        username: inviter._id,
-                                                        user: rdt.username.toLowerCase()
-                                                    })
-                                                }
+                                                req.session.uid = rdt.username.toLowerCase();
+
+                                                res.redirect('/');
+
+                                                invites.remove(bdata.code, function(err, cd) {});
                                             });
                                         });
-
-                                        req.session.uid = rdt.username.toLowerCase();
-
-                                        res.redirect('/');
-
-                                        invites.remove(bdata.code, function(err, cd) {});
                                     });
-});
-});
-});
-} else {
-    var not = {
-        type: 'alert-error',
-        message: 'The username you choose is already taken.'
-    };
+                                });
 
-    res.render('invitation', {
-        user: '',
-        data: cdata,
-        username: bdata.username.toLowerCase(),
-        name: bdata.name,
-        notification: not
-    });
-}
-});
-}
-});
-}
+                            });
+                        });
+                    } else {
+                        var not = {
+                            type: 'alert-error',
+                            message: 'The username you choose is already taken.'
+                        };
+
+                        res.render('invitation', {
+                            user: '',
+                            data: cdata,
+                            username: bdata.username.toLowerCase(),
+                            name: bdata.name,
+                            notification: not
+                        });
+                    }
+                });
+            }
+        });
+    }
 };
 
 exports.showmessage = function(req, res) {
