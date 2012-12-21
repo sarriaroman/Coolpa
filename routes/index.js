@@ -354,6 +354,10 @@ exports.create_images = function(req, res) {
     } );
 };
 
+exports.avatars = function(req, res) {
+    res.redirect('https://coolpa.s3.amazonaws.com/' + req.params.username + '/' + req.params.file);
+};
+
 exports.mobile_message = function(req, res) {
     mobile_security(req, res, function(request, response){
         message_factory(request, response,
