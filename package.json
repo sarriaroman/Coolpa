@@ -10,6 +10,8 @@
     "ejs": "*",
     "mongoskin": "*",
     "amazon-ses": "*",
-    "easyimage": "*"
+    "easyimage": "*",
+    "express-session-mongo": "*",
+    "knox": "*"
   }
 }
