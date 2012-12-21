@@ -340,14 +340,14 @@ exports.create_images = function(req, res) {
             var square = 'avatar.square.jpg';
             var top = 'top.jpg'
 
-            s3.get().putFile( folder + orig, ffolder + orig, function(err, rs){
+            s3.get().putFile( folder + orig, ffolder + orig, { 'x-amz-acl': 'public-read' }, function(err, rs){
                 console.log(rs);
             });
-            s3.get().putFile( folder + square, ffolder + square, function(err, rs){
+            s3.get().putFile( folder + square, ffolder + square, { 'x-amz-acl': 'public-read' }, function(err, rs){
                 console.log(rs);
             });
 
-            s3.get().putFile( dirname + '/public/images/top-header.jpg', ffolder + top, function(err, rs){
+            s3.get().putFile( dirname + '/public/images/top-header.jpg', { 'x-amz-acl': 'public-read' }, ffolder + top, function(err, rs){
                 console.log(rs);
             });
         });
