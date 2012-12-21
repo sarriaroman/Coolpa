@@ -347,7 +347,7 @@ exports.create_images = function(req, res) {
                 console.log(rs);
             });
 
-            s3.get().putFile( dirname + '/public/images/top-header.jpg', { 'x-amz-acl': 'public-read' }, ffolder + top, function(err, rs){
+            s3.get().putFile( dirname + '/public/images/top-header.jpg', ffolder + top, { 'x-amz-acl': 'public-read' }, function(err, rs){
                 console.log(rs);
             });
         });
