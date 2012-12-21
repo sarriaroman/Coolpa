@@ -1029,8 +1029,8 @@ exports.upload_avatar = function(req, res) {
                                                 if (err) throw err;
                                                 console.log('Thumbnail created');
 
-                                                s3.get().putFile( orig, ffolder + 'avatar.original.jpg', { 'x-amz-acl': 'public-read' }, function(err, rs){
-                                                    s3.get().putFile( square, ffolder + 'avatar.square.jpg', { 'x-amz-acl': 'public-read' }, function(err, rs){
+                                                s3.get().putFile( orig, ffolder + 'avatar.original.jpg', { 'x-amz-acl': 'public-read', 'LastModified': new Date() }, function(err, rs){
+                                                    s3.get().putFile( square, ffolder + 'avatar.square.jpg', { 'x-amz-acl': 'public-read', 'LastModified': new Date() }, function(err, rs){
                                                         fs.unlink(orig, function(){
                                                             fs.unlink(square, function(){
                                                                 req.session.notification = {
