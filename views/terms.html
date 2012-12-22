@@ -4,7 +4,11 @@
         <div class="flexslider">
             <ul class="slides"> 
                 <li>
+                    <% if( user == undefined ) { %>
                     <img src="/images/top-header.jpg" alt="" />
+                    <% } else { %>
+                    <img src="/avatars/<%= user %>/top.jpg" alt="" />
+                    <% } %>
                     <div id="main-description">
                         <h1>Welcome to Coolpa!</h1>
                         <span>Find out what's up with your family and friends.</span>
