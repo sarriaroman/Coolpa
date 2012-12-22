@@ -337,19 +337,28 @@ exports.create_images = function(req, res) {
             var ffolder = data._id.toLowerCase() + '/';
 
             var orig = 'avatar.original.jpg';
+            var final_orig = (new Date()).getTime() + '_original.jpg';
             var square = 'avatar.square.jpg';
+            var final_square = (new Date()).getTime() + '_square.jpg';
             var top = 'top.jpg'
+            var final_top = (new Date()).getTime() + '_top.jpg';
 
-            s3.get().putFile( folder + orig, ffolder + orig, { 'x-amz-acl': 'public-read' }, function(err, rs){
+            s3.get().putFile( folder + orig, ffolder + final_orig, { 'x-amz-acl': 'public-read' }, function(err, rs){
                 console.log(rs);
             });
-            s3.get().putFile( folder + square, ffolder + square, { 'x-amz-acl': 'public-read' }, function(err, rs){
+            s3.get().putFile( folder + square, ffolder + final_square, { 'x-amz-acl': 'public-read' }, function(err, rs){
                 console.log(rs);
             });
 
-            s3.get().putFile( dirname + '/public/images/top-header.jpg', ffolder + top, { 'x-amz-acl': 'public-read' }, function(err, rs){
+            s3.get().putFile( dirname + '/public/images/top-header.jpg', ffolder + final_top, { 'x-amz-acl': 'public-read' }, function(err, rs){
                 console.log(rs);
             });
+
+            users.update( data._id, {
+                'images.original' : ffolder + final_orig,
+                'images.square' : ffolder + final_square,
+                'images.top' : ffolder + final_top
+            }, function(err){});
         });
     } );
 };
