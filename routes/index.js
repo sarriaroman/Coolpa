@@ -368,9 +368,9 @@ exports.avatars = function(req, res) {
 
     users.user(req.params.username, function(err, data) {
         if( req.params.file == 'avatar.original.jpg' ) {
-            res.redirect('https://coolpa.s3.amazonaws.com/' + data._id + '/' + data.images.original );
+            res.redirect('https://coolpa.s3.amazonaws.com/' + data.images.original );
         } else {
-            res.redirect('https://coolpa.s3.amazonaws.com/' + data._id + '/' + data.images.original );
+            res.redirect('https://coolpa.s3.amazonaws.com/' + data.images.square );
         }
     });    
 };
