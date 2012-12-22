@@ -1077,7 +1077,7 @@ exports.upload_avatar = function(req, res) {
                                                                         }, function(err) {
                                                                         req.session.notification = {
                                                                             type: 'avatar',
-                                                                            message: 'Your avatar was changed succesfully'
+                                                                            message: 'Your avatar was changed succesfully. If not appear, wait because maybe take a while to be updated.'
                                                                         };
 
                                                                         res.redirect('/profile#user_avatar');
@@ -1147,7 +1147,7 @@ exports.upload_top = function(req, res) {
                                     }, function(err) {
                                         req.session.notification = {
                                             type: 'top',
-                                            message: 'Your top image was changed succesfully'
+                                            message: 'Your top image was changed succesfully. If not appear, wait because maybe take a while to be updated.'
                                         };
 
                                         res.redirect('/profile#user_top');
