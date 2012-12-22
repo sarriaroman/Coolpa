@@ -369,8 +369,10 @@ exports.avatars = function(req, res) {
     users.user(req.params.username, function(err, data) {
         if( req.params.file == 'avatar.original.jpg' ) {
             res.redirect('https://coolpa.s3.amazonaws.com/' + data.images.original );
-        } else {
+        } else if( req.params.file == 'avatar.square.jpg' ) {
             res.redirect('https://coolpa.s3.amazonaws.com/' + data.images.square );
+        } else {
+            res.redirect('https://coolpa.s3.amazonaws.com/' + data.images.top );
         }
     });    
 };
@@ -1095,6 +1097,72 @@ exports.upload_avatar = function(req, res) {
             }
         } else {
             res.redirect('/profile#user_avatar');
+        }
+    }
+};
+
+exports.upload_top = function(req, res) {
+    if( req.session.uid == undefined ) {
+        res.redirect('/');
+    } else {
+        if( req.files.top ) {
+            if( req.files.top.length > 0 ) {
+                var easyimg = require('easyimage');
+                var fs = require('fs');
+                var s3 = new (require('../classes/s3'))();
+                var users = new (require('../models/users'))();
+                
+                var top = req.files.top;
+
+                if( top.size > ( (8 * 100) * 1024 ) ) {
+                    req.session.notification = {
+                        message: 'Your top image is too big.'
+                    };
+
+                    res.redirect('/profile#user_top');
+                } else {
+                    var dirname = __dirname.replace('routes', '');
+                
+                    var orig = dirname + 'public/avatars/' + req.session.uid + '/top.jpg';
+                
+                    var ffolder = req.session.uid + '/';
+
+                    var final_orig = ffolder + (new Date()).getTime() + '_top.jpg';
+
+                    users.user(req.session.uid, function(err, data) {
+
+                    easyimg.convert({
+                        src:top.path, 
+                        dst:orig, 
+                        quality:90
+                    }, function(err, image) {
+                        if (err) throw err;
+                        console.log('Converted');
+
+                        s3.get().deleteFile('/'+data.images.top, function(err, rs){
+                            s3.get().putFile( orig, final_orig, { 'x-amz-acl': 'public-read' }, function(err, rs){
+                                fs.unlink(orig, function(){
+                                    users.update( req.session.uid, {
+                                        'images.top' : final_orig,
+                                    }, function(err) {
+                                        req.session.notification = {
+                                            message: 'Your top image was changed succesfully'
+                                        };
+
+                                        res.redirect('/profile#user_top');
+                                    } );
+                                });
+                            });
+                        });                        
+                    });
+                });
+
+            } else {
+                res.redirect('/profile#user_top');
+            }
+        }
+        } else {
+            res.redirect('/profile#user_top');
         }
     }
 };

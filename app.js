@@ -101,6 +101,7 @@ app.post('/request_beta', routes.request_beta);
 app.post('/message', routes.message);
 app.post('/more', routes.more);
 app.post('/upload_avatar', routes.upload_avatar);
+app.post('/upload_top', routes.upload_top);
 app.post('/user_data', routes.user_data);
 app.post('/invite', routes.invite);
 app.post('/invitation', routes.invitation_data);
