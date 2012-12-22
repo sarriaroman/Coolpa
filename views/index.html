@@ -41,14 +41,49 @@
                                 <input type="hidden" id="author" name="author" value=""/>
                                 <input type="hidden" id="original_id" name="original_id" value=""/>
                                 <textarea rows="3" id="message" name="message" placeholder="What you want to tell?" style="width: 92%;max-width:92%;min-width: 92%;"></textarea><br/>
+                                <input type="file" id="fileElem" name="image" accept="image/*" style="display:none" onchange="handleFiles(this.files)">
+                                <div id="images"></div>
                             </p>
                         </div>
                         <div class="timeline-bar">
                             <div>
                                 <input type="submit" class="btn" id="sendBtn" value="Send" />
+                                <a class="btn" href="#" id="fileSelect"><i class="icon-picture"></i></a>
                                 <a class="btn" href="#"  id="help" rel="popover" class="button-ask" data-content="Just write what you want to tell to the world. <br/>If you want to mention someone put the username preppending a colon ( : ). Ex. :username hi how are you?."><i class="icon-question-sign"></i></a>
                             </div>
                         </div>
+                        <script>
+                        var fileSelect = document.getElementById("fileSelect"),
+                        fileElem = document.getElementById("fileElem");
+
+                        fileSelect.addEventListener("click", function (e) {
+                            if (fileElem) {
+                                fileElem.click();
+                            }
+                            e.preventDefault(); // prevent navigation to "#"
+                        }, false);
+
+                        function handleFiles(files) {
+                          for (var i = 0; i < files.length; i++) {
+                            var file = files[i];
+                            var imageType = /image.*/;
+
+                            if (!file.type.match(imageType)) {
+                              continue;
+                          }
+
+                          var img = document.createElement("img");
+                          img.classList.add("obj");
+                          img.file = file;
+                          //preview.appendChild(img);
+                          $('#images').append(img);
+
+                          var reader = new FileReader();
+                          reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+                          reader.readAsDataURL(file);
+                      }
+                  }
+                  </script>
                     </div>
                 </div>
             </form>

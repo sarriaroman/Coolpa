@@ -157,6 +157,8 @@ var message_factory = function(req, res, information, callback) {
             }
         }
     });
+
+    // Process image and add to image array.
     
     Message.add({
         message: msg,
@@ -167,7 +169,8 @@ var message_factory = function(req, res, information, callback) {
         author: information.author,
         original_id: information.original_id,
         hidden: false,
-        from: information.from
+        from: information.from,
+        images: information.images
     }, function(msg, err) {
         if( msg.public === true ) {
             fs.readFile('views/email_template.html', 'UTF-8', function(err, html) {
@@ -322,6 +325,8 @@ exports.mobile_more = function(req, res) {
 };
 
 exports.upload_picture = function(req, res){
+    // Solo una imagen y por separado
+    // Imagen asociada a mensaje en el mensaje.
 
 };
 
@@ -377,6 +382,10 @@ exports.avatars = function(req, res) {
     });    
 };
 
+exports.images = function(req, res) {
+    res.redirect('https://coolpa.s3.amazonaws.com/images' + req.params.file );
+};
+
 exports.mobile_message = function(req, res) {
     mobile_security(req, res, function(request, response){
         message_factory(request, response,
@@ -415,6 +424,34 @@ exports.mobile_message = function(req, res) {
 exports.message = function(req, res) {
     security(req, res);
 
+    var s3 = new (require('../classes/s3'))();
+    
+    var imgs = [];
+    if( req.files.image ) {
+        if( req.files.image.length > 0 ) {
+            var dirname = __dirname.replace('routes', '');
+
+            var name = parseInt((new Date()).getTime(), 16) + '.jpg';
+
+            imgs.push(name);
+
+            var tmp = dirname + 'public/temp/' + name;
+            var easyimg = require('easyimage');
+
+            easyimg.convert({
+                src: req.files.image.path, 
+                dst: tmp, 
+                quality:80
+            }, function(err, image) {
+                if (err) throw err;
+
+                s3.get().putFile( tmp, 'images/' + name, { 'x-amz-acl': 'public-read' }, function(err, rs){
+                    fs.fs.unlink(tmp, function(){});
+                });
+            });
+        }
+    }
+
     message_factory(req, res, {
             uid: req.session.uid,
             message: req.body.message,
@@ -422,7 +459,8 @@ exports.message = function(req, res) {
             reply_to: req.body.reply_to,
             author: req.body.author,
             original_id: req.body.original_id,
-            from: 'Web'
+            from: 'Web',
+            images: imgs
     }, function(req, res, information) {
         if( information.public === true ) {
             res.redirect('/');
