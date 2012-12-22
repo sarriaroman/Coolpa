@@ -1027,13 +1027,25 @@ exports.upload_avatar = function(req, res) {
                 var final_square = ffolder + (new Date()).getTime() + '_square.jpg';
 
                 users.user(req.session.uid, function(err, data) {
-                    fs.exists(orig, function(oexists) {
+                    /*fs.exists(orig, function(oexists) {
                     if( oexists ) {
                         fs.unlink( orig, function() {
                             fs.exists(square, function(sexists) {
                                 if( sexists ) {
                                     fs.unlink( square, function() {
-                                        easyimg.convert({
+                                        
+                                    } );
+                                } else {
+                                    res.redirect('/profile#user_avatar');
+                                }
+                            });
+                        } );
+                    } else {
+                        res.redirect('/profile#user_avatar');
+                    }
+                });*/
+
+                    easyimg.convert({
                                             src:avatar.path, 
                                             dst:orig, 
                                             quality:80
@@ -1051,8 +1063,8 @@ exports.upload_avatar = function(req, res) {
                                                 if (err) throw err;
                                                 console.log('Thumbnail created');
 
-                                                s3.get().deleteFile(data.images.original, function(err, rs){
-                                                    s3.get().deleteFile(data.images.square, function(err, rs){
+                                                s3.get().deleteFile('/'+data.images.original, function(err, rs){
+                                                    s3.get().deleteFile('/'+data.images.square, function(err, rs){
                                                         s3.get().putFile( orig, final_orig, { 'x-amz-acl': 'public-read' }, function(err, rs){
                                                             s3.get().putFile( square, final_square, { 'x-amz-acl': 'public-read' }, function(err, rs){
                                                                 fs.unlink(orig, function(){
@@ -1076,16 +1088,6 @@ exports.upload_avatar = function(req, res) {
                                                 });
                                             });
                                         });
-                                    } );
-                                } else {
-                                    res.redirect('/profile#user_avatar');
-                                }
-                            });
-                        } );
-                    } else {
-                        res.redirect('/profile#user_avatar');
-                    }
-                });
                 });
 
             } else {
