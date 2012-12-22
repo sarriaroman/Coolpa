@@ -39,6 +39,12 @@
                                     <h2 class="post-title">Your data</h2>
                                     <span class="post-divider"></span>
 
+                                    <% if( notification ) { %>
+                                    <% if( notification.type == 'data' ) { %>
+                                    <p><%=notification.message%></p>
+                                    <% } %>
+                                    <% } %>
+
                                     <div class="control-group">
                                         <label class="control-label" for="inputName">Name</label>
                                         <div class="controls">
@@ -117,6 +123,12 @@
                                 <h2 class="post-title">Change your avatar</h2>
                                 <span class="post-divider"></span>
 
+                                <% if( notification ) { %>
+                                <% if( notification.type == 'avatar' ) { %>
+                                <p><%=notification.message%></p>
+                                <% } %>
+                                <% } %>
+
                                 <div class="control-group">
                                     <label class="control-label" for="avatar">Image</label>
                                     <div class="controls">
@@ -144,6 +156,12 @@
                                 <h2 class="post-title">Change your Top</h2>
                                 <span class="post-divider"></span>
 
+                                <% if( notification ) { %>
+                                <% if( notification.type == 'top' ) { %>
+                                <p><%=notification.message%></p>
+                                <% } %>
+                                <% } %>
+
                                 <div class="control-group">
                                     <label class="control-label" for="avatar">Top Image</label>
                                     <div class="controls">
@@ -170,6 +188,12 @@
                             <div class="textpost">
                                 <h2 class="post-title">Invite people to Coolpa.net</h2>
                                 <span class="post-divider"></span>
+
+                                <% if( notification ) { %>
+                                <% if( notification.type == 'invites' ) { %>
+                                <p><%=notification.message%></p>
+                                <% } %>
+                                <% } %>
 
                                 <div class="control-group">
                                     <label class="control-label" for="inputEmail">Email</label>

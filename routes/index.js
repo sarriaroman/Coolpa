@@ -940,7 +940,7 @@ exports.profile = function(req, res) {
         
         var notification = ( req.session.notification == undefined ) ? false : req.session.notification;
         delete req.session.notification;
-        
+
         users.user( req.session.uid, function(err, data) {
             res.render('user_profile', {
                 user: req.session.uid,
@@ -978,7 +978,7 @@ exports.user_data = function(req, res) {
             }, function() {
 
                 req.session.notification = {
-                    type: 'alert-success',
+                    type: 'data',
                     message: 'Your information was updated. You changed your password... please remember it the next time!'
                 };
 
@@ -995,7 +995,7 @@ exports.user_data = function(req, res) {
                 }
             }, function() {
                 req.session.notification = {
-                    type: 'alert-success',
+                    type: 'data',
                     message: 'Your information was updated'
                 };
                 
@@ -1075,8 +1075,8 @@ exports.upload_avatar = function(req, res) {
                                                                             'images.original' : final_orig,
                                                                             'images.square' : final_square
                                                                         }, function(err) {
-                                                                            req.session.notification = {
-                                                                            type: 'alert-success',
+                                                                        req.session.notification = {
+                                                                            type: 'avatar',
                                                                             message: 'Your avatar was changed succesfully'
                                                                         };
 
@@ -1146,6 +1146,7 @@ exports.upload_top = function(req, res) {
                                         'images.top' : final_orig,
                                     }, function(err) {
                                         req.session.notification = {
+                                            type: 'top',
                                             message: 'Your top image was changed succesfully'
                                         };
 
@@ -1158,7 +1159,7 @@ exports.upload_top = function(req, res) {
                 });
 
             }
-            
+
             } else {
                 res.redirect('/profile#user_top');
             }
@@ -1231,7 +1232,7 @@ exports.invite = function(req, res) {
             }
             
             req.session.notification = {
-                type: 'alert-success',
+                type: 'invites',
                 message: 'Your invitations were sent.'
             };
             res.redirect('/profile#invites');
@@ -1333,8 +1334,8 @@ exports.invitation = function(req, res) {
                                 // Create folders for avatars
                                 var dirname = __dirname.replace('routes', '');
 
-                                var orig = folder + 'avatar.original.jpg';
-                                var square = folder + 'avatar.square.jpg';
+                                var orig = 'avatar.original.jpg';
+                                var square = 'avatar.square.jpg';
                                 var top = 'top.jpg'
                                 
                                 var ffolder = rdt.username.toLowerCase() + '/';
