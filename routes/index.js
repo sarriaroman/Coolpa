@@ -1160,7 +1160,6 @@ exports.upload_top = function(req, res) {
             } else {
                 res.redirect('/profile#user_top');
             }
-        }
         } else {
             res.redirect('/profile#user_top');
         }
