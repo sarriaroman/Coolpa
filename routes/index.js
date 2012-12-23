@@ -393,7 +393,6 @@ exports.mobile_message = function(req, res) {
         var fs = require('fs');
 
         var imgs = [];
-        console.log(req.body);
         if( req.body.image ) {
             var data = new Buffer(req.body.image, 'base64').toString('binary');
 
@@ -410,7 +409,7 @@ exports.mobile_message = function(req, res) {
                 if (err) throw err;
                
                 easyimg.convert({
-                    src: req.files.image.path, 
+                    src: tmp, 
                     dst: tmp, 
                     quality:80
                 }, function(err, image) {
