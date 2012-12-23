@@ -77,7 +77,6 @@
                           img.file = file;
                           //preview.appendChild(img);
                           $('#images').append(img);
-                          
 
                           var reader = new FileReader();
                           reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
