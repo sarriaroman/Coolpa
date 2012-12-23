@@ -394,7 +394,7 @@ exports.mobile_message = function(req, res) {
 
         var imgs = [];
         if( req.body.image ) {
-            var data = new Buffer(req.body.image, 'base64').toString('binary');
+            var data = new Buffer(req.body.image, 'base64').toString('utf-8');
             //console.log(data);
             //var data = req.body.image;
 
@@ -409,20 +409,18 @@ exports.mobile_message = function(req, res) {
 
             fs.writeFile(tmp, data, function (err) {
                 if (err) throw err;
-               
-                s3.get().putFile( tmp, 'images/' + name, { 'x-amz-acl': 'public-read' }, function(err, rs){
-                        fs.unlink(tmp, function(){});
-                    });
 
-                /*easyimg.convert({
+                easyimg.convert({
                     src: tmp, 
                     dst: tmp, 
                     quality:80
                 }, function(err, image) {
                     if (err) throw err;
 
-                    
-                }); */
+                    s3.get().putFile( tmp, 'images/' + name, { 'x-amz-acl': 'public-read' }, function(err, rs){
+                        fs.unlink(tmp, function(){});
+                    }); 
+                });
             });
         }
 
