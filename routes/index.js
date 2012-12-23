@@ -388,6 +388,40 @@ exports.images = function(req, res) {
 
 exports.mobile_message = function(req, res) {
     mobile_security(req, res, function(request, response){
+
+        var s3 = new (require('../classes/s3'))();
+        var fs = require('fs');
+
+        var imgs = [];
+        if( req.body.image ) {
+            var data = new Buffer(req.body.image, 'base64').toString('binary');
+
+            var dirname = __dirname.replace('routes', '');
+
+            var name = parseInt((new Date()).getTime(), 16) + '.jpg';
+
+            imgs.push(name);
+
+            var tmp = dirname + 'public/temp/' + name;
+            var easyimg = require('easyimage');
+
+            fs.writeFile(tmp, data, function (err) {
+                if (err) throw err;
+               
+                easyimg.convert({
+                    src: req.files.image.path, 
+                    dst: tmp, 
+                    quality:80
+                }, function(err, image) {
+                    if (err) throw err;
+
+                    s3.get().putFile( tmp, 'images/' + name, { 'x-amz-acl': 'public-read' }, function(err, rs){
+                        fs.unlink(tmp, function(){});
+                    });
+                }); 
+            });
+        }
+
         message_factory(request, response,
             {
                 uid: req.body.username,
@@ -396,7 +430,8 @@ exports.mobile_message = function(req, res) {
                 reply_to: ( req.body.reply_to == undefined || req.body.reply_to == '-1' ) ? -1 : req.body.reply_to,
                 author: '',
                 original_id: '',
-                from: 'Mobile application'
+                from: 'Mobile application',
+                images: imgs
             }, 
             function(req, res, information) {
                 if( information.message.trim() == '' ) {
