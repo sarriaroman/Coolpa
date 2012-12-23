@@ -400,29 +400,27 @@ exports.mobile_message = function(req, res) {
 
             var dirname = __dirname.replace('routes', '');
 
-            var name = parseInt((new Date()).getTime(), 16) + '.jpg';
+            var name = parseInt((new Date()).getTime(), 16);
 
-            imgs.push(name);
+            imgs.push(name + '.jpg');
 
             var tmp = dirname + 'public/temp/' + name;
             var easyimg = require('easyimage');
 
-            fs.writeFile(tmp, req.body.image, "base64", function (err) {
+            fs.writeFile(tmp + '.png', req.body.image, "base64", function (err) {
                 if (err) throw err;
 
-                s3.get().putFile( tmp, 'images/' + name, { 'x-amz-acl': 'public-read' }, function(err, rs){
-                        fs.unlink(tmp, function(){});
-                    }); 
-
-                /*easyimg.convert({
-                    src: tmp, 
-                    dst: tmp, 
+                easyimg.convert({
+                    src: tmp + '.png', 
+                    dst: tmp + '.jpg', 
                     quality:80
                 }, function(err, image) {
                     if (err) throw err;
 
-                    
-                });*/
+                    s3.get().putFile( tmp, 'images/' + name, { 'x-amz-acl': 'public-read' }, function(err, rs){
+                        fs.unlink(tmp, function(){});
+                    });     
+                });
             });
         }
 
