@@ -42,15 +42,15 @@
                                 <input type="hidden" id="original_id" name="original_id" value=""/>
                                 <textarea rows="3" id="message" name="message" placeholder="What you want to tell?" style="width: 92%;max-width:92%;min-width: 92%;"></textarea><br/>
                                 <input type="file" id="fileElem" name="image" accept="image/*" style="display:none" onchange="handleFiles(this.files)">
-                                <div id="images"></div>
                             </p>
                         </div>
                         <div class="timeline-bar">
-                            <div>
+                            <div style="float: left;">
                                 <input type="submit" class="btn" id="sendBtn" value="Send" />
                                 <a class="btn" href="#" id="fileSelect"><i class="icon-picture"></i></a>
                                 <a class="btn" href="#"  id="help" rel="popover" class="button-ask" data-content="Just write what you want to tell to the world. <br/>If you want to mention someone put the username preppending a colon ( : ). Ex. :username hi how are you?."><i class="icon-question-sign"></i></a>
                             </div>
+                            <div id="images" style="float: right; display: block; max-height: 60px; overflow: hidden;"></div>
                         </div>
                         <script>
                         var fileSelect = document.getElementById("fileSelect"),
@@ -75,6 +75,7 @@
                           var img = document.createElement("img");
                           img.classList.add("obj");
                           img.file = file;
+                          img.height = '60';
                           //preview.appendChild(img);
                           $('#images').append(img);
 
