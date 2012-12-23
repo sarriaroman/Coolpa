@@ -427,6 +427,7 @@ exports.message = function(req, res) {
     var s3 = new (require('../classes/s3'))();
     
     var imgs = [];
+    console.log(req.files);
     if( req.files.image ) {
         if( req.files.image.length > 0 ) {
             var dirname = __dirname.replace('routes', '');

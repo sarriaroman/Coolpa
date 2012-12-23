@@ -64,25 +64,24 @@
                         }, false);
 
                         function handleFiles(files) {
-                          for (var i = 0; i < files.length; i++) {
-                            var file = files[i];
-                            var imageType = /image.*/;
+                            for (var i = 0; i < files.length; i++) {
+                                var file = files[i];
+                                var imageType = /image.*/;
 
-                            if (!file.type.match(imageType)) {
-                              continue;
-                          }
+                                if (!file.type.match(imageType)) {
+                                    continue;
+                                }
 
-                          var img = document.createElement("img");
-                          img.classList.add("img-preview");
-                          img.file = file;
-                          //preview.appendChild(img);
-                          $('#images').html(img);
+                                var img = document.createElement("img");
+                                img.classList.add("img-preview");
+                                img.file = file;
+                                $('#images').html(img);
 
-                          var reader = new FileReader();
-                          reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
-                          reader.readAsDataURL(file);
-                      }
-                  }
+                                var reader = new FileReader();
+                                reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+                                reader.readAsDataURL(file);
+                            }
+                        }
                   </script>
                     </div>
                 </div>
