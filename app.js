@@ -94,6 +94,7 @@ app.get('/hide/:id', routes.hide_message);
 app.get('/unhide/:id', routes.unhide_message);
 app.get('/search/:token', routes.search);
 app.get('/avatars/:username/:file', routes.avatars);
+app.get('/i/:file', routes.images);
 
 // POST
 app.post('/auth', routes.auth);

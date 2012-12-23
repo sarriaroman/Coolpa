@@ -383,7 +383,7 @@ exports.avatars = function(req, res) {
 };
 
 exports.images = function(req, res) {
-    res.redirect('https://coolpa.s3.amazonaws.com/images' + req.params.file );
+    res.redirect('https://coolpa.s3.amazonaws.com/images/' + req.params.file );
 };
 
 exports.mobile_message = function(req, res) {
@@ -426,7 +426,7 @@ exports.message = function(req, res) {
 
     var s3 = new (require('../classes/s3'))();
     var fs = require('fs');
-    
+
     var imgs = [];
     console.log(req.files);
     if( req.files ) {
