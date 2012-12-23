@@ -82,6 +82,12 @@ p {font-weight: normal;}
 		font-size: 19px;
 		font-weight: lighter;
 	}
+
+	.img-preview {
+		height: 40px;
+		width: auto;
+		display: block;
+	}
 	
 	span.pointer-sub {
 		position: absolute;
