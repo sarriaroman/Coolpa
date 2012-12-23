@@ -425,6 +425,7 @@ exports.message = function(req, res) {
     security(req, res);
 
     var s3 = new (require('../classes/s3'))();
+    var fs = require('fs');
     
     var imgs = [];
     console.log(req.files);
@@ -447,7 +448,7 @@ exports.message = function(req, res) {
                 if (err) throw err;
 
                 s3.get().putFile( tmp, 'images/' + name, { 'x-amz-acl': 'public-read' }, function(err, rs){
-                    fs.fs.unlink(tmp, function(){});
+                    fs.unlink(tmp, function(){});
                 });
             });
         }
