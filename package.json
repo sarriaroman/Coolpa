@@ -12,6 +12,7 @@
     "amazon-ses": "*",
     "easyimage": "*",
     "express-session-mongo": "*",
-    "knox": "*"
+    "knox": "*",
+    "gcm": "*"
   }
 }
