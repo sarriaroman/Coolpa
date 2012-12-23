@@ -88,6 +88,11 @@ p {font-weight: normal;}
 		width: auto;
 		display: block;
 	}
+
+	.message-image {
+		text-align: center;
+		display: none;
+	}
 	
 	span.pointer-sub {
 		position: absolute;

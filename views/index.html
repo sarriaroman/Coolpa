@@ -154,7 +154,7 @@
                                             </p>
                                             <% if( data.images) { %>
                                             <% if( data.images.length > 0 ) { %>
-                                            <div class="message-image">
+                                            <div class="message-image" id="<%=data._id%>_image">
                                                 <img src="/i/<%=data.images[0]%>" />
                                             </div>
                                             <% } %>
@@ -169,6 +169,11 @@
                                                 <% } %>
                                             </div>
                                             <div class="data_buttons">
+                                                <% if( data.images) { %>
+                                                <% if( data.images.length > 0 ) { %>
+                                                <button class="btn" rel="tooltip" title="Show/Hide image" onclick="$('#<%=data._id%>_image').toggle();"><i class="icon-picture"></i></button>
+                                                <% } %>
+                                                <% } %>
                                                 <% if( section != 'favorites' ) { %>
                                                 <button class="btn" rel="tooltip" title="Repeat message" onclick="$('#message').val('<%=data.message%> ');$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();$('#author').val('<%=data.sender%>');$('#original_id').val('<%=data._id%>');"><i class="icon-repeat"></i></button>
 
