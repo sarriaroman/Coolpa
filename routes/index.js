@@ -400,11 +400,11 @@ exports.mobile_message = function(req, res) {
 
             var dirname = __dirname.replace('routes', '');
 
-            var name = parseInt((new Date()).getTime(), 16);
+            var name = parseInt((new Date()).getTime(), 16) + '.jpg';
 
             imgs.push(name);
 
-            var tmp = dirname + 'public/temp/' + name + '.jpg';
+            var tmp = dirname + 'public/temp/' + name;
             var easyimg = require('easyimage');
 
             fs.writeFile(tmp, data, function (err) {
