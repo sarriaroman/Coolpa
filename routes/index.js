@@ -398,19 +398,19 @@ exports.mobile_message = function(req, res) {
 
             var dirname = __dirname.replace('routes', '');
 
-            var name = parseInt((new Date()).getTime(), 16) + '.jpg';
+            var name = parseInt((new Date()).getTime(), 16);
 
             imgs.push(name);
 
             var tmp = dirname + 'public/temp/' + name;
             var easyimg = require('easyimage');
 
-            fs.writeFile(tmp, data, function (err) {
+            fs.writeFile(tmp + '_mobile.jpg', data, function (err) {
                 if (err) throw err;
                
                 easyimg.convert({
-                    src: tmp, 
-                    dst: tmp, 
+                    src: tmp + '_mobile.jpg', 
+                    dst: tmp + '.jpg', 
                     quality:80
                 }, function(err, image) {
                     if (err) throw err;
