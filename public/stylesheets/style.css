@@ -646,6 +646,16 @@ p {font-weight: normal;}
 	.bodytext .data_buttons {
 		float:right;
 	}
+
+	.main_buttons {
+		float:left;
+	}
+	
+	.main_images {
+		float:right;
+		display: block;
+		max-height: 30px;
+	}
 	
 	/*========== POST QUOTE ==========*/
 	.quoteline {
