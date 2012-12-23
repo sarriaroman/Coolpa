@@ -76,7 +76,7 @@
                           img.classList.add("img-preview");
                           img.file = file;
                           //preview.appendChild(img);
-                          $('#images').append(img);
+                          $('#images').html(img);
 
                           var reader = new FileReader();
                           reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
