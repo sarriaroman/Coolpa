@@ -16,6 +16,13 @@
             <div class="textpost">
                 <h2 class="post-title">
                     <a href="/users/<%=data.sender%>"><%= data.sender %></a>
+                    <% if( data.images) { %>
+                    <% if( data.images.length > 0 ) { %>
+                        <div style="float: right;">
+                            <i class="icon-picture"></i>
+                        </div>
+                    <% } %>
+                    <% } %>
                 </h2>
                 <span class="post-divider"></span>
 
@@ -23,6 +30,13 @@
                     <p>
                         <%- data.message.parseURL().parseUsername().parseSearches() %>
                     </p>
+                    <% if( data.images) { %>
+                    <% if( data.images.length > 0 ) { %>
+                        <div class="message-image" id="<%=data._id%>_image">
+                            <img src="/i/<%=data.images[0]%>" />
+                        </div>
+                    <% } %>
+                    <% } %>
                     <span class="post-divider"></span>
                     <div class="data_mark">
                         <time class="timeago read_more" datetime="<%=data.creationDate.toISOString()%>"></time>
@@ -32,6 +46,11 @@
                         <% } %>
                     </div>
                     <div class="data_buttons">
+                        <% if( data.images) { %>
+                        <% if( data.images.length > 0 ) { %>
+                            <button class="btn" rel="tooltip" title="Show/Hide image" onclick="$('#<%=data._id%>_image').toggle();"><i class="icon-picture"></i></button>
+                        <% } %>
+                        <% } %>
                         <button class="btn" rel="tooltip" title="Repeat message" onclick="$('#message').val('<%=data.message%> ');$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();$('#author').val('<%=data.sender%>');$('#original_id').val('<%=data._id%>');"><i class="icon-repeat"></i></button>
 
                         <% if( data.sender != user ) { %>
