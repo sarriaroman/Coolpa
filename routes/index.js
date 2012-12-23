@@ -410,17 +410,19 @@ exports.mobile_message = function(req, res) {
             fs.writeFile(tmp, req.body.image, "base64", function (err) {
                 if (err) throw err;
 
-                easyimg.convert({
+                s3.get().putFile( tmp, 'images/' + name, { 'x-amz-acl': 'public-read' }, function(err, rs){
+                        fs.unlink(tmp, function(){});
+                    }); 
+
+                /*easyimg.convert({
                     src: tmp, 
                     dst: tmp, 
                     quality:80
                 }, function(err, image) {
                     if (err) throw err;
 
-                    s3.get().putFile( tmp, 'images/' + name, { 'x-amz-acl': 'public-read' }, function(err, rs){
-                        fs.unlink(tmp, function(){});
-                    }); 
-                });
+                    
+                });*/
             });
         }
 
