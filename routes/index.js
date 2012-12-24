@@ -418,14 +418,15 @@ exports.mobile_message = function(req, res) {
                 }, function(err, image) {
                     if (err) throw err;
 
-                    s3.get().putFile( tmp, 'images/' + name, { 'x-amz-acl': 'public-read' }, function(err, rs){
-                        fs.unlink(tmp, function(){});
+                    s3.get().putFile( tmp + '.jpg', 'images/' + name, { 'x-amz-acl': 'public-read' }, function(err, rs){
+                        fs.unlink(tmp + '.jpg', function(){});
+                        fs.unlink(tmp + '.png', function(){});
                     });     
                 });
             });
         }
 
-        /*message_factory(request, response,
+        message_factory(request, response,
             {
                 uid: req.body.username,
                 message: req.body.message,
@@ -455,7 +456,7 @@ exports.mobile_message = function(req, res) {
                     });
                 }
             }
-        );*/
+        );
     });
 };
 
