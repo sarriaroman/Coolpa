@@ -408,7 +408,7 @@ exports.mobile_message = function(req, res) {
             var tmp = dirname + 'public/temp/' + name;
             var easyimg = require('easyimage');
 
-            fs.writeFile(tmp + '.png', req.body.image, "binary", function (err) {
+            fs.writeFile(tmp + '.png', req.body.image, "utf-8", function (err) {
                 if (err) throw err;
 
                 easyimg.convert({
