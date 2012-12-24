@@ -396,7 +396,7 @@ exports.mobile_message = function(req, res) {
         if( req.body.image ) {
             //var data = new Buffer(req.body.image, 'base64').toString('utf-8');
             //var base64Data  =  data.replace('+', ' ');
-            //console.log(data);
+            console.log(req.body.image);
             //var data = req.body.image;
 
             var dirname = __dirname.replace('routes', '');
