@@ -393,13 +393,12 @@ exports.mobile_message = function(req, res) {
         var fs = require('fs');
 
         var imgs = [];
-        console.log(req.files);
         if( req.files ) {
             if( req.files.image.length > 0 ) {
                 var dirname = __dirname.replace('routes', '');
 
                 var name = parseInt((new Date()).getTime(), 16) + '.jpg';
-
+                console.log(name);
                 imgs.push(name);
 
                 var tmp = dirname + 'public/temp/' + name;
