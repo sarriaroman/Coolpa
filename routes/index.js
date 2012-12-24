@@ -425,7 +425,7 @@ exports.mobile_message = function(req, res) {
             });
         }
 
-        message_factory(request, response,
+        /*message_factory(request, response,
             {
                 uid: req.body.username,
                 message: req.body.message,
@@ -455,7 +455,7 @@ exports.mobile_message = function(req, res) {
                     });
                 }
             }
-        );
+        );*/
     });
 };
 
