@@ -1499,22 +1499,38 @@ exports.showmessage = function(req, res) {
     }
 };
 
+var remove_factory = function(mid, uid, req, res, callback) {
+    var messages = new (require('../models/messages'))();
+        
+    messages.get(mid, function(err, data) {
+        if( data.sender == uid ) {
+            messages.remove(mid, function(err) {
+                callback(true, req, res);
+            });
+        } else {
+            callback(false, req, res);
+        }
+    });
+};
+
 exports.remove_message = function(req, res) {
     if( req.session.uid == undefined ) {
         res.redirect('/');
     } else {
-        var messages = new (require('../models/messages'))();
-        
-        messages.get(req.params.id, function(err, data) {
-            if( data.sender == req.session.uid ) {
-            	messages.remove(req.params.id, function(err) {
-            		res.redirect('/');
-            	});
-            } else {
-            	res.redirect('/');
-            }
+        remove_factory(req.params.id, req.session.uid, req, res, function( deleted, req, res) {
+            res.redirect('/');
         });
     }
+};
+
+exports.mobile_remove = function(req, res) {
+    mobile_security(req, res, function(request, response){
+        remove_factory(req.body.id, req.body.username, request, response, function( deleted, req, res) {
+            res.json({
+                result: deleted
+            });
+        });
+    });
 };
 
 exports.hide_message = function(req, res) {

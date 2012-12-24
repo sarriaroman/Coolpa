@@ -121,6 +121,7 @@ app.post('/api/mentions', routes.mobile_mentions);
 app.post('/api/privates', routes.mobile_privates);
 app.post('/api/message', routes.mobile_message);
 app.post('/api/newest', routes.mobile_newest);
+app.post('/api/remove', routes.mobile_remove);
 app.post('/api/more', routes.mobile_more);
 app.post('/api/push', routes.mobile_push);
 
