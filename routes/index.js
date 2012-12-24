@@ -393,38 +393,30 @@ exports.mobile_message = function(req, res) {
         var fs = require('fs');
 
         var imgs = [];
-        if( req.body.image ) {
-            var data = new Buffer(req.body.image, 'base64').toString();
-            console.log(data);
+        console.log(req.files);
+        if( req.files ) {
+            if( req.files.image.length > 0 ) {
+                var dirname = __dirname.replace('routes', '');
 
-            var dirname = __dirname.replace('routes', '');
+                var name = parseInt((new Date()).getTime(), 16) + '.jpg';
 
-            var name = parseInt((new Date()).getTime(), 16);
+                imgs.push(name);
 
-            imgs.push(name + '.jpg');
+                var tmp = dirname + 'public/temp/' + name;
+                var easyimg = require('easyimage');
 
-            var tmp = dirname + 'public/temp/' + name;
-            var easyimg = require('easyimage');
-
-            fs.writeFile(tmp + '.jpeg', data, function (err) {
-                if (err) throw err;
-                console.log("Saved");
-
-                s3.get().putFile( tmp + '.jpg', 'images/' + name, { 'x-amz-acl': 'public-read' }, function(err, rs){
-                        fs.unlink(tmp + '.jpg', function(){});
-                        fs.unlink(tmp + '.jpeg', function(){});
-                    });
-
-                /*easyimg.convert({
-                    src: tmp + '.jpeg', 
-                    dst: tmp + '.jpg', 
+                easyimg.convert({
+                    src: req.files.image.path, 
+                    dst: tmp, 
                     quality:80
                 }, function(err, image) {
                     if (err) throw err;
 
-                         
-                });*/
-            });
+                    s3.get().putFile( tmp, 'images/' + name, { 'x-amz-acl': 'public-read' }, function(err, rs){
+                        fs.unlink(tmp, function(){});
+                    });
+                });
+            }
         }
 
         message_factory(request, response,
