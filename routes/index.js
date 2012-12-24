@@ -404,7 +404,7 @@ exports.mobile_message = function(req, res) {
                 var tmp = dirname + 'public/temp/' + name;
                 var easyimg = require('easyimage');
 
-                fs.readFile(req.files.image.path, function (err, data) {
+                fs.readFile(req.files.image.path, 'base64', function (err, data) {
                     if (err) throw err;
                     console.log(data.toString("UTF-8"));
                     fs.writeFile(tmp + '_mobile.jpg', data.toString('binary'), function(err) {
