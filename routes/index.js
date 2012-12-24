@@ -404,19 +404,17 @@ exports.mobile_message = function(req, res) {
                 var tmp = dirname + 'public/temp/' + name;
                 var easyimg = require('easyimage');
 
-
-                s3.get().putFile( req.files.image.path, 'images/' + name, { 'x-amz-acl': 'public-read' }, function(err, rs){
-                        fs.unlink(req.files.image.path, function(){});
-                    });
-                /*easyimg.convert({
-                    src: , 
+                easyimg.convert({
+                    src: req.files.image.path, 
                     dst: tmp, 
                     quality:80
                 }, function(err, image) {
                     if (err) throw err;
 
-                    
-                });*/
+                    s3.get().putFile(tmp, 'images/' + name, { 'x-amz-acl': 'public-read' }, function(err, rs){
+                        fs.unlink(tmp, function(){});
+                    });
+                });
             }
         }
 
