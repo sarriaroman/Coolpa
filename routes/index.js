@@ -397,9 +397,9 @@ exports.mobile_message = function(req, res) {
             if( req.files.image.length > 0 ) {
                 var dirname = __dirname.replace('routes', '');
 
-                var name = (new Date()).getTime().toString(16);
-                console.log(name + '.jpg' );
-                imgs.push(name + '.jpg' );
+                var name = (new Date()).getTime().toString(16) + '.jpg';
+                console.log(name  );
+                imgs.push(name);
 
                 var tmp = dirname + 'public/temp/' + name;
                 var easyimg = require('easyimage');
@@ -407,19 +407,19 @@ exports.mobile_message = function(req, res) {
                 fs.readFile(req.files.image.path, function (err, data) {
                     if (err) throw err;
                     //console.log( new Buffer( data.toString(), 'base64').toString() );
-                    fs.writeFile(tmp + '_mobile.jpg', new Buffer( data.toString(), 'base64').toString('binary'), 'binary', function(err) {
+                    fs.writeFile(tmp, new Buffer( data.toString(), 'base64').toString('binary'), 'binary', function(err) {
                         if (err) throw err;
-                        console.log("Saved to: " + tmp + '_mobile.jpg' );
+                        console.log("Saved to: " + tmp );
 
                         easyimg.convert({
-                            src: tmp + '_mobile.jpg', 
-                            dst: tmp + '.jpg', 
+                            src: tmp, 
+                            dst: tmp, 
                             quality:80
                         }, function(err, image) {
                             if (err) throw err;
 
-                            s3.get().putFile(tmp + '.jpg', 'images/' + name, { 'x-amz-acl': 'public-read' }, function(err, rs){
-                                fs.unlink(tmp + '.jpg', function(){});
+                            s3.get().putFile(tmp, 'images/' + name, { 'x-amz-acl': 'public-read' }, function(err, rs){
+                                fs.unlink(tmp, function(){});
                             });
                         });
                     });
