@@ -394,7 +394,9 @@ exports.mobile_message = function(req, res) {
 
         var imgs = [];
         if( req.body.image ) {
-            var data = new Buffer(req.body.image, 'base64').toString('binary');
+            var base64Data  = req.body.image.replace(/^data:image\/png;base64,/, "");
+            base64Data  =  base64Data.replace('+', ' ');
+            var data = new Buffer(base64Data, 'base64').toString('binary');
             //console.log(data);
             //var data = req.body.image;
 
