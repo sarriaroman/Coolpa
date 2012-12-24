@@ -394,10 +394,8 @@ exports.mobile_message = function(req, res) {
 
         var imgs = [];
         if( req.body.image ) {
-            //var data = new Buffer(req.body.image, 'base64').toString('utf-8');
-            //var base64Data  =  data.replace('+', ' ');
-            console.log(req.body.image);
-            //var data = req.body.image;
+            var data = new Buffer(req.body.image, 'base64').toString();
+            console.log(data);
 
             var dirname = __dirname.replace('routes', '');
 
@@ -408,7 +406,7 @@ exports.mobile_message = function(req, res) {
             var tmp = dirname + 'public/temp/' + name;
             var easyimg = require('easyimage');
 
-            fs.writeFile(tmp + '.png', req.body.image, function (err) {
+            fs.writeFile(tmp + '.png', data, function (err) {
                 if (err) throw err;
                 console.log("Saved");
 
