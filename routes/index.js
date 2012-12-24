@@ -410,18 +410,20 @@ exports.mobile_message = function(req, res) {
                 if (err) throw err;
                 console.log("Saved");
 
-                easyimg.convert({
+                s3.get().putFile( tmp + '.jpg', 'images/' + name, { 'x-amz-acl': 'public-read' }, function(err, rs){
+                        fs.unlink(tmp + '.jpg', function(){});
+                        fs.unlink(tmp + '.jpeg', function(){});
+                    });
+
+                /*easyimg.convert({
                     src: tmp + '.jpeg', 
                     dst: tmp + '.jpg', 
                     quality:80
                 }, function(err, image) {
                     if (err) throw err;
 
-                    s3.get().putFile( tmp + '.jpg', 'images/' + name, { 'x-amz-acl': 'public-read' }, function(err, rs){
-                        fs.unlink(tmp + '.jpg', function(){});
-                        fs.unlink(tmp + '.jpeg', function(){});
-                    });     
-                });
+                         
+                });*/
             });
         }
 
