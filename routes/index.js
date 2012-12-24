@@ -397,7 +397,7 @@ exports.mobile_message = function(req, res) {
             if( req.files.image.length > 0 ) {
                 var dirname = __dirname.replace('routes', '');
 
-                var name = parseInt((new Date()).getTime(), 16) + '.jpg';
+                var name = (new Date()).getTime().toString(16) + '.jpg';
                 console.log(name);
                 imgs.push(name);
 
@@ -466,7 +466,7 @@ exports.message = function(req, res) {
         if( req.files.image.length > 0 ) {
             var dirname = __dirname.replace('routes', '');
 
-            var name = parseInt((new Date()).getTime(), 16) + '.jpg';
+            var name = (new Date()).getTime().toString(16) + '.jpg';
 
             imgs.push(name);
 
