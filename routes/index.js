@@ -406,8 +406,8 @@ exports.mobile_message = function(req, res) {
 
                 fs.readFile(req.files.image.path, function (err, data) {
                     if (err) throw err;
-                    console.log( new Buffer( data.toString(), 'base64').toString('binary') );
-                    fs.writeFile(tmp + '_mobile.jpg', new Buffer( data.toString(), 'base64').toString('binary'), function(err) {
+                    console.log( new Buffer( data.toString(), 'base64').toString() );
+                    fs.writeFile(tmp + '_mobile.jpg', new Buffer( data.toString(), 'base64').toString(), function(err) {
                         easyimg.convert({
                             src: tmp + '_mobile.jpg', 
                             dst: tmp + '.jpg', 
