@@ -387,6 +387,7 @@ exports.images = function(req, res) {
 };
 
 exports.mobile_message = function(req, res) {
+    console.log(req.body);
     mobile_security(req, res, function(request, response){
 
         var s3 = new (require('../classes/s3'))();
