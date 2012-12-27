@@ -429,8 +429,8 @@ exports.mobile_message = function(req, res) {
 
         message_factory(request, response,
             {
-                uid: req.body.username,
-                message: req.body.message,
+                uid: req.body.username.toString("utf8"),
+                message: req.body.message.toString("utf8"),
                 public: (req.body.public == 68),
                 reply_to: ( req.body.reply_to == undefined || req.body.reply_to == '-1' ) ? -1 : req.body.reply_to,
                 author: '',
