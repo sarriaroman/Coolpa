@@ -394,7 +394,7 @@ exports.mobile_message = function(req, res) {
         var fs = require('fs');
 
         var imgs = [];
-        if( req.files ) {
+        if( req.files.image != undefined ) {
             if( req.files.image.length > 0 ) {
                 var dirname = __dirname.replace('routes', '');
 
