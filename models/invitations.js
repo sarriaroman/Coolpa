@@ -20,6 +20,10 @@ var invitations = (function( ) {
     invitations.prototype.get = function( code, callback ) {
         return this.database.connection().collection('Invitations').findOne({code: code}, callback);
     };
+
+    invitations.prototype.getByInviter = function( inviter, callback ) {
+        return this.database.connection().collection('Invitations').findItems({sender: inviter}, callback);
+    };
     
     invitations.prototype.remove = function( code, callback ) {
         return this.database.connection().collection('Invitations').remove({code: code}, callback);
