@@ -21,6 +21,7 @@ app.configure(function(){
     app.set('view engine', 'html');
     app.use(express.favicon(__dirname + '/favicon.ico'));
     app.use(express.logger('dev'));
+    app.disable('x-powered-by');
     app.use(express.bodyParser({
         keepExtensions: true
     }));
