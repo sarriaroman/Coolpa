@@ -1101,13 +1101,13 @@ exports.upload_avatar = function(req, res) {
                 
                 var dirname = __dirname.replace('routes', '');
                 
-                var orig = dirname + 'public/avatars/' + req.session.uid + '/avatar.original.jpg';
-                var square = dirname + '/public/avatars/' + req.session.uid + '/avatar.square.jpg';
-                
                 var ffolder = req.session.uid + '/';
 
                 var final_orig = ffolder + (new Date()).getTime() + '_original.jpg';
                 var final_square = ffolder + (new Date()).getTime() + '_square.jpg';
+
+                var orig = dirname + 'public/avatars/' + final_orig;
+                var square = dirname + '/public/avatars/' + final_square;
 
                 users.user(req.session.uid, function(err, data) {
                     /*fs.exists(orig, function(oexists) {
@@ -1204,11 +1204,11 @@ exports.upload_top = function(req, res) {
                 } else {
                     var dirname = __dirname.replace('routes', '');
                 
-                    var orig = dirname + 'public/avatars/' + req.session.uid + '/top.jpg';
-                
                     var ffolder = req.session.uid + '/';
 
                     var final_orig = ffolder + (new Date()).getTime() + '_top.jpg';
+
+                    var orig = dirname + 'public/avatars/' + final_orig;
 
                     users.user(req.session.uid, function(err, data) {
 
