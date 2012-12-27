@@ -1106,8 +1106,8 @@ exports.upload_avatar = function(req, res) {
                 var final_orig = ffolder + (new Date()).getTime() + '_original.jpg';
                 var final_square = ffolder + (new Date()).getTime() + '_square.jpg';
 
-                var orig = dirname + 'public/avatars/' + final_orig;
-                var square = dirname + '/public/avatars/' + final_square;
+                var orig = dirname + 'public/avatars/' + (new Date()).getTime() + '_original.jpg';
+                var square = dirname + '/public/avatars/' + (new Date()).getTime() + '_square.jpg';
 
                 users.user(req.session.uid, function(err, data) {
                     /*fs.exists(orig, function(oexists) {
@@ -1208,7 +1208,7 @@ exports.upload_top = function(req, res) {
 
                     var final_orig = ffolder + (new Date()).getTime() + '_top.jpg';
 
-                    var orig = dirname + 'public/avatars/' + final_orig;
+                    var orig = dirname + 'public/avatars/' + (new Date()).getTime() + '_top.jpg';
 
                     users.user(req.session.uid, function(err, data) {
 
