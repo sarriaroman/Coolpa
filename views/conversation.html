@@ -132,22 +132,6 @@
 </div>
 </section>
 
-<script>
-function load_more() {
-    var button = $("#load_more");
-
-    $.post('/more', {
-        date: button.attr('data-date'),
-        section: '<%=section%>'
-    }, function(html){
-        button.remove();
-
-        $('#messages').append(html);
-
-        $('.timeago').timeago();
-    }, 'html');
-}
-</script>
 </div>
 </div>
 <% include footer.html %>
