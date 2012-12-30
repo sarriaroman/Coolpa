@@ -433,7 +433,7 @@ exports.mobile_message = function(req, res) {
                 uid: req.body.username,
                 message: req.body.message,
                 public: (req.body.public == 68),
-                reply_to: ( req.body.reply_to == undefined || req.body.reply_to == '-1' ) ? -1 : req.body.reply_to,
+                reply_to: ( req.body.reply_to == undefined || req.body.reply_to == '-1' || req.body.reply_to == "" ) ? -1 : req.body.reply_to,
                 author: '',
                 original_id: '',
                 from: 'Mobile application',
