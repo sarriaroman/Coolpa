@@ -80,7 +80,7 @@ app.get('/terms', routes.terms);
 app.get('/start', routes.start);
 app.get('/mentions', routes.mentions);
 app.get('/privates', routes.messages);
-app.get('/conversation/:mid', routes.reading);
+app.get('/conversation/:mid', routes.conversation);
 app.get('/reading/:username', routes.reading);
 app.get('/readers/:username', routes.readers);
 app.get('/message/:id', routes.showmessage);
