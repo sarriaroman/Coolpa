@@ -577,6 +577,7 @@ exports.conversation = function(req, res) {
                 response.render('conversation', {
                     user: request.session.uid,
                     username: '', 
+                    user_data: data,
                     messages: msgs
                 });
             });
