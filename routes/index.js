@@ -553,7 +553,7 @@ exports.connect = function(req, res) {
 };
 
 var conversation_factory = function(msgs, id, request, response, callback) {
-    var message = require('../models/messages')();
+    var message = (require('../models/messages'))();
 
     message.get(id, function(err, data) {
         msgs.push( data );
