@@ -574,7 +574,7 @@ exports.conversation = function(req, res) {
             var users = new (require('../models/users'))();
 
             users.user( request.session.uid, function(err, data) {
-                res.render('conversation', {
+                response.render('conversation', {
                     user: request.session.uid,
                     username: '', 
                     messages: msgs
