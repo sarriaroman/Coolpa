@@ -197,7 +197,11 @@
                                                 <button class="btn" rel="tooltip" title="Unhide message" onclick="location.href='/unhide/<%=data._id%>';"><i class="icon-eye-open"></i></button>
                                                 <% } %>
                                                 <% } %>
+                                                <% if( data.reply_to == -1 ) { %>
                                                 <button rel="tooltip" title="Link to this message" class="btn"><a href="/message/<%= data._id %>" target="_BLANK"><i class="icon-globe"></i></a></button>
+                                                <% } else { %>
+                                                <button class="btn" rel="tooltip" title="See conversation" onclick="location.href='/conversation/<%=data._id%>';"><i class="icon-comment"></i></button>
+                                                <% } %>
                                                 <button class="btn" rel="tooltip" title="Add/Remove Favorite" onclick="javascript:favorite('<%=data._id%>');" id="fav_<%=data._id%>"><% if( user_data.favorites.indexOf(data._id.toString()) == -1 ) { %><i class="icon-star-empty"></i><% } else { %><i class="icon-star"></i><% } %></button>
                                             </div>
                                         </div>
