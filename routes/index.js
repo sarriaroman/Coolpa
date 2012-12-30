@@ -573,9 +573,9 @@ exports.conversation = function(req, res) {
         conversation_factory([], req.params.mid, req, res, function(msgs, request, response) {
             var users = new (require('../models/users'))();
 
-            users.user( session_uid, function(err, data) {
+            users.user( request.session.uid, function(err, data) {
                 res.render('conversation', {
-                    user: req.session.uid,
+                    user: request.session.uid,
                     username: '', 
                     messages: msgs
                 });
