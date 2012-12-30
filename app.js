@@ -80,6 +80,7 @@ app.get('/terms', routes.terms);
 app.get('/start', routes.start);
 app.get('/mentions', routes.mentions);
 app.get('/privates', routes.messages);
+app.get('/conversation/:mid', routes.reading);
 app.get('/reading/:username', routes.reading);
 app.get('/readers/:username', routes.readers);
 app.get('/message/:id', routes.showmessage);
@@ -113,7 +114,7 @@ app.post('/unfavorite', routes.unfavorite);
 
 
 // Temporal
-app.get('/update_users', routes.create_images);
+//app.get('/update_users', routes.create_images);
 
 // API's
 app.post('/api/login', routes.mobile_auth);

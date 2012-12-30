@@ -552,6 +552,38 @@ exports.connect = function(req, res) {
     });
 };
 
+var conversation_factory = function(msgs, id, request, response, callback) {
+    var message = require('../models/messages')();
+
+    message.get(id, function(err, data) {
+        msgs.push( data );
+
+        if( data.reply_to == '' || data.reply_to == -1 ) {
+            callback(msgs, request, response);
+        } else {
+            conversation_factory(msgs, data.reply_to, request, response, callback);
+        }
+    });
+};
+
+exports.conversation = function(req, res) {
+    if( req.session.uid == undefined ) {
+        res.redirect('/');
+    } else {
+        conversation_factory([], req.params.mid, req, res, function(msgs, request, response) {
+            var users = new (require('../models/users'))();
+
+            users.user( session_uid, function(err, data) {
+                res.render('conversation', {
+                    user: req.session.uid,
+                    username: '', 
+                    messages: msgs
+                });
+            });
+        });
+    }
+};
+
 exports.favorites = function(req, res) {
     var messages = new (require('../models/messages'))();
     var users = new (require('../models/users'))();
