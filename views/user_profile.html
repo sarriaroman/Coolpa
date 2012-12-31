@@ -222,13 +222,12 @@
                             <span class="post-divider"></span>
 
                             <% invites.forEach( function(data) {  %>
-                            <div>
+                            <div class="invites">
                                 <button class="btn" rel="tooltip" title="Send again" onclick="#';"><i class="icon-share-alt"></i></button>
                                 <button class="btn" rel="tooltip" title="Delete invitation" onclick="#';"><i class="icon-remove"></i></button>
                                 <span><%=data.email%></span>
-                                <br/>
-                                <span class="post-divider"></span>
                             </div>
+                            <span class="post-divider"></span>
                             <% }); %>
                         </div>
                     </div>
