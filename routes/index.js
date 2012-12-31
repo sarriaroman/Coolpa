@@ -1,7 +1,9 @@
-
 /*
- * GET home page.
+ * WebPage and Internal Mobile API
  */
+
+// Load factories
+var factories = require("factories");
 
  exports.index = function(req, res){
     if( req.session.uid == undefined ) {
@@ -131,7 +133,7 @@ exports.mobile_push = function(req, res) {
     });
 };
 
-var message_factory = function(req, res, information, callback) {
+/*var message_factory = function(req, res, information, callback) {
     var Messages = require('../models/messages');
     var users = new (require('../models/users'))();
     var fs = require('fs');
@@ -290,10 +292,10 @@ var message_factory = function(req, res, information, callback) {
 
 });
 
-};
+};*/
 
 exports.mobile_newest = function(req, res) {
-    mobile_security(req, res, function(request, response){
+    factories.mobile_security(req, res, function(request, response){
         var users = new (require('../models/users'))();
         var messages = new (require('../models/messages'))();
 
@@ -428,7 +430,7 @@ exports.mobile_message = function(req, res) {
             }
         }
 
-        message_factory(request, response,
+        factories.message_factory(request, response,
             {
                 uid: req.body.username,
                 message: req.body.message,
@@ -495,7 +497,7 @@ exports.message = function(req, res) {
         }
     }
 
-    message_factory(req, res, {
+    factories.message_factory(req, res, {
             uid: req.session.uid,
             message: req.body.message,
             public: (req.body.public == 55),
@@ -552,7 +554,7 @@ exports.connect = function(req, res) {
     });
 };
 
-var conversation_factory = function(msgs, id, request, response, callback) {
+/*var conversation_factory = function(msgs, id, request, response, callback) {
     var message = new (require('../models/messages'))();
 
     message.get(id, function(err, data) {
@@ -564,13 +566,13 @@ var conversation_factory = function(msgs, id, request, response, callback) {
             conversation_factory(msgs, data.reply_to, request, response, callback);
         }
     });
-};
+};*/
 
 exports.conversation = function(req, res) {
     if( req.session.uid == undefined ) {
         res.redirect('/');
     } else {
-        conversation_factory([], req.params.mid, req, res, function(msgs, request, response) {
+        factories.conversation_factory([], req.params.mid, req, res, function(msgs, request, response) {
             var users = new (require('../models/users'))();
 
             users.user( request.session.uid, function(err, data) {
@@ -706,7 +708,7 @@ var date_sort_desc = function (date1, date2) {
   return 0;
 };
 
-var home_factory = function(session_uid, callback) {
+/*var home_factory = function(session_uid, callback) {
     var messages = new (require('../models/messages'))();
     var users = new (require('../models/users'))();
 
@@ -741,11 +743,11 @@ var home_factory = function(session_uid, callback) {
             } );
         });
     } );
-};
+};*/
 
 exports.mobile_start = function(req, res) {
-    mobile_security(req, res, function(request, response){
-        home_factory(request.body.username, function(data){
+    factories.mobile_security(req, res, function(request, response){
+        factories.home_factory(request.body.username, function(data){
             response.json(data);
         });
     });
@@ -793,7 +795,7 @@ exports.start = function(req, res) {
     }
 };
 
-var privates_factory = function(session_uid, callback) {
+/*var privates_factory = function(session_uid, callback) {
     var messages = new (require('../models/messages'))();
     var users = new (require('../models/users'))();
 
@@ -815,11 +817,11 @@ var privates_factory = function(session_uid, callback) {
             } );
         });
     } );
-};
+};*/
 
 exports.mobile_privates = function(req, res) {
-    mobile_security(req, res, function(request, response){
-        privates_factory(request.body.username, function(data){
+    factories.mobile_security(req, res, function(request, response){
+        factories.privates_factory(request.body.username, function(data){
             response.json(data);
         });
     });
@@ -896,7 +898,7 @@ exports.more = function(req, res) {
     }
 };
 
-var mentions_factory = function(session_uid, callback) {
+/*var mentions_factory = function(session_uid, callback) {
     var messages = new (require('../models/messages'))();
     var users = new (require('../models/users'))();
 
@@ -931,11 +933,11 @@ var mentions_factory = function(session_uid, callback) {
             } );
         });
     } );
-};
+};*/
 
 exports.mobile_mentions = function(req, res) {
-    mobile_security(req, res, function(request, response){
-        mentions_factory(request.body.username, function(data){
+    factories.mobile_security(req, res, function(request, response){
+        factories.mentions_factory(request.body.username, function(data){
             response.json(data);
         });
     });
@@ -1533,7 +1535,7 @@ exports.showmessage = function(req, res) {
     }
 };
 
-var remove_factory = function(mid, uid, req, res, callback) {
+/*var remove_factory = function(mid, uid, req, res, callback) {
     var messages = new (require('../models/messages'))();
         
     messages.get(mid, function(err, data) {
@@ -1545,21 +1547,21 @@ var remove_factory = function(mid, uid, req, res, callback) {
             callback(false, req, res);
         }
     });
-};
+};*/
 
 exports.remove_message = function(req, res) {
     if( req.session.uid == undefined ) {
         res.redirect('/');
     } else {
-        remove_factory(req.params.id, req.session.uid, req, res, function( deleted, req, res) {
+        factories.remove_factory(req.params.id, req.session.uid, req, res, function( deleted, req, res) {
             res.redirect('/');
         });
     }
 };
 
 exports.mobile_remove = function(req, res) {
-    mobile_security(req, res, function(request, response){
-        remove_factory(req.body.id, req.body.username, request, response, function( deleted, req, res) {
+    factories.mobile_security(req, res, function(request, response){
+        factories.remove_factory(req.body.id, req.body.username, request, response, function( deleted, req, res) {
             res.json({
                 result: deleted
             });
