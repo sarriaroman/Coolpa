@@ -97,8 +97,8 @@ app.get('/unhide/:id', routes.unhide_message);
 app.get('/search/:token', routes.search);
 app.get('/avatars/:username/:file', routes.avatars);
 app.get('/i/:file', routes.images);
-app.post('/invite_again/:code', routes.invite_again);
-app.post('/invite_remove/:code', routes.invite_remove);
+app.get('/invite_again/:code', routes.invite_again);
+app.get('/invite_remove/:code', routes.invite_remove);
 
 // POST
 app.post('/auth', routes.auth);
