@@ -212,6 +212,27 @@
                 </div>
             </form>
 
+            <div class="post">
+                <div class="timeline-preview">
+                    <div class="timeline-icon"><span class="icon-chat"></span></div>
+                    <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                    <div class="timeline-content-page">
+                        <div class="textpost">
+                            <h2 class="post-title">Invitations sent</h2>
+                            <span class="post-divider"></span>
+
+                            <% invites.forEach( function(data) {  %>
+                            <div>
+                                <button class="btn" rel="tooltip" title="Send again" onclick="#';"><i class="icon-share-alt"></i></button>
+                                <button class="btn" rel="tooltip" title="Delete invitation" onclick="#';"><i class="icon-remove"></i></button>
+                                <span><%=data.email%></span>
+                                <span class="post-divider"></span>
+                            </div>
+                            <% }); %>
+                        </div>
+                    </div>
+            </div>
+
         </div> <!-- End .timeline-preview -->
     </div> <!-- End .post -->               
 
