@@ -787,7 +787,6 @@ exports.profile = function(req, res) {
 
         users.user( req.session.uid, function(err, data) {
             invitations.getByInviter( data._id, function( err, invites ) {
-                console.log(invites);
                 res.render('user_profile', {
                     user: req.session.uid,
                     data: data,
