@@ -3,7 +3,7 @@
  */
 
 // Load factories
-var factories = require("factories");
+var factories = require("./factories");
 
  exports.index = function(req, res){
     if( req.session.uid == undefined ) {
@@ -311,7 +311,7 @@ exports.mobile_newest = function(req, res) {
 };
 
 exports.mobile_more = function(req, res) {
-    mobile_security(req, res, function(request, response){
+    factories.mobile_security(req, res, function(request, response){
         var users = new (require('../models/users'))();
         var messages = new (require('../models/messages'))();
 
