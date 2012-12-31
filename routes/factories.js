@@ -172,7 +172,7 @@ exports.conversation_factory = function(msgs, id, request, response, callback) {
         if( data.reply_to == '' || data.reply_to == -1 ) {
             callback(msgs, request, response);
         } else {
-            this(msgs, data.reply_to, request, response, callback);
+            exports.conversation_factory(msgs, data.reply_to, request, response, callback);
         }
     });
 };
