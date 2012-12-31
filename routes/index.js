@@ -499,8 +499,8 @@ exports.user = function(req, res) {
                     });
                 } );
             });
-}
-} );
+        }
+    } );
 };
 
 var mobile_security = function(req, res, callback) {
@@ -780,16 +780,21 @@ exports.profile = function(req, res) {
         res.redirect('/');
     } else {
         var users = new (require('../models/users'))();
+        var invitations = new (require('../models/invitations'))();
         
         var notification = ( req.session.notification == undefined ) ? false : req.session.notification;
         delete req.session.notification;
 
         users.user( req.session.uid, function(err, data) {
-            res.render('user_profile', {
-                user: req.session.uid,
-                data: data,
-                notification: notification
-            }); 
+            invitations.getByInviter( data._id, function( err, invites ) {
+                console.log(invites);
+                res.render('user_profile', {
+                    user: req.session.uid,
+                    data: data,
+                    invites: invites,
+                    notification: notification
+                });
+            });
         });
     }
 };
