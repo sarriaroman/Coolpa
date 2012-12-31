@@ -1109,7 +1109,11 @@ exports.invite_again = function(req, res) {
                 }
             });
 
-            res.redirect('/profile#invites');
+            req.session.notification = {
+                type: 'invite_again',
+                message: 'Invitation re-sent to ' + data.email
+            };
+            res.redirect('/profile#invite_again');
         });
     });
 };

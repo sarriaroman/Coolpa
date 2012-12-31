@@ -212,7 +212,7 @@
                 </div>
             </form>
 
-            <div class="post">
+            <div class="post" id="invite_again">
                 <div class="timeline-preview">
                     <div class="timeline-icon"><span class="icon-chat"></span></div>
                     <div class="timeline-pointer"><span class="tl-pointer"></span></div>
@@ -220,6 +220,12 @@
                         <div class="textpost">
                             <h2 class="post-title">Invitations sent</h2>
                             <span class="post-divider"></span>
+
+                            <% if( notification ) { %>
+                            <% if( notification.type == 'invite_again' ) { %>
+                                <p><%=notification.message%></p>
+                            <% } %>
+                            <% } %>
 
                             <% invites.forEach( function(data) {  %>
                             <div class="invites">
