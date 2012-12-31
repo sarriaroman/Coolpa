@@ -1088,6 +1088,43 @@ exports.invite = function(req, res) {
 }
 };
 
+exports.invite_again = function(req, res) {
+    var invites = new (require('../models/invitations'))();
+    var fs = require('fs');
+    var ses = new (require('../classes/ses'))();
+    var ejs = require('ejs');
+
+    invites.get( req.params.code, function(err, data) {
+        fs.readFile('views/invite_template.html', 'UTF-8', function(err, html) {
+
+            ses.get().send({
+                from: 'Coolpa.net <info@coolpa.net>',
+                to: [data.email],
+                subject: 'You have been invited to Coolpa.net',
+                    body: {
+                        html: ejs.render(html, {
+                            uid: req.session.uid,
+                            code: data.code
+                        })
+                }
+            });
+
+            res.redirect('/profile#invites');
+        });
+    });
+};
+
+exports.invite_remove = function(req, res) {
+    var invites = new (require('../models/invitations'))();
+    var fs = require('fs');
+    var ses = new (require('../classes/ses'))();
+    var ejs = require('ejs');
+
+    invites.remove( req.params.code, function(err) {
+        res.redirect('/profile#invites');
+    });
+};
+
 exports.invitation = function(req, res) {
     var invites = new (require('../models/invitations'))();
     

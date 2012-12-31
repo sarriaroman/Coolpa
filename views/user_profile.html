@@ -223,8 +223,8 @@
 
                             <% invites.forEach( function(data) {  %>
                             <div class="invites">
-                                <button class="btn" rel="tooltip" title="Send again" onclick="#';"><i class="icon-share-alt"></i></button>
-                                <button class="btn" rel="tooltip" title="Delete invitation" onclick="#';"><i class="icon-remove"></i></button>
+                                <button class="btn" rel="tooltip" title="Send again" onclick="location.href='/invite_again/<%=data.code%>';"><i class="icon-share-alt"></i></button>
+                                <button class="btn" rel="tooltip" title="Delete invitation" onclick="location.href='/invite_remove/<%=data.code%>';"><i class="icon-remove"></i></button>
                                 <span><%=data.email%></span>
                             </div>
                             <% }); %>
