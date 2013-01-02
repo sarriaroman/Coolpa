@@ -69,15 +69,14 @@ var messages = (function( ) {
 
     messages.prototype.recommendationsByMessages = function( fcallback ) {
         return this.database.connection().collection('Messages').group(["sender"], {}, {"count": 0}, "function(obj, prev) { prev.count++; }", false, function(err, recommendations) {
-            console.log(err);
-            console.log(recommendations);
             var async = require('async');
 
             async.sortBy(recommendations, function(reco, callback){
                 if( reco.count > 4 ) {
                     callback(reco.count);
                 }
-            }, function(results){
+            }, function(err,results){
+                console.log(results);
                 fcallback( results.splice(0, 5) );
             });
         });
