@@ -212,6 +212,10 @@ exports.home_factory = function(session_uid, callback) {
     var users = new (require('../models/users'))();
 
     users.user( session_uid, function(err, data) {
+        if(data == null || err ) {
+            req.session.uid = undefined;
+            delete req.session.uid;
+        } else {
         messages.find( session_uid, data.connections.slice(0), new Date(), function(err, docs) {
             messages.count( session_uid, [], function(err, cnt) {
                 users.connections( session_uid, function(err, conns) {
@@ -241,6 +245,7 @@ exports.home_factory = function(session_uid, callback) {
                 }); 
             } );
         });
+        }
     } );
 };
 

@@ -142,8 +142,6 @@ http.createServer(app).listen(app.get('port'), function(){
 // Exception Handling
 process.on('uncaughtException', function (err) {
 	console.trace(err);
-
-    req.session.uid = undefined;
 	
     process.exit(0);
 });
