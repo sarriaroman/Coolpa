@@ -1193,14 +1193,14 @@ exports.invitation = function(req, res) {
                 code: bdata.code,
                 email: bdata.email
             },
-            username: bdata.username.toLowerCase(),
+            username: bdata.username.toLowerCase().trim(),
             name: bdata.name,
             notification: {
                 type: 'alert-error',
                 message: 'The username you select is wrong. A right username must have at least 3 characters, no more than 15 and no spaces.'
             }
         });
-    } else if( bdata.password != bdata.repeatpassword ) {
+    } else if( bdata.password.trim().length == 0 || bdata.repeatpassword.trim().length == 0 || bdata.password != bdata.repeatpassword ) {
         res.render('invitation', {
             user: '',
             data: {
