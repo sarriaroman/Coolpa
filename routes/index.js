@@ -1186,7 +1186,7 @@ exports.invitation = function(req, res) {
     console.log(selecteduname);
     console.log("Test " + reg.test(selecteduname));
 
-    if( selecteduname.length < 3 || selecteduname.length > 15 || reg.test(selecteduname) === false ) {
+    if( reg.test(selecteduname) === false ) {
         res.render('invitation', {
             user: '',
             data: {
