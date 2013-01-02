@@ -17,6 +17,13 @@ exports.message_factory = function(req, res, information, callback) {
         callback(req, res, information);
         return;
     }
+
+    // Protect the platform from HTML injection
+    msg = msg.replace(/<\s*br\/*>/gi, " ");
+    msg = msg.replace(/<\s*a.*href="(.*?)".*>(.*?)<\/a>/gi, " $1 "); //" $2 (Link->$1) "
+    msg = msg.replace(/<\s*\/*.+?>/ig, " ");
+    msg = msg.replace(/ {2,}/gi, " ");
+    msg = msg.replace(/\n+\s*/gi, " ");
     
     var ids = new Array();
     msg.replace(/[:]+[A-Za-z0-9-_]+/g, function(u) {
