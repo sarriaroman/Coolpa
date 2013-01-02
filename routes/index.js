@@ -1059,7 +1059,7 @@ exports.invite = function(req, res) {
             var ems = invitations.split(',');
             console.log(ems);
             for( var i = 0 ; i < ems.length ; i++ ) {
-                var email = ems[i].replace(/^\s+/g,'').replace(/\s+$/g,'');
+                var email = ems[i].trim();
 
                 if( re.test(email) ) {
                     emails.push(email);
@@ -1178,13 +1178,14 @@ exports.invitation = function(req, res) {
     var ses = new (require('../classes/ses'))();
     var ejs = require('ejs');
     
-    var reg = /^(\w){3,15}$/g;
+    var reg = /^(\w){3,15}$/;
     
     var bdata = req.body;
     var selecteduname = req.body.username.toLowerCase().trim();
 
+    console.log("Test " + reg.test(selecteduname) );
+
     if( reg.test(selecteduname) !== true ) {
-        console.log("Invitation error by RegExp");
         res.render('invitation', {
             user: '',
             data: {
