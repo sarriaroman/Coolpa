@@ -96,9 +96,7 @@ function favorite(mid) {
     // Notifications section
     if (window.webkitNotifications) {
         if (window.webkitNotifications.checkPermission() != 0) {
-            window.webkitNotifications.requestPermission(function() {
-                console.log("Granted");
-            });
+            $("#html5_notification").show();
         }
     } else {
         console.log("Notifications are not supported for this Browser/OS version yet.");
@@ -125,12 +123,6 @@ function favorite(mid) {
         if (window.webkitNotifications) {
             if (window.webkitNotifications.checkPermission() == 0) {
                 window.webkitNotifications.createNotification('http://coolpa.net/avatars/avatar.jpg', data.title, data.message).show();
-            } else {
-                window.webkitNotifications.requestPermission(function() {
-                    console.log("Granted");
-
-                    window.webkitNotifications.createNotification('http://coolpa.net/avatars/avatar.jpg', data.title, data.message).show();
-                });
             }
         }
         if( data.type == 'mention' ) {

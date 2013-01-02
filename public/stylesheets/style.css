@@ -99,6 +99,10 @@ p {font-weight: normal;}
 		padding-top: 4px;
 		padding-bottom: 4px;
 	}
+
+	#html5_notification {
+		display: none;
+	}
 	
 	span.pointer-sub {
 		position: absolute;
