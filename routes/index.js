@@ -1058,7 +1058,7 @@ exports.invite = function(req, res) {
             console.log(ems);
             for( var i = 0 ; i < ems.length ; i++ ) {
                 var email = ems[i].replace(/^\s+/g,'').replace(/\s+$/g,'');
-                
+
                 if( re.test(email) ) {
                     emails.push(email);
                 }
@@ -1179,7 +1179,7 @@ exports.invitation = function(req, res) {
     var reg = /^[ ]*[A-Za-z0-9-_]+/g;
     
     var bdata = req.body;
-    var selecteduname = req.body.username.toLowerCase();
+    var selecteduname = req.body.username.toLowerCase().trim();
     
     if( selecteduname.length < 3 || !reg.test(selecteduname) ) {
         res.render('invitation', {

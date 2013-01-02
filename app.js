@@ -73,6 +73,10 @@ String.prototype.parseSearches = function() {
     });
 };
 
+String.prototype.trim = function() {
+    return this.replace(/^\s+/g,'').replace(/\s+$/g,'');
+};
+
 // GET
 app.get('/', routes.index);
 app.get('/about', routes.about);
