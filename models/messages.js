@@ -75,7 +75,7 @@ var messages = (function( ) {
                 if( reco.count > 4 ) {
                     callback(reco.count);
                 }
-            }, function(err,results){
+            }, function(results){
                 console.log(results);
                 fcallback( results.splice(0, 5) );
             });
