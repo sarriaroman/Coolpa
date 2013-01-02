@@ -604,27 +604,29 @@ exports.messages = function(req, res) {
     if( req.session.uid == undefined ) {
         res.redirect('/');
     } else {
-        var messages = new (require('../models/messages'))();
-        var users = new (require('../models/users'))();
+        factories.security(req, res, function(req, res) {
+            var messages = new (require('../models/messages'))();
+            var users = new (require('../models/users'))();
         
-        users.user( req.session.uid, function(err, data) {
-            messages.privates( req.session.uid, new Date(), function(err, docs) {
-                messages.count(req.session.uid, [], function(err, cnt) {
-                    users.connections( req.session.uid, function(err, conns) {
+            users.user( req.session.uid, function(err, data) {
+                messages.privates( req.session.uid, new Date(), function(err, docs) {
+                    messages.count(req.session.uid, [], function(err, cnt) {
+                        users.connections( req.session.uid, function(err, conns) {
 
-                        res.render('privates', {
-                            user: req.session.uid,
-                            username: '',
-                            messages: docs, // Reversing array
-                            count: cnt,
-                            connections: data.connections.length,
-                            connecteds: conns.length,
-                            section: 'privates'
+                            res.render('privates', {
+                                user: req.session.uid,
+                                username: '',
+                                messages: docs, // Reversing array
+                                count: cnt,
+                                connections: data.connections.length,
+                                connecteds: conns.length,
+                                section: 'privates'
+                            }); 
                         }); 
-                    }); 
-                } );
-            });
-        } );
+                    } );
+                });
+            } );
+        });
     }
 };
 
@@ -683,6 +685,7 @@ exports.mentions = function(req, res) {
     if( req.session.uid == undefined ) {
         res.redirect('/');
     } else {
+        factories.security(req, res, function(req, res) {
         var messages = new (require('../models/messages'))();
         var users = new (require('../models/users'))();
         
@@ -718,6 +721,7 @@ exports.mentions = function(req, res) {
                 } );
             });
         } );
+    });
     }
 };
 
