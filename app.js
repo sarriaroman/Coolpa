@@ -82,11 +82,11 @@ String.prototype.trimString = function() {
     });
 };
 
-var online = new Array();
+GLOBAL.online = new Array();
 
 io.sockets.on('connection', function (socket) {
     socket.on('username', function(username) {
-        online[username] = socket;
+        GLOBAL.online[username] = socket;
     });
 });
 

@@ -85,9 +85,9 @@ exports.message_factory = function(req, res, information, callback) {
                             console.log('Email sent to ' + data._id);
                             }
                             
-                            console.log(online);
-                            if( online[data._id] != undefined ) {
-                                online[data._id].emit('notification', { 
+                            console.log(GLOBAL.online);
+                            if( GLOBAL.online[data._id] != undefined ) {
+                                GLOBAL.online[data._id].emit('notification', { 
                                     type: 'mention',
                                     title: ':' + msg.sender + ' is talking about you',
                                     message: msg.message
@@ -149,9 +149,9 @@ exports.message_factory = function(req, res, information, callback) {
                             });
                             }
                     
-                            console.log(online);
-                            if( online[data._id] != undefined ) {
-                                online[data._id].emit('notification', { 
+                            console.log(GLOBAL.online);
+                            if( GLOBAL.online[data._id] != undefined ) {
+                                GLOBAL.online[data._id].emit('notification', { 
                                     type: 'private',
                                     title: ':' + msg.sender + ' sent you a new private message',
                                     message: msg.message
