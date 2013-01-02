@@ -212,7 +212,7 @@ exports.home_factory = function(session_uid, callback) {
     var users = new (require('../models/users'))();
 
     users.user( session_uid, function(err, data) {
-        if(data == null || err ) {
+        if(data == null || data == undefined || err ) {
             req.session.uid = undefined;
             delete req.session.uid;
         } else {
