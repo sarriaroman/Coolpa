@@ -120,6 +120,7 @@ function favorite(mid) {
     var socket = io.connect('http://coolpa.net:3001');
     socket.emit('username', '<%=user%>');
     socket.on('notification', function (data) {
+        console.log(data);
         if (window.webkitNotifications) {
             window.webkitNotifications.createNotification('http://coolpa.net/avatars/avatar.jpg', data.title, data.message).show();
         }

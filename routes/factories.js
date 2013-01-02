@@ -85,6 +85,7 @@ exports.message_factory = function(req, res, information, callback) {
                             console.log('Email sent to ' + data._id);
                             }
                             
+                            console.log(online);
                             if( online[data._id] != undefined ) {
                                 online[data._id].emit('notification', { 
                                     type: 'mention',
@@ -148,6 +149,7 @@ exports.message_factory = function(req, res, information, callback) {
                             });
                             }
                     
+                            console.log(online);
                             if( online[data._id] != undefined ) {
                                 online[data._id].emit('notification', { 
                                     type: 'private',
