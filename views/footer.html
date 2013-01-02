@@ -151,6 +151,14 @@ function favorite(mid) {
             $("#badge_private").show();
         }
     }
+
+    function enableNotifications() {
+        window.webkitNotifications.requestPermission(function() {
+            if (window.webkitNotifications.checkPermission() == 0) {
+                $("#html5_notification").hide();
+            }
+        });
+    }
 <% } %>
 
 </script>
