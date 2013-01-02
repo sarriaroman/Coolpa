@@ -13,6 +13,7 @@
     "easyimage": "*",
     "express-session-mongo": "*",
     "knox": "*",
-    "gcm": "*"
+    "gcm": "*",
+    "socket.io": "*"
   }
 }

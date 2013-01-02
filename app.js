@@ -13,6 +13,9 @@ var express = require('express')
 
 var app = express();
 
+var server = http.createServer(app),
+    io = require('socket.io').listen(server);
+
 app.engine('html', require('ejs').renderFile);
 
 app.configure(function(){
@@ -79,6 +82,14 @@ String.prototype.trimString = function() {
     });
 };
 
+var online = new Array();
+
+io.sockets.on('connection', function (socket) {
+    socket.on('username', function(username) {
+        online[username] = socket;
+    });
+});
+
 // GET
 app.get('/', routes.index);
 app.get('/about', routes.about);
@@ -135,7 +146,7 @@ app.post('/api/remove', routes.mobile_remove);
 app.post('/api/more', routes.mobile_more);
 app.post('/api/push', routes.mobile_push);
 
-http.createServer(app).listen(app.get('port'), function(){
+server.listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));
 });
 
