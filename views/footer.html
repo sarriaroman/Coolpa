@@ -96,7 +96,9 @@ function favorite(mid) {
     // Notifications section
     if (window.webkitNotifications) {
         if (window.webkitNotifications.checkPermission() != 0) {
-            window.webkitNotifications.requestPermission();
+            window.webkitNotifications.requestPermission(function() {
+                console.log("Granted");
+            });
         }
     } else {
         console.log("Notifications are not supported for this Browser/OS version yet.");
