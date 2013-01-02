@@ -73,7 +73,7 @@ var messages = (function( ) {
 
             async.sortBy(recommendations, function(reco, callback){
                 callback(null, reco.count);
-            }, function(results){
+            }, function(err, results){
                 console.log(results);
                 fcallback( results.splice(0, 5) );
             });
