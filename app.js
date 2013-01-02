@@ -74,7 +74,9 @@ String.prototype.parseSearches = function() {
 };
 
 String.prototype.trim = function() {
-    return this.replace(/^\s+/g,'').replace(/\s+$/g,'');
+    return this.replace(/^\s+/g,'', function(u) {
+        return u.replace(/\s+$/g,'');
+    });
 };
 
 // GET

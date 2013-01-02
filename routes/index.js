@@ -1181,6 +1181,9 @@ exports.invitation = function(req, res) {
     var bdata = req.body;
     var selecteduname = req.body.username.toLowerCase().trim();
     
+    console.log(selecteduname);
+    console.log("Test " + reg.test(selecteduname));
+
     if( selecteduname.length < 3 || !reg.test(selecteduname) ) {
         res.render('invitation', {
             user: '',
@@ -1192,7 +1195,7 @@ exports.invitation = function(req, res) {
             name: bdata.name,
             notification: {
                 type: 'alert-error',
-                message: 'The username you select is wrong. A right username must have at least 3 characters.'
+                message: 'The username you select is wrong. A right username must have at least 3 characters and no spaces.'
             }
         });
     } else if( bdata.password != bdata.repeatpassword ) {
