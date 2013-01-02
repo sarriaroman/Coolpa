@@ -69,6 +69,7 @@ var messages = (function( ) {
 
     messages.prototype.recommendationsByMessages = function( fcallback ) {
         return this.database.connection().collection('Messages').group({"sender":true}, {"count": 0}, "function(obj, prev) { prev.count++; }", true, function(err, recommendations) {
+            console.log(err);
             console.log(recommendations);
             var async = require('async');
 
