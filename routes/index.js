@@ -471,8 +471,9 @@ exports.disconnect = function(req, res) {
 
 exports.user = function(req, res) {
     if( req.session.uid == undefined ) {
+        req.session.auth_notification = 'Please login to see the user.';
         req.session.back = '/users/' + req.params.username;
-                
+
         res.redirect('/');
     } else {
         var messages = new (require('../models/messages'))();
