@@ -215,6 +215,8 @@ exports.home_factory = function(session_uid, callback) {
         if(data == null || data == undefined || err ) {
             req.session.uid = undefined;
             delete req.session.uid;
+
+            res.redirect('/');
         } else {
         messages.find( session_uid, data.connections.slice(0), new Date(), function(err, docs) {
             messages.count( session_uid, [], function(err, cnt) {
