@@ -1057,8 +1057,10 @@ exports.invite = function(req, res) {
             var ems = invitations.split(',');
             console.log(ems);
             for( var i = 0 ; i < ems.length ; i++ ) {
-                if( re.test(ems[i]) ) {
-                    emails.push(ems[i]);
+                var email = ems[i].replace(/^\s+/g,'').replace(/\s+$/g,'');
+                
+                if( re.test(email) ) {
+                    emails.push(email);
                 }
             }
         }
