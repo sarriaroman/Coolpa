@@ -124,7 +124,15 @@ function favorite(mid) {
     socket.on('notification', function (data) {
         console.log(data);
         if (window.webkitNotifications) {
-            window.webkitNotifications.createNotification('http://coolpa.net/avatars/avatar.jpg', data.title, data.message).show();
+            if (window.webkitNotifications.checkPermission() == 0) {
+                window.webkitNotifications.createNotification('http://coolpa.net/avatars/avatar.jpg', data.title, data.message).show();
+            } else {
+                window.webkitNotifications.requestPermission(function() {
+                    console.log("Granted");
+
+                    window.webkitNotifications.createNotification('http://coolpa.net/avatars/avatar.jpg', data.title, data.message).show();
+                });
+            }
         }
         if( data.type == 'mention' ) {
             var cnt = parseInt( window.localStorage.getItem(mention_store) ) + 1;
