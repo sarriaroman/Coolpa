@@ -72,7 +72,7 @@ var messages = (function( ) {
             var async = require('async');
 
             async.sortBy(recommendations, function(reco, callback){
-                callback(undefined, reco.count);
+                callback(null, reco.count);
             }, function(results){
                 console.log(results);
                 fcallback( results.splice(0, 5) );
