@@ -552,41 +552,43 @@ exports.start = function(req, res) {
     if( req.session.uid == undefined ) {
         res.redirect('/');
     } else {
-        var messages = new (require('../models/messages'))();
-        var users = new (require('../models/users'))();
+        factories.security(req, res, function(req, res) {
+            var messages = new (require('../models/messages'))();
+            var users = new (require('../models/users'))();
         
-        users.user( req.session.uid, function(err, data) {
-            messages.find( req.session.uid, data.connections.slice(0), new Date(), function(err, docs) {
-                messages.count(req.session.uid, [], function(err, cnt) {
-                    users.connections( req.session.uid, function(err, conns) {
+            users.user( req.session.uid, function(err, data) {
+                messages.find( req.session.uid, data.connections.slice(0), new Date(), function(err, docs) {
+                    messages.count(req.session.uid, [], function(err, cnt) {
+                        users.connections( req.session.uid, function(err, conns) {
                     	
-                    	var autocomplete = "[";
-                    	for( var i = 0 ; i < data.connections.length ; i++ ) {
-                    		var obj = "{'id':'" + data.connections[i] + "', 'name':':" + data.connections[i] + "', 'avatar': '/avatars/" + data.connections[i] + "/avatar.square.jpg" + "', 'icon':'" + "', 'type':'contact'}";
+                    	   var autocomplete = "[";
+                    	   for( var i = 0 ; i < data.connections.length ; i++ ) {
+                    		  var obj = "{'id':'" + data.connections[i] + "', 'name':':" + data.connections[i] + "', 'avatar': '/avatars/" + data.connections[i] + "/avatar.square.jpg" + "', 'icon':'" + "', 'type':'contact'}";
 
-                         if( i < (data.connections.length - 1) ) {
-                            obj += ",";
+                            if( i < (data.connections.length - 1) ) {
+                                obj += ",";
+                            }
+
+                            autocomplete += obj;
                         }
+                        autocomplete += "]";
 
-                        autocomplete += obj;
-                    }
-                    autocomplete += "]";
-
-                    res.render('index', {
-                        user: req.session.uid,
-                        user_data: data,
-                        username: '',
-                        messages: docs, // Reversing array
-                        count: cnt,
-                        connections: data.connections.length,
-                        connecteds: conns.length,
-                        autocomplete: autocomplete,
-                        section: 'start'
-                    }); 
-                    }); 
-                } );
-            });
-        } );
+                        res.render('index', {
+                            user: req.session.uid,
+                            user_data: data,
+                            username: '',
+                            messages: docs, // Reversing array
+                            count: cnt,
+                            connections: data.connections.length,
+                            connecteds: conns.length,
+                            autocomplete: autocomplete,
+                            section: 'start'
+                        }); 
+                        }); 
+                    } );
+                });
+            } );
+        });
     }
 };
 

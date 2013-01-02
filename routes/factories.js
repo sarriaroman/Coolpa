@@ -181,7 +181,18 @@ exports.security = function(req, res, callback) {
     if( req.session.uid == undefined ) {
         res.redirect('/');
     } else {
-        callback(req, res);
+        var users = new (require('../models/users'))();
+
+        users.user( req.session.uid, function(err, data) {
+            if(data == null || data == undefined || err ) {
+                req.session.uid = undefined;
+                delete req.session.uid;
+
+                res.redirect('/');
+            } else {
+                callback(req, res);
+            }
+        });
     }
 };
 
@@ -212,12 +223,6 @@ exports.home_factory = function(session_uid, callback) {
     var users = new (require('../models/users'))();
 
     users.user( session_uid, function(err, data) {
-        if(data == null || data == undefined || err ) {
-            req.session.uid = undefined;
-            delete req.session.uid;
-
-            res.redirect('/');
-        } else {
         messages.find( session_uid, data.connections.slice(0), new Date(), function(err, docs) {
             messages.count( session_uid, [], function(err, cnt) {
                 users.connections( session_uid, function(err, conns) {
@@ -247,7 +252,6 @@ exports.home_factory = function(session_uid, callback) {
                 }); 
             } );
         });
-        }
     } );
 };
 
