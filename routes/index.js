@@ -1178,7 +1178,7 @@ exports.invitation = function(req, res) {
     var ses = new (require('../classes/ses'))();
     var ejs = require('ejs');
     
-    var reg = /^[ ]*[A-Za-z0-9-_]+/g;
+    var reg = /^:?(\w){3,15}$/g;
     
     var bdata = req.body;
     var selecteduname = req.body.username.toLowerCase().trim();
@@ -1186,7 +1186,7 @@ exports.invitation = function(req, res) {
     console.log(selecteduname);
     console.log("Test " + reg.test(selecteduname));
 
-    if( selecteduname.length < 3 || !reg.test(selecteduname) ) {
+    if( selecteduname.length < 3 || selecteduname.length > 15 || !reg.test(selecteduname) ) {
         res.render('invitation', {
             user: '',
             data: {
@@ -1197,7 +1197,7 @@ exports.invitation = function(req, res) {
             name: bdata.name,
             notification: {
                 type: 'alert-error',
-                message: 'The username you select is wrong. A right username must have at least 3 characters and no spaces.'
+                message: 'The username you select is wrong. A right username must have at least 3 characters, no more than 15 and no spaces.'
             }
         });
     } else if( bdata.password != bdata.repeatpassword ) {
