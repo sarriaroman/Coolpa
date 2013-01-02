@@ -139,12 +139,14 @@ function favorite(mid) {
             $("#badge_mention").hide();
         } else {
             $("#badge_mention").html( ( parseInt( window.localStorage.getItem(mention_store) ) > 9 ) ? "9+" : parseInt( window.localStorage.getItem(mention_store) ) );
+            $("#badge_mention").show();
         }
 
         if( window.localStorage.getItem(private_store) == undefined || window.localStorage.getItem(private_store) == 0 ) {
             $("#badge_private").hide();
         } else {
             $("#badge_private").html( ( parseInt( window.localStorage.getItem(private_store) ) > 9 ) ? "9+" : parseInt( window.localStorage.getItem(private_store) ) );
+            $("#badge_private").show();
         }
     }
 <% } %>
