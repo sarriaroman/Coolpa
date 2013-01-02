@@ -14,6 +14,7 @@
     "express-session-mongo": "*",
     "knox": "*",
     "gcm": "*",
-    "socket.io": "*"
+    "socket.io": "*",
+    "async":"*"
   }
 }

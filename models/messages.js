@@ -66,6 +66,20 @@ var messages = (function( ) {
     messages.prototype.search = function( search, callback ) {
         return this.database.connection().collection('Messages').findItems({message: { $regex: search, $options: 'i' }, public: true}, callback);
     };
+
+    messages.prototype.recommendationsByMessages = function( fcallback ) {
+        return this.database.connection().collection('Messages').group(["sender"], {"count": 0}, "function(obj, prev) { prev.count++; }", true, function(err, recommendations) {
+            var async = require('async');
+
+            async.sortBy(recommendations, function(reco, callback){
+                if( reco.count > 4 ) {
+                    callback(reco.count);
+                }
+            }, function(results){
+                fcallback( results.splice(0, 5) );
+            });
+        });
+    };
     
     return messages;
 })();
