@@ -559,7 +559,7 @@ exports.start = function(req, res) {
             users.user( req.session.uid, function(err, data) {
                 messages.find( req.session.uid, data.connections.slice(0), new Date(), function(err, docs) {
                     messages.count(req.session.uid, [], function(err, cnt) {
-                        messages.recommendationsByMessages(function(err, recommendations) {
+                        messages.recommendationsByMessages(function(recommendations) {
                             console.log(recommendations);
                             users.connections( req.session.uid, function(err, conns) {
 
