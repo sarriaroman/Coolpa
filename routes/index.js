@@ -1041,20 +1041,29 @@ exports.invite = function(req, res) {
         var invitations = req.body.invitations;
         var emails = new Array();
         
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
         if( invitations.indexOf(',') == -1 ) {
-            emails.push(invitations);
+            if( re.test(invitations) ) {
+                emails.push(invitations);
+            } else {
+                req.session.notification = {
+                    type: 'invites',
+                    message: 'The email is not valid'
+                };
+                res.redirect('/profile#invites');
+            }
         } else {
-            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            
             var ems = invitations.split(',');
             
-            for( var email in ems ) {
-                if( re.test(email) ) {
-                    emails.push(email);
+            for( var i = 0 ; i < ems.length ; i++ ) {
+                if( re.test(ems[i]) ) {
+                    emails.push(ems[i]);
                 }
             }
         }
         
+        if( emails.length > 0 ) {
         fs.readFile('views/invite_template.html', 'UTF-8', function(err, html) {
             for( var i = 0 ; i < emails.length ; i++ ) {
                 var invitation = emails[i];
@@ -1091,7 +1100,8 @@ exports.invite = function(req, res) {
             };
             res.redirect('/profile#invites');
         });
-}
+        }
+    }
 };
 
 exports.invite_again = function(req, res) {
