@@ -1182,11 +1182,9 @@ exports.invitation = function(req, res) {
     
     var bdata = req.body;
     var selecteduname = req.body.username.toLowerCase().trim();
-    
-    console.log(selecteduname);
-    console.log("Test " + reg.test(selecteduname));
 
     if( reg.test(selecteduname) !== true ) {
+        console.log("Invitation error by RegExp");
         res.render('invitation', {
             user: '',
             data: {
