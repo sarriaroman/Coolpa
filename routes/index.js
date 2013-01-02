@@ -1176,7 +1176,7 @@ exports.invitation = function(req, res) {
     var ses = new (require('../classes/ses'))();
     var ejs = require('ejs');
     
-    var reg = /[A-Za-z0-9-_]+/g;
+    var reg = /^[ ]*[A-Za-z0-9-_]+/g;
     
     var bdata = req.body;
     var selecteduname = req.body.username.toLowerCase();

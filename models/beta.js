@@ -18,6 +18,10 @@ var beta = (function( ) {
     beta.prototype.remove = function( id, callback ) {
         return this.database.connection().collection('Beta').remove({_id: id}, callback);
     };
+
+    beta.prototype.all = function(callback) {
+        this.database.connection().collection('Beta').findItems({}, callback);
+    };
     
     return beta;
 })();
