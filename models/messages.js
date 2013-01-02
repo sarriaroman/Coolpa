@@ -73,7 +73,7 @@ var messages = (function( ) {
 
             async.sortBy(recommendations, function(reco, callback){
                 if( reco.count > 4 ) {
-                    callback(null, reco.count);
+                    callback(undefined, reco.count);
                 }
             }, function(results){
                 console.log(results);
