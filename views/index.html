@@ -110,6 +110,28 @@
                     </div>
                 </div>
             </div>
+
+            <% if(recommendations != undefined ) { %>
+            <div class="post" id="html5_notification">
+                <div class="timeline-preview">
+                    <div class="timeline-icon"><span class="icon-chat"></span></div>
+                    <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                    <div class="timeline-content-page">
+                        <div class="textpost">
+                            <h2 class="post-page-title">People that you maybe want to read!</h2>
+                            <span class="post-divider"></span>
+
+                            <div class="bodytext">
+                                <% recommendations.forEach(function(data){ 
+                                    if( data.sender == user ) return ""; %>
+                                    <img src="/avatars/<%= data.sender %>/avatar.square.jpg" class="recommend_pic" width="50" height="50" />
+                                <% }); %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } %>
             <% } else { %>
             <div id="profile-description">
                 <div class="timeline-preview">

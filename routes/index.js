@@ -560,7 +560,6 @@ exports.start = function(req, res) {
                 messages.find( req.session.uid, data.connections.slice(0), new Date(), function(err, docs) {
                     messages.count(req.session.uid, [], function(err, cnt) {
                         messages.recommendationsByMessages(function(recommendations) {
-                            console.log(recommendations);
                             users.connections( req.session.uid, function(err, conns) {
 
                                 var autocomplete = "[";
@@ -584,6 +583,7 @@ exports.start = function(req, res) {
                                     connections: data.connections.length,
                                     connecteds: conns.length,
                                     autocomplete: autocomplete,
+                                    recommendations: recommendations,
                                     section: 'start'
                                 }); 
                             }); 
@@ -718,6 +718,7 @@ exports.mentions = function(req, res) {
                             connections: data.connections.length,
                             connecteds: conns.length,
                             autocomplete: autocomplete,
+                            recommendations: undefined,
                             section: 'mentions'
                         }); 
                     }); 

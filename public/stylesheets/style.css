@@ -104,6 +104,11 @@ p {font-weight: normal;}
 		display: none;
 	}
 	
+	.recommend_pic {
+		margin-right: 5px;
+		margin-bottom: 5px;
+	}
+
 	span.pointer-sub {
 		position: absolute;
 		top: -7px;
