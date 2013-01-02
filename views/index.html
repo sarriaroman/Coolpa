@@ -124,7 +124,7 @@
                             <div class="bodytext">
                                 <% recommendations.forEach(function(data){ 
                                     if( data.sender == user ) return ""; %>
-                                    <img src="/avatars/<%= data.sender %>/avatar.square.jpg" class="recommend_pic" width="50" height="50" />
+                                    <a href="/users/<%= data.sender %>"><img src="/avatars/<%= data.sender %>/avatar.square.jpg" class="recommend_pic" width="40" height="40" /></a>
                                 <% }); %>
                             </div>
                         </div>
