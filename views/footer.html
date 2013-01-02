@@ -117,7 +117,7 @@ function favorite(mid) {
     // Show or hide depending of content
     update_counters();
 
-    var socket = io.connect('http://localhost');
+    var socket = io.connect('http://coolpa.net:3001');
     socket.emit('username', '<%=user%>');
     socket.on('notification', function (data) {
         if (window.webkitNotifications) {
