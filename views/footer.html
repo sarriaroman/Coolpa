@@ -135,10 +135,10 @@ function favorite(mid) {
             }
         }
         if( data.type == 'mention' ) {
-            var cnt = parseInt( window.localStorage.getItem(mention_store) ) + 1;
+            var cnt = parseInt( window.localStorage.getItem(mention_store) == undefined ? 0 : window.localStorage.getItem(mention_store) ) + 1;
             window.localStorage.setItem(mention_store, cnt);
         } else if( data.type == 'private' ) {
-            var cnt = parseInt( window.localStorage.getItem(private_store) ) + 1;
+            var cnt = parseInt( window.localStorage.getItem(private_store) == undefined ? 0 : window.localStorage.getItem(private_store) ) + 1;
             window.localStorage.setItem(private_store, cnt);
         }
 
