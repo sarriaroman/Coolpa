@@ -1186,7 +1186,7 @@ exports.invitation = function(req, res) {
     console.log(selecteduname);
     console.log("Test " + reg.test(selecteduname));
 
-    if( !reg.test(selecteduname) ) {
+    if( reg.test(selecteduname) !== true ) {
         res.render('invitation', {
             user: '',
             data: {
