@@ -74,7 +74,6 @@ var messages = (function( ) {
             async.sortBy(recommendations, function(reco, callback){
                 callback(null, reco.count);
             }, function(err, results){
-                console.log(results.reverse().splice(0, 5));
                 fcallback( results.reverse().splice(0, 5) );
             });
         });
