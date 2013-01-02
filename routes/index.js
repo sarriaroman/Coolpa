@@ -1062,6 +1062,8 @@ exports.invite = function(req, res) {
                 }
             }
         }
+
+        console.log(emails);
         
         if( emails.length > 0 ) {
         fs.readFile('views/invite_template.html', 'UTF-8', function(err, html) {
