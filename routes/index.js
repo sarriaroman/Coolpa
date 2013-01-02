@@ -1055,7 +1055,7 @@ exports.invite = function(req, res) {
             }
         } else {
             var ems = invitations.split(',');
-            
+            console.log(ems);
             for( var i = 0 ; i < ems.length ; i++ ) {
                 if( re.test(ems[i]) ) {
                     emails.push(ems[i]);
