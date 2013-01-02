@@ -73,7 +73,7 @@ String.prototype.parseSearches = function() {
     });
 };
 
-String.prototype.trim = function() {
+String.prototype.trimString = function() {
     return this.replace(/^\s+/g,'', function(u) {
         return u.replace(/\s+$/g,'');
     });
