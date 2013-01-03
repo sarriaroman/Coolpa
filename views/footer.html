@@ -93,21 +93,7 @@ function favorite(mid) {
 }
 
 <% if (typeof autocomplete != 'undefined') { %>
-    if("/start"==window.location.pathname||"/mentions"==window.location.pathname||"/privates"==window.location.pathname){var triggered=!1,trigger=":";$("#message").autocomplete({source:<%-autocomplete%>,search:function(){if(!triggered)return!1},select:function(a,b){var c=this.value,d=c.lastIndexOf(trigger);this.value=c.substring(0,d+trigger.length)+b.item.value;return triggered=!1},focus:function(){return!1},minLength:1}).bind("keyup",function(e){
-        switch (e.keyCode) {
-                    case $.ui.keyCode.ESCAPE:
-                        self.close(e);
-                        e.stopImmediatePropagation();
-                        break;
-                    case $.ui.keyCode.TAB:
-                    case $.ui.keyCode.UP:
-                    case $.ui.keyCode.DOWN:
-                        if (!self.menu.element.is(":visible")) {
-                            e.stopImmediatePropagation();
-                        }
-                }
-        var a=this.value,b=a.length;triggered?(b=a.lastIndexOf(trigger),a=a.substring(b+
-trigger.length),$(this).autocomplete("search",a)):b>=trigger.length&&(a=a.substring(b-trigger.length),triggered=a===trigger)});};
+    if("/start"==window.location.pathname||"/mentions"==window.location.pathname||"/privates"==window.location.pathname){var triggered=!1,trigger=":";$("#message").autocomplete({source:<%-autocomplete%>,search:function(){if(!triggered)return!1},select:function(a,b){var c=this.value,d=c.lastIndexOf(trigger);this.value=c.substring(0,d+trigger.length)+b.item.value;return triggered=!1},focus:function(){return!1},minLength:1}).bind("keyup",function(a){switch(a.keyCode){case $.ui.keyCode.ESCAPE:self.close(a);a.stopImmediatePropagation();break;case $.ui.keyCode.UP:case $.ui.keyCode.DOWN:self.menu.element.is(":visible")||a.stopImmediatePropagation()}a=this.value;var b=a.length;triggered?(b=a.lastIndexOf(trigger),a=a.substring(b+trigger.length),$(this).autocomplete("search",a)):b>=trigger.length&&(a=a.substring(b-trigger.length),triggered=a===trigger)});};
 <% } %>
 
 </script>
