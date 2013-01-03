@@ -93,50 +93,9 @@ function favorite(mid) {
 }
 
 <% if (user) { %>
-    
-    // Autocomplete
-    if( window.location.pathname == '/start' || window.location.pathname == '/mentions' || window.location.pathname == '/privates' ) {
-        var triggered = false;
-        var trigger = ":";
-
-        $("#message").autocomplete({
-            source: <%-autocomplete%>,
-            search: function() {
-                if (!triggered) {
-                    return false;
-                }
-            },
-            select: function(event, ui) {
-                var text = this.value;
-                var pos = text.lastIndexOf(trigger);
-
-                this.value = text.substring(0, pos + trigger.length) + ui.item.value;
-
-                triggered = false;
-
-                return false;
-            },
-            focus: function() { return false; },
-            minLength: 3
-        }).bind("keyup", function() {
-            var text = this.value;
-            var len = text.length;
-            var last;
-            var query;
-            var index;
-
-            if (triggered) {
-                index = text.lastIndexOf(trigger);
-                query = text.substring(index + trigger.length);
-                $(this).autocomplete("search", query);
-            } else if (len >= trigger.length) {
-                last = text.substring(len - trigger.length);
-                triggered = (last === trigger);
-            }
-        });​
-    }
-
-    <% } %>
+    if("/start"==window.location.pathname||"/mentions"==window.location.pathname||"/privates"==window.location.pathname){var triggered=!1,trigger=":";$("#message").autocomplete({source:<%-autocomplete%>,search:function(){if(!triggered)return!1},select:function(a,b){var c=this.value,d=c.lastIndexOf(trigger);this.value=c.substring(0,d+trigger.length)+b.item.value;return triggered=!1},focus:function(){return!1},minLength:3}).bind("keyup",function(){var a=this.value,b=a.length;triggered?(b=a.lastIndexOf(trigger),a=a.substring(b+
+trigger.length),$(this).autocomplete("search",a)):b>=trigger.length&&(a=a.substring(b-trigger.length),triggered=a===trigger)})};
+<% } %>
 
 </script>
 <% if (user) { %>
