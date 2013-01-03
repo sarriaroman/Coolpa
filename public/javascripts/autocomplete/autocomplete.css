@@ -40,7 +40,7 @@
 
 /* workarounds */
 * html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
-.ui-menu { list-style:none; padding-top: 2px; padding-bottom: 2px; border-bottom-radius: 10px; margin: 0; display:block; outline: none; background: white; }
+.ui-menu { list-style:none; padding-top: 2px; padding-bottom: 2px; margin: 0; display:block; outline: none; background: white; border-bottom-right-radius:10px; -moz-border-radius-bottomright: 10px; border-bottom-left-radius: 10px; -moz-border-radius-bottomleft: 10px; }
 .ui-menu .ui-menu { margin-top: -3px; position: absolute; }
 .ui-menu .ui-menu-item { margin: 0; padding: 0; zoom: 1; width: 100%; }
 .ui-menu .ui-menu-divider { margin: 5px -2px 5px -2px; height: 0; font-size: 0; line-height: 0; border-width: 1px 0 0 0; }
