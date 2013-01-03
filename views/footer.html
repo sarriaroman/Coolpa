@@ -159,6 +159,50 @@ function favorite(mid) {
             }
         });
     }
+
+    // Autocomplete
+    if( window.location.pathname == '/start' || window.location.pathname == '/mentions' || window.location.pathname == '/privates' ) {
+        var triggered = false;
+        var trigger = ":";
+
+        $("#message").autocomplete({
+            source: <%-autocomplete%>,
+            search: function() {
+                if (!triggered) {
+                    return false;
+                }
+            },
+            select: function(event, ui) {
+                var text = this.value;
+                var pos = text.lastIndexOf(trigger);
+      
+                this.value = text.substring(0, pos + trigger.length) + ui.item.value;
+        
+                triggered = false;
+        
+                return false;
+            },
+            focus: function() { return false; },
+            minLength: 0
+        }).bind("keyup", function() {
+            var text = this.value;
+            var len = text.length;
+            var last;
+            var query;
+            var index;
+    
+            if (triggered) {
+                index = text.lastIndexOf(trigger);
+                query = text.substring(index + trigger.length);
+                $(this).autocomplete("search", query);
+            }
+            else if (len >= trigger.length) {
+                last = text.substring(len - trigger.length);
+                triggered = (last === trigger);
+            }
+        });​
+    }
+
 <% } %>
 
 </script>

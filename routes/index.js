@@ -591,7 +591,8 @@ exports.start = function(req, res) {
 
                                 var autocomplete = "[";
                                 for( var i = 0 ; i < data.connections.length ; i++ ) {
-                                    var obj = "{'id':'" + data.connections[i] + "', 'name':':" + data.connections[i] + "', 'avatar': '/avatars/" + data.connections[i] + "/avatar.square.jpg" + "', 'icon':'" + "', 'type':'contact'}";
+                                    //var obj = "{'id':'" + data.connections[i] + "', 'name':':" + data.connections[i] + "', 'avatar': '/avatars/" + data.connections[i] + "/avatar.square.jpg" + "', 'icon':'" + "', 'type':'contact'}";
+                                    var obj = "'" + data.connections[i] + "'";
 
                                     if( i < (data.connections.length - 1) ) {
                                         obj += ",";
@@ -643,8 +644,19 @@ exports.messages = function(req, res) {
                     messages.count(req.session.uid, [], function(err, cnt) {
                         users.connections( req.session.uid, function(err, conns) {
 
+                            var autocomplete = "[";
+                            for( var i = 0 ; i < data.connections.length ; i++ ) {
+                                var obj = "'" + data.connections[i] + "'";
+
+                                if( i < (data.connections.length - 1) ) { obj += ","; }
+
+                                autocomplete += obj;
+                            }
+                            autocomplete += "]";
+
                             res.render('privates', {
                                 user: req.session.uid,
+                                autocomplete: autocomplete,
                                 username: '',
                                 messages: docs, // Reversing array
                                 count: cnt,
@@ -726,7 +738,8 @@ exports.mentions = function(req, res) {
 
                     	var autocomplete = "[";
                     	for( var i = 0 ; i < data.connections.length ; i++ ) {
-                    		var obj = "{'id':'" + data.connections[i] + "', 'name':':" + data.connections[i] + "', 'avatar': '/avatars/" + data.connections[i] + "/avatar.square.jpg" + "', 'icon':'" + "', 'type':'contact'}";
+                    		//var obj = "{'id':'" + data.connections[i] + "', 'name':':" + data.connections[i] + "', 'avatar': '/avatars/" + data.connections[i] + "/avatar.square.jpg" + "', 'icon':'" + "', 'type':'contact'}";
+                            var obj = "'" + data.connections[i] + "'";
 
                          if( i < (data.connections.length - 1) ) {
                             obj += ",";
