@@ -40,7 +40,29 @@
 
 /* workarounds */
 * html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
-.ui-menu { list-style:none; padding-top: 2px; padding-bottom: 2px; margin: 0; display:block; outline: none; background: white; border-bottom-right-radius:10px; -moz-border-radius-bottomright: 10px; border-bottom-left-radius: 10px; -moz-border-radius-bottomleft: 10px; overflow: hidden; max-height: 150px }
+.ui-menu { 
+	list-style:none; 
+	padding-top: 2px; 
+	padding-bottom: 2px; 
+	margin: 0; 
+	display:block; 
+	outline: none; 
+	background: white; 
+	border-bottom-right-radius:4px; 
+	-moz-border-radius-bottomright: 4px; 
+	border-bottom-left-radius: 4px; 
+	-moz-border-radius-bottomleft: 4px; 
+	overflow: hidden; 
+	max-height: 150px;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0, 0, 0, 0.2); 
+	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+     -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  	-webkit-background-clip: padding-box;
+     -moz-background-clip: padding;
+          background-clip: padding-box;
+}
 .ui-menu .ui-menu { margin-top: -3px; position: absolute; }
 .ui-menu .ui-menu-item { margin: 0; padding: 0; zoom: 1; width: 100%; }
 .ui-menu .ui-menu-divider { margin: 5px -2px 5px -2px; height: 0; font-size: 0; line-height: 0; border-width: 1px 0 0 0; }
