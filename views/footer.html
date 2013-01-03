@@ -99,6 +99,7 @@ function favorite(mid) {
                         self.close(e);
                         e.stopImmediatePropagation();
                         break;
+                    case $.ui.keyCode.TAB:
                     case $.ui.keyCode.UP:
                     case $.ui.keyCode.DOWN:
                         if (!self.menu.element.is(":visible")) {
