@@ -1237,7 +1237,8 @@ exports.invitation = function(req, res) {
                                 notifications: { 
                                     mentions: 1, 
                                     privates: 1, 
-                                    readers: 1 
+                                    readers: 1,
+                                    favorites: 1
                                 },
                                 mobile: {
                                     sessions: [],
