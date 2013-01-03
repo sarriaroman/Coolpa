@@ -592,7 +592,7 @@ exports.start = function(req, res) {
                                 var autocomplete = "[";
                                 for( var i = 0 ; i < data.connections.length ; i++ ) {
                                     //var obj = "{'id':'" + data.connections[i] + "', 'name':':" + data.connections[i] + "', 'avatar': '/avatars/" + data.connections[i] + "/avatar.square.jpg" + "', 'icon':'" + "', 'type':'contact'}";
-                                    var obj = "'" + data.connections[i] + "'";
+                                    var obj = '"' + data.connections[i] + '"';
 
                                     if( i < (data.connections.length - 1) ) {
                                         obj += ",";
