@@ -114,7 +114,7 @@ p {font-weight: normal;}
 		top: -7px;
 		width: 12px;
 		height: 9px;
-		background-image: url('http://static.tumblr.com/bygdzhm/6Kvlyne57/menu-pointer.png');
+		background-image: url('/images/menu-pointer.png');
 		background-repeat: no-repeat;
 		background-position: left top;
 		float: left;
@@ -285,7 +285,7 @@ p {font-weight: normal;}
 		height: 30px;
 		margin: 0;
 		background: #c8cbd6;
-		background-image: url('http://static.tumblr.com/bygdzhm/lHylylgnf/icon-totop.png');
+		background-image: url('/images/icon-totop.png');
 		background-repeat: no-repeat;
 		background-position: center center; 
 		-webkit-border-radius: 50%;
@@ -308,7 +308,7 @@ p {font-weight: normal;}
 		font-size: 10px;
 		line-height: 22px;
 		color: #fff;
-		background: url('http://static.tumblr.com/bygdzhm/tsalz25w7/tophov-bg.png') no-repeat left top;
+		background: url('/images/tophov-bg.png') no-repeat left top;
 		float: left;
 	}
 	
@@ -356,28 +356,28 @@ p {font-weight: normal;}
 		width: 46px;
 		height: 46px;
 		margin: 0;
-		background: url('http://static.tumblr.com/bygdzhm/zculylgqy/icon-photoset.png') no-repeat center center;
+		background: url('/images/icon-photoset.png') no-repeat center center;
 		float: left;
 	}
 	.timeline-icon a.icon-audio {
 		width: 46px;
 		height: 46px;
 		margin: 0;
-		background: url('http://static.tumblr.com/bygdzhm/TGolylgri/icon-audio.png') no-repeat center center;
+		background: url('/images/icon-audio.png') no-repeat center center;
 		float: left;
 	}
 	.timeline-icon a.icon-video {
 		width: 46px;
 		height: 46px;
 		margin: 0;
-		background: url('http://static.tumblr.com/bygdzhm/3PNlylgsb/icon-video.png') no-repeat center center;
+		background: url('/images/icon-video.png') no-repeat center center;
 		float: left;
 	}
 	.timeline-icon a.icon-text {
 		width: 46px;
 		height: 46px;
 		margin: 0;
-		background: url('http://static.tumblr.com/bygdzhm/ulwlylgt9/icon-text.png') no-repeat center center;
+		background: url('/images/icon-text.png') no-repeat center center;
 		float: left;
 	}
 	.timeline-icon a.icon-chat {
@@ -400,14 +400,14 @@ p {font-weight: normal;}
 		width: 46px;
 		height: 46px;
 		margin: 0;
-		background: url('http://static.tumblr.com/bygdzhm/dXOlylgun/icon-quote.png') no-repeat center center;
+		background: url('/images/icon-quote.png') no-repeat center center;
 		float: left;
 	}
 	.timeline-icon a.icon-link {
 		width: 46px;
 		height: 46px;
 		margin: 0;
-		background: url('http://static.tumblr.com/bygdzhm/Tdglylgvc/icon-link.png') no-repeat center center;
+		background: url('/images/icon-link.png') no-repeat center center;
 		float: left;
 	}
 
@@ -439,21 +439,21 @@ p {font-weight: normal;}
 		width: 46px;
 		height: 46px;
 		margin: 0;
-		background: url('http://static.tumblr.com/bygdzhm/eoFlyntr2/icon-searchpostype.png') no-repeat center center;
+		background: url('/images/icon-searchpostype.png') no-repeat center center;
 		float: left;
 	}
 	.timeline-icon span.icon-taggedpost {
 		width: 46px;
 		height: 46px;
 		margin: 0;
-		background: url('http://static.tumblr.com/bygdzhm/7OSlynv1i/icon-taggedpostype.png') no-repeat center center;
+		background: url('/images/icon-taggedpostype.png') no-repeat center center;
 		float: left;
 	}
 	.timeline-icon span.icon-datepost {
 		width: 46px;
 		height: 46px;
 		margin: 0;
-		background: url('http://static.tumblr.com/bygdzhm/zQMlynuyf/icon-datepostype.png') no-repeat center center;
+		background: url('/images/icon-datepostype.png') no-repeat center center;
 		float: left;
 	}
 	
@@ -822,7 +822,7 @@ p {font-weight: normal;}
 			left: -13px;
 			width: 17px;
 			height: 26px;
-			background: url('http://static.tumblr.com/bygdzhm/v4vlylgwv/tl-pointer.png') no-repeat left top;
+			background: url('/images/tl-pointer.png') no-repeat left top;
 			float: left;
 			z-index: 100;
 		}
@@ -1003,7 +1003,7 @@ p {font-weight: normal;}
 			left: -13px;
 			width: 17px;
 			height: 26px;
-			background: url('http://static.tumblr.com/bygdzhm/v4vlylgwv/tl-pointer.png') no-repeat left top;
+			background: url('/images/tl-pointer.png') no-repeat left top;
 			float: left;
 			z-index: 100;
 		}
@@ -1204,7 +1204,7 @@ p {font-weight: normal;}
 			left: 30px;
 			width: 14px;
 			height: 8px;
-			background: url('http://static.tumblr.com/bygdzhm/tAnlz11ei/tl-pointer-small.png') no-repeat left top;
+			background: url('/images/tl-pointer-small.png') no-repeat left top;
 			float: left;
 			z-index: 100;
 		}
@@ -1226,7 +1226,7 @@ p {font-weight: normal;}
 			left: 30px;
 			width: 14px;
 			height: 8px;
-			background: url('http://static.tumblr.com/bygdzhm/tAnlz11ei/tl-pointer-small.png') no-repeat left top;
+			background: url('/images/tl-pointer-small.png') no-repeat left top;
 			float: left;
 			z-index: 100;
 		}
