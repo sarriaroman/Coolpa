@@ -106,19 +106,7 @@ function favorite(mid) {
                         }
                 }
         var a=this.value,b=a.length;triggered?(b=a.lastIndexOf(trigger),a=a.substring(b+
-trigger.length),$(this).autocomplete("search",a)):b>=trigger.length&&(a=a.substring(b-trigger.length),triggered=a===trigger)}).bind('keydown', function (e) {
-                switch (e.keyCode) {
-                    case $.ui.keyCode.ESCAPE:
-                        self.close(e);
-                        e.stopImmediatePropagation();
-                        break;
-                    case $.ui.keyCode.UP:
-                    case $.ui.keyCode.DOWN:
-                        if (!self.menu.element.is(":visible")) {
-                            e.stopImmediatePropagation();
-                        }
-                }
-            });};
+trigger.length),$(this).autocomplete("search",a)):b>=trigger.length&&(a=a.substring(b-trigger.length),triggered=a===trigger)});};
 <% } %>
 
 </script>
