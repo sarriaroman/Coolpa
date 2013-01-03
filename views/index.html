@@ -126,12 +126,11 @@
                                 <% 
                                 recommendations.forEach(function(data){ 
                                     if( data.sender == user ) return "";
-                                    if( user_data.connections.indexOf(data.sender) != -1 ) return ""; %>
+                                    if( user_data.connections.indexOf(data.sender) != -1 ) return "";
+                                    if( counter > 5 ) return ""; %>
                                     <a href="/users/<%= data.sender %>"><img src="/avatars/<%= data.sender %>/avatar.square.jpg" class="recommend_pic" width="40" height="40" /></a>
                                 <% 
                                     counter++;
-
-                                    if( counter > 5 ) return false;
                                 }); 
                                 %>
                             </div>
