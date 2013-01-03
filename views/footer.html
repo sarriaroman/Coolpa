@@ -161,12 +161,12 @@ function favorite(mid) {
     }
 
     // Autocomplete
-    if( window.location.pathname == '/start' || window.location.pathname == '/mentions' || window.location.pathname == '/privates' ) {
+    //if( window.location.pathname == '/start' || window.location.pathname == '/mentions' || window.location.pathname == '/privates' ) {
         var triggered = false;
         var trigger = ":";
 
         $("#message").autocomplete({
-            source: ["koliffato","sarriaroman","cyberfrancis","jared","karensonia","albacafran","dgrl","khaos","beatriz","guinaliu","gmolino","y_alshehri","huguito","pauloatreides","b0x","danieltello","martin_navarro","angelitoroman","chiong38","pablodepaz","generationfgod","licoadtp","gust","agaponeo","rattoon","pierro","santiagoei","luisrebosio"],
+            source: <%-autocomplete%>,
             search: function() {
                 if (!triggered) {
                     return false;
@@ -183,7 +183,7 @@ function favorite(mid) {
                 return false;
             },
             focus: function() { return false; },
-            minLength: 0
+            minLength: 3
         }).bind("keyup", function() {
             var text = this.value;
             var len = text.length;
@@ -200,7 +200,7 @@ function favorite(mid) {
                 triggered = (last === trigger);
             }
         });​
-    }
+    //}
 
 <% } %>
 
