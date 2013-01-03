@@ -166,7 +166,7 @@ function favorite(mid) {
         var trigger = ":";
 
         $("#message").autocomplete({
-            source: <%-autocomplete%>,
+            source: <%=autocomplete%>,
             search: function() {
                 if (!triggered) {
                     return false;
@@ -195,8 +195,7 @@ function favorite(mid) {
                 index = text.lastIndexOf(trigger);
                 query = text.substring(index + trigger.length);
                 $(this).autocomplete("search", query);
-            }
-            else if (len >= trigger.length) {
+            } else if (len >= trigger.length) {
                 last = text.substring(len - trigger.length);
                 triggered = (last === trigger);
             }
