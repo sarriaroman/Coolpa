@@ -450,7 +450,7 @@ exports.favorite = function(req, res) {
             var messages = new (require('../models/messages'))();
         
             messages.get(req.body.mid, function(err, msg) {
-                users.user(req.params.username, function(err, data){
+                users.user(msg.sender, function(err, data){
                     if( data != undefined ) {
                         fs.readFile('views/favorite_template.html', 'UTF-8', function(err, html) {
                             ses.get().send({
