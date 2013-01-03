@@ -446,7 +446,8 @@ exports.favorite = function(req, res) {
             var fs = require('fs');
             var ses = new (require('../classes/ses'))();
             var ejs = require('ejs');
-            var users = new (require('../models/messages'))();
+            var users = new (require('../models/users'))();
+            var messages = new (require('../models/messages'))();
         
             messages.get(req.body.mid, function(err, msg) {
                 users.user(req.params.username, function(err, data){
