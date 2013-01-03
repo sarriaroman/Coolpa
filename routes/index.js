@@ -443,6 +443,32 @@ exports.favorite = function(req, res) {
         var users = new (require('../models/users'))();
         
         users.addFavorite(req.session.uid, req.body.mid, function(err) {
+            var fs = require('fs');
+            var ses = new (require('../classes/ses'))();
+            var ejs = require('ejs');
+            var users = new (require('../models/messages'))();
+        
+            messages.get(req.body.mid, function(err, msg) {
+                users.user(req.params.username, function(err, data){
+                    if( data != undefined ) {
+                        fs.readFile('views/favorite_template.html', 'UTF-8', function(err, html) {
+                            ses.get().send({
+                                from: 'Coolpa.net <info@coolpa.net>',
+                                to: [data.email],
+                                subject: req.session.uid + ' favorited on of your messages on Coolpa',
+                                body: {
+                                    html: ejs.render(html, {
+                                        username: data._id, 
+                                        uid: req.session.uid,
+                                        message: msg.message
+                                    })
+                                }
+                            });
+                        });
+                    }
+                });
+            });
+
             res.json({result: true});
         }); 
     }
