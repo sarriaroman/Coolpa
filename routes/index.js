@@ -512,7 +512,7 @@ exports.user = function(req, res) {
             if( data == null ) {
                 res.redirect('/');
             } else {
-                messages.find( username, data.connections, new Date(), function(err, docs) {
+                messages.find( username, [], new Date(), function(err, docs) {
                     messages.count(username, [], function(err, cnt) {
                         users.user( req.session.uid, function(err, actual) { // Get the actual user!!!
 
