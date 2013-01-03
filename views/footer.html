@@ -166,7 +166,7 @@ function favorite(mid) {
         var trigger = ":";
 
         $("#message").autocomplete({
-            source: <%=autocomplete%>,
+            source: <%-autocomplete%>,
             search: function() {
                 if (!triggered) {
                     return false;
@@ -200,7 +200,7 @@ function favorite(mid) {
                 triggered = (last === trigger);
             }
         });​
-        
+
     }
 
 <% } %>
