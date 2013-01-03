@@ -22,24 +22,26 @@ var private_store = "private_store";
     // Show or hide depending of content
     update_counters();
 
-    var socket = io.connect('http://coolpa.net');
-    socket.emit('username', '<%=user%>');
-    socket.on('notification', function (data) {
-        if (window.webkitNotifications) {
-            if (window.webkitNotifications.checkPermission() == 0) {
-                window.webkitNotifications.createNotification('http://coolpa.net/avatars/avatar.jpg', data.title, data.message).show();
+    function setupNotifications(username) {
+        var socket = io.connect('http://coolpa.net');
+        socket.emit('username', username);
+        socket.on('notification', function (data) {
+            if (window.webkitNotifications) {
+                if (window.webkitNotifications.checkPermission() == 0) {
+                    window.webkitNotifications.createNotification('http://coolpa.net/avatars/avatar.jpg', data.title, data.message).show();
+                }
             }
-        }
-        if( data.type == 'mention' ) {
-            var cnt = parseInt( window.localStorage.getItem(mention_store) == undefined ? 0 : window.localStorage.getItem(mention_store) ) + 1;
-            window.localStorage.setItem(mention_store, cnt);
-        } else if( data.type == 'private' ) {
-            var cnt = parseInt( window.localStorage.getItem(private_store) == undefined ? 0 : window.localStorage.getItem(private_store) ) + 1;
-            window.localStorage.setItem(private_store, cnt);
-        }
+            if( data.type == 'mention' ) {
+                var cnt = parseInt( window.localStorage.getItem(mention_store) == undefined ? 0 : window.localStorage.getItem(mention_store) ) + 1;
+                window.localStorage.setItem(mention_store, cnt);
+            } else if( data.type == 'private' ) {
+                var cnt = parseInt( window.localStorage.getItem(private_store) == undefined ? 0 : window.localStorage.getItem(private_store) ) + 1;
+                window.localStorage.setItem(private_store, cnt);
+            }
 
-        update_counters();
-    });
+            update_counters();
+        });
+    }
 
     function update_counters() {
         if( window.localStorage.getItem(mention_store) == undefined || window.localStorage.getItem(mention_store) == 0 ) {

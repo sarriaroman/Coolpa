@@ -100,6 +100,9 @@ trigger.length),$(this).autocomplete("search",a)):b>=trigger.length&&(a=a.substr
 </script>
 <% if (user) { %>
 <script type="text/javascript" src="/javascripts/coolpa.js"></script>
+<script type="text/javascript">
+    setupNotifications('<%=user%>');
+</script>
 <% } %>
 
 <style>
