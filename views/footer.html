@@ -161,7 +161,7 @@ function favorite(mid) {
     }
 
     // Autocomplete
-    //if( window.location.pathname == '/start' || window.location.pathname == '/mentions' || window.location.pathname == '/privates' ) {
+    if( window.location.pathname == '/start' || window.location.pathname == '/mentions' || window.location.pathname == '/privates' ) {
         var triggered = false;
         var trigger = ":";
 
@@ -200,7 +200,7 @@ function favorite(mid) {
                 triggered = (last === trigger);
             }
         });​
-    //}
+    }
 
 <% } %>
 
