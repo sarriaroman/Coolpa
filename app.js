@@ -46,13 +46,13 @@ app.configure(function(){
 
 // Subdomain processor.
 app.all('*', function(req, res, next){
-    if(req.headers.host.indexOf('www') != -1) {
+    if(req.headers.host.indexOf('developer') != -1) {
         res.redirect('http://coolpa.net');
 
         return;
     }
 
-    if(req.headers.host == 'api.coolpa.net' || req.headers.host == 'api.coolpa.net:3001')
+    if(req.headers.host.indexOf('developer') != -1 )
         req.url = '/api_subdomain' + req.url;
     
     next(); 
