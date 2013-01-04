@@ -23,7 +23,9 @@ if( type == 'html' ) {
   				var html_packed = S(data).s; //packer.packHTML(S(data).s);
   				html_packed = html_packed.collapseWhitespace();
 
-				fs.writeFile('../views/' + files[i], html_packed.s, function() {
+  				console.log(html_packed.s);
+
+				fs.writeFile('../views/' + files[i], html_packed.s, function(err) {
 					if (err) throw err;
   					console.log('It\'s saved!');
 				});
