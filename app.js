@@ -16,6 +16,9 @@ var app = express();
 var server = http.createServer(app),
     io = require('socket.io').listen(server);
 
+io.set('browser client minification', true);
+io.set('browser client etag', true);
+
 app.engine('html', require('ejs').renderFile);
 
 app.configure(function(){
