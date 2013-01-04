@@ -6,7 +6,7 @@
     "start": "node pack"
   },
   "dependencies": {
-    "commander": "*",
+    "string": "*",
     "html-minifier": "*",
     "uglify-js": "*",
     "uglifycss": "*"
