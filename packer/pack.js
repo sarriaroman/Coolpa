@@ -1,12 +1,9 @@
-#!/usr/bin/env node
-
 /**
  * Module dependencies.
  */
 
 var fs = require('fs'),
 	packer = require('./packer');
-
 
 var type = process.env.TYPE.toLowerCase();
 if( type == 'html' ) {
