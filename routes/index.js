@@ -224,7 +224,15 @@ exports.avatars = function(req, res) {
 };
 
 exports.images = function(req, res) {
-    res.redirect('https://coolpa.s3.amazonaws.com/images/' + req.params.file );
+    var s3 = new (require('../classes/s3'))();
+
+    res.set('Content-Type', 'image/jpeg');
+
+    s3.get().getFile('/images/' + req.params.file, function(err, response){
+        res.write(response);
+        res.end();
+    });
+    //res.redirect('https://coolpa.s3.amazonaws.com/images/' + req.params.file );
 };
 
 exports.mobile_message = function(req, res) {
