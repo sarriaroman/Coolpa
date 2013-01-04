@@ -1,13 +1,13 @@
 /**
- * Module dependencies.
+ * Packer code
  */
+
+ // String prototypes
+var S = require('string');
+S.extendPrototype();
 
 var fs = require('fs'),
 	packer = require('./packer');
-
-// String prototypes
-var S = require('string');
-S.extendPrototype();
 
 var type = process.env.TYPE.toLowerCase();
 if( type == 'html' ) {
