@@ -46,9 +46,8 @@ app.configure(function(){
 
 // Subdomain processor.
 app.all('*', function(req, res, next){
-    //&& req.headers.host.split('.').length > 2
-    console.log(req.headers);
-    if(req.headers.host.indexOf('developer') == -1 ) {
+    
+    if(req.headers.host.indexOf('developer') == -1 && req.headers.host.split('.').length > 2 ) {
         var url = 'http://coolpa.net';
         url += ( req.headers.host.indexOf(':') == -1 ) ? '' : ':' + req.headers.host.split(':')[1];
         console.log(url);
