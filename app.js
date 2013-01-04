@@ -47,7 +47,7 @@ app.configure(function(){
 // Subdomain processor.
 app.all('*', function(req, res, next){
     if(req.headers.host.indexOf('www') != -1) {
-        res.redirect('coolpa.net');
+        res.redirect('http://coolpa.net');
 
         return;
     }
