@@ -235,9 +235,11 @@ exports.images = function(req, res) {
         res.end(  );
     });*/
     s3.get().get('/images/' + req.params.file).on('response', function(response){
+        console.log(response);
         res.set(response.headers);
         response.setEncoding('utf8');
         response.on('data', function(chunk){
+            console.log(chunk);
             res.write(chunk);
         });
     }).end();
