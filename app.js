@@ -46,7 +46,7 @@ app.configure(function(){
 
 app.all('*', function(req, res, next){ 
     console.log(req.headers.host);
-    if(req.headers.host == 'api.coolpa.net')
+    if(req.headers.host == 'api.coolpa.net' || req.headers.host == 'api.coolpa.net:3001')
         req.url = '/api_subdomain' + req.url;
     
     next(); 
