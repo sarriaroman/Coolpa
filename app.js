@@ -37,12 +37,6 @@ app.configure(function(){
     }));
     app.use(app.router);
     app.use(express.compress());
-    app.use(require('getsmart-js')({ 
-        compress: true, 
-        isProduction: true, 
-        src: __dirname + '/public', 
-        dest: __dirname + '/public' 
-    }));
     app.use(express.static(path.join(__dirname, 'public')));
 });
 
