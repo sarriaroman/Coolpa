@@ -226,17 +226,8 @@ exports.avatars = function(req, res) {
 exports.images = function(req, res) {
     var s3 = new (require('../classes/s3'))();
 
-    //res.set('Content-Type', 'image/jpeg');
-
-    /*s3.get().getFile('/images/' + req.params.file, function(err, response){
-        console.log(response);
-        res.set( response.headers );
-        res.write( response.client._buffer.pool );
-        res.end(  );
-    });*/
     s3.get().get('/images/' + req.params.file).on('response', function(response){
-        res.set('Content-Type', 'image/jpeg');
-        //response.setEncoding('binary');
+        res.set(response.headers);
         response.on('data', function(chunk){
             res.write(chunk);
         });
