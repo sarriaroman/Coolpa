@@ -6,7 +6,8 @@
  */
 
 var express = require('express')
-, routes = require('./routes')
+, routes = require('./routes'),
+, api = require('./api_subdomain')
 , http = require('http')
 , path = require('path')
 , MongoStore = require('express-session-mongo');
@@ -42,6 +43,13 @@ app.configure(function(){
     app.use(express.compress());
     app.use(express.static(path.join(__dirname, 'public')));
 });
+
+app.all('*', function(req, res, next){ 
+    if(req.headers.host == 'api.coolpa.net')
+        req.url = '/api_subdomain' + req.url;
+    
+    next(); 
+}); 
 
 app.configure('development', function(){
     app.use(express.errorHandler({ 
@@ -148,6 +156,9 @@ app.post('/api/newest', routes.mobile_newest);
 app.post('/api/remove', routes.mobile_remove);
 app.post('/api/more', routes.mobile_more);
 app.post('/api/push', routes.mobile_push);
+
+// api_subdomain
+app.get('/api_subdomain/', api.index);
 
 server.listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));
