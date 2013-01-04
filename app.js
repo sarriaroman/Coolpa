@@ -36,6 +36,12 @@ app.configure(function(){
     app.use(express.methodOverride());
     app.use(express.cookieParser('741b09105b235f2f8fa0511a1229f48e'));
     app.use(express.session({
+        cookie: {  
+            path     : '/',  
+            domain   : 'coolpa.net',  
+            httpOnly : true,  
+            maxAge   : 1000*60*60*24*30*12
+        },
     	store: new MongoStore({
     		db: 'coolpa-sessions'
     	})
