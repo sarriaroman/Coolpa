@@ -6,7 +6,7 @@
  */
 
 var express = require('express')
-, routes = require('./routes'),
+, routes = require('./routes')
 , api = require('./api_subdomain')
 , http = require('http')
 , path = require('path')
