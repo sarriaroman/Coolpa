@@ -44,8 +44,8 @@ app.configure(function(){
     app.use(express.static(path.join(__dirname, 'public')));
 });
 
+// Subdomain processor.
 app.all('*', function(req, res, next){ 
-    console.log(req.headers.host);
     if(req.headers.host == 'api.coolpa.net' || req.headers.host == 'api.coolpa.net:3001')
         req.url = '/api_subdomain' + req.url;
     
