@@ -46,7 +46,7 @@ app.configure(function(){
 
 // Subdomain processor.
 app.all('*', function(req, res, next){
-    
+
     if(req.headers.host.indexOf('developer') == -1 && req.headers.host.split('.').length > 2 ) {
         var url = 'http://coolpa.net';
         url += ( req.headers.host.indexOf(':') == -1 ) ? '' : ':' + req.headers.host.split(':')[1];
@@ -168,6 +168,7 @@ app.post('/api/remove', routes.mobile_remove);
 app.post('/api/more', routes.mobile_more);
 app.post('/api/push', routes.mobile_push);
 
+// Developers Site
 // api_subdomain
 app.get('/api_subdomain/', api.index);
 
