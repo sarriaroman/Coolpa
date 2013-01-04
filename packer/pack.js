@@ -20,9 +20,10 @@ if( type == 'html' ) {
 		console.log(files);
 		for( var i = 0 ; i < files.length ; i++ ) {
 			console.log("Current: " + files[i]);
-			
+
 			var html_packed = S( fs.readFileSync('../views/' + files[i]) ).s;
   			
+  			html_packed = html_packed.replace(/(\r\n|\r|\n)/g, "<br />");
   			html_packed = html_packed.collapseWhitespace();
 
   			console.log(html_packed.s);
