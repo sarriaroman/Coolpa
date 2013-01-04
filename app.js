@@ -23,6 +23,7 @@ io.set('browser client etag', true);
 app.engine('html', require('ejs').renderFile);
 
 app.configure(function(){
+    app.use(express.compress());
     app.set('port', process.env.PORT || 3000);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'html');
@@ -40,7 +41,6 @@ app.configure(function(){
     	})
     }));
     app.use(app.router);
-    app.use(express.compress());
     app.use(express.static(path.join(__dirname, 'public')));
 });
 
