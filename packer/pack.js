@@ -3,8 +3,8 @@
  */
 
  // String prototypes
-var S = require('string');
-S.extendPrototype();
+//var S = require('string');
+//S.extendPrototype();
 
 // Check
 var proto_test = ' Trim proto ';
