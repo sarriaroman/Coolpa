@@ -10,11 +10,14 @@ if( type == 'html' ) {
 	/* Pack HTML */
 	fs.readdir('../views/', function(err, files){
 		for( var i = 0 ; i < files.length ; i++ ) {
-			var html_packed = packer.packHTML('../views/' + files[i]);
+			fs.readFile('../views/' + files[i], function (err, data) {
+  				if (err) throw err;
+  				var html_packed = packer.packHTML(data);
 
-			fs.writeFile('../views/' + files[i], html_packed, function() {
-				if (err) throw err;
-  				console.log('It\'s saved!');
+				fs.writeFile('../views/' + files[i], html_packed, function() {
+					if (err) throw err;
+  					console.log('It\'s saved!');
+				});
 			});
 		}
 	});
