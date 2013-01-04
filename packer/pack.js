@@ -6,6 +6,10 @@
 var S = require('string');
 S.extendPrototype();
 
+// Check
+var proto_test = ' Trim proto ';
+console.log( proto_test.trim() );
+
 var fs = require('fs'),
 	packer = require('./packer');
 
