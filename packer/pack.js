@@ -26,7 +26,6 @@ if( type == 'html' ) {
   			html_packed = html_packed.replace(/(\r\n|\r|\n)/g, '');
   			html_packed = html_packed.replace(/<!--[\s\S]*?-->/g, '');
   			html_packed = html_packed.collapseWhitespace();
-  			html_packed = html_packed.replace('<!DOCTYPE html>', '<!DOCTYPE html>\n');
 
   			console.log(html_packed.s);
 
