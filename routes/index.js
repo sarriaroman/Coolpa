@@ -236,7 +236,7 @@ exports.images = function(req, res) {
     });*/
     s3.get().get('/images/' + req.params.file).on('response', function(response){
         res.set('Content-Type', 'image/jpeg');
-        response.setEncoding('binary');
+        //response.setEncoding('binary');
         response.on('data', function(chunk){
             res.write(chunk);
         });
