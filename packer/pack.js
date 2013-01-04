@@ -22,7 +22,7 @@ if( type == 'html' ) {
   				if (err) throw err;
   				var html_packed = S(data).s; //packer.packHTML(S(data).s);
   				html_packed = html_packed.collapseWhitespace();
-  				html_packed = html_packed.replace(/\r?\n|\r/g, '');
+  				html_packed = html_packed.replace(/(\r\n|\r|\n)/g, "");
 
 				fs.writeFile('../views/' + files[i], html_packed, function() {
 					if (err) throw err;
