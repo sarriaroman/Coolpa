@@ -1,0 +1,143 @@
+<% include header.html %>
+
+<section id="slider-wrapper">
+
+    <div class="flexslider">
+        <ul class="slides"> 
+            <li>
+                <img src="/avatars/<%= data._id %>/top.jpg" alt="" />
+            </li>
+        </ul>
+    </div>
+
+</section>
+
+<section id="content-wrapper">
+    <div id="content">
+        <div id="timeline">
+            <div id="time-line">
+                <div class="timeline-icon-bottom">
+                    <a href="#" class="icon-totop"></a>
+                    <span class="tophov">Back to top</span>
+                </div>   
+            </div>
+
+            <div id="picture-profile">
+                <a href="#">
+                    <img src="/avatars/<%= data._id %>/avatar.square.jpg" alt="" />
+                </a>
+            </div>
+
+            <div id="profile-description">
+                <div class="timeline-preview">
+                    <div class="timeline-icon-pp"><a href="/" class="icon-profile"></a></div>
+                    <div class="timeline-pointer-pp"><span class="tl-pointer"></span></div>
+                    <div class="timeline-content">
+                        <p class="description">
+                            <div class="textpost">
+                                <!-- DESCRIPTION -->
+                                <h2 class="post-title"><%= data.name %></h2>
+                                <span class="post-divider"></span>
+                                <div class="bodytext">
+                                    <span><%= data.description %></span><br/><br/>
+                                </div>
+                            </div>
+                        </p>
+                    </div>
+                    <div class="timeline-bar">
+                        <div style="float:left;">
+                            <% if( mustConnect ) { %>
+                            <% if( isConnected ) { %>
+                            <a href="/disconnect/<%=username%>" id="connectionbtn" class="btn btn-danger">Disconnect</a><br/>
+                            <% } else { %>
+                            <a href="/connect/<%=username%>" id="connectionbtn" class="btn btn-inverse">Connect</a><br/>
+                            <% } %>
+                            <% } %>
+                        </div>
+                        <div style="float:right; padding-top:4px; padding-bottom: 4px;">
+                            <strong><%=count%></strong> messages
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="timeline-preview">
+                    <div class="timeline-icon"><span class="icon-profile"></span></div>
+                    <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                    <div class="timeline-content-page">
+                        <div class="textpost">
+                            <h2 class="post-page-title"><%=username%> has <strong><a href="/readers/<%= (username != '') ? username : 'me' %>"><%=connecteds%></a></strong> readers and is reading from <strong><a href="/reading/<%= (username != '') ? username : 'me' %>"><%=connections%></a></strong>.</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="messages">
+                <% messages.forEach(function(data){ %>
+                <% if( data.sender != user && data.hidden == true ) { return ""; } %>
+                <div class="post">
+                    <div class="timeline-preview">
+                        <div class="timeline-icon">
+                            <!--<span class="icon-datepost"></span>-->
+                            <div class="minipic">
+                                <a href="/users/<%=data.sender%>">
+                                    <img src="/avatars/<%= data.sender %>/avatar.square.jpg">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                        <div class="timeline-content-page">
+                            <div class="textpost">
+                                <h2 class="post-title">
+                                    <a href="/users/<%=data.sender%>"><%= data.sender %></a>
+                                    <% if( data.images) { %>
+                                    <% if( data.images.length > 0 ) { %>
+                                        <div style="float: right;">
+                                            <i class="icon-picture"></i>
+                                        </div>
+                                    <% } %>
+                                    <% } %>
+                                </h2>
+                                <span class="post-divider"></span>
+
+                                <div class="bodytext">
+                                    <p>
+                                        <%- data.message.parseURL().parseUsername().parseSearches() %>
+                                    </p>
+                                    <% if( data.images) { %>
+                                    <% if( data.images.length > 0 ) { %>
+                                        <div class="message-image" id="<%=data._id%>_image">
+                                            <img src="/i/<%=data.images[0]%>" />
+                                        </div>
+                                    <% } %>
+                                    <% } %>
+                                    <span class="post-divider"></span>
+                                    <!--<a href="{Permalink}" class="read_more">Read More ...</a>-->
+                                    <time class="timeago read_more" datetime="<%=data.creationDate.toISOString()%>"></time>
+                                    <div style="float:right;">
+                                        <% if( data.images) { %>
+                                        <% if( data.images.length > 0 ) { %>
+                                            <button class="btn" rel="tooltip" title="Show/Hide image" onclick="$('#<%=data._id%>_image').toggle();"><i class="icon-picture"></i></button>
+                                        <% } %>
+                                        <% } %>
+                                        <button class="btn"><a href="/message/<%= data._id %>" target="_BLANK"><i class="icon-globe"></i></a></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </div> <!-- End .timeline-preview -->
+    </div> <!-- End .post -->               
+
+</div><!-- End #blogpost -->
+
+</div><!-- End #timeline -->
+
+</div><!-- End #content -->
+</section>
+
+<% include footer.html %>

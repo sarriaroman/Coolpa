@@ -16,12 +16,12 @@ var fs = require('fs'),
 var type = process.env.TYPE.toLowerCase();
 if( type == 'html' ) {
 	/* Pack HTML */
-	fs.readdir('../views/', function(err, files){
+	fs.readdir('../original_views/', function(err, files){
 		console.log(files);
 		for( var i = 0 ; i < files.length ; i++ ) {
 			console.log("Current: " + files[i]);
 
-			var html_packed = S( fs.readFileSync('../views/' + files[i]) ).s;
+			var html_packed = S( fs.readFileSync('../original_views/' + files[i]) ).s;
   			
   			html_packed = html_packed.replace(/(\r\n|\r|\n)/g, '');
   			html_packed = html_packed.replace(/<!--[\s\S]*?-->/g, '');

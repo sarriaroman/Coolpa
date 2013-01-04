@@ -1,0 +1,77 @@
+<% include header.html %>
+
+<section id="slider-wrapper">
+
+    <div class="flexslider">
+        <ul class="slides"> 
+            <li>
+                <img src="/avatars/<%= data.sender %>/top.jpg" alt="" />
+            </li>
+        </ul>
+    </div>
+
+</section>
+
+<section id="content-wrapper">
+    <div id="content">
+        <div id="timeline">
+            <div id="time-line">
+                <div class="timeline-icon-bottom">
+                    <a href="#" class="icon-totop"></a>
+                    <span class="tophov">Back to top</span>
+                </div>   
+            </div>
+
+            <div id="picture-profile">
+                <a href="#">
+                    <img src="/avatars/<%= data.sender %>/avatar.square.jpg" alt="" />
+                </a>
+            </div>
+
+            <div id="profile-description">
+                <div class="timeline-preview">
+                    <div class="timeline-icon-pp"><a href="/" class="icon-profile"></a></div>
+                    <div class="timeline-pointer-pp"><span class="tl-pointer"></span></div>
+                    <div class="timeline-content">
+                        <p class="description">
+                            <div class="textpost">
+                                <!-- DESCRIPTION -->
+                                <h2 class="post-title"><%= data.sender %></h2>
+                                <span class="post-divider"></span>
+                                <div class="bodytext">
+                                    <p>
+                                        <%- data.message.parseURL().parseUsername().parseSearches() %>
+                                    </p>
+                                    <% if( data.images) { %>
+                                        <% if( data.images.length > 0 ) { %>
+                                            <div id="<%=data._id%>_image">
+                                                <img src="/i/<%=data.images[0]%>" />
+                                            </div>
+                                        <% } %>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </p>
+                    </div>
+                    <div class="timeline-bar">
+                        <div style="float: left">
+                            <time class="timeago read_more" datetime="<%=data.creationDate.toISOString()%>">about 8 hours ago</time>
+                        </div>
+                        <div style="float: right;">
+                            <a href="/users/<%=data.sender%>" class="btn btn-invers">Go to profile</a><br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- End .timeline-preview -->
+    </div> <!-- End .post -->               
+
+</div><!-- End #blogpost -->
+
+</div><!-- End #timeline -->
+
+</div><!-- End #content -->
+</section>
+
+<% include footer.html %>

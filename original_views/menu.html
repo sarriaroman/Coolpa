@@ -1,0 +1,13 @@
+<div class="span2 offset2 well" style="max-width: 340px; padding: 8px 0;">
+    <ul class="nav nav-list">
+        <li class="nav-header">About <%= (username != '') ? username : 'me' %></li>
+        <li class="divider"></li>
+        <% if( username == user || username == '' ) { %>
+        <li><a href="/users/<%=user%>">Messages: <%=count%></a></li>
+        <li class="divider"></li>
+        <% } %>
+        <li><a href="/reading/<%= (username != '') ? username : 'me' %>">Reading from: <%=connections%></a></li> <!-- class="active" -->
+        <li class="divider"></li>
+        <li><a href="/readers/<%= (username != '') ? username : 'me' %>">Reading me: <%=connecteds%></a></li>
+    </ul>
+</div>

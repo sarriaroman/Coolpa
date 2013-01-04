@@ -1,0 +1,175 @@
+<% include header.html %>
+
+<section id="slider-wrapper">
+
+    <div class="flexslider">
+        <ul class="slides"> 
+            <li>
+                <img src="/avatars/<%= user %>/top.jpg" alt="" />
+            </li>
+        </ul>
+    </div>
+
+</section>
+
+<section id="content-wrapper">
+    <div id="content">
+        <div id="timeline">
+            <div id="time-line">
+                <div class="timeline-icon-bottom">
+                    <a href="#" class="icon-totop"></a>
+                    <span class="tophov">Back to top</span>
+                </div>   
+            </div>
+
+            <div id="picture-profile">
+                <a href="/">
+                    <img src="/avatars/<%=user%>/avatar.square.jpg" />
+                </a>
+            </div>
+
+            <div id="profile-description">
+                <div class="timeline-preview">
+                    <div class="timeline-icon-pp"><a href="/" class="icon-profile"></a></div>
+                    <div class="timeline-pointer-pp"><span class="tl-pointer"></span></div>
+                    <div class="timeline-content">
+                        <p class="description">
+                            <div class="textpost">
+                                Results for <%=search%>
+                            </div>
+                        </p>
+                    </div>
+                    <div class="timeline-bar">
+                        <div>
+                            <a class="btn" href="/">Go to home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="timeline-preview">
+                    <div class="timeline-icon"><span class="icon-profile"></span></div>
+                    <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                    <div class="timeline-content-page">
+                        <div class="textpost">
+                            <h2 class="post-page-title">Users for <%=search%>: <%=users.length%> results</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <% users.forEach(function(data){ %>
+            <div class="post">
+                <div class="timeline-preview">
+                    <div class="timeline-icon">
+                        <div class="minipic">
+                            <a href="/users/<%=data._id%>">
+                                <img src="/avatars/<%= data._id %>/avatar.square.jpg">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                    <div class="timeline-content-page">
+                        <div class="textpost">
+                            <h2 class="post-title">
+                                <a href="/users/<%=data._id%>"><%= data._id %></a>
+                            </h2>
+                            <span class="post-divider"></span>
+
+                            <div class="bodytext">
+                                <p>
+                                    <% if( data.description == "" ) { %>
+                                    No Description
+                                    <% } else { %>
+                                    <%= data.description %>
+                                    <% } %>
+                                </p>
+
+                                <% if( data._id != user ) { %>
+                                <span class="post-divider"></span>
+                                <div style="float:right;">
+                                        <% if( user_data.connections.indexOf( data._id ) != -1 ) { %>
+                                            <a href="/disconnect/<%=data._id%>" id="connectionbtn" class="btn btn-danger">Disconnect</a><br/>
+                                        <% } else { %>
+                                            <a href="/connect/<%=data._id%>" id="connectionbtn" class="btn btn-inverse">Connect</a><br/>
+                                        <% } %>
+                                </div>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+
+            <div class="post">
+                <div class="timeline-preview">
+                    <div class="timeline-icon"><span class="icon-chat"></span></div>
+                    <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                    <div class="timeline-content-page">
+                        <div class="textpost">
+                            <h2 class="post-page-title">Messages for <%=search%>: <%=messages.length%> results</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <% messages.forEach(function(data){ %>
+            <% if( data.public === false ) { return ""; } %>
+            <% if( data.sender != user && data.hidden == true ) { return ""; } %>
+            <div class="post">
+                <div class="timeline-preview">
+                    <div class="timeline-icon">
+                        <!--<span class="icon-datepost"></span>-->
+                        <div class="minipic">
+                            <a href="/users/<%=data.sender%>">
+                                <img src="/avatars/<%= data.sender %>/avatar.square.jpg">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                    <div class="timeline-content-page">
+                        <div class="textpost">
+                            <h2 class="post-title">
+                                <a href="/users/<%=data.sender%>"><%= data.sender %></a>
+                            </h2>
+                            <span class="post-divider"></span>
+
+                            <div class="bodytext">
+                                <p>
+                                    <%- data.message.parseURL().parseUsername().parseSearches() %>
+                                </p>
+                                <span class="post-divider"></span>
+                                <!--<a href="{Permalink}" class="read_more">Read More ...</a>-->
+                                <time class="timeago read_more" datetime="<%=data.creationDate.toISOString()%>"></time>
+                                <div style="float:right;">
+                                    <% if( data.sender == user ) { %>
+                                    <button class="btn" onclick="location.href='/remove/<%=data._id%>';"><i class="icon-remove"></i></button>
+
+                                    <% if( data.hidden == false ) { %>
+                                    <button class="btn" onclick="location.href='/hide/<%=data._id%>';"><i class="icon-eye-close"></i></button>
+                                    <% } else { %>
+                                    <button class="btn" onclick="location.href='/unhide/<%=data._id%>';"><i class="icon-eye-open"></i></button>
+                                    <% } %>
+                                    <% } %>
+                                    <button class="btn"><a href="/message/<%= data._id %>" target="_BLANK"><i class="icon-globe"></i></a></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+
+        </div> <!-- End .timeline-preview -->
+    </div> <!-- End .post -->               
+
+</div><!-- End #blogpost -->
+
+</div><!-- End #timeline -->
+
+</div><!-- End #content -->
+</section>
+
+<% include footer.html %>

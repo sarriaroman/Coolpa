@@ -1,0 +1,305 @@
+<% include header.html %>
+<section id="slider-wrapper">
+
+    <div class="flexslider">
+        <ul class="slides"> 
+            <li>
+                <img src="/avatars/<%= user %>/top.jpg" alt="" />
+            </li>
+        </ul>
+    </div>
+
+</section>
+
+<section id="content-wrapper">
+    <div id="content">
+        <div id="timeline">
+            <div id="time-line">
+                <div class="timeline-icon-bottom">
+                    <a href="#" class="icon-totop"></a>
+                    <span class="tophov">Back to top</span>
+                </div>   
+            </div>
+
+            <div id="picture-profile">
+                <a href="/">
+                    <img src="/avatars/<%= user %>/avatar.square.jpg" alt="" />
+                </a>
+            </div>
+
+            <% if( section != 'favorites' ) { %>
+            <form method="POST" action="/message" id="message_sender" enctype="multipart/form-data">
+                <div id="profile-description">
+                    <div class="timeline-preview">
+                        <div class="timeline-icon-pp"><a href="/" class="icon-profile"></a></div>
+                        <div class="timeline-pointer-pp"><span class="tl-pointer"></span></div>
+                        <div class="timeline-content">
+                            <p class="description">
+                                <input type="hidden" name="uid" value="<%=user%>"/>
+                                <input type="hidden" name="public" value="55"/>
+                                <input type="hidden" id="reply_to" name="reply_to" value="-1"/>
+                                <input type="hidden" id="author" name="author" value=""/>
+                                <input type="hidden" id="original_id" name="original_id" value=""/>
+                                <textarea rows="3" id="message" name="message" placeholder="What you want to tell?" style="width: 92%;max-width:92%;min-width: 92%;"></textarea><br/>
+                                <input type="file" id="image" name="image" accept="image/*" style="display:none" onchange="handleFiles(this.files);"/>
+                            </p>
+                        </div>
+                        <div class="timeline-bar">
+                            <div class="main_buttons">
+                                <input type="submit" class="btn" id="sendBtn" value="Send" />
+                                <a class="btn" href="#" id="fileSelect"><i class="icon-picture"></i></a>
+                                <a class="btn" href="#"  id="help" rel="popover" class="button-ask" data-content="Just write what you want to tell to the world. <br/>If you want to mention someone put the username preppending a colon ( : ). Ex. :username hi how are you?."><i class="icon-question-sign"></i></a>
+                            </div>
+                            <div id="images" class="main_images"></div>
+                        </div>
+                        <script>
+                        var fileSelect = document.getElementById("fileSelect"),
+                        fileElem = document.getElementById("image");
+
+                        fileSelect.addEventListener("click", function (e) {
+                            if (fileElem) {
+                                fileElem.click();
+                            }
+                            e.preventDefault();
+                        }, false);
+
+                        function handleFiles(files) {
+                            for (var i = 0; i < files.length; i++) {
+                                var file = files[i];
+                                var imageType = /image.*/;
+
+                                if (!file.type.match(imageType)) {
+                                    continue;
+                                }
+
+                                var img = document.createElement("img");
+                                img.classList.add("img-preview");
+                                img.file = file;
+                                $('#images').html(img);
+
+                                var reader = new FileReader();
+                                reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+                                reader.readAsDataURL(file);
+                            }
+                        }
+                  </script>
+                    </div>
+                </div>
+            </form>
+
+            <div class="post">
+                <div class="timeline-preview">
+                    <div class="timeline-icon"><span class="icon-profile"></span></div>
+                    <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                    <div class="timeline-content-page">
+                        <div class="textpost">
+                            <h2 class="post-page-title">You have <strong><a href="/readers/<%= (username != '') ? username : 'me' %>"><%=connecteds%></a></strong> readers and you are reading from <strong><a href="/reading/<%= (username != '') ? username : 'me' %>"><%=connections%></a></strong>.</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="post" id="html5_notification">
+                <div class="timeline-preview">
+                    <div class="timeline-icon"><span class="icon-chat"></span></div>
+                    <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                    <div class="timeline-content-page">
+                        <div class="textpost">
+                            <h2 class="post-page-title">Your browser support our notification service. <a href="javascript:enableNotifications();">Click here to enable</a></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <% if(recommendations != undefined ) { %>
+            <div class="post">
+                <div class="timeline-preview">
+                    <div class="timeline-icon"><span class="icon-profile"></span></div>
+                    <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                    <div class="timeline-content-page">
+                        <div class="textpost">
+                            <h2 class="post-page-title">People that you maybe want to read!</h2>
+                            <span class="post-divider"></span>
+
+                            <div class="bodytext">
+                                <% var counter = 0; %>
+                                <% 
+                                recommendations.forEach(function(data){ 
+                                    if( data.sender == user ) return "";
+                                    if( user_data.connections.indexOf(data.sender) != -1 ) return "";
+                                    if( counter > 5 ) return ""; %>
+                                    <a href="/users/<%= data.sender %>"><img src="/avatars/<%= data.sender %>/avatar.square.jpg" class="recommend_pic" width="40" height="40" /></a>
+                                <% 
+                                    counter++;
+                                }); 
+                                %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+            <% } else { %>
+            <div id="profile-description">
+                <div class="timeline-preview">
+                    <div class="timeline-icon-pp"><a href="/" class="icon-profile"></a></div>
+                    <div class="timeline-pointer-pp"><span class="tl-pointer"></span></div>
+                    <div class="timeline-content">
+                        <p class="description">
+                            <div class="textpost">
+                                Favorites: <%=user_data.favorites.length%>
+                            </div>
+                        </p>
+                    </div>
+                    <div class="timeline-bar">
+                        <div>
+                            <a class="btn" href="/">Go to home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+
+
+
+                    <div id="messages">
+                        <% messages.forEach(function(data){ %>
+                        <% if( data.public === false ) { return ""; } %>
+                        <% if( data.sender != user && data.hidden == true ) { return ""; } %>
+                        <div class="post">
+                            <div class="timeline-preview">
+                                <div class="timeline-icon">
+                                    <!--<span class="icon-datepost"></span>-->
+                                    <div class="minipic">
+                                        <a href="/users/<%=data.sender%>">
+                                            <img src="/avatars/<%= data.sender %>/avatar.square.jpg">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                                <div class="timeline-content-page">
+                                    <div class="textpost">
+                                        <h2 class="post-title">
+                                            <a href="/users/<%=data.sender%>"><%= data.sender %></a>
+                                            <% if( data.images) { %>
+                                            <% if( data.images.length > 0 ) { %>
+                                            <div style="float: right;">
+                                                <i class="icon-picture"></i>
+                                            </div>
+                                            <% } %>
+                                            <% } %>
+                                        </h2>
+                                        <span class="post-divider"></span>
+
+                                        <div class="bodytext">
+                                            <p>
+                                                <%- data.message.parseURL().parseUsername().parseSearches() %>
+                                            </p>
+                                            <% if( data.images) { %>
+                                            <% if( data.images.length > 0 ) { %>
+                                            <div class="message-image" id="<%=data._id%>_image">
+                                                <img src="/i/<%=data.images[0]%>" />
+                                            </div>
+                                            <% } %>
+                                            <% } %>
+                                            <span class="post-divider"></span>
+                                            <!--<a href="{Permalink}" class="read_more">Read More ...</a>-->
+                                            <div class="data_mark">
+                                                <time class="timeago read_more" datetime="<%=data.creationDate.toISOString()%>"></time>
+                                                <span class="read_more"> from <%=data.from%></span>
+                                                <% if( data.author != '' && data.author != null && data.author != undefined ) { %>
+                                                <br/><span class="read_more">Created by <a href="/users/<%=data.author%>"><%=data.author%></a> (<a href="/message/<%=data.original_id%>">See message</a>)</span>
+                                                <% } %>
+                                            </div>
+                                            <div class="data_buttons">
+                                                <% if( data.images) { %>
+                                                <% if( data.images.length > 0 ) { %>
+                                                <button class="btn" rel="tooltip" title="Show/Hide image" onclick="$('#<%=data._id%>_image').toggle();"><i class="icon-picture"></i></button>
+                                                <% } %>
+                                                <% } %>
+                                                <% if( section != 'favorites' ) { %>
+                                                <button class="btn" rel="tooltip" title="Repeat message" onclick="$('#message').val('<%=data.message%> ');$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();$('#author').val('<%=data.sender%>');$('#original_id').val('<%=data._id%>');"><i class="icon-repeat"></i></button>
+
+                                                <% if( data.sender != user ) { %>
+                                                <button class="btn" rel="tooltip" title="Reply" onclick="$('#message').val(':<%=data.sender%> ');$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();$('#reply_to').val('<%=data._id%>');"><i class="icon-share-alt"></i></button>
+                                                <% if( data.ids.length > 1 ) { %>
+                                                    <% if( data.ids.indexOf(data.sender) == -1 ) { %>
+                                                        <button class="btn" rel="tooltip" title="Reply to all" onclick="$('#message').val( (':<%=data.sender%> :<%=data.ids.join(" :")%> ') );$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();$('#reply_to').val('<%=data._id%>');"><i class="icon-share-alt"> </i><i class="icon-share-alt"> </i></button>
+                                                    <% } else { %>
+                                                        <button class="btn" rel="tooltip" title="Reply to all" onclick="$('#message').val((':<%=data.ids.join(" :")%> '));$('html, body').animate({scrollTop:0}, 'fast');$('#message').focus();$('#message').caretToEnd();$('#reply_to').val('<%=data._id%>');"><i class="icon-share-alt"> </i><i class="icon-share-alt"> </i></button>
+                                                    <% } %>
+                                                    <% } %>
+                                                <% } %>
+                                                <% } %>
+                                                <% if( data.sender == user ) { %>
+                                                <button class="btn"  rel="tooltip" title="Delete message" onclick="location.href='/remove/<%=data._id%>';"><i class="icon-remove"></i></button>
+
+                                                <% if( data.hidden == false ) { %>
+                                                <button class="btn" rel="tooltip" title="Hide message" onclick="location.href='/hide/<%=data._id%>';"><i class="icon-eye-close"></i></button>
+                                                <% } else { %>
+                                                <button class="btn" rel="tooltip" title="Unhide message" onclick="location.href='/unhide/<%=data._id%>';"><i class="icon-eye-open"></i></button>
+                                                <% } %>
+                                                <% } %>
+                                                <% if( data.reply_to == -1 || data.reply_to == '' ) { %>
+                                                <button rel="tooltip" title="Link to this message" class="btn"><a href="/message/<%= data._id %>" target="_BLANK"><i class="icon-globe"></i></a></button>
+                                                <% } else { %>
+                                                <button class="btn" rel="tooltip" title="See conversation" onclick="location.href='/conversation/<%=data._id%>';"><i class="icon-comment"></i></button>
+                                                <% } %>
+                                                <button class="btn" rel="tooltip" title="Add/Remove Favorite" onclick="javascript:favorite('<%=data._id%>');" id="fav_<%=data._id%>"><% if( user_data.favorites.indexOf(data._id.toString()) == -1 ) { %><i class="icon-star-empty"></i><% } else { %><i class="icon-star"></i><% } %></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+
+                        <% if( section != 'favorites' ) { %>
+                        <% if(messages != undefined ) { %>
+                        <% if(messages.length > 0) { %>
+                        <div class="post"  id="load_more" data-date="<%= messages[messages.length - 1].creationDate %>">
+                            <div class="timeline-preview">
+                                <div class="timeline-icon"><span class="icon-chat"></span></div>
+                                <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                                <div class="timeline-content-page">
+                                    <div class="textpost">
+                                        <h2 class="post-page-title">
+                                            <a href="javascript:load_more();">Load More...</a>
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                        <% } %>
+                        <% } %>
+                    </div>
+                </div> 
+            </div> 
+
+        </div>
+
+    </div>
+
+</div>
+</section>
+
+<script>
+function load_more() {
+    var button = $("#load_more");
+
+    $.post('/more', {
+        date: button.attr('data-date'),
+        section: '<%=section%>'
+    }, function(html){
+        button.remove();
+
+        $('#messages').append(html);
+
+        $('.timeago').timeago();
+    }, 'html');
+}
+</script>
+</div>
+</div>
+<% include footer.html %>
