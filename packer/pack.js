@@ -23,7 +23,8 @@ if( type == 'html' ) {
 
 			var html_packed = S( fs.readFileSync('../views/' + files[i]) ).s;
   			
-  			html_packed = html_packed.replace(/(\r\n|\r|\n)/g, "<br />");
+  			html_packed = html_packed.replace(/(\r\n|\r|\n)/g, '');
+  			html_packed = html_packed.replace(/<!--[\s\S]*?-->/g, '');
   			html_packed = html_packed.collapseWhitespace();
 
   			console.log(html_packed.s);
