@@ -235,7 +235,7 @@ exports.images = function(req, res) {
         res.end(  );
     });*/
     s3.get().get('/images/' + req.params.file).on('response', function(response){
-        response.set(res.headers);
+        res.set(response.headers);
         response.setEncoding('utf8');
         response.on('data', function(chunk){
             res.write(chunk);
