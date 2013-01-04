@@ -226,10 +226,11 @@ exports.avatars = function(req, res) {
 exports.images = function(req, res) {
     var s3 = new (require('../classes/s3'))();
 
-    res.set('Content-Type', 'image/jpeg');
+    //res.set('Content-Type', 'image/jpeg');
 
     s3.get().getFile('/images/' + req.params.file, function(err, response){
-        res.write(response);
+        console.log(response);
+        res.write('binary', response);
         res.end();
     });
     //res.redirect('https://coolpa.s3.amazonaws.com/images/' + req.params.file );
