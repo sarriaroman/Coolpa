@@ -17,19 +17,17 @@ var type = process.env.TYPE.toLowerCase();
 if( type == 'html' ) {
 	/* Pack HTML */
 	fs.readdir('../views/', function(err, files){
+		console.log(files);
 		for( var i = 0 ; i < files.length ; i++ ) {
-			fs.readFile('../views/' + files[i], function (err, data) {
-  				if (err) throw err;
-  				var html_packed = S(data).s; //packer.packHTML(S(data).s);
-  				html_packed = html_packed.collapseWhitespace();
+			console.log("Current: " + files[i]);
+			
+			var html_packed = S( fs.readFileSync('../views/' + files[i]) ).s;
+  			
+  			html_packed = html_packed.collapseWhitespace();
 
-  				console.log(html_packed.s);
+  			console.log(html_packed.s);
 
-				fs.writeFile('../views/' + files[i], html_packed.s, function(err) {
-					if (err) throw err;
-  					console.log('It\'s saved!');
-				});
-			});
+			fs.writeFileSync('../views/' + files[i], html_packed.s);
 		}
 	});
 } else if( type == 'css' ) {
