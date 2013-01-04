@@ -7,7 +7,7 @@
 
 var express = require('express')
 , routes = require('./routes')
-, api = require('./api_subdomain')
+, api = require('./routes/api_subdomain')
 , http = require('http')
 , path = require('path')
 , MongoStore = require('express-session-mongo');
