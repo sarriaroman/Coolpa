@@ -34,7 +34,6 @@ app.configure(function(){
         keepExtensions: true
     }));
     app.use(express.methodOverride());
-    app.use(express.vhost('*.net', app));
     app.use(express.cookieParser('741b09105b235f2f8fa0511a1229f48e'));
     app.use(express.session({
     	store: new MongoStore({
