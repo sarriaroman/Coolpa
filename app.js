@@ -46,7 +46,7 @@ app.configure(function(){
 
 // Subdomain processor.
 app.all('*', function(req, res, next){
-    if(req.headers.host.indexOf('developer') != -1) {
+    if(req.headers.host.indexOf('developer') != -1 && req.headers.host.split('.').length > 2 ) {
         res.redirect('http://coolpa.net' + ( req.headers.port == 80 ) ? '' : ':' + req.headers.port );
 
         return;
