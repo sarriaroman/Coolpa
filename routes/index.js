@@ -235,12 +235,13 @@ exports.images = function(req, res) {
         res.end(  );
     });*/
     s3.get().get('/images/' + req.params.file).on('response', function(response){
-        console.log(response);
-        res.set(response.headers);
-        response.setEncoding('utf8');
+        res.set('Content-Type', 'image/jpeg');
+        response.setEncoding('binary');
         response.on('data', function(chunk){
-            console.log(chunk);
             res.write(chunk);
+        });
+        response.on('end', function() {
+            res.end();
         });
     }).end();
     //res.redirect('https://coolpa.s3.amazonaws.com/images/' + req.params.file );
