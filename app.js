@@ -35,20 +35,35 @@ app.configure(function(){
     }));
     app.use(express.methodOverride());
     app.use(express.cookieParser('741b09105b235f2f8fa0511a1229f48e'));
-    app.use(express.session({
-        cookie: {  
-            path     : '/',  
-            domain   : 'coolpa.net',  
-            httpOnly : true,  
-            maxAge   : 1000*60*60*24*30*12
-        },
+    /*app.use(express.session({
     	store: new MongoStore({
     		db: 'coolpa-sessions'
     	})
+    }));*/
+    app.use(hostAwareSessionMiddleware({
+        store: new MongoStore({
+            db: 'coolpa-sessions'
+        })
     }));
     app.use(app.router);
     app.use(express.static(path.join(__dirname, 'public')));
 });
+
+function hostAwareSessionMiddleware(options) {
+    var originalMiddleware = express.session(options);
+    if(!options.cookie || !options.cookie.domain) return originalMiddleware;
+    var domain = options.cookie.domain;
+    if(domain[0] === '.') domain = '(.+)\.' + domain.slice(1);
+    var regex = new RegExp('^' + domain.replace('.', '\\.') + '$', 'i');
+    return function(req, res, next) {
+        if(!req.headers.host) return next();
+    
+        if(req.headers.host.match(regex)) {
+            return originalMiddleware(req, res, next);
+        }
+    next();
+    }
+}
 
 // Subdomain processor.
 app.all('*', function(req, res, next){ 
