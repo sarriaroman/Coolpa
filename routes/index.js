@@ -227,7 +227,7 @@ exports.avatars = function(req, res) {
             image = data.images.top;
         }
 
-        s3.get().get('/images/' + req.params.file).on('response', function(response){
+        s3.get().get( image ).on('response', function(response){
             res.set(response.headers);
             response.on('data', function(chunk){
                 res.write(chunk);
