@@ -230,8 +230,8 @@ exports.images = function(req, res) {
 
     s3.get().getFile('/images/' + req.params.file, function(err, response){
         console.log(response);
-        res.write('binary', response);
-        res.end();
+        res.set( response.headers );
+        res.end( response.buffer );
     });
     //res.redirect('https://coolpa.s3.amazonaws.com/images/' + req.params.file );
 };
