@@ -20,13 +20,15 @@ if( type == 'html' ) {
 		for( var i = 0 ; i < files.length ; i++ ) {
 			fs.readFile('../views/' + files[i], function (err, data) {
   				if (err) throw err;
-  				var html_packed = data; //packer.packHTML(S(data).s);
+  				var html_packed = S(data).s; //packer.packHTML(S(data).s);
   				html_packed = html_packed.collapseWhitespace();
 
-				fs.writeFile('../views/' + files[i], html_packed, function() {
+  				console.log(html_packed);
+
+				/*fs.writeFile('../views/' + files[i], html_packed, function() {
 					if (err) throw err;
   					console.log('It\'s saved!');
-				});
+				});*/
 			});
 		}
 	});
