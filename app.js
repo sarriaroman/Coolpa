@@ -36,8 +36,8 @@ app.configure(function(){
     	})
     }));
     app.use(app.router);
+    app.use(express.compress());
     app.use(express.static(path.join(__dirname, 'public')));
-	app.use(express.compress());
 });
 
 app.configure('development', function(){
