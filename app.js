@@ -46,8 +46,8 @@ app.configure(function(){
 
 // Subdomain processor.
 app.all('*', function(req, res, next){
-    if(req.headers.host.indexOf('www') != -1) res.redirect('coolpa.net');
-    
+    if(req.headers.host.indexOf('www') != -1) req.headers.host = 'coolpa.net';
+
     if(req.headers.host == 'api.coolpa.net' || req.headers.host == 'api.coolpa.net:3001')
         req.url = '/api_subdomain' + req.url;
     
