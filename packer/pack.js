@@ -12,7 +12,7 @@ if( type == 'html' ) {
 		for( var i = 0 ; i < files.length ; i++ ) {
 			var html_packed = packer.packHTML('../views/' + files[i]);
 
-			fs.fs.writeFile('../views/' + files[i], html_packed, function() {
+			fs.writeFile('../views/' + files[i], html_packed, function() {
 				if (err) throw err;
   				console.log('It\'s saved!');
 			});
