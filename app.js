@@ -50,7 +50,7 @@ app.all('*', function(req, res, next){
     console.log(req.headers);
     if(req.headers.host.indexOf('developer') == -1 ) {
         var url = 'http://coolpa.net';
-        url += ( req.headers.port == 80 ) ? '' : ':' + req.headers.port;
+        url += ( req.headers.host.indexOf(':') == -1 ) ? '' : ':' + req.headers.host.split(':')[1];
         console.log(url);
         res.redirect( url );
 
