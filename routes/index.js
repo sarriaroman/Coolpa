@@ -63,7 +63,7 @@ exports.auth = function(req, res) {
 };
 
 exports.recovery = function(req, res) {
-    var users = (new require('../models/users')());
+    var users = new (require('../models/users'))();
     var recover = require('../models/recovery');
     var fs = require('fs');
 
