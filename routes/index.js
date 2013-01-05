@@ -112,6 +112,48 @@ exports.recovery = function(req, res) {
     } );
 };
 
+exports.password_recovery = function(req, res) {
+    var users = new (require('../models/users'))();
+    var recover = require('../models/recover');
+
+    if( req.body == undefined ) {
+        recover.get( req.params.code, function(err, data) {
+            if( err || data == undefined || data == null ) {
+                req.session.auth_notification = "Your doesn't with our database.";
+                res.redirect('/');
+            } else {
+                res.render('password_recovery', {
+                    user: false,
+                    code: req.params.code,
+                    password_notification: ''
+                });
+            }
+        } );
+    } else {
+        recover.get( req.body.code, function(err, data) {
+            if( err || data == undefined || data == null ) {
+                req.session.auth_notification = "Your doesn't with our database.";
+                res.redirect('/');
+            } else {
+                if( req.body.password != "" && req.body.password == req.body.repeatpassword ) {
+                    users.update( data.user, {
+                        password: users.hashPass( req.body.password )
+                    }, function() {
+                        req.session.auth_notification = "Your password has been changed. Please access with the new one.";
+                        res.redirect('/');
+                    } );
+               } else {
+                    res.render('password_recovery', {
+                        user: false,
+                        code: req.body.code,
+                        password_notification: 'The passwords do not match.'
+                    });
+               }
+            }
+        } );
+    }
+};
+
 exports.request_beta = function(req, res) {
     var Beta = new (require('../models/beta'))();
 

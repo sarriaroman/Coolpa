@@ -138,10 +138,12 @@ app.get('/avatars/:username/:file', routes.avatars);
 app.get('/i/:file', routes.images);
 app.get('/invite_again/:code', routes.invite_again);
 app.get('/invite_remove/:code', routes.invite_remove);
+app.get('/password_recovery/:code', routes.password_recovery);
 
 // POST
 app.post('/auth', routes.auth);
 app.post('/recover', routes.recovery);
+app.get('/password_recovery/', routes.password_recovery);
 app.post('/request_beta', routes.request_beta);
 app.post('/message', routes.message);
 app.post('/more', routes.more);
