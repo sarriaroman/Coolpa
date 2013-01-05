@@ -66,6 +66,8 @@ exports.recovery = function(req, res) {
     var users = new (require('../models/users'))();
     var recover = require('../models/recovery');
     var fs = require('fs');
+    var ses = new (require('../classes/ses'))();
+    var ejs = require('ejs');
 
     users.user( req.body.rusername, function(err, data) {
         if( err || data == undefined ) {
