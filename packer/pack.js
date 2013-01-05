@@ -13,7 +13,7 @@ var fs = require('fs'),
 	packer = require('./packer');
 
 console.info('Ckecking Views directory');
-if( fs.existsSync('../views/').isDirectory() ) {
+if( fs.existsSync('../views/') ) {
 	fs.rmdirSync('../views/');
 }
 
