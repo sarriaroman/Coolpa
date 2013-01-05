@@ -114,7 +114,7 @@ exports.recovery = function(req, res) {
 
 exports.password_recovery = function(req, res) {
     var users = new (require('../models/users'))();
-    var recover = require('../models/recover');
+    var recover = require('../models/recovery');
 
     if( req.body == undefined ) {
         recover.get( req.params.code, function(err, data) {
