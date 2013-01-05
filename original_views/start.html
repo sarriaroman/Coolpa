@@ -39,7 +39,7 @@
                                     <input type="text" id="username" name="username" placeholder="Username" value="" style="width: 95%" /><br/>
                                     <input type="password" id="password" name="password" placeholder="Password" value="" style="width: 95%" /><br/>
 
-                                    <br/><a href="javascript:$('#password_recovery').show();$('#rusername').focus();">Lost your password?</a>
+                                    <a href="javascript:$('#password_recovery').show();$('#rusername').focus();">Lost your password?</a><br/>
                                     <% if( auth_notification != '' ) { %>
                                     <p><%=auth_notification%></p>
                                     </div>
@@ -62,23 +62,42 @@
                             <div class="timeline-pointer-pp"><span class="tl-pointer"></span></div>
                             <div class="timeline-content">
                                 <p class="description">
-                                    <% if( recover_notification != '' ) { %>
-                                    <div class="textpost">
-                                    <% } %>
-                                    <input type="text" id="rusername" name="rusername" placeholder="Username or Email" value="" style="width: 95%" /><br/>
-
-                                    <% if( recover_notification != '' ) { %>
-                                    <p><%=recover_notification%></p>
-                                    <script>
-                                    $('#password_recovery').show();
-                                    </script>
-                                    </div>
-                                    <% } %>
+                                    
                                 </p>
                             </div>
                             <div class="timeline-bar">
                                 <div>
                                     <input type="submit" value="Log In" class="btn btn-large" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="post">
+                        <div class="timeline-preview">
+                            <div class="timeline-icon"><span class="icon-answer"></span></div>
+                            <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                            <div class="timeline-content-page">
+                                <div class="textpost">
+                                    <h2 class="post-page-title">
+                                        Password recovery
+                                    </h2>
+                                    <span class="post-divider"></span>
+
+                                    <div class="bodytext">
+                                        <input type="text" id="rusername" name="rusername" placeholder="Username or Email" value="" style="width: 95%" /><br/>
+
+                                        <% if( recover_notification != '' ) { %>
+                                        <p><%=recover_notification%></p>
+                                        <script>
+                                        $('#password_recovery').show();
+                                        </script>
+                                        <% } %>
+
+                                        <span class="post-divider"></span>
+
+                                        <input type="submit" value="Submit" class="btn" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
