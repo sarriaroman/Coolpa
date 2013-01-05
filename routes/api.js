@@ -31,6 +31,13 @@ exports.search = function(req, res) {
                 delete udocs[i].email;
                 delete udocs[i].favorites;
                 delete udocs[i]._id;
+                delete udocs[i].lastname;
+
+                udocs[i].images = {
+                    original: 'http://coolpa.net/avatars/' + username + '/avatar.original.jpg',
+                    square: 'http://coolpa.net/avatars/' + username + '/avatar.square.jpg',
+                    top: 'http://coolpa.net/avatars/' + username + '/top.jpg',
+                };
             }
 
             res.json({
