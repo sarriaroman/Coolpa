@@ -22,6 +22,7 @@ exports.search = function(req, res) {
             for( var i = 0 ; i < udocs.length ; i++ ) {
                 var username = udocs[i]._id;
                 udocs[i].username = username;
+
                 delete udocs[i].connections;
                 delete udocs[i].favorites;
                 delete udocs[i].password;
@@ -38,6 +39,14 @@ exports.search = function(req, res) {
                     square: 'http://coolpa.net/avatars/' + username + '/avatar.square.jpg',
                     top: 'http://coolpa.net/avatars/' + username + '/top.jpg',
                 };
+            }
+
+            for( i = 0 ; i < docs.length ; i++ ) {
+                delete docs[i].public;
+                delete docs[i].hidden;
+                delete docs[i].images;
+                delete docs[i].ids;
+                delete docs[i].from;
             }
 
             res.json({
