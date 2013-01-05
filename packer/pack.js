@@ -17,7 +17,7 @@ if( fs.existsSync('../views/') ) {
 	fs.rmdirSync('../views/');
 }
 
-fs.fs.mkdirSync('../views/');
+fs.mkdirSync('../views/');
 
 /* Pack HTML */
 fs.readdir('../original_views/', function(err, files){
