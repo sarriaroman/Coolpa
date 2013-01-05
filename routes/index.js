@@ -139,8 +139,10 @@ exports.password_recovery = function(req, res) {
                     users.update( data.user, {
                         password: users.hashPass( req.body.password )
                     }, function() {
-                        req.session.auth_notification = "Your password has been changed. Please access with the new one.";
-                        res.redirect('/');
+                        recover.remove(req.body.code, function(err) {
+                            req.session.auth_notification = "Your password has been changed. Please access with the new one.";
+                            res.redirect('/');
+                        });
                     } );
                } else {
                     res.render('password_recovery', {
