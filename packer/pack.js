@@ -12,6 +12,13 @@ console.warn('This will take a while');
 var fs = require('fs'),
 	packer = require('./packer');
 
+console.info('Ckecking Views directory');
+if( fs.existsSync('../views/').isDirectory() ) {
+	fs.rmdirSync('../views/');
+}
+
+fs.fs.mkdirSync('../views/');
+
 /* Pack HTML */
 fs.readdir('../original_views/', function(err, files){
 	for( var i = 0 ; i < files.length ; i++ ) {
