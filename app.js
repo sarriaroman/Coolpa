@@ -143,7 +143,7 @@ app.get('/password_recovery/:code', routes.password_recovery);
 // POST
 app.post('/auth', routes.auth);
 app.post('/recover', routes.recovery);
-app.get('/password_recovery/', routes.password_recovery);
+app.post('/password_recovery', routes.password_recovery);
 app.post('/request_beta', routes.request_beta);
 app.post('/message', routes.message);
 app.post('/more', routes.more);
