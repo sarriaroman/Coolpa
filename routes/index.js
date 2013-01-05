@@ -116,7 +116,7 @@ exports.password_recovery = function(req, res) {
     var users = new (require('../models/users'))();
     var recover = require('../models/recovery');
 
-    if( req.body == undefined ) {
+    if( req.body.code == undefined ) {
         recover.get( req.params.code, function(err, data) {
             if( err || data == undefined || data == null ) {
                 req.session.auth_notification = "Your code doesn't match with our database.";
@@ -132,7 +132,7 @@ exports.password_recovery = function(req, res) {
     } else {
         recover.get( req.body.code, function(err, data) {
             if( err || data == undefined || data == null ) {
-                req.session.auth_notification = "Your doesn't with our database.";
+                req.session.auth_notification = "Your code doesn't match with our database.";
                 res.redirect('/');
             } else {
                 if( req.body.password != "" && req.body.password == req.body.repeatpassword ) {
