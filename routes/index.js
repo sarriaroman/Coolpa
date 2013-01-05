@@ -119,7 +119,7 @@ exports.password_recovery = function(req, res) {
     if( req.body == undefined ) {
         recover.get( req.params.code, function(err, data) {
             if( err || data == undefined || data == null ) {
-                req.session.auth_notification = "Your doesn't with our database.";
+                req.session.auth_notification = "Your code doesn't match with our database.";
                 res.redirect('/');
             } else {
                 res.render('password_recovery', {
