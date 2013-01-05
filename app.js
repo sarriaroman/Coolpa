@@ -7,7 +7,8 @@
 
 var express = require('express')
 , routes = require('./routes')
-, api = require('./routes/api_subdomain')
+, developer = require('./routes/developer_subdomain')
+, api = require('./routes/api')
 , http = require('http')
 , path = require('path')
 , MongoStore = require('express-session-mongo');
@@ -47,7 +48,9 @@ app.configure(function(){
 // Subdomain processor.
 app.all('*', function(req, res, next){
 
-    if(req.headers.host.indexOf('developer') == -1 && req.headers.host.split('.').length > 2 ) {
+    if( req.headers.host.indexOf('developer') == -1 
+        && req.headers.host.indexOf('api') == -1 
+        && req.headers.host.split('.').length > 2 ) {
         var url = 'http://coolpa.net';
         url += ( req.headers.host.indexOf(':') == -1 ) ? '' : ':' + req.headers.host.split(':')[1];
         console.log(url);
@@ -57,8 +60,11 @@ app.all('*', function(req, res, next){
     }
 
     if(req.headers.host.indexOf('developer') != -1 )
-        req.url = '/api_subdomain' + req.url;
+        req.url = '/developer_subdomain' + req.url;
     
+    if(req.headers.host.indexOf('api') != -1 )
+        req.url = '/api_subdomain' + req.url;
+
     next(); 
 }); 
 
@@ -172,8 +178,13 @@ app.post('/api/more', routes.mobile_more);
 app.post('/api/push', routes.mobile_push);
 
 // Developers Site
+// developer_subdomain
+app.get('/developer_subdomain/', developer.index);
+
+// Public API
 // api_subdomain
-app.get('/api_subdomain/', api.index);
+app.get('/api_subdomain/search/:token', api.search);
+app.post('/api_subdomain/search', api.search);
 
 server.listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));
