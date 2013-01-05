@@ -103,6 +103,10 @@ p {font-weight: normal;}
 	#html5_notification {
 		display: none;
 	}
+
+	#password_recovery {
+		display: none;
+	}
 	
 	.recommend_pic {
 		margin-right: 5px;

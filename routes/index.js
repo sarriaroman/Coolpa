@@ -11,7 +11,8 @@ exports.index = function(req, res){
         res.render('start', {
             user: req.session.uid,
             beta_notification: '',
-            auth_notification: (req.session.auth_notification == undefined) ? '' : req.session.auth_notification
+            auth_notification: (req.session.auth_notification == undefined) ? '' : req.session.auth_notification,
+            recover_notification: ''
         });
 
         if(req.session.auth_notification != undefined) {
@@ -61,6 +62,54 @@ exports.auth = function(req, res) {
     } );
 };
 
+exports.recovery = function(req, res) {
+    var users = (new require('../models/users')());
+    var recover = require('../models/recovery');
+    var fs = require('fs');
+
+    users.user( req.body.rusername, function(err, data) {
+        if( err || data == unefined ) {
+            res.render('start', {
+                user: req.session.uid,
+                beta_notification: '',
+                auth_notification: '',
+                recover_notification: 'Your email or username not exists.'
+            });
+        } else {
+            var time = (new Date()).getTime();
+
+            var code = users.hashPass( 'Password_' + data.email + '_Recovery_' + time + '_Coolpa' );
+
+            recover.add( {
+                user: data._id,
+                email: data.email,
+                code: code
+            }, function(err) {
+                fs.readFile('views/recover_template.html', 'UTF-8', function(err, html) {
+                    ses.get().send({
+                        from: 'Coolpa.net <info@coolpa.net>',
+                        to: [data.email],
+                        subject: 'Password recovery - Coolpa.net',
+                        body: {
+                            html: ejs.render(html, {
+                                uid: data._id,
+                                code: code
+                            })
+                        }
+                    });
+
+                    res.render('start', {
+                        user: req.session.uid,
+                        beta_notification: '',
+                        auth_notification: '',
+                        recover_notification: 'We sent you an email to recover your password.'
+                    });
+                });
+            });
+        }
+    } );
+};
+
 exports.request_beta = function(req, res) {
     var Beta = new (require('../models/beta'))();
 
@@ -83,7 +132,8 @@ exports.request_beta = function(req, res) {
             res.render('start', {
                 user: req.session.uid,
                 beta_notification: 'Thanks for your insterest. You will be notified soon.',
-                auth_notification: ''
+                auth_notification: '',
+                recover_notification: ''
             });
         });
     }

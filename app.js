@@ -141,6 +141,7 @@ app.get('/invite_remove/:code', routes.invite_remove);
 
 // POST
 app.post('/auth', routes.auth);
+app.post('/recover', routes.recovery);
 app.post('/request_beta', routes.request_beta);
 app.post('/message', routes.message);
 app.post('/more', routes.more);

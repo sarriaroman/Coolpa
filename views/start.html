@@ -39,6 +39,35 @@
                                     <input type="text" id="username" name="username" placeholder="Username" value="" style="width: 95%" /><br/>
                                     <input type="password" id="password" name="password" placeholder="Password" value="" style="width: 95%" /><br/>
 
+                                    <br/><a href="javascript:$('#password_recovery').show();">Lost your password?</a>
+                                    <% if( auth_notification != '' ) { %>
+                                    <p><%=auth_notification%></p>
+                                    </div>
+                                    <% } %>
+                                </p>
+                            </div>
+                            <div class="timeline-bar">
+                                <div>
+                                    <input type="submit" value="Log In" class="btn btn-large" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <form method="POST" action="/recover" id="password_recovery">
+                    <div id="profile-description">
+                        <div class="timeline-preview">
+                            <div class="timeline-icon-pp"><a href="/" class="icon-profile"></a></div>
+                            <div class="timeline-pointer-pp"><span class="tl-pointer"></span></div>
+                            <div class="timeline-content">
+                                <p class="description">
+                                    <% if( auth_notification != '' ) { %>
+                                    <div class="textpost">
+                                    <% } %>
+                                    <input type="text" id="username" name="username" placeholder="Username" value="" style="width: 95%" /><br/>
+                                    <input type="password" id="password" name="password" placeholder="Password" value="" style="width: 95%" /><br/>
+
                                     <% if( auth_notification != '' ) { %>
                                     <p><%=auth_notification%></p>
                                     </div>

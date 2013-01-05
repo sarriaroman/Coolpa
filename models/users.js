@@ -7,7 +7,7 @@ var users = (function( ) {
     
     users.prototype.auth = function( username, password, callback ) {
         this.database.connection().collection('Users').findOne({
-            _id: username,
+            $or: [ { _id: username }, { email: username } ],
             password: this.hashPass(password)
         }, function(err, data){
             callback(data);
@@ -23,7 +23,7 @@ var users = (function( ) {
     };
     
     users.prototype.user = function(username, callback) {
-        this.database.connection().collection('Users').findOne({_id: username}, callback);
+        this.database.connection().collection('Users').findOne( $or : [ { _id : username }, { email : username }], callback);
     };
     
     users.prototype.users = function(usernames, callback) {
