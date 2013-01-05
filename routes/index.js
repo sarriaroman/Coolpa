@@ -68,7 +68,7 @@ exports.recovery = function(req, res) {
     var fs = require('fs');
 
     users.user( req.body.rusername, function(err, data) {
-        if( err || data == unefined ) {
+        if( err || data == undefined ) {
             res.render('start', {
                 user: req.session.uid,
                 beta_notification: '',
