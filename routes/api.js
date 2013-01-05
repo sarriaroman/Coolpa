@@ -20,7 +20,7 @@ exports.search = function(req, res) {
 
             // Pre-process results
             for( var i = 0 ; i < udocs.length ; i++ ) {
-                var username = + udocs[i]._id;
+                var username = udocs[i]._id;
                 udocs[i].username = username;
                 delete udocs[i].connections;
                 delete udocs[i].favorites;
