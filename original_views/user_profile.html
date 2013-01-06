@@ -53,6 +53,20 @@
                                     </div>
 
                                     <div class="control-group">
+                                        <label class="control-label" for="inputLocation">Location</label>
+                                        <div class="controls">
+                                            <input type="text" name="location" id="inputLocation" placeholder="Ex. New York, United States" value="<%=data.location%>">
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputWebsite">Website</label>
+                                        <div class="controls">
+                                            <input type="text" name="website" id="inputWebsite" placeholder="http://coolpa.net" value="<%=data.website%>">
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
                                         <label class="control-label" for="inputDescription">Description</label>
                                         <div class="controls">
                                             <input type="text" name="description" id="inputDescription" placeholder="A bit about you..." maxlength="140" value="<%=data.description%>">
@@ -81,6 +95,17 @@
                                         <label class="control-label" for="inputRepeatPassword">Repeat Password</label>
                                         <div class="controls">
                                             <input type="password" id="inputRepeatPassword" name="repeatpassword" placeholder="Repeat Password">
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <small>If you change this settings your profile will be public</small>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputPublic">Public Profile</label>
+                                        <div class="controls">
+                                            <input type="checkbox" name="public" id="inputPublic" <% if( data.public ) { %>checked="checked"<% } %>>
                                         </div>
                                     </div>
 

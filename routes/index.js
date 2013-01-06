@@ -997,6 +997,10 @@ exports.user_data = function(req, res) {
                 name: req.body.name,
                 description: req.body.description.substring(0, 139),
                 password: users.hashPass( req.body.password ),
+                location: req.body.location,
+                website: req.body.website,
+                public: (req.body.public == undefined) ? false : true,
+                email: req.body.email,
                 notifications: {
                     mentions: (req.body.mentions == undefined) ? 0 : 1,
                     privates: (req.body.privates == undefined) ? 0 : 1,
@@ -1015,6 +1019,10 @@ exports.user_data = function(req, res) {
             users.update( req.session.uid, {
                 name: req.body.name,
                 description: req.body.description.substring(0, 139),
+                location: req.body.location,
+                website: req.body.website,
+                public: (req.body.public == undefined) ? false : true,
+                email: req.body.email,
                 notifications: {
                     mentions: (req.body.mentions == undefined) ? 0 : 1,
                     privates: (req.body.privates == undefined) ? 0 : 1,
@@ -1396,6 +1404,9 @@ exports.invitation = function(req, res) {
                                 connections: [],
                                 description: '',
                                 name: bdata.name,
+                                location: '',
+                                website: '',
+                                public: false,
                                 email: bdata.email,
                                 notifications: { 
                                     mentions: 1, 
