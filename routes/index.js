@@ -649,7 +649,7 @@ exports.user = function(req, res) {
                         // Just for unknown user.
                         if( actual == null ) {
                             actual = {
-                                connections = [];
+                                connections : [];
                             };
                         }
                         users.connections( username, function(err, conns) {
