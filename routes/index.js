@@ -1511,20 +1511,37 @@ exports.invitation = function(req, res) {
 };
 
 exports.showmessage = function(req, res) {
-    if( req.session.uid == undefined ) {
-        req.session.back = '/message/' + req.params.id;
+    var messages = new (require('../models/messages'))();
+    var users = new (require('../models/users'))();
         
-        res.redirect('/');
-    } else {
-        var messages = new (require('../models/messages'))();
+    messages.get(req.params.id, function(err, mdata) {
+        var username = mdata.sender;
+
+        if( req.session.uid == undefined ) {
+            users.user( username, function(err, data) {
+                if( data == null ) {
+                    req.session.auth_notification = 'The message not exists.';
+
+                    res.redirect('/');
+                } else if( data.public == false ) {
+                    req.session.auth_notification = 'The user owner of the message is private. You must be logged in.';
+                    req.session.back = '/message/' + req.params.id;
         
-        messages.get(req.params.id, function(err, data) {
+                    res.redirect('/');
+                } else {
+                    res.render('message', {
+                        user: req.session.uid,
+                        data: mdata
+                    }); 
+                }
+            });
+        } else {
             res.render('message', {
                 user: req.session.uid,
-                data: data
+                data: mdata
             }); 
-        });
-    }
+        }
+    });
 };
 
 exports.remove_message = function(req, res) {
