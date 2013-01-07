@@ -22,19 +22,19 @@ if( fs.existsSync('../views/') ) {
 fs.mkdirSync('../views/');
 
 /* Pack HTML */
-fs.readdir('../original_views/', function(err, files){
-	for( var i = 0 ; i < files.length ; i++ ) {
-		console.log("Current: " + files[i]);
+var files = fs.readdirSync('../original_views/');
 
-		var html_packed = S( fs.readFileSync('../original_views/' + files[i]) ).s;
+for( var i = 0 ; i < files.length ; i++ ) {
+	console.log("Current: " + files[i]);
+
+	var html_packed = S( fs.readFileSync('../original_views/' + files[i]) ).s;
   			
-  		html_packed = html_packed.replace(/(\r\n|\r|\n)/g, '');
-  		html_packed = html_packed.replace(/<!--[\s\S]*?-->/g, '');
-  		html_packed = html_packed.collapseWhitespace();
+  	html_packed = html_packed.replace(/(\r\n|\r|\n)/g, '');
+  	html_packed = html_packed.replace(/<!--[\s\S]*?-->/g, '');
+  	html_packed = html_packed.collapseWhitespace();
 
-		fs.writeFileSync('../views/' + files[i], html_packed.s);
-	}
-});
+	fs.writeFileSync('../views/' + files[i], html_packed.s);
+}
 
 console.info('Processing CSS');
 /* Pack CSS */
