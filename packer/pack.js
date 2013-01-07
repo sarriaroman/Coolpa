@@ -17,6 +17,7 @@ var fs = require('fs'),
 console.info('Ckecking Views directory');
 if( fs.existsSync('../views/') ) {
 	functions.rmDir('../views/');
+	fs.rmdirSync('../views/');
 }
 
 fs.mkdirSync('../views/');
