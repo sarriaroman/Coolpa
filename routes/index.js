@@ -485,35 +485,41 @@ exports.signout = function(req, res) {
 };
 
 exports.connect = function(req, res) {
-    security( req, res );
-    var users = new (require('../models/users'))();
+    if( req.session.uid == undefined ) {
+        req.session.auth_notification = 'You must be logged in to connect with other user.';
+        req.session.back = '/connect/' + req.params.username;
+
+        res.redirect('/');
+    } else {
+        var users = new (require('../models/users'))();
     
-    users.connect(req.session.uid, req.params.username, function(err, data) {
-        var fs = require('fs');
-        var ses = new (require('../classes/ses'))();
-        var ejs = require('ejs');
+        users.connect(req.session.uid, req.params.username, function(err, data) {
+            var fs = require('fs');
+            var ses = new (require('../classes/ses'))();
+            var ejs = require('ejs');
         
-        users.user(req.params.username, function(err, data){
-            if( data != undefined ) {
-                fs.readFile('views/reading_template.html', 'UTF-8', function(err, html) {
-                    ses.get().send({
-                        from: 'Coolpa.net <info@coolpa.net>',
-                        to: [data.email],
-                        subject: 'You have new readers on Coolpa',
-                        body: {
-                            html: ejs.render(html, {
-                                username: data._id, 
-                                uid: req.session.uid
-                            })
-                        }
+            users.user(req.params.username, function(err, data){
+                if( data != undefined ) {
+                    fs.readFile('views/reading_template.html', 'UTF-8', function(err, html) {
+                        ses.get().send({
+                            from: 'Coolpa.net <info@coolpa.net>',
+                            to: [data.email],
+                            subject: 'You have new readers on Coolpa',
+                            body: {
+                                html: ejs.render(html, {
+                                    username: data._id, 
+                                    uid: req.session.uid
+                                })
+                            }
+                        });
+                        console.log('Email sent to ' + data._id);
                     });
-                    console.log('Email sent to ' + data._id);
-                });
-            }
-        });
+                }
+            });
         
-        res.redirect('/users/' + req.params.username); 
-    });
+            res.redirect('/users/' + req.params.username); 
+        });
+    }
 };
 
 exports.conversation = function(req, res) {
@@ -640,7 +646,12 @@ exports.user = function(req, res) {
             messages.find( username, [], new Date(), function(err, docs) {
                 messages.count(username, [], function(err, cnt) {
                     users.user( req.session.uid, function(err, actual) { // Get the actual user!!!
-
+                        // Just for unknown user.
+                        if( actual == null ) {
+                            actual = {
+                                connections = [];
+                            };
+                        }
                         users.connections( username, function(err, conns) {
                             res.render('user_view', {
                                 user: req.session.uid,
