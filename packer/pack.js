@@ -7,16 +7,16 @@ var S = require('string');
 S.extendPrototype();
 
 console.warn('Starting resource compression');
-console.warn('This will take a while');
+console.warn('This will take a while\n');
 
 var fs = require('fs'),
 	packer = require('./packer'),
 	functions = require('./functions');
 
-console.info('Ckecking Views directory');
+console.info('Ckecking Views directory\n');
 if( fs.existsSync('../views/') ) {
 	functions.rmDir('../views/');
-	fs.rmdirSync('../views/');
+	//fs.rmdirSync('../views/');
 }
 
 fs.mkdirSync('../views/');
