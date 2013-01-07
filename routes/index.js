@@ -621,7 +621,9 @@ exports.disconnect = function(req, res) {
 
 exports.user = function(req, res) {
     var users = new (require('../models/users'))();
-    
+
+    var username = req.params.username;
+
     users.user( username, function(err, data) {
         if( data == null ) {
             req.session.auth_notification = 'The user not exists';
@@ -634,8 +636,6 @@ exports.user = function(req, res) {
             res.redirect('/');
         } else {
             var messages = new (require('../models/messages'))();
-
-            var username = req.params.username;
     
             messages.find( username, [], new Date(), function(err, docs) {
                 messages.count(username, [], function(err, cnt) {
