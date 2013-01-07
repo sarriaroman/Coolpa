@@ -6,13 +6,12 @@
 var S = require('string');
 S.extendPrototype();
 
-var functions = require('./functions');
-
 console.warn('Starting resource compression');
 console.warn('This will take a while');
 
 var fs = require('fs'),
-	packer = require('./packer');
+	packer = require('./packer'),
+	functions = require('./functions');
 
 console.info('Ckecking Views directory');
 if( fs.existsSync('../views/') ) {

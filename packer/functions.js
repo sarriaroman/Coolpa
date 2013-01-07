@@ -1,4 +1,6 @@
 exports.rmDir = function(dirPath) {
+	var fs = require('fs');
+	
 	try { var files = fs.readdirSync(dirPath); }
 	catch(e) { return; }
 	if (files.length > 0)
@@ -10,4 +12,4 @@ exports.rmDir = function(dirPath) {
 				rmDir(filePath);
 		}
 		fs.rmdirSync(dirPath);
-	};
+};
