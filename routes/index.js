@@ -620,44 +620,44 @@ exports.disconnect = function(req, res) {
 };
 
 exports.user = function(req, res) {
-    if( req.session.uid == undefined ) {
-        req.session.auth_notification = 'Please login to see the user.';
-        req.session.back = '/users/' + req.params.username;
+    users.user( username, function(err, data) {
+        if( data == null ) {
+            req.session.auth_notification = 'The user not exists';
 
-        res.redirect('/');
-    } else {
-        var messages = new (require('../models/messages'))();
-        var users = new (require('../models/users'))();
+            res.redirect('/');
+        } else if( data.public == false && req.session.uid == undefined ) {
+            req.session.auth_notification = 'The user you request is private. Please login to see the user.';
+            req.session.back = '/users/' + req.params.username;
 
-        var username = req.params.username;
+            res.redirect('/');
+        } else {
+            var messages = new (require('../models/messages'))();
+            var users = new (require('../models/users'))();
+
+            var username = req.params.username;
     
-        users.user( username, function(err, data) { // Get the search user!
-            if( data == null ) {
-                res.redirect('/');
-            } else {
-                messages.find( username, [], new Date(), function(err, docs) {
-                    messages.count(username, [], function(err, cnt) {
-                        users.user( req.session.uid, function(err, actual) { // Get the actual user!!!
+            messages.find( username, [], new Date(), function(err, docs) {
+                messages.count(username, [], function(err, cnt) {
+                    users.user( req.session.uid, function(err, actual) { // Get the actual user!!!
 
-                            users.connections( username, function(err, conns) {
-                                res.render('user_view', {
-                                    user: req.session.uid,
-                                    username: username,
-                                    data: data,
-                                    messages: docs, // Reversing array
-                                    count: cnt,
-                                    connections: data.connections.length,
-                                    connecteds: conns.length,
-                                    mustConnect: (username != req.session.uid),
-                                    isConnected: (actual.connections.indexOf(username) > -1)
-                                }); 
-                            });
+                        users.connections( username, function(err, conns) {
+                            res.render('user_view', {
+                                user: req.session.uid,
+                                username: username,
+                                data: data,
+                                messages: docs,
+                                count: cnt,
+                                connections: data.connections.length,
+                                connecteds: conns.length,
+                                mustConnect: (username != req.session.uid),
+                                isConnected: (actual.connections.indexOf(username) > -1)
+                            }); 
                         });
-                    } );
-                });
-            }
-        } );
-    }
+                    });
+                } );
+            });
+        }
+    } );
 };
 
 var mobile_security = function(req, res, callback) {

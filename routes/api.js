@@ -20,6 +20,7 @@ exports.search = function(req, res) {
 
             // Pre-process results
             for( var i = 0 ; i < udocs.length ; i++ ) {
+                // Remove non public users.
                 var username = udocs[i]._id;
                 udocs[i].username = username;
 
