@@ -1612,9 +1612,11 @@ exports.change_username = function(req, res) {
     // Mensajes mencionado: replace en el mensaje y cambio de ids. ( actualizar )
     // cambiar req.session.uid
 
+    var username = req.session.uid;
+
     var notify = function( percentage, message ) {
-        if( GLOBAL.online[data._id] != undefined ) {
-            GLOBAL.online[data._id].emit('username_change', {
+        if( GLOBAL.online[username] != undefined ) {
+            GLOBAL.online[username].emit('username_change', {
                 progress: percentage,
                 message: message
             } );

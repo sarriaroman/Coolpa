@@ -181,7 +181,7 @@
                     $("#username_change").modal();
 
                     var socket = io.connect('http://coolpa.net:3001');
-                    socket.emit('username', username);
+                    socket.emit('username', '<%=data._id%>');
                     socket.on('username_change', function (data) {
                         $("#username_change .bar").css('width', data.progress + '%');
                         $("#username_change #message").html( data.message );
