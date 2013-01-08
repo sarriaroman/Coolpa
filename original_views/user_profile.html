@@ -160,9 +160,9 @@
                                 <% } %>
 
                                 <div class="control-group">
-                                    <label class="control-label" for="inputEmail">Username</label>
+                                    <label class="control-label" for="inputUsername">Username</label>
                                     <div class="controls">
-                                        <input type="text" name="username" id="inputEmail" placeholder="Username" value="<%=data._id%>">
+                                        <input type="text" name="username" id="inputUsername" placeholder="Username" value="<%=data._id%>">
                                     </div>
                                 </div>
                             </div>
@@ -188,7 +188,7 @@
                     });
 
                     $.post('/change_username', {
-                        username: $("#user_change #username").val()
+                        username: $("#user_change #inputUsername").val()
                     }, function( data ) {
                         /* reload */
                         location.reload();
