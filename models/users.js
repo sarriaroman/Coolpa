@@ -23,7 +23,7 @@ var users = (function( ) {
     };
     
     users.prototype.user = function(username, callback) {
-        this.database.connection().collection('Users').findOne( { $or : [ { _id : { $regex: '/^' + username + '$/', $options: 'i' } }, { email : username }] }, callback);
+        this.database.connection().collection('Users').findOne( { $or : [ { _id : { $regex: '/^' + username + '$/i' } }, { email : username }] }, callback);
     };
     
     users.prototype.users = function(usernames, callback) {
