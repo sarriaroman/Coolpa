@@ -10,7 +10,7 @@ var db = (function() {
     }
     
     db.prototype.connection = function() {
-        return this.mongo.db('localhost:27017/coolpatest?auto_reconnect=true', {safe: true, fsync: true});
+        return this.mongo.db('localhost:27017/coolpa?auto_reconnect=true', {safe: true, fsync: true});
     };
     
     return db;

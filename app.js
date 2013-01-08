@@ -120,6 +120,25 @@ io.sockets.on('connection', function (socket) {
     });
 });
 
+var isPortTaken = function(PORT, callback) {
+    var net = require('net')
+    var tester = net.createServer()
+    tester.once('error', function (err) {
+        if (err.code == 'EADDRINUSE') {
+            callback(null, true)
+        } else {
+            callback(err)
+        }
+    });
+    tester.once('listening', function() {
+        tester.once('close', function() {
+            callback(null, false)
+        })
+        tester.close()
+    });
+    tester.listen(PORT);
+};
+
 // GET
 app.get('/', routes.index);
 app.get('/about', routes.about);
@@ -189,9 +208,15 @@ app.get('/developer_subdomain/', developer.index);
 app.get('/api_subdomain/search/:token', api.search);
 app.post('/api_subdomain/search', api.search);
 
-server.listen(app.get('port'), function(){
-    console.log("Express server listening on port " + app.get('port'));
-});
+isPortTaken( app.get('port'), function(err, taken) {
+    if( taken ) {
+        app.set('port', 3001);
+    }
+
+    server.listen(app.get('port'), function(){
+        console.log("Express server listening on port " + app.get('port'));
+    });
+} );
 
 // Exception Handling
 process.on('uncaughtException', function (err) {
