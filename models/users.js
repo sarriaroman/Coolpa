@@ -23,7 +23,7 @@ var users = (function( ) {
     };
     
     users.prototype.user = function(username, callback) {
-        this.database.connection().collection('Users').findOne( { $or : [ { _id : { $regex: username, $options: 'i' } }, { email : username }] }, callback);
+        this.database.connection().collection('Users').findOne( { $or : [ { _id : { $regex: '/^' + username + '$/', $options: 'i' } }, { email : username }] }, callback);
     };
     
     users.prototype.users = function(usernames, callback) {
@@ -103,7 +103,7 @@ var users = (function( ) {
     };
     
     users.prototype.find = function(username, callback) {
-        this.database.connection().collection('Users').findItems({_id: { $regex: username, $options: 'i' }}, callback);
+        this.database.connection().collection('Users').findItems({_id: { $regex: '/^' + username + '$/', $options: 'i' }}, callback);
     };
     
     users.prototype.search = function(search, callback) {
