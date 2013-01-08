@@ -51,11 +51,9 @@ app.all('*', function(req, res, next){
     if( req.headers.host.indexOf('developer') == -1 
         && req.headers.host.indexOf('api') == -1 
         && req.headers.host.split('.').length > 2 ) {
-        var actual = req.headers.host.replace('http://','');
-        console.log(req.url);
         var url = 'http://coolpa.net';
         url += ( req.headers.host.indexOf(':') == -1 ) ? '' : ':' + req.headers.host.split(':')[1];
-        url += (actual.indexOf('/') == -1 ) ? '' : actual.substring( actual.indexOf('/') );
+        url += req.url;
         console.log(url);
         res.redirect( url );
 
