@@ -64,7 +64,7 @@ var messages = (function( ) {
     };
     
     messages.prototype.search = function( search, callback ) {
-        return this.database.connection().collection('Messages').findItems({ $or { message: { $regex: search, $options: 'i' }, sender : search }, public: true, hidden: false}, {limit: 0}, callback);
+        return this.database.connection().collection('Messages').findItems({ $or : { message: { $regex: search, $options: 'i' }, sender : search }, public: true, hidden: false}, {limit: 0}, callback);
     };
 
     messages.prototype.recommendationsByMessages = function( fcallback ) {
