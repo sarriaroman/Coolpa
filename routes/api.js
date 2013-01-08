@@ -40,11 +40,17 @@ exports.search = function(req, res) {
             }
 
             for( i = 0 ; i < docs.length ; i++ ) {
-                delete docs[i].public;
-                delete docs[i].hidden;
-                delete docs[i].images;
-                delete docs[i].ids;
-                delete docs[i].from;
+                var object = {
+                    id: docs[i]._id,
+                    sender: docs[i].sender,
+                    message: docs[i].message,
+                    reply_to: docs[i].reply_to,
+                    created: docs[i].creationDate,
+                    republish : {
+                        author: docs[i].author,
+                        original_id: docs[i].original_id
+                    }
+                };
             }
 
             res.json({
