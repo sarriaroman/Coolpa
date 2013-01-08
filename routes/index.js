@@ -1641,6 +1641,8 @@ exports.change_username = function(req, res) {
                 for( var i = 0 ; i < mentions.length ; i++ ) {
                     var mention = mentions[i];
 
+                    delete mention._id;
+                    
                     mention.message = S(mention.message).replaceAll(':' + user_data._id, ':' + new_username).s;
                     mention.ids.splice( mention.ids.indexOf(user_data._id), 1 );
                     mention.ids.push(new_username);
