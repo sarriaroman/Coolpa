@@ -138,6 +138,54 @@
                 </div>
             </form>
 
+            <form method="POST" action="/change_username" enctype="multipart/form-data" id="user_change" class="form-horizontal">
+                <div class="post">
+                    <div class="timeline-preview">
+                        <div class="timeline-icon"><span class="icon-photo"></span></div>
+                        <div class="timeline-pointer"><span class="tl-pointer"></span></div>
+                        <div class="timeline-content-page">
+                            <div class="textpost">
+                                <h2 class="post-title">Change Username</h2>
+                                <span class="post-divider"></span>
+
+                                <div class="alert alert-block alert-error">
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                    - This is a very dangerous process. Make it under your own risk. Data could be removed in the process.<br/>
+                                    - If you decide to change your username please wait until the process finish.
+                                </div>
+
+                                <% if( notification ) { %>
+                                <% if( notification.type == 'top' ) { %>
+                                <p><%=notification.message%></p>
+                                <% } %>
+                                <% } %>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="inputEmail">Username</label>
+                                    <div class="controls">
+                                        <input type="text" name="username" id="inputEmail" placeholder="Username" value="<%=data._id%>">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-bar">
+                            <div>
+                                <button type="submit" class="btn">Change</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div id="username_change" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="change" aria-hidden="true">
+                <div class="modal-body">
+                    <div class="progress progress-striped active">
+                        <div class="bar bar-success" style="width: 10%;"></div>
+                    </div>
+                    <p>Processing...</p>
+                </div>
+            </div>
+
             <form method="POST" action="/upload_avatar" enctype="multipart/form-data" id="user_avatar" class="form-horizontal">
                 <div class="post">
                     <div class="timeline-preview">
