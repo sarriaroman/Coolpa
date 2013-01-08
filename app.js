@@ -52,6 +52,7 @@ app.all('*', function(req, res, next){
         && req.headers.host.indexOf('api') == -1 
         && req.headers.host.split('.').length > 2 ) {
         var actual = req.headers.host.replace('http://','');
+        console.log(actual);
         var url = 'http://coolpa.net';
         url += ( req.headers.host.indexOf(':') == -1 ) ? '' : ':' + req.headers.host.split(':')[1];
         url += (actual.indexOf('/') == -1 ) ? '' : actual.substring( actual.indexOf('/') );
