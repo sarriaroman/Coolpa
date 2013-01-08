@@ -87,7 +87,7 @@ var users = (function( ) {
             var old_id = data._id;
             data._id = new_username;
 
-            db.connection().collection('Users').removeById(db.getObjectID(old_id), function(err) {
+            db.connection().collection('Users').removeById(old_id, function(err) {
                 db.connection().collection('Users').insert( data, callback );
             });
         });
