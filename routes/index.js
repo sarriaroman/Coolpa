@@ -1662,6 +1662,7 @@ exports.change_username = function(req, res) {
                     notify(90, 'Finishing process...');
 
                     users.copy(user_data._id, new_username, function(err) {
+                        console.error(err);
                         notify(100, 'Completed');
 
                         req.session.uid = new_username;
