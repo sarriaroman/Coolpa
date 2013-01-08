@@ -27,7 +27,7 @@ var users = (function( ) {
     };
     
     users.prototype.users = function(usernames, callback) {
-        this.database.connection().collection('Users').findItems({_id: { $in: usernames }}, callback);
+        this.database.connection().collection('Users').findItems({_id: { $in: { $regex: usernames, $options: 'i' } }}, callback);
     };
     
     users.prototype.connections = function(username, callback) {
