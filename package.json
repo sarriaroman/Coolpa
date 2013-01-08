@@ -15,6 +15,7 @@
     "knox": "*",
     "gcm": "*",
     "socket.io": "*",
-    "async":"*"
+    "async":"*",
+    "string": "*"
   }
 }

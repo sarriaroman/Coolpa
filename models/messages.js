@@ -53,6 +53,10 @@ var messages = (function( ) {
         return this.database.connection().collection('Messages').findItems({sender: uid},{sort: { creationDate: -1 }, limit: 0 }, callback);
     };
 
+    messages.prototype.update = function( mid, data, callback ) {
+        return this.database.connection().collection('Messages').updateById(mid, { $set: data }, callback);
+    };
+
     messages.prototype.changeSender = function( username, new_sender, callback ) {
         return this.database.connection().collection('Messages').update({sender : username}, { sender : new_sender }, { multi : true}, callback);
     };

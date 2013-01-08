@@ -1613,6 +1613,9 @@ exports.change_username = function(req, res) {
     // cambiar req.session.uid
 
     var username = req.session.uid;
+    var new_username = req.body.username;
+
+    var S = require('string');
 
     var notify = function( percentage, message ) {
         if( GLOBAL.online[username] != undefined ) {
@@ -1628,6 +1631,46 @@ exports.change_username = function(req, res) {
 
     users.user( req.session.uid, function(err, user_data) {
         notify(10, 'Processing user...');
+
+        users.connections( user_data._id, function( err, connections ) {
+            notify(20, 'Processing connections...');
+
+            messages.allMentions( user_data._id, function(err, mentions) {
+                notify(35, 'Processing mentions...');
+
+                for( var i = 0 ; i < mentions.length ; i++ ) {
+                    var mention = mentions[i];
+
+                    mention.message = S(mention.message).replaceAll(':' + user_data._id, ':' + new_username).s;
+                    mention.ids.splice( mention.ids.indexOf(user_data._id), 1 );
+                    mention.ids.push(new_username);
+
+                    messages.update(mention._id, mention, function(err) {
+                        console.log('Updated...');
+                    });
+                }
+
+                notify(55, 'Processing your messages');
+                messages.changeSender(user_data._id, new_username, function(err ) {
+                    notify(70, 'Updating to your new username...');
+
+                    for( var c = 0 ; c < connections.length ; c++ ) {
+                        users.disconnect( connections[c]._id, user_data._id, function(err) {} );
+                        users.connect( connections[c]._id, new_username, function() {} );
+                    }
+
+                    notify(90, 'Finishing process...');
+
+                    users.copy(user_data._id, new_username, function(err) {
+                        notify(100, 'Completed');
+
+                        res.json({
+                            result: true
+                        });
+                    })
+                });
+            } );
+        });
     } );
 };
 
