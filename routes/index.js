@@ -1640,14 +1640,16 @@ exports.change_username = function(req, res) {
 
                 for( var i = 0 ; i < mentions.length ; i++ ) {
                     var mention = mentions[i];
+                    var mid = mention._id;
 
-                    delete mention._id;
+                    var ids = mention.ids;
+                    ids.splice( mention.ids.indexOf(user_data._id), 1 );
+                    ids.push(new_username);
 
-                    mention.message = S(mention.message).replaceAll(':' + user_data._id, ':' + new_username).s;
-                    mention.ids.splice( mention.ids.indexOf(user_data._id), 1 );
-                    mention.ids.push(new_username);
-
-                    messages.update(mentions[i]._id, mention, function(err) {
+                    messages.update(mid, {
+                        message: S(mention.message).replaceAll(':' + user_data._id, ':' + new_username).s,
+                        ids : ids
+                    }, function(err) {
                         console.log('Updated...');
                     });
                 }
