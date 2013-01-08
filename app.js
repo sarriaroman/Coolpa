@@ -30,7 +30,7 @@ app.configure(function(){
     app.set('view engine', 'html');
     app.use(express.favicon(__dirname + '/favicon.ico'));
     app.use(express.logger('dev'));
-    app.disable('x-powered-by');
+    app.disable('x-powered-by'); // Security reasons
     app.use(express.bodyParser({
         keepExtensions: true
     }));
@@ -52,9 +52,10 @@ app.all('*', function(req, res, next){
         && req.headers.host.indexOf('api') == -1 
         && req.headers.host.split('.').length > 2 ) {
         var url = 'http://coolpa.net';
+        
         url += ( req.headers.host.indexOf(':') == -1 ) ? '' : ':' + req.headers.host.split(':')[1];
         url += req.url;
-        console.log(url);
+        
         res.redirect( url );
 
         return;
