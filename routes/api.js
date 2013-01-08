@@ -27,7 +27,7 @@ exports.search = function(req, res) {
                     description: udocs[i].description,
                     location : udocs[i].location,
                     website: udocs[i].website,
-                    images = {
+                    images : {
                         original: 'http://coolpa.net/avatars/' + username + '/avatar.original.jpg',
                         square: 'http://coolpa.net/avatars/' + username + '/avatar.square.jpg',
                         top: 'http://coolpa.net/avatars/' + username + '/top.jpg',
