@@ -1642,13 +1642,12 @@ exports.change_username = function(req, res) {
                     var mention = mentions[i];
 
                     delete mention._id;
-                    
+
                     mention.message = S(mention.message).replaceAll(':' + user_data._id, ':' + new_username).s;
                     mention.ids.splice( mention.ids.indexOf(user_data._id), 1 );
                     mention.ids.push(new_username);
 
-                    console.log(mention);
-                    messages.update(mention._id, mention, function(err) {
+                    messages.update(mentions[i]._id, mention, function(err) {
                         console.log('Updated...');
                     });
                 }
@@ -1666,14 +1665,9 @@ exports.change_username = function(req, res) {
                     notify(90, 'Finishing process...');
 
                     users.remove(user_data._id, function(err) {
-                        console.error(err);
-
                         user_data._id = new_username;
 
-                        console.log(user_data);
-
                         users.add(user_data, function(err) {
-                            console.trace(err);
                             notify(100, 'Completed');
 
                             req.session.uid = new_username;
