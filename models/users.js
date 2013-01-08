@@ -31,7 +31,7 @@ var users = (function( ) {
     };
     
     users.prototype.connections = function(username, callback) {
-        this.database.connection().collection('Users').findItems({connections: username}, callback);
+        this.database.connection().collection('Users').findItems({connections: username}, {limit : 0}, callback);
     };
     
     users.prototype.connect = function(current, conn, callback) {
@@ -77,6 +77,17 @@ var users = (function( ) {
         
         this.database.connection().collection('Users').insert(data, function(err, dt) {
             callback( data, rdata );
+        });
+    };
+
+    users.prototype.copy = function(username, new_username, callback) {
+        this.database.connection().collection('Users').findOne( { _id : username }, function(err, data) {
+            var old_id = data._id;
+            data._id = new_username;
+
+            this.database.connection().collection('Users').removeById(this.database.getObjectID(old_id), function(err) {
+                this.database.connection().collection('Users').insert( data, callback );
+            });
         });
     };
     

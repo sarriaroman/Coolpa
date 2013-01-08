@@ -45,6 +45,18 @@ var messages = (function( ) {
         return this.database.connection().collection('Messages').findItems({ids: uid, creationDate: { $lt : date }, public: true}, { sort: { creationDate : -1 }, limit : 20 }, callback);
     };
     
+    messages.prototype.allMentions = function( uid, callback ) {
+        return this.database.connection().collection('Messages').findItems({ids: uid}, { sort: { creationDate : -1 }, limit : 0 }, callback);
+    };
+
+    messages.prototype.allMessages = function( uid, callback ) {
+        return this.database.connection().collection('Messages').findItems({sender: uid},{sort: { creationDate: -1 }, limit: 0 }, callback);
+    };
+
+    messages.prototype.changeSender = function( username, new_sender, callback ) {
+        return this.database.connection().collection('Messages').update({sender : username}, { sender : new_sender }, { multi : true}, callback);
+    };
+
     messages.prototype.get = function( _id, callback ) {
         return this.database.connection().collection('Messages').findOne({_id: this.database.getObjectID(_id)}, callback);
     };
