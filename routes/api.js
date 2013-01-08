@@ -21,25 +21,22 @@ exports.search = function(req, res) {
             // Pre-process results
             for( var i = 0 ; i < udocs.length ; i++ ) {
                 // Remove non public users.
-                var username = udocs[i]._id;
-                udocs[i].username = username;
-
-                delete udocs[i].connections;
-                delete udocs[i].favorites;
-                delete udocs[i].password;
-                delete udocs[i].invites;
-                delete udocs[i].mobile;
-                delete udocs[i].notifications;
-                delete udocs[i].email;
-                delete udocs[i].favorites;
-                delete udocs[i]._id;
-                delete udocs[i].lastname;
-
-                udocs[i].images = {
-                    original: 'http://coolpa.net/avatars/' + username + '/avatar.original.jpg',
-                    square: 'http://coolpa.net/avatars/' + username + '/avatar.square.jpg',
-                    top: 'http://coolpa.net/avatars/' + username + '/top.jpg',
+                var object = {
+                    username : udocs[i]._id,
+                    name: udocs[i].name,
+                    description: udocs[i].description,
+                    location : udocs[i].location,
+                    website: udocs[i].website,
+                    images = {
+                        original: 'http://coolpa.net/avatars/' + username + '/avatar.original.jpg',
+                        square: 'http://coolpa.net/avatars/' + username + '/avatar.square.jpg',
+                        top: 'http://coolpa.net/avatars/' + username + '/top.jpg',
+                    },
+                    created: udocs[i].createdDate,
+                    updated: udocs[i].updatedDate
                 };
+                
+                udocs[i] = object;
             }
 
             for( i = 0 ; i < docs.length ; i++ ) {
