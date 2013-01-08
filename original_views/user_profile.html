@@ -186,6 +186,12 @@
                         $("#username_change .bar").css('width', data.progress + '%');
                         $("#username_change #message").html( data.message );
                     });
+
+                    $.post('/change_username', {
+                        username: $("#user_change #username").val();
+                    }, function( data ) {
+                        // reload
+                    }, 'json');
                 });
             </script>
 

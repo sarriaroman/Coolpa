@@ -163,6 +163,7 @@ app.post('/invitation', routes.invitation_data);
 app.post('/search', routes.search);
 app.post('/favorite', routes.favorite);
 app.post('/unfavorite', routes.unfavorite);
+app.post('/change_username', routes.change_username);
 
 
 // Temporal
