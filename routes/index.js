@@ -42,7 +42,7 @@ exports.auth = function(req, res) {
     
     var User = new Users();
     
-    User.auth( req.body.username.toLowerCase(), req.body.password, function(data) {
+    User.auth( req.body.username, req.body.password, function(data) {
         if( data ) {
             req.session.uid = data._id;
 
@@ -191,7 +191,7 @@ exports.mobile_auth = function(req, res) {
     var User = new Users();
     console.log(req.body);
     
-    User.auth( req.body.username.toLowerCase(), req.body.password, function(data) {
+    User.auth( req.body.username, req.body.password, function(data) {
         console.log(data);
         if( data ) {
             var session_id = (new Date().getTime()).toString(16);
@@ -916,15 +916,15 @@ exports.reading = function(req, res) {
         var username = ( req.params.username == 'me' ) ? req.session.uid : req.params.username;
         
         users.user( username, function(err, data) {
-            messages.count(username, [], function(err, cnt) {
-                users.connections( username, function(err, conns) {
+            messages.count(data._id, [], function(err, cnt) {
+                users.connections( data._id, function(err, conns) {
                     users.users( data.connections, function(err, reads) {
                         users.user( req.session.uid, function(err, sdata) {
                             res.render('users', {
                                 title: 'Reading',
                                 user: req.session.uid,
                                 user_data: sdata,
-                                username: username,
+                                username: data._id,
                                 users: reads,
                                 count: cnt,
                                 connections: data.connections.length,
@@ -948,14 +948,14 @@ exports.readers = function(req, res) {
         var username = ( req.params.username == 'me' ) ? req.session.uid : req.params.username;
         
         users.user( username, function(err, data) {
-            messages.count(username, [], function(err, cnt) {
-                users.connections( username, function(err, conns) {
+            messages.count(data._id, [], function(err, cnt) {
+                users.connections( data._id, function(err, conns) {
                     users.user( req.session.uid, function(err, sdata) {
                         res.render('users', {
                             title: 'Readers',
                             user: req.session.uid,
                             user_data: sdata,
-                            username: username,
+                            username: data._id,
                             users: conns,
                             count: cnt,
                             connections: data.connections.length,
@@ -995,12 +995,6 @@ exports.user_data = function(req, res) {
     if( req.session.uid == undefined ) {
         res.redirect('/');
     } else {
-        // Si el Username es modificado se deben modificar todas las referencias en la base de datos
-        // Mensajes
-        // - Texto
-        // - ids
-        // Lectores
-        
         var users = new (require('../models/users'))();
 
         console.log(req.body);
@@ -1373,7 +1367,7 @@ exports.invitation = function(req, res) {
     var reg = /^(\w){3,15}$/;
     
     var bdata = req.body;
-    var selecteduname = req.body.username.toLowerCase().trim();
+    var selecteduname = req.body.username.trim();
 
     console.log("Test " + reg.test(selecteduname) );
 
@@ -1384,7 +1378,7 @@ exports.invitation = function(req, res) {
                 code: bdata.code,
                 email: bdata.email
             },
-            username: bdata.username.toLowerCase().trim(),
+            username: bdata.username.trim(),
             name: bdata.name,
             notification: {
                 type: 'alert-error',
@@ -1398,7 +1392,7 @@ exports.invitation = function(req, res) {
                 code: bdata.code,
                 email: bdata.email
             },
-            username: bdata.username.toLowerCase(),
+            username: bdata.username.trim(),
             name: bdata.name,
             notification: {
                 type: 'alert-error',
@@ -1408,12 +1402,12 @@ exports.invitation = function(req, res) {
     } else {
         invites.get(bdata.code, function(err, cdata) {
             if( cdata ) {
-                users.find(bdata.username.toLowerCase(), function(err, usersarray) {
+                users.find(bdata.username, function(err, usersarray) {
                     if( usersarray.length == 0 )
                     {
                         users.user(cdata.sender, function(error, inviter) {
                             users.create({
-                                _id: bdata.username.toLowerCase(),
+                                _id: bdata.username,
                                 connections: [],
                                 description: '',
                                 name: bdata.name,
@@ -1432,9 +1426,9 @@ exports.invitation = function(req, res) {
                                     devices: []
                                 },
                                 images : { 
-                                    original : bdata.username.toLowerCase() + '/avatar.original.jpg', 
-                                    square : bdata.username.toLowerCase() + '/avatar.square.jpg', 
-                                    top: bdata.username.toLowerCase() + '/top.jpg' 
+                                    original : bdata.username + '/avatar.original.jpg', 
+                                    square : bdata.username + '/avatar.square.jpg', 
+                                    top: bdata.username + '/top.jpg' 
                                 },
                                 favorites: [],
                                 invites: 2,
@@ -1447,7 +1441,7 @@ exports.invitation = function(req, res) {
                                 var square = 'avatar.square.jpg';
                                 var top = 'top.jpg'
                                 
-                                var ffolder = rdt.username.toLowerCase() + '/';
+                                var ffolder = rdt.username + '/';
 
                                 s3.get().putFile( dirname + 'public/avatars/avatar.jpg', ffolder + orig, { 'x-amz-acl': 'public-read' }, function(err, rs){
                                     s3.get().putFile( dirname + 'public/avatars/avatar.jpg', ffolder + square, { 'x-amz-acl': 'public-read' }, function(err, rs){
@@ -1459,7 +1453,7 @@ exports.invitation = function(req, res) {
                                                     subject: 'You are succesfully registered on Coolpa.net',
                                                     body: {
                                                         html: ejs.render(html, {
-                                                            username: rdt.username.toLowerCase(),
+                                                            username: rdt.username,
                                                             password: rdt.password
                                                         })
                                                     }
@@ -1469,17 +1463,17 @@ exports.invitation = function(req, res) {
                                                     ses.get().send({
                                                         from: 'Coolpa.net <info@coolpa.net>',
                                                         to: [inviter.email],
-                                                        subject: rdt.username.toLowerCase() + ' has joined Coolpa.net',
+                                                        subject: rdt.username + ' has joined Coolpa.net',
                                                         body: {
                                                             html: ejs.render(jhtml, {
                                                                 username: inviter._id,
-                                                                user: rdt.username.toLowerCase()
+                                                                user: rdt.username
                                                             })
                                                         }
                                                     });
                                                 });
 
-                                                req.session.uid = rdt.username.toLowerCase();
+                                                req.session.uid = rdt.username;
 
                                                 res.redirect('/');
 
@@ -1500,7 +1494,7 @@ exports.invitation = function(req, res) {
                         res.render('invitation', {
                             user: '',
                             data: cdata,
-                            username: bdata.username.toLowerCase(),
+                            username: bdata.username,
                             name: bdata.name,
                             notification: not
                         });
@@ -1731,8 +1725,8 @@ exports.search = function(req, res) {
         users.user( username, function(err, data) {
             messages.search( search, function(err, docs) {
                 users.search( search, function( err, userssearch ) {
-                    messages.count(username, [], function(err, cnt) {
-                        users.connections( username, function(err, conns) {
+                    messages.count(data._id, [], function(err, cnt) {
+                        users.connections( data._id, function(err, conns) {
                             users.user( req.session.uid, function(err, sdata) {
                                 res.render('search', {
                                     user: req.session.uid,
