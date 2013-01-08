@@ -1645,6 +1645,7 @@ exports.change_username = function(req, res) {
                     mention.ids.splice( mention.ids.indexOf(user_data._id), 1 );
                     mention.ids.push(new_username);
 
+                    console.log(mention);
                     messages.update(mention._id, mention, function(err) {
                         console.log('Updated...');
                     });
@@ -1655,20 +1656,25 @@ exports.change_username = function(req, res) {
                     notify(70, 'Updating to your new username...');
 
                     for( var c = 0 ; c < connections.length ; c++ ) {
+                        console.log('Updating ' + connections[c]._id );
                         users.disconnect( connections[c]._id, user_data._id, function(err) {} );
                         users.connect( connections[c]._id, new_username, function() {} );
                     }
 
                     notify(90, 'Finishing process...');
 
-                    users.copy(user_data._id, new_username, function(err) {
+                    users.remove(user_data._id, function(err) {
                         console.error(err);
-                        notify(100, 'Completed');
 
-                        req.session.uid = new_username;
-                        // copiar las imagenes al nuevo directorio, actualizar imagenes en el usuario. borrar el viejo
-                        res.json({
-                            result: true
+                        user_data._id = new_username;
+                        users.add(user_data, function(err) {
+                            notify(100, 'Completed');
+
+                            req.session.uid = new_username;
+                            // copiar las imagenes al nuevo directorio, actualizar imagenes en el usuario. borrar el viejo
+                            res.json({
+                                result: true
+                            });
                         });
                     })
                 });

@@ -80,6 +80,14 @@ var users = (function( ) {
         });
     };
 
+    users.prototype.remove = function(username, callback) {
+        return this.database.connection().collection('Users').removeById(username, callback);
+    };
+
+    users.prototype.add = function(data, callback) {
+        this.database.connection().collection('Users').insert(data, callback);
+    };
+
     users.prototype.copy = function(username, new_username, callback) {
         var db = this.database;
 
