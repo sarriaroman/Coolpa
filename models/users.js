@@ -7,7 +7,7 @@ var users = (function( ) {
     
     users.prototype.auth = function( username, password, callback ) {
         this.database.connection().collection('Users').findOne({
-            $or: [ { _id: { $regex: '/^' + username + '$/i' } }, { email: username } ],
+            $or: [ { _id: { $regex: '^' + username + '$', $options : 'i' } }, { email: username } ],
             password: this.hashPass(password)
         }, function(err, data){
             console.trace(err);
@@ -25,7 +25,7 @@ var users = (function( ) {
     };
     
     users.prototype.user = function(username, callback) {
-        this.database.connection().collection('Users').findOne( { $or : [ { _id : { $regex: '/^' + username + '$/i' } }, { email : username }] }, callback);
+        this.database.connection().collection('Users').findOne( { $or : [ { _id : { $regex: '^' + username + '$', $options : 'i' } }, { email : username }] }, callback);
     };
     
     users.prototype.users = function(usernames, callback) {
@@ -105,7 +105,7 @@ var users = (function( ) {
     };
     
     users.prototype.find = function(username, callback) {
-        this.database.connection().collection('Users').findItems({_id: { $regex: '/^' + username + '$/', $options: 'i' }}, callback);
+        this.database.connection().collection('Users').findItems({_id: { $regex: '^' + username + '$', $options : 'i' }}, callback);
     };
     
     users.prototype.search = function(search, callback) {
