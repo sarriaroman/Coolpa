@@ -310,28 +310,29 @@ exports.avatars = function(req, res) {
     var s3 = new (require('../classes/s3'))();
 
     users.user(req.params.username, function(err, data) {
-        var image = "";
-
-        if( req.params.file == 'avatar.original.jpg' ) {
-            //res.redirect('https://coolpa.s3.amazonaws.com/' + data.images.original );
-            image = data.images.original;
-        } else if( req.params.file == 'avatar.square.jpg' ) {
-            //res.redirect('https://coolpa.s3.amazonaws.com/' + data.images.square );
-            image = data.images.square;
+        if( data == null ) {
+            res.end();
         } else {
-            //res.redirect('https://coolpa.s3.amazonaws.com/' + data.images.top );
-            image = data.images.top;
-        }
+            var image = "";
 
-        s3.get().get( image ).on('response', function(response){
-            res.set(response.headers);
-            response.on('data', function(chunk){
-                res.write(chunk);
-            });
-            response.on('end', function() {
-                res.end();
-            });
-        }).end();
+            if( req.params.file == 'avatar.original.jpg' ) {
+                image = data.images.original;
+            } else if( req.params.file == 'avatar.square.jpg' ) {
+                image = data.images.square;
+            } else {
+                image = data.images.top;
+            }
+
+            s3.get().get( image ).on('response', function(response){
+                res.set(response.headers);
+                response.on('data', function(chunk){
+                    res.write(chunk);
+                });
+                response.on('end', function() {
+                    res.end();
+                });
+            }).end();
+        }
     });    
 };
 
