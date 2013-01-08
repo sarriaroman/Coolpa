@@ -28,9 +28,9 @@ exports.search = function(req, res) {
                     location : udocs[i].location,
                     website: udocs[i].website,
                     images : {
-                        original: 'http://coolpa.net/avatars/' + username + '/avatar.original.jpg',
-                        square: 'http://coolpa.net/avatars/' + username + '/avatar.square.jpg',
-                        top: 'http://coolpa.net/avatars/' + username + '/top.jpg',
+                        original: 'http://coolpa.net/avatars/' + udocs[i]._id + '/avatar.original.jpg',
+                        square: 'http://coolpa.net/avatars/' + udocs[i]._id + '/avatar.square.jpg',
+                        top: 'http://coolpa.net/avatars/' + udocs[i]._id + '/top.jpg',
                     },
                     created: udocs[i].createdDate,
                     updated: udocs[i].updatedDate
