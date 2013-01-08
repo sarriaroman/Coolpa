@@ -275,8 +275,8 @@ exports.create_images = function(req, res) {
 
     users.all( function(err, users_data) {
         users_data.forEach( function(data) {
-            var folder = dirname + 'public/avatars/' + data._id.toLowerCase() + '/';
-            var ffolder = data._id.toLowerCase() + '/';
+            var folder = dirname + 'public/avatars/' + data._id + '/';
+            var ffolder = data._id + '/';
 
             var orig = 'avatar.original.jpg';
             var final_orig = (new Date()).getTime() + '_original.jpg';
@@ -644,8 +644,8 @@ exports.user = function(req, res) {
         } else {
             var messages = new (require('../models/messages'))();
     
-            messages.find( username, [], new Date(), function(err, docs) {
-                messages.count(username, [], function(err, cnt) {
+            messages.find( data._id, [], new Date(), function(err, docs) {
+                messages.count(data._id, [], function(err, cnt) {
                     users.user( req.session.uid, function(err, actual) { // Get the actual user!!!
                         // Just for unknown user.
                         if( actual == null ) {
@@ -656,14 +656,14 @@ exports.user = function(req, res) {
                         users.connections( username, function(err, conns) {
                             res.render('user_view', {
                                 user: req.session.uid,
-                                username: username,
+                                username: data._id,
                                 data: data,
                                 messages: docs,
                                 count: cnt,
                                 connections: data.connections.length,
                                 connecteds: conns.length,
-                                mustConnect: (username != req.session.uid),
-                                isConnected: (actual.connections.indexOf(username) > -1)
+                                mustConnect: (data._id != req.session.uid),
+                                isConnected: (actual.connections.indexOf(data._id) > -1)
                             }); 
                         });
                     });
