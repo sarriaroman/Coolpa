@@ -1667,17 +1667,43 @@ exports.change_username = function(req, res) {
                     notify(90, 'Finishing process...');
 
                     users.remove(user_data._id, function(err) {
-                        user_data._id = new_username;
+                        notify(92, 'Transfering images (1/3)...');
 
-                        users.add(user_data, function(err) {
-                            notify(100, 'Completed');
+                        var s3 = new (require('../classes/s3'))();
 
-                            req.session.uid = new_username;
-                            // copiar las imagenes al nuevo directorio, actualizar imagenes en el usuario. borrar el viejo
-                            res.json({
-                                result: true
-                            });
-                        });
+                        var new_original = user_data.images.original.replace( user_data._id, new_username );
+                        var new_square = user_data.images.square.replace( user_data._id, new_username );
+                        var new_top = user_data.images.top.replace( user_data._id, new_username );
+
+                        s3.get().copyFile('/' + user_data.images.original, '/' + new_original, function(err, fres) {
+                            notify(94, 'Transfering images (2/3)...');
+
+                            s3.get().copyFile('/' + user_data.images.square, '/' + new_square, function(err, fres) {
+                                notify(96, 'Transfering images (3/3)...');
+
+                                s3.get().copyFile('/' + user_data.images.top, '/' + new_top, function(err, fres) {
+                                    notify(96, 'Transfering images (3/3)...');
+                                
+                                    s3.get().deleteMultiple(user_data.images, function(err, fres) {
+                                        user_data.images.original = new_original;
+                                        user_data.images.square = new_square;
+                                        user_data.images.top = new_top;
+
+                                        user_data._id = new_username;
+
+                                        users.add(user_data, function(err) {
+                                            notify(100, 'Completed');
+
+                                            req.session.uid = new_username;
+                                            res.json({
+                                                result: true
+                                            });
+                                        });
+                                    });
+
+                                } );    
+                            } );        
+                        } );
                     })
                 });
             } );
