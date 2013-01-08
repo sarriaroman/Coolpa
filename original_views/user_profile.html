@@ -188,7 +188,7 @@
                     });
 
                     $.post('/change_username', {
-                        username: $("#user_change #inputUsername").val()
+                        username: $("#inputUsername").val()
                     }, function( data ) {
                         /* reload */
                         location.reload();
