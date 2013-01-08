@@ -51,6 +51,8 @@ exports.search = function(req, res) {
                         original_id: docs[i].original_id
                     }
                 };
+
+                docs[i] = object;
             }
 
             res.json({
