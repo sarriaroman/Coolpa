@@ -7,9 +7,11 @@ var users = (function( ) {
     
     users.prototype.auth = function( username, password, callback ) {
         this.database.connection().collection('Users').findOne({
-            $or: [ { _id: username }, { email: username } ],
+            $or: [ { _id: { $regex: '/^' + username + '$/i' } }, { email: username } ],
             password: this.hashPass(password)
         }, function(err, data){
+            console.trace(err);
+            console.log(data);
             callback(data);
         });
     };
