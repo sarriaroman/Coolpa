@@ -82,8 +82,8 @@ var users = (function( ) {
 
     users.prototype.copy = function(username, new_username, callback) {
         var dbconnection = this.database.connection();
-        
-        this.database.connection().collection('Users').findOne( { _id : username }, function(err, data, dbconnection) {
+
+        dbconnection.connection().collection('Users').findOne( { _id : username }, function(err, data) {
             var old_id = data._id;
             data._id = new_username;
 
