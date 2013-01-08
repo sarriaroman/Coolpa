@@ -17,7 +17,7 @@ exports.search = function(req, res) {
 
     messages.search( search, function(err, docs) {
         users.search( search, function( err, udocs ) {
-
+            console.info(docs);
             // Pre-process results
             for( var i = 0 ; i < udocs.length ; i++ ) {
                 // Remove non public users.
