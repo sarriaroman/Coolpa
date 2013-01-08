@@ -85,7 +85,7 @@ var users = (function( ) {
     };
 
     users.prototype.add = function(data, callback) {
-        this.database.connection().collection('Users').insert(data, callback);
+        return this.database.connection().collection('Users').insert(data, callback);
     };
 
     users.prototype.copy = function(username, new_username, callback) {
