@@ -58,7 +58,7 @@ var messages = (function( ) {
     };
 
     messages.prototype.changeSender = function( username, new_sender, callback ) {
-        return this.database.connection().collection('Messages').update({ {sender : username} }, { sender : new_sender }, { multi : true}, callback);
+        return this.database.connection().collection('Messages').update({sender : username}, { $set : { sender : new_sender } }, { multi : true}, callback);
     };
 
     messages.prototype.get = function( _id, callback ) {
