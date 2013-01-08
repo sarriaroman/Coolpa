@@ -653,7 +653,7 @@ exports.user = function(req, res) {
                                 connections : []
                             };
                         }
-                        users.connections( username, function(err, conns) {
+                        users.connections( data._id, function(err, conns) {
                             res.render('user_view', {
                                 user: req.session.uid,
                                 username: data._id,
