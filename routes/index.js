@@ -1684,7 +1684,7 @@ exports.change_username = function(req, res) {
                                 s3.get().copyFile('/' + user_data.images.top, '/' + new_top, function(err, fres) {
                                     notify(96, 'Transfering images (3/3)...');
                                 
-                                    s3.get().deleteMultiple(user_data.images, function(err, fres) {
+                                    s3.get().deleteMultiple([user_data.images.original, user_data.images.square, user_data.images.top], function(err, fres) {
                                         user_data.images.original = new_original;
                                         user_data.images.square = new_square;
                                         user_data.images.top = new_top;
