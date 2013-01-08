@@ -1665,7 +1665,7 @@ exports.change_username = function(req, res) {
                         notify(100, 'Completed');
 
                         req.session.uid = new_username;
-                        
+                        // copiar las imagenes al nuevo directorio, actualizar imagenes en el usuario. borrar el viejo
                         res.json({
                             result: true
                         });
