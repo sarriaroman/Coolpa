@@ -84,6 +84,7 @@ var users = (function( ) {
         var db = this.database;
 
         db.connection().collection('Users').findOne( { _id : username }, function(err, data) {
+            console.log(data);
             var old_id = data._id;
             data._id = new_username;
 
