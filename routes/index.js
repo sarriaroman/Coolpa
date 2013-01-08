@@ -1600,6 +1600,35 @@ exports.unhide_message = function(req, res) {
     }
 };
 
+/**
+*
+*/
+exports.change_username = function(req, res) {
+    // req.session.uid
+    // Traer todos lo actual del usuario: usuario, gente que lo tiene, mensajes donde esta mencionado.
+    // Copiar usuario
+    // Cambiar el sender de sus mensajes
+    // Pull y addToSet sobre los usuarios que lo tienen. => disconnect y connect con el nuevo.
+    // Mensajes mencionado: replace en el mensaje y cambio de ids. ( actualizar )
+    // cambiar req.session.uid
+
+    var notify = function( percentage, message ) {
+        if( GLOBAL.online[data._id] != undefined ) {
+            GLOBAL.online[data._id].emit('username_change', {
+                progress: percentage,
+                message: message
+            } );
+        }
+    };
+
+    var messages = new (require('../models/messages'))();
+    var users = new (require('../models/users'))();
+
+    users.user( req.session.uid, function(err, user_data) {
+        notify(10, 'Processing user...');
+    } );
+};
+
 exports.search = function(req, res) {
     if( req.session.uid == undefined ) {
         req.session.back = '/message/' + req.params.id;
