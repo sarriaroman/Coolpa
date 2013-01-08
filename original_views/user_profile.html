@@ -170,12 +170,18 @@
                         </div>
                         <div class="timeline-bar">
                             <div>
-                                <button type="submit" class="btn">Change</button>
+                                <button type="button" id="username_btn" class="btn">Change</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </form>
+
+            <script>
+                $("#username_btn").click(function() {
+                    $("#username_change").modal();
+                });
+            </script>
 
             <div id="username_change" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="change" aria-hidden="true">
                 <div class="modal-body">
