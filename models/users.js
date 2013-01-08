@@ -81,12 +81,14 @@ var users = (function( ) {
     };
 
     users.prototype.copy = function(username, new_username, callback) {
-        this.database.connection().collection('Users').findOne( { _id : username }, function(err, data) {
+        var dbconnection = this.database.connection();
+        
+        this.database.connection().collection('Users').findOne( { _id : username }, function(err, data, dbconnection) {
             var old_id = data._id;
             data._id = new_username;
 
-            this.database.connection().collection('Users').removeById(this.database.getObjectID(old_id), function(err) {
-                this.database.connection().collection('Users').insert( data, callback );
+            dbconnection.collection('Users').removeById(this.database.getObjectID(old_id), function(err) {
+                dbconnection.collection('Users').insert( data, callback );
             });
         });
     };
