@@ -29,9 +29,10 @@ for( var i = 0 ; i < files.length ; i++ ) {
 
 	var html_packed = S( fs.readFileSync('../original_views/' + files[i]) ).s;
   			
-  	html_packed = html_packed.replace(/(\r\n|\r|\n)/g, '');
+  	html_packed = packer.packHTML( html_packed );
+  	/*html_packed = html_packed.replace(/(\r\n|\r|\n)/g, '');
   	html_packed = html_packed.replace(/<!--[\s\S]*?-->/g, '');
-  	html_packed = html_packed.collapseWhitespace();
+  	html_packed = html_packed.collapseWhitespace();*/
 
 	fs.writeFileSync('../views/' + files[i], html_packed.s);
 }
