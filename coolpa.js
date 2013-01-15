@@ -2,7 +2,7 @@
 * Coolpa server
 */
 
-exports.coolpa = function( selected_port ) {
+exports.create = function( selected_port ) {
 	var express = require('express')
 	, routes = require('./routes')
 	, developer = require('./routes/developer_subdomain')
