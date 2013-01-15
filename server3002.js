@@ -1,3 +1,3 @@
 var coolpa = require('./coolpa');
 
-coolpa.create(3002);
+new coolpa.create(3002);
