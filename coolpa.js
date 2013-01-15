@@ -206,6 +206,7 @@ exports.create = function( selected_port ) {
 	// api_subdomain
 	app.get('/api_subdomain/search/:token', api.search);
 	app.post('/api_subdomain/search', api.search);
+	app.get('/api_subdomain/widget', api.widget);
 
 	isPortTaken( app.get('port'), function(err, taken) {
 		if( taken ) {

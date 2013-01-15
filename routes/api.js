@@ -5,6 +5,10 @@
 // Load factories
 var factories = require("./factories");
 
+exports.widget = function(req, res) {
+    res.jsonp( {cookie: req.cookies.coolpa_session } );
+};
+
 // Search API
 exports.search = function(req, res) {
     var messages = new (require('../models/messages'))();
