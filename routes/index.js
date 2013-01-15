@@ -46,6 +46,8 @@ exports.auth = function(req, res) {
         if( data ) {
             req.session.uid = data._id;
 
+            res.cookie('coolpa_session', data._id, { maxAge: null });
+
             if(req.session.back != undefined) {
                 var backUrl = req.session.back;
                 
