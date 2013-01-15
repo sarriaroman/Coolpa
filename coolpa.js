@@ -34,7 +34,9 @@ exports.create = function( selected_port ) {
     	}));
     	app.use(express.methodOverride());
     	app.use(express.cookieParser('741b09105b235f2f8fa0511a1229f48e'));
+    	app.use(express.cookieDecoder());
     	app.use(express.session({
+    		cookie: { path: '/', httpOnly: true, maxAge: null },
     		store: new MongoStore({
     			db: 'coolpa-sessions'
     		})
