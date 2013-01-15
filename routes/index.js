@@ -9,7 +9,7 @@ var factories = require("./factories");
 exports.widget = function(req, res) {
     console.log(req.cookies);
     console.log(req.session);
-    res.jsonp( {cookie: req.cookies.coolpa_session } );
+    res.jsonp( {cookie: req.session.uid } );
 };
 
 exports.index = function(req, res){
