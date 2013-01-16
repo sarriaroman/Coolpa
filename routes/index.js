@@ -7,9 +7,15 @@ var factories = require("./factories");
 
 // Just to try 
 exports.widget = function(req, res) {
-    console.log(req.cookies);
-    console.log(req.session);
-    res.jsonp( {cookie: req.session.uid } );
+    var users = new (require('../models/users'))();
+
+    //var username = re
+    console.log(req.params);
+    console.log(req.body);
+
+    users.user( req.session.uid, function(err, actual) {
+        res.jsonp({ connected: isConnected: (actual.connections.indexOf(data._id) > -1) } );
+    });
 };
 
 exports.index = function(req, res){
