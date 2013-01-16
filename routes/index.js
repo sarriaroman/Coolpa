@@ -14,7 +14,7 @@ exports.widget = function(req, res) {
     console.log(req.body);
 
     users.user( req.session.uid, function(err, actual) {
-        res.jsonp({ connected: isConnected: (actual.connections.indexOf(data._id) > -1) } );
+        res.jsonp({ connected: (actual.connections.indexOf(data._id) > -1) } );
     });
 };
 
