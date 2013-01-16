@@ -9,12 +9,12 @@ var factories = require("./factories");
 exports.widget = function(req, res) {
     var users = new (require('../models/users'))();
 
-    //var username = re
+    var username = req.params.username;
     console.log(req.params);
     console.log(req.body);
 
     users.user( req.session.uid, function(err, actual) {
-        res.jsonp({ connected: (actual.connections.indexOf(data._id) > -1) } );
+        res.jsonp({ connected: (actual.connections.indexOf(username) > -1) } );
     });
 };
 

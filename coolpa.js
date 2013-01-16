@@ -165,7 +165,7 @@ exports.create = function( selected_port ) {
 	app.get('/invite_again/:code', routes.invite_again);
 	app.get('/invite_remove/:code', routes.invite_remove);
 	app.get('/password_recovery/:code', routes.password_recovery);
-	app.get('/widget', routes.widget);
+	app.get('/widget/:username', routes.widget);
 
 	// POST
 	app.post('/auth', routes.auth);
