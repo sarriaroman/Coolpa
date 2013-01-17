@@ -168,6 +168,7 @@ exports.create = function( selected_port ) {
 	app.get('/widget/:username', routes.widget);
 	app.get('/widget_login', routes.widget_login);
 	app.get('/widget_close', routes.widget_close);
+	app.get('/widget_connect', routes.widget_connect);
 
 	// POST
 	app.post('/auth', routes.auth);

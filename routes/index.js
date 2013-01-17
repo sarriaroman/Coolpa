@@ -39,6 +39,53 @@ exports.widget_close = function(req, res) {
     res.end('<script>window.close();</script>');
 };
 
+exports.widget_connect = function(req, res) {
+    var users = new (require('../models/users'))();
+
+    var username = req.params.username;
+
+    if( req.session.uid != undefined ) {
+        users.connect(req.session.uid, username, function(err, data) {
+            var fs = require('fs');
+            var ses = new (require('../classes/ses'))();
+            var ejs = require('ejs');
+        
+            users.user(req.params.username, function(err, data){
+                if( data != undefined ) {
+                    fs.readFile('views/reading_template.html', 'UTF-8', function(err, html) {
+                        ses.get().send({
+                            from: 'Coolpa.net <info@coolpa.net>',
+                            to: [data.email],
+                            subject: 'You have new readers on Coolpa',
+                            body: {
+                                html: ejs.render(html, {
+                                    username: data._id, 
+                                    uid: req.session.uid
+                                })
+                            }
+                        });
+                        console.log('Email sent to ' + data._id);
+                    });
+
+                    res.jsonp({ 
+                        connected: true,
+                        connections: data.connections.length,
+                        logged: true
+                    });
+                }
+            });
+        });
+    } else {
+        users.user(req.params.username, function(err, data){
+            res.jsonp({ 
+                connected: false,
+                connections: data.connections.length,
+                logged: false
+            });
+        });
+    }
+};
+
 exports.index = function(req, res){
     if( req.session.uid == undefined ) {
 
