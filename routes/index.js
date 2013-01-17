@@ -1798,7 +1798,7 @@ exports.search = function(req, res) {
     } else {
         var messages = new (require('../models/messages'))();
         var users = new (require('../models/users'))();
-        var S = require('String');
+        var S = require('string');
         
         var username = req.session.uid;
         
