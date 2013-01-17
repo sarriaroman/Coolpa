@@ -31,8 +31,12 @@ exports.widget = function(req, res) {
 };
 
 exports.widget_login = function(req, res) {
-    req.session.back = 'javascript:window.close();';
+    req.session.back = '/widget_close';
     res.redirect('/');
+};
+
+exports.widget_close = function(req, res) {
+    res.end('<script>window.close();</script>');
 };
 
 exports.index = function(req, res){
