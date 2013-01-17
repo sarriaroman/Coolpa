@@ -36,10 +36,10 @@
                                     <% if( auth_notification != '' ) { %>
                                     <div class="textpost">
                                     <% } %>
-                                    <input type="text" id="username" name="username" placeholder="Username" value="" style="width: 95%" /><br/>
-                                    <input type="password" id="password" name="password" placeholder="Password" value="" style="width: 95%" /><br/>
+                                    <input type="text" id="username" name="username" placeholder="<%=t('username_email')%>" value="" style="width: 95%" /><br/>
+                                    <input type="password" id="password" name="password" placeholder="<%=t('password')%>" value="" style="width: 95%" /><br/>
 
-                                    <a href="javascript:$('#password_recovery').show();$('#rusername').focus();">Lost your password?</a><br/>
+                                    <a href="javascript:$('#password_recovery').show();$('#rusername').focus();"><%=t('login.password_lost')%></a><br/>
                                     <% if( auth_notification != '' ) { %>
                                     <br/>
                                     <p><%=auth_notification%></p>
@@ -49,7 +49,7 @@
                             </div>
                             <div class="timeline-bar">
                                 <div>
-                                    <input type="submit" value="Log In" class="btn btn-large" />
+                                    <input type="submit" value="<%=t('login.login')%>" class="btn btn-large" />
                                 </div>
                             </div>
                         </div>
@@ -64,12 +64,12 @@
                             <div class="timeline-content-page">
                                 <div class="textpost">
                                     <h2 class="post-page-title">
-                                        Password recovery
+                                        <%=t('login.password_recovery')%>
                                     </h2>
                                     <span class="post-divider"></span>
 
                                     <div class="bodytext">
-                                        <input type="text" id="rusername" name="rusername" placeholder="Username or Email" value="" style="width: 95%" /><br/>
+                                        <input type="text" id="rusername" name="rusername" placeholder="<%=t('username_email')%>" value="" style="width: 95%" /><br/>
 
                                         <% if( recover_notification != '' ) { %>
                                         <p><%=recover_notification%></p>
@@ -80,7 +80,7 @@
 
                                         <span class="post-divider"></span>
 
-                                        <input type="submit" value="Submit" class="btn" />
+                                        <input type="submit" value="<%=t('submit')%>" class="btn" />
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                             <div class="timeline-content-page">
                                 <div class="textpost">
                                     <h2 class="post-page-title">
-                                        Why beta?
+                                        <%=t('login.why_beta')%>
                                     </h2>
                                     <span class="post-divider"></span>
 
@@ -107,11 +107,11 @@
                                         </p>
                                         <span class="post-divider"></span>
 
-                                        <input type="email" id="email" name="email" placeholder="Introduce your email" style="width: 95%" />
+                                        <input type="email" id="email" name="email" placeholder="<%=t('login.introduce_email')%>" style="width: 95%" />
 
                                         <span class="post-divider"></span>
 
-                                        <input type="submit" value="Suscribe" class="btn" />
+                                        <input type="submit" value="<%=t('login.suscribe')%>" class="btn" />
 
                                         <% } else { %>
                                             <p><%=beta_notification%></p>

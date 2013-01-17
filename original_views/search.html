@@ -53,7 +53,7 @@
                     <div class="timeline-pointer"><span class="tl-pointer"></span></div>
                     <div class="timeline-content-page">
                         <div class="textpost">
-                            <h2 class="post-page-title"><%=t('search.users_text', search, users.length)%></h2>
+                            <h2 class="post-page-title"><%=t('search.users_text', { search: search, results: users.length })%></h2>
                         </div>
                     </div>
                 </div>
@@ -109,7 +109,7 @@
                     <div class="timeline-pointer"><span class="tl-pointer"></span></div>
                     <div class="timeline-content-page">
                         <div class="textpost">
-                            <h2 class="post-page-title"><%=t('search.messages_text', search, messages.length)%></h2>
+                            <h2 class="post-page-title"><%=t('search.messages_text', { search: search, results: messages.length })%></h2>
                         </div>
                     </div>
                 </div>
