@@ -40,7 +40,7 @@
   "coolpa": {
     "message_text": "Que quieres decir?",
     "send": "Enviar",
-    "your_people": "__person__ tiene __readers__ personas que lo leen y tu lees a __reading__ personas.",
+    "your_people": "__person__ tienes __readers__ personas que te leen y tu lees a __reading__ personas.",
     "recommendations": "Personas que te gustaría leer!",
     "load_more": "Cargar más...",
     "help_text": "Escribe lo que quieres decirle al mundo.<br/>Si quieres mencionar a alguien coloca su nombre de usuario anteponiendo dos puntos ( : ). Ej.: :usuario hola! cómo estas?",
