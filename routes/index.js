@@ -18,13 +18,15 @@ exports.widget = function(req, res) {
             users.user( req.session.uid, function(err, actual) {
                 res.jsonp({ 
                     connected: (actual.connections.indexOf(data._id) > -1),
-                    connections: data.connections.length
+                    connections: data.connections.length,
+                    logged: true
                 });
             });
         } else {
             res.jsonp({ 
                 connected: false,
-                connections: data.connections.length
+                connections: data.connections.length,
+                logged: false
             });            
         }
     } );
