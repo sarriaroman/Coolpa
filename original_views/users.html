@@ -78,9 +78,9 @@
                                 <span class="post-divider"></span>
                                 <div style="float:right;">
                                         <% if( user_data.connections.indexOf( data._id ) != -1 ) { %>
-                                            <a href="/disconnect/<%=data._id%>" id="connectionbtn" class="btn btn-danger">Disconnect</a><br/>
+                                            <a href="/disconnect/<%=data._id%>" id="connectionbtn" class="btn btn-danger"><%=t('disconnect')%></a><br/>
                                         <% } else { %>
-                                            <a href="/connect/<%=data._id%>" id="connectionbtn" class="btn btn-inverse">Connect</a><br/>
+                                            <a href="/connect/<%=data._id%>" id="connectionbtn" class="btn btn-inverse"><%=t('connect')%></a><br/>
                                         <% } %>
                                 </div>
                                 <% } %>

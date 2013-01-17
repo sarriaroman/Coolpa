@@ -13,6 +13,8 @@
 	"message" : "message",
 	"messages" : "messages",
 	"profile" : "profile",
+	"connect" : "Connect",
+	"disconnect" : "Disconnect",
 	"login" : {
 		"password_lost" : "Lost your password?",
 		"login" : "Log In",

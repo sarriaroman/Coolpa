@@ -16,6 +16,8 @@
   "message": "mensaje",
   "messages": "mensajes",
   "profile": "perfil",
+  "connect" : "Conectar",
+  "disconnect" : "Desconectar",
   "login": {
     "password_lost": "Perdiste tu contraseña?",
     "login": "Ingresar",
