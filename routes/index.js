@@ -17,8 +17,8 @@ exports.widget = function(req, res) {
         if( req.session.uid != undefined ) {
             users.user( req.session.uid, function(err, actual) {
                 res.jsonp({ 
-                    connected: (actual.connections.indexOf(username) > -1),
-                    connections: actual.connections.length
+                    connected: (actual.connections.indexOf(data._id) > -1),
+                    connections: data.connections.length
                 });
             });
         } else {
