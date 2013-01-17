@@ -14,11 +14,13 @@ exports.widget = function(req, res) {
     users.user( username, function(err, data) {
         if( req.session.uid != undefined ) {
             users.user( req.session.uid, function(err, actual) {
-                res.jsonp({ 
-                    connected: (actual.connections.indexOf(data._id) > -1),
-                    connections: data.connections.length,
-                    logged: true
-                });
+                users.connections( username, function(err, conns) {
+                    res.jsonp({ 
+                        connected: (actual.connections.indexOf(data._id) > -1),
+                        connections: conns.length,
+                        logged: true
+                    });
+                } );
             });
         } else {
             res.jsonp({ 
@@ -67,16 +69,18 @@ exports.widget_connect = function(req, res) {
                         console.log('Email sent to ' + data._id);
                     });
 
-                    res.jsonp({ 
-                        connected: true,
-                        connections: data.connections.length,
-                        logged: true
+                    users.connections( data._id, function(err, conns) {
+                        res.jsonp({ 
+                            connected: true,
+                            connections: conns.length,
+                            logged: true
+                        });
                     });
                 }
             });
         });
     } else {
-        users.user(req.params.username, function(err, data){
+        users.connections( req.params.username, function(err, conns) {
             res.jsonp({ 
                 connected: false,
                 connections: data.connections.length,
