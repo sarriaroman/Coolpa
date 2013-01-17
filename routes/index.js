@@ -14,7 +14,10 @@ exports.widget = function(req, res) {
     console.log(req.body);
 
     users.user( req.session.uid, function(err, actual) {
-        res.jsonp({ connected: (actual.connections.indexOf(username) > -1) } );
+        res.jsonp({ 
+            connected: (actual.connections.indexOf(username) > -1),
+            connections: actual.connections.length
+        });
     });
 };
 
@@ -500,6 +503,7 @@ exports.signout = function(req, res) {
     res.redirect('/');
 };
 
+// Si o si totalmente ajax
 exports.connect = function(req, res) {
     if( req.session.uid == undefined ) {
         req.session.auth_notification = 'You must be logged in to connect with other user.';

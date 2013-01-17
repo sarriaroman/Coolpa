@@ -9,6 +9,7 @@
     "express": "*",
     "ejs": "*",
     "mongoskin": "*",
+    "i18next": "*",
     "amazon-ses": "*",
     "easyimage": "*",
     "express-session-mongo": "*",
