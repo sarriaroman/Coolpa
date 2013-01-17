@@ -233,10 +233,10 @@ exports.create = function( selected_port ) {
 	} );
 
 	// Exception Handling
-	process.on('uncaughtException', function (err) {
+	/*process.on('uncaughtException', function (err) {
 		// Insert to DB and after that restart
 		console.trace(err);
 		
 		process.exit(0);
-	});
+	});*/
 };
