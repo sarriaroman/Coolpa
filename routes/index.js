@@ -1798,6 +1798,7 @@ exports.search = function(req, res) {
     } else {
         var messages = new (require('../models/messages'))();
         var users = new (require('../models/users'))();
+        var S = require('String');
         
         var username = req.session.uid;
         
@@ -1805,6 +1806,8 @@ exports.search = function(req, res) {
         if( search == undefined ) {
             search = req.params.token;
         }
+
+        search = S(search).trim().s;
 
         users.user( username, function(err, data) {
             messages.search( search, function(err, docs) {
