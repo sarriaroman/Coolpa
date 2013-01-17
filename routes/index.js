@@ -80,7 +80,7 @@ exports.auth = function(req, res) {
 
             if(req.session.back != undefined) {
                 var backUrl = req.session.back;
-                
+                console.log(backUrl);
                 delete req.session.back;
                 
                 res.redirect( backUrl );
