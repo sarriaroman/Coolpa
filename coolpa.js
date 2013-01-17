@@ -9,9 +9,17 @@ exports.create = function( selected_port ) {
 	, api = require('./routes/api')
 	, http = require('http')
 	, path = require('path')
-	, MongoStore = require('express-session-mongo');
+	, MongoStore = require('express-session-mongo')
+	, i18n = require("i18next");
 
 	var app = express();
+
+	i18n.init({
+		fallbackLng: 'en',
+		preload: ['en', 'es'],
+		cookieName: 'coolpa_lang'
+	});
+	i18n.registerAppHelper(app);
 
 	var server = http.createServer(app),
 	io = require('socket.io').listen(server);
@@ -32,6 +40,7 @@ exports.create = function( selected_port ) {
     	app.use(express.bodyParser({
     		keepExtensions: true
     	}));
+    	app.use(i18n.handle); // Language handler
     	app.use(express.methodOverride());
     	app.use(express.cookieParser('741b09105b235f2f8fa0511a1229f48e'));
     	app.use(express.session({
@@ -186,6 +195,7 @@ exports.create = function( selected_port ) {
 	app.post('/favorite', routes.favorite);
 	app.post('/unfavorite', routes.unfavorite);
 	app.post('/change_username', routes.change_username);
+	app.post('/change_language', routes.setLanguage);
 
 
 	// Temporal

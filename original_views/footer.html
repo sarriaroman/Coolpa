@@ -13,6 +13,15 @@
 </section>
 
 <script>
+
+function changeLang(lang) {
+    $.post('/change_language', {
+        lang: lang
+    }, function(data) {
+        location.reload(true);
+    });
+}
+
 $(document).ready(function() {
 
     if( window.location.pathname == '/profile' ) {

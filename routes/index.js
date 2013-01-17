@@ -5,6 +5,15 @@
 // Load factories
 var factories = require("./factories");
 
+// Change language
+exports.setLanguage = function(req, res) {
+    res.cookie('coolpa_lang', req.body.lang, { maxAge: null });
+
+    res.json({
+        result: true
+    });
+};
+
 // Just to try 
 exports.widget = function(req, res) {
     var users = new (require('../models/users'))();
