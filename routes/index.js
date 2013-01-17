@@ -16,7 +16,7 @@ exports.widget = function(req, res) {
             users.user( req.session.uid, function(err, actual) {
                 users.connections( username, function(err, conns) {
                     res.jsonp({ 
-                        connected: (actual.connections.indexOf(data._id) > -1),
+                        connected: ( (actual.connections.indexOf(data._id) > -1) || username == req.session.uid ),
                         connections: conns.length,
                         logged: true
                     });
@@ -48,7 +48,7 @@ exports.widget_connect = function(req, res) {
 
     var username = req.params.username;
 
-    if( req.session.uid != undefined ) {
+    if( req.session.uid != undefined && req.session.uid != username ) {
         users.connect(req.session.uid, username, function(err, data) {
             var fs = require('fs');
             var ses = new (require('../classes/ses'))();
