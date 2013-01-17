@@ -1108,12 +1108,15 @@ exports.user_data = function(req, res) {
                 website: req.body.website,
                 public: (req.body.public == undefined) ? false : true,
                 email: req.body.email,
+                language: req.body.language,
                 notifications: {
                     mentions: (req.body.mentions == undefined) ? 0 : 1,
                     privates: (req.body.privates == undefined) ? 0 : 1,
                     readers: 1
                 }
             }, function() {
+
+                res.cookie('coolpa_lang', req.body.language, { maxAge: null });
 
                 req.session.notification = {
                     type: 'data',
@@ -1130,12 +1133,15 @@ exports.user_data = function(req, res) {
                 website: req.body.website,
                 public: (req.body.public == undefined) ? false : true,
                 email: req.body.email,
+                language: req.body.language,
                 notifications: {
                     mentions: (req.body.mentions == undefined) ? 0 : 1,
                     privates: (req.body.privates == undefined) ? 0 : 1,
                     readers: 1
                 }
             }, function() {
+                res.cookie('coolpa_lang', req.body.language, { maxAge: null });
+
                 req.session.notification = {
                     type: 'data',
                     message: 'Your information was updated'
