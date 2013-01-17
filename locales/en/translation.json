@@ -1,4 +1,55 @@
 {
 	"welcome_message" : "Welcome to Coolpa!",
-	"welcome_text" : "Find out what's up with your family and friends."
+	"welcome_text" : "Find out what's up with your family and friends.",
+	"username" : "Username",
+	"username_email" : "Username or Email",
+	"password" : "Password",
+	"submit" : "Submit",
+	"rights" : "Coolpa.net all rights reserved",
+	"about" : "About",
+	"terms" : "Terms of Service",
+	"back_to" : "Back to ",
+	"help" : "Help",
+	"message" : "message",
+	"messages" : "messages",
+	"profile" : "profile",
+	"login" : {
+		"password_lost" : "Lost your password?",
+		"login" : "Log In",
+		"why_beta" : "Why beta?",
+		"beta_text" : "Right now we are running some test before releasing the final version. If you want to help us to test Coolpa, please suscribe in the form below and we will be inviting you as soonas we were ready!",
+		"introduce_email" : "Introduce your email",
+		"suscribe" : "Suscribe",
+		"password_recovery" : "Password recovery"
+	},
+	"about" : {
+		"about_coolpa" : "About Coolpa.net",
+		"about_text" : "Coolpa is a social network that allows you to connect with friends and family.<br/>You can invite friends to join in.</br>You can share your thoughts, feelings and stories in a 140 character comment. Long enough to challenge yourself to make your stories more interesting!<br/><br/>You can mention your friends by adding \":\" before their names. You can send private messages as well.<br/>You can experience Coolpa on your mobile device, just access from your device.<br/><br/>We will keep you update about our native apps. Right now we are testing the Android app available here: <a href=\"http://coolpa.net/apps/coolpa.native.apk\">Download</a>"
+	},
+	"navbar" : {
+		"public" : "public",
+		"mentions" : "mentions",
+		"privates" : "privates",
+		"search" : "search",
+		"favorites" : "My Favorites",
+		"settings" : "Settings & Profile",
+		"invite" : "Invite friends!",
+		"logout" : "Log Out"
+	},
+	"coolpa" : {
+		"message_text" : "What you want to tell?",
+		"send" : "Send",
+		"your_people" : "__person__ have __readers__ readers and you are reading from __reading__.",
+		"recommendations" : "People that you maybe want to read!",
+		"load_more" : "Load More...",
+		"help_text" : "Just write what you want to tell to the world.<br/>If you want to mention someone put the username preppending a colon ( : ). Ex. :username hi how are you?."
+	},
+	"search" : {
+		"results_for" : "Results for",
+		"users_text" : "Users for __search__: __results__ results",
+		"messages_text" : "Messages for __search__: __results__ results"
+	},
+	"privates" : {
+		"message_text" : "Private message with..."
+	}
 }

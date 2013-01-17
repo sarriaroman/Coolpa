@@ -1,4 +1,53 @@
 {
-	"welcome_message" : "Bienvenido a Coolpa!",
-	"welcome_text" : "Conoce que sucede con tu familia y amigos!"
+  "welcome_message": "Bienvenido a Coolpa!",
+  "welcome_text": "Conoce que sucede con tu familia y amigos!",
+  "username": "Usuario",
+  "username_email": "Usuario o Email",
+  "password": "Contraseña",
+  "submit": "Subir",
+  "rights": "Coolpa.net - Todos los derechos reservados.",
+  "about": {
+    "about_coolpa": "Acerca de Coolpa.net",
+  },
+  "terms": "Términos del Servicio",
+  "back_to": "Volver a ",
+  "help": "Ayuda",
+  "message": "mensaje",
+  "messages": "mensajes",
+  "profile": "perfil",
+  "login": {
+    "password_lost": "Perdiste tu contraseña?",
+    "login": "Ingresar",
+    "why_beta": "Por qué beta?",
+    "beta_text": "",
+    "introduce_email": "Introduce tu email",
+    "suscribe": "Suscribirte",
+    "password_recovery": "Recuperación de contraseña"
+  },
+  "navbar": {
+    "public": "público",
+    "mentions": "menciones",
+    "privates": "privados",
+    "search": "búsqueda",
+    "favorites": "Mis favoritos",
+    "settings": "Configuración y Perfil",
+    "invite": "Invita a tus Amigos!",
+    "logout": "Salir"
+  },
+  "coolpa": {
+    "message_text": "Que quieres decir?",
+    "send": "Enviar",
+    "your_people": "__person__ tiene __readers__ personas que lo leen y tu lees a __reading__ personas.",
+    "recommendations": "Personas que te gustaría leer!",
+    "load_more": "Cargar más...",
+    "help_text": "Escribe lo que quieres decirle al mundo.<br/>Si quieres mencionar a alguien coloca su nombre de usuario anteponiendo dos puntos ( : ). Ej.: :usuario hola! cómo estas?"
+  },
+  "search": {
+  	"results_for" : "Resultados para",
+    "users_text": "Usuarios para __search__: __results__ resultados.",
+    "messages_text": "Mensajes para __search__: __results__ resultados."
+  },
+  "privates": {
+    "message_text": "Mensaje privado con..."
+  }
 }

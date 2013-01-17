@@ -18,7 +18,7 @@
             <div id="time-line">
                 <div class="timeline-icon-bottom">
                     <a href="#" class="icon-totop"></a>
-                    <span class="tophov">Back to top</span>
+                    <span class="tophov"><%=t('back_to')%> top</span>
                 </div>   
             </div>
 
@@ -35,13 +35,13 @@
                     <div class="timeline-content">
                         <p class="description">
                             <div class="textpost">
-                                Results for <%=search%>
+                                <%=t('search.results_for')%> <%=search%>
                             </div>
                         </p>
                     </div>
                     <div class="timeline-bar">
                         <div>
-                            <a class="btn" href="/">Go to home</a>
+                            <a class="btn" href="/"><%=t('back_to')%> <%=t('navbar.public')%></a>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                     <div class="timeline-pointer"><span class="tl-pointer"></span></div>
                     <div class="timeline-content-page">
                         <div class="textpost">
-                            <h2 class="post-page-title">Users for <%=search%>: <%=users.length%> results</h2>
+                            <h2 class="post-page-title"><%=t('search.users_text', search, users.length)%></h2>
                         </div>
                     </div>
                 </div>
@@ -109,7 +109,7 @@
                     <div class="timeline-pointer"><span class="tl-pointer"></span></div>
                     <div class="timeline-content-page">
                         <div class="textpost">
-                            <h2 class="post-page-title">Messages for <%=search%>: <%=messages.length%> results</h2>
+                            <h2 class="post-page-title"><%=t('search.messages_text', search, messages.length)%></h2>
                         </div>
                     </div>
                 </div>

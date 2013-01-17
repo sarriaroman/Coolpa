@@ -81,6 +81,21 @@
                                     </div>
 
                                     <div class="control-group">
+                                        <small>Change your language</small>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputMentions">Language</label>
+                                        <div class="controls">
+                                            <select name="language" id="language">
+                                                <option value="en">English</option>
+                                                <option value="es">Español</option>
+                                            </select>
+                                            <script>$("#language").val('<%=data.language%>');</script>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
                                         <small>Complete if you want to change your password</small>
                                     </div>
 

@@ -142,7 +142,8 @@ exports.auth = function(req, res) {
         if( data ) {
             req.session.uid = data._id;
 
-            res.cookie('coolpa_session', data._id, { maxAge: null });
+            //res.cookie('coolpa_session', data._id, { maxAge: null });
+            res.cookie('coolpa_lang', data.language, { maxAge: null });
 
             if(req.session.back != undefined) {
                 var backUrl = req.session.back;
@@ -1531,6 +1532,7 @@ exports.invitation = function(req, res) {
                                 },
                                 favorites: [],
                                 invites: 2,
+                                language: 'en',
                                 password: users.hashPass( bdata.password )
                             }, bdata, function( dt, rdt ) {
                                 // Create folders for avatars
