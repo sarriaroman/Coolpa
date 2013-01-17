@@ -10,8 +10,6 @@ exports.widget = function(req, res) {
     var users = new (require('../models/users'))();
 
     var username = req.params.username;
-    console.log(req.params);
-    console.log(req.body);
 
     users.user( username, function(err, data) {
         if( req.session.uid != undefined ) {
