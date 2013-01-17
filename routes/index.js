@@ -23,11 +23,13 @@ exports.widget = function(req, res) {
                 } );
             });
         } else {
-            res.jsonp({ 
-                connected: false,
-                connections: data.connections.length,
-                logged: false
-            });            
+            users.connections( username, function(err, conns) {
+                res.jsonp({ 
+                    connected: false,
+                    connections: conns.length,
+                    logged: false
+                });            
+            });
         }
     } );
 };
