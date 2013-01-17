@@ -13,12 +13,21 @@ exports.widget = function(req, res) {
     console.log(req.params);
     console.log(req.body);
 
-    users.user( req.session.uid, function(err, actual) {
-        res.jsonp({ 
-            connected: (actual.connections.indexOf(username) > -1),
-            connections: actual.connections.length
-        });
-    });
+    users.user( username, function(err, data) {
+        if( req.session.uid != undefined ) {
+            users.user( req.session.uid, function(err, actual) {
+                res.jsonp({ 
+                    connected: (actual.connections.indexOf(username) > -1),
+                    connections: actual.connections.length
+                });
+            });
+        } else {
+            res.jsonp({ 
+                connected: false,
+                connections: data.connections.length
+            });            
+        }
+    } );
 };
 
 exports.index = function(req, res){
