@@ -57,7 +57,8 @@ exports.create = function( selected_port ) {
 	app.all('*', function(req, res, next){
 
 		if( req.headers.host.indexOf('developer') == -1 
-			&& req.headers.host.indexOf('api') == -1 
+			&& req.headers.host.indexOf('api') == -1
+			&& req.headers.host.indexOf('beta') == -1 
 			&& req.headers.host.split('.').length > 2 ) {
 			var url = 'http://coolpa.net';
 
@@ -233,10 +234,10 @@ exports.create = function( selected_port ) {
 	} );
 
 	// Exception Handling
-	/*process.on('uncaughtException', function (err) {
+	process.on('uncaughtException', function (err) {
 		// Insert to DB and after that restart
 		console.trace(err);
 		
 		process.exit(0);
-	});*/
+	});
 };
