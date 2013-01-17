@@ -30,6 +30,11 @@ exports.widget = function(req, res) {
     } );
 };
 
+exports.widget_login = function(req, res) {
+    req.session.back = 'javascript:window.close();';
+    res.redirect('/');
+};
+
 exports.index = function(req, res){
     if( req.session.uid == undefined ) {
 
