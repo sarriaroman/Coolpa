@@ -24,7 +24,7 @@
 	},
 	"about" : {
 		"about_coolpa" : "About Coolpa.net",
-		"about_text" : "Coolpa is a social network that allows you to connect with friends and family.<br/>You can invite friends to join in.</br>You can share your thoughts, feelings and stories in a 140 character comment. Long enough to challenge yourself to make your stories more interesting!<br/><br/>You can mention your friends by adding \":\" before their names. You can send private messages as well.<br/>You can experience Coolpa on your mobile device, just access from your device.<br/><br/>We will keep you update about our native apps. Right now we are testing the Android app available here: <a href=\"http://coolpa.net/apps/coolpa.native.apk\">Download</a>"
+		"about_text" : "Coolpa is a social network that allows you to connect with friends and family.<br/>You can invite friends to join in.</br>You can share your thoughts, feelings and stories in a 140 character comment. Long enough to challenge yourself to make your stories more interesting!<br/><br/>You can mention your friends by adding ':'' before their names. You can send private messages as well.<br/>You can experience Coolpa on your mobile device, just access from your device.<br/><br/>We will keep you update about our native apps. Right now we are testing the Android app available here: <a href='http://coolpa.net/apps/coolpa.native.apk'>Download</a>"
 	},
 	"navbar" : {
 		"public" : "public",
