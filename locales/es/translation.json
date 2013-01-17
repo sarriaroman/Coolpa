@@ -9,7 +9,7 @@
   "about": {
     "about_coolpa": "Acerca de Coolpa.net"
   },
-  "about_coolpa" : "About",
+  "about_coolpa" : "Acerca de",
   "terms": "Términos del Servicio",
   "back_to": "Volver a ",
   "help": "Ayuda",
@@ -41,7 +41,8 @@
     "your_people": "__person__ tiene __readers__ personas que lo leen y tu lees a __reading__ personas.",
     "recommendations": "Personas que te gustaría leer!",
     "load_more": "Cargar más...",
-    "help_text": "Escribe lo que quieres decirle al mundo.<br/>Si quieres mencionar a alguien coloca su nombre de usuario anteponiendo dos puntos ( : ). Ej.: :usuario hola! cómo estas?"
+    "help_text": "Escribe lo que quieres decirle al mundo.<br/>Si quieres mencionar a alguien coloca su nombre de usuario anteponiendo dos puntos ( : ). Ej.: :usuario hola! cómo estas?",
+    "you" : "Tu"
   },
   "search": {
   	"results_for" : "Resultados para",

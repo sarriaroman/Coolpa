@@ -42,7 +42,8 @@
 		"your_people" : "__person__ have __readers__ readers and you are reading from __reading__.",
 		"recommendations" : "People that you maybe want to read!",
 		"load_more" : "Load More...",
-		"help_text" : "Just write what you want to tell to the world.<br/>If you want to mention someone put the username preppending a colon ( : ). Ex. :username hi how are you?."
+		"help_text" : "Just write what you want to tell to the world.<br/>If you want to mention someone put the username preppending a colon ( : ). Ex. :username hi how are you?.",
+		"you" : "You"
 	},
 	"search" : {
 		"results_for" : "Results for",

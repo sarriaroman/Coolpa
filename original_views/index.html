@@ -48,7 +48,7 @@
                             <div class="main_buttons">
                                 <input type="submit" class="btn" id="sendBtn" value="Send" />
                                 <a class="btn" href="#" id="fileSelect"><i class="icon-picture"></i></a>
-                                <a class="btn" href="#"  id="help" rel="popover" class="button-ask" data-content="Just write what you want to tell to the world. <br/>If you want to mention someone put the username preppending a colon ( : ). Ex. :username hi how are you?."><i class="icon-question-sign"></i></a>
+                                <a class="btn" href="#"  id="help" rel="popover" class="button-ask" data-content="<%=t('coolpa.help_text')%>"><i class="icon-question-sign"></i></a>
                             </div>
                             <div id="images" class="main_images"></div>
                         </div>
@@ -92,7 +92,10 @@
                     <div class="timeline-pointer"><span class="tl-pointer"></span></div>
                     <div class="timeline-content-page">
                         <div class="textpost">
-                            <h2 class="post-page-title">You have <strong><a href="/readers/<%= (username != '') ? username : 'me' %>"><%=connecteds%></a></strong> readers and you are reading from <strong><a href="/reading/<%= (username != '') ? username : 'me' %>"><%=connections%></a></strong>.</h2>
+                            <h2 class="post-page-title">
+                                <%-t('coolpa.your_people', { person : t('you'), readers: '<strong><a href="/readers/<%= (username != '') ? username : 'me' %>"><%=connecteds%></a></strong>', readers: '<strong><a href="/reading/<%= (username != '') ? username : 'me' %>"><%=connections%></a></strong>' })%>
+                                <!--You have <strong><a href="/readers/<%= (username != '') ? username : 'me' %>"><%=connecteds%></a></strong> readers and you are reading from <strong><a href="/reading/<%= (username != '') ? username : 'me' %>"><%=connections%></a></strong>.-->
+                            </h2>
                         </div>
                     </div>
                 </div>
