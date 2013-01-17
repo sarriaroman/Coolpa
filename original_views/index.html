@@ -93,7 +93,11 @@
                     <div class="timeline-content-page">
                         <div class="textpost">
                             <h2 class="post-page-title">
-                                <%-t('coolpa.your_people', { person : t('you'), readers: '<strong><a href="/readers/' + ( (username != '') ? username : 'me') + '">' + connecteds + '</a></strong>', readers: '<strong><a href="/reading/' + ( (username != '') ? username : 'me' ) + '">' + connections + '</a></strong>' })%>
+                                <%-t('coolpa.your_people', { 
+                                    person : t('you'), 
+                                    readers: '<strong><a href="/readers/' + ( (username != '') ? username : 'me') + '">' + connecteds + '</a></strong>',
+                                    readers: '<strong><a href="/reading/' + ( (username != '') ? username : 'me' ) + '">' + connections + '</a></strong>' })
+                                %>
                                 <!--You have <strong><a href="/readers/<%= (username != '') ? username : 'me' %>"><%=connecteds%></a></strong> readers and you are reading from <strong><a href="/reading/<%= (username != '') ? username : 'me' %>"><%=connections%></a></strong>.-->
                             </h2>
                         </div>
