@@ -2,7 +2,7 @@
 Microblogging social network. NodeJS
 
 ## How to run it ##
-> npm install
+> npm install  
 > node coolpa.js
 
 ## License ##
